@@ -2,19 +2,15 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:agent_porta/styles/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:uicons/uicons.dart';
 
 import '../styles/style.dart';
 import 'home_page.dart';
-
-void main() {
-  runApp(const businessCreation());
-}
 
 class businessCreation extends StatelessWidget {
   const businessCreation({Key? key}) : super(key: key);
@@ -25,7 +21,7 @@ class businessCreation extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         inputDecorationTheme: InputDecorationTheme(
-          contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 13),
+          contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 13),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide.none,
@@ -130,7 +126,7 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
       builder: (BuildContext context) {
         return Container(
           padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-          height: 200,
+          height: 200.r,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -169,7 +165,11 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
                         SizedBox(height: 8),
                         Text(
                           'Camera',
-                          style: TextStyle(fontFamily: 'qs', fontSize: 14,fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                            fontFamily: 'qs',
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ],
                     ),
@@ -196,7 +196,11 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
                         SizedBox(height: 8),
                         Text(
                           'Gallery',
-                          style: TextStyle(fontFamily: 'qs', fontSize: 14,fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                            fontFamily: 'qs',
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ],
                     ),
@@ -396,7 +400,7 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: white,
-        toolbarHeight: 70,
+        toolbarHeight: 70.h,
         automaticallyImplyLeading: false,
         scrolledUnderElevation: 0,
         elevation: 0,
@@ -404,12 +408,12 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
         title: Text(
           'Add Business',
           style: GTextStyle.bodyBold.copyWith(
-            fontSize: 18,
+            fontSize: 18.sp,
             fontWeight: FontWeight.w800,
           ),
         ),
-        titleSpacing: 30,
-        actionsPadding: EdgeInsets.symmetric(horizontal: 15),
+        titleSpacing: 30.w,
+        actionsPadding: EdgeInsets.symmetric(horizontal: 15.w),
         leading: IconButton(
           onPressed: () {
             Navigator.push(
@@ -422,24 +426,20 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(20, 5, 20, 20),
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: Form(
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                _buildFieldLabel(
+                _buildBusinessField(
                   label: 'Business Name',
                   icon: PhosphorIconsFill.buildings,
-                  topPad: 5
-                ),
-                TextFormField(
-                  cursorColor: kPrimaryColor,
-                  controller: _nameController,
-                  decoration: const InputDecoration(
-                    hintText: 'Enter Business Name',
-                  ),
-                  validator:
+
+                  hintTExt: 'Enter Business Name',
+                  Controller: _nameController,
+
+                  Validator:
                       (value) =>
                           value == null || value.isEmpty
                               ? 'Please enter Business name'
@@ -783,7 +783,8 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
                     ),
                     minimumSize: const Size(double.infinity, 50),
                     backgroundColor: Colors.transparent, // Set to transparent
-                    shadowColor: Colors.transparent, // Optional: removes button shadow
+                    shadowColor:
+                        Colors.transparent, // Optional: removes button shadow
                   ),
                   child: Ink(
                     decoration: BoxDecoration(
@@ -802,23 +803,24 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
                     child: Container(
                       alignment: Alignment.center,
                       constraints: const BoxConstraints(minHeight: 50),
-                      child: _isLoading
-                          ? const SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                          strokeWidth: 2,
-                        ),
-                      )
-                          : const Text(
-                        'SUBMIT',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'qs',
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      child:
+                          _isLoading
+                              ? const SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                  strokeWidth: 2,
+                                ),
+                              )
+                              : const Text(
+                                'SUBMIT',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'qs',
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                     ),
                   ),
                 ),
@@ -830,22 +832,52 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
     );
   }
 
-  Widget _buildFieldLabel({required String label, IconData? icon, double? topPad}) {
+  Widget _buildFieldLabel({
+    required String label,
+    IconData? icon,
+    double? topPad,
+  }) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 5.0, left: 10, right: 5, top: topPad ?? 20),
+      padding: EdgeInsets.only(
+        bottom: 5.0,
+        left: 10,
+        right: 5,
+        top: topPad ?? 20,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 10,
-              color: kPrimaryColor,
-              fontWeight: FontWeight.w700,
-              fontFamily: 'qs',
-            ),
-          ),
+          Text(label, style: GTextStyle.label.copyWith(color: kPrimaryColor)),
           Icon(icon, size: 18, color: kPrimaryColor),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBusinessField({
+    required String label,
+    required String hintTExt,
+    required TextEditingController Controller,
+    String? Function(String?)? Validator,
+    IconData? icon,
+    TextInputType? keybordType,
+    double? topPad,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 5, 20, 20),
+
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _buildFieldLabel(label: label, icon: icon, topPad: topPad),
+
+          TextFormField(
+            cursorColor: kPrimaryColor,
+            controller: Controller,
+            decoration: InputDecoration(hintText: hintTExt),
+            validator: Validator,
+            keyboardType: keybordType,
+          ),
         ],
       ),
     );

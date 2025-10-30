@@ -1,4 +1,4 @@
-import 'package:agent_porta/pages/login_page.dart';
+import 'package:agent_porta/pages/set_pasaword.dart';
 import 'package:agent_porta/pages/moblie_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

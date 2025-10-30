@@ -1,7 +1,7 @@
 
 import 'dart:convert';
 
-import 'package:agent_porta/pages/login_page.dart';
+import 'package:agent_porta/pages/set_pasaword.dart';
 import 'package:agent_porta/styles/style.dart';
 import 'package:agent_porta/styles/theme_helper.dart';
 import 'package:flutter/cupertino.dart';
@@ -42,7 +42,7 @@ class _ForgotChnagePageState extends State<ForgotChnagePage> {
       if (response.statusCode == 200) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => LoginPage()),
+          MaterialPageRoute(builder: (context) => setpassword()),
         );
       } else {
         // Handle error response
@@ -206,7 +206,7 @@ class _ForgotChnagePageState extends State<ForgotChnagePage> {
                                 child: ElevatedButton(
                                   style: ThemeHelper().buttonStyle(),
                                   onPressed: (){
-                                    Navigator.push(context,MaterialPageRoute(builder: (context)=> LoginPage()));
+                                    Navigator.push(context,MaterialPageRoute(builder: (context)=> setpassword()));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),

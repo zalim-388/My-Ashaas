@@ -1,43 +1,58 @@
 import 'dart:convert';
-import 'package:agent_porta/widgets/logo.dart';
+import 'dart:io';
+import 'package:agent_porta/pages/Congratulation.dart';
+import 'package:agent_porta/pages/verify_screen.dart';
+import 'package:agent_porta/widgets/upload_image.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-
 import 'forget_pasword_page(1).dart';
-import 'home_page.dart';
 import '../layout_page.dart';
 import 'package:agent_porta/styles/constants.dart';
 import 'package:agent_porta/styles/style.dart';
 import '../widgets/custom_listTile.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class setpassword extends StatefulWidget {
+  const setpassword({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<setpassword> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<setpassword> {
   int? selectedTile;
   bool _isPasswordVisible = false;
+  File? _profileimage;
 
-  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _usernameFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
 
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController usenameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   bool isLoading = false;
+
+  Future<void> _pikeprofileimage() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: false,
+    );
+
+    if (result != null) {
+      setState(() {
+        _profileimage = File(result.files.single.path!);
+      });
+    }
+  }
 
   @override
   void initState() {
     super.initState();
 
-    _emailFocusNode.addListener(() {
+    _usernameFocusNode.addListener(() {
       setState(() {
-        selectedTile = _emailFocusNode.hasFocus ? 0 : null;
+        selectedTile = _usernameFocusNode.hasFocus ? 0 : null;
       });
     });
 
@@ -50,15 +65,15 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    _emailFocusNode.dispose();
+    _usernameFocusNode.dispose();
     _passwordFocusNode.dispose();
-    emailController.dispose();
+    _usernameFocusNode.dispose();
     passwordController.dispose();
     super.dispose();
   }
 
   Future<void> login() async {
-    final email = emailController.text.trim();
+    final email = usenameController.text.trim();
     final password = passwordController.text.trim();
 
     if (email.isEmpty || password.isEmpty) {
@@ -89,6 +104,10 @@ class _LoginPageState extends State<LoginPage> {
           context,
         ).showSnackBar(SnackBar(content: Text('Login successful')));
 
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Congratulation()),
+        );
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => LayoutPage()),
@@ -122,12 +141,22 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: kBackgroundColor,
 
       appBar: AppBar(
-        leading: BackButton(),
+        toolbarHeight: 70,
+
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => VerifyScreen()),
+            );
+          },
+          icon: Icon(Icons.arrow_back_ios, color: black),
+        ),
         backgroundColor: kBackgroundColor,
 
         title: Text("Set Password", style: GTextStyle.heading1Bold),
 
-        elevation: 1,
+        elevation: 0,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -135,25 +164,37 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 120.h),
+              SizedBox(height: 100.h),
 
-              CircleAvatar(
-                child: Icon(Icons.person, size: 10),
-
-                backgroundColor: Colors.blueGrey,
-                radius: 40.r,
+              GestureDetector(
+                onTap: _pikeprofileimage,
+                child: CircleAvatar(
+                  child:
+                      _profileimage != null
+                          ? ClipOval(
+                            child: Image.file(
+                              _profileimage!,
+                              width: 90.r,
+                              height: 90.r,
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                          : Icon(Icons.camera_alt, size: 40, color: grey),
+                  backgroundColor: Colors.grey[300],
+                  radius: 45.r,
+                ),
               ),
               SizedBox(height: 30.h),
 
               CustomListTile(
                 title: 'User name',
                 hintText: 'Enter UserName',
-                controller: emailController,
-                focusNode: _emailFocusNode,
+                controller: usenameController,
+                focusNode: _usernameFocusNode,
 
                 showBorder: true,
                 onTap: () {
-                  _emailFocusNode.requestFocus();
+                  _usernameFocusNode.requestFocus();
                 },
 
                 keyboardType: TextInputType.name,
@@ -167,6 +208,7 @@ class _LoginPageState extends State<LoginPage> {
                 controller: passwordController,
                 focusNode: _passwordFocusNode,
                 obscureText: !_isPasswordVisible,
+
                 onTap: () {
                   _passwordFocusNode.requestFocus();
                 },
@@ -185,14 +227,10 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 50.h),
               GestureDetector(
                 onTap: () {
-                  // Navigator.pushReplacement(
-                  //   //   context,
-                  //   //   DialogRoute(
-                  //   //     context: context,
-                  //   //     builder: (context) => (),
-                  //   //   ),
-                  //   // );
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Congratulation()),
+                  );
                 },
                 child: Container(
                   width: double.infinity,
@@ -245,19 +283,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-}
-
-void _showGreetingDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (context) {
-      return Dialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24.r),
-        ),
-        elevation: 8,
-        child: Container(),
-      );
-    },
-  );
 }

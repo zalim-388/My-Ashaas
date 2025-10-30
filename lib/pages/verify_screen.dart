@@ -1,4 +1,4 @@
-import 'package:agent_porta/pages/login_page.dart';
+import 'package:agent_porta/pages/set_pasaword.dart';
 import 'package:agent_porta/styles/constants.dart';
 import 'package:agent_porta/styles/style.dart';
 import 'package:agent_porta/widgets/logo.dart';
@@ -22,7 +22,8 @@ class _VerifyScreenState extends State<VerifyScreen> {
     (index) => FocusNode(),
   );
 
-  void iniState() {
+  @override
+  void initState() {
     super.initState();
     for (var node in _verifyfocusnode) {
       node.addListener(() {
@@ -51,7 +52,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 110.w),
+            SizedBox(height: 110.h),
             buildlogo(),
             SizedBox(height: 10.h),
 
@@ -64,11 +65,20 @@ class _VerifyScreenState extends State<VerifyScreen> {
             ),
             SizedBox(height: 6.h),
 
-            Text(
-              'Enter the 6 -digit code sent to ',
-              style: GTextStyle.bodyBold,
+            RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                style: GTextStyle.bodyBold.copyWith(
+                  color: black,
+                  fontSize: 12.0.sp,
+                ),
+                children: const [
+                  TextSpan(text: 'Enter the 6 -digit code sent to\n'),
+                  TextSpan(text: '+91 5485627345'),
+                ],
+              ),
             ),
-            Text('+91 5485627345', style: GTextStyle.bodyBold),
+
             SizedBox(height: 30.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 50.w),
@@ -81,10 +91,14 @@ class _VerifyScreenState extends State<VerifyScreen> {
                     height: 35.h,
                     width: 35.w,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: kBackgroundColor,
                       borderRadius: BorderRadius.circular(8.r),
                       border: Border.all(
-                        color: _isFcous ? kPrimaryColor : Colors.grey,
+                        color:
+                            (_isFcous ||
+                                    _verifycontroller[index].text.isNotEmpty)
+                                ? kPrimaryColor
+                                : Colors.grey,
                         width: 1.w,
                       ),
                     ),
@@ -131,7 +145,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                     context,
                     DialogRoute(
                       context: context,
-                      builder: (context) => LoginPage(),
+                      builder: (context) => setpassword(),
                     ),
                   );
                 },

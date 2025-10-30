@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GTextStyle extends TextStyle {
   const GTextStyle._({
@@ -23,7 +23,6 @@ class GTextStyle extends TextStyle {
     letterSpacing: -1,
     height: 1.2,
   );
-
 
   static const heading1Light = GTextStyle._(
     fontSize: 24.0,
@@ -122,9 +121,9 @@ class GTextStyle extends TextStyle {
   );
 
   static const label = GTextStyle._(
-    fontSize: 14.0,
-    fontWeight: FontWeight.w400,
-    fontFamily: _fontFamily,
+    fontSize: 10,
+    fontWeight: FontWeight.w700,
+    fontFamily: "qs'",
     textBaseline: TextBaseline.alphabetic,
     letterSpacing: 0,
   );

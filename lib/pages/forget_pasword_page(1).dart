@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'forget_password_verification.dart';
-import 'login_page.dart';
+import 'set_pasaword.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({Key? key}) : super(key: key);
@@ -187,7 +187,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                         ..onTap = () {
                                           Navigator.push(
                                             context,
-                                            MaterialPageRoute(builder: (context) => LoginPage()),
+                                            MaterialPageRoute(builder: (context) => setpassword()),
                                           );
                                         },
                                       style: GTextStyle.bodyBold.copyWith(fontWeight: FontWeight.bold),
