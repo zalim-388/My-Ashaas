@@ -1,3 +1,4 @@
+import 'package:agent_porta/pages/find_you_matchCreation.dart';
 import 'package:agent_porta/pages/profile_page.dart';
 import 'package:agent_porta/pages/businessCreation.dart';
 import 'package:carousel_slider/carousel_options.dart';
@@ -24,9 +25,10 @@ class _HomePageState extends State<HomePage> {
       CarouselSliderController();
 
   final List<String> _items = [
-    'assets/images/porta.jpeg',
-    'assets/images/offer.jpeg',
-    'assets/images/50offer.jpeg',
+    'assets/images/pc.jpg',
+    'assets/images/image2.jpg',
+    'assets/images/image1.jpg',
+    'assets/images/image2.jpg',
   ];
 
   final List<String> myitems = [
@@ -50,11 +52,11 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
-        backgroundColor: kBackgroundColor1,
+        backgroundColor: Colors.white.withOpacity(0.1),
         toolbarHeight: 70,
         automaticallyImplyLeading: false,
         scrolledUnderElevation: 0,
-        elevation: 1,
+        elevation: 2,
         centerTitle: false,
         title: Row(
           children: [
@@ -87,116 +89,134 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.symmetric(horizontal: 23.w),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 20.h),
+              SizedBox(height: 10.h),
 
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8.r),
-                child:
-                    _items.isEmpty
-                        ? _buildErrorcImage()
-                        : CarouselSlider(
-                          carouselController: _carouselController,
-                          options: CarouselOptions(
-                            height: 180.h,
-                            aspectRatio: 16 / 9,
-                            scrollDirection: Axis.horizontal,
-                            reverse: false,
-                            autoPlay: true,
-                            enableInfiniteScroll: _items.length > 1,
-                            viewportFraction: 0.8,
-                            initialPage: 0,
-                            autoPlayInterval: const Duration(seconds: 3),
-                            autoPlayAnimationDuration: const Duration(
-                              milliseconds: 800,
+              sliderAds(),
+              // ClipRRect(
+              //   borderRadius: BorderRadius.circular(4.r),
+              //   child:
+              //       _items.isEmpty
+              //           ? _buildErrorcImage()
+              //           : CarouselSlider(
+              //             carouselController: _carouselController,
+              //             options: CarouselOptions(
+              //               height: 180.h,
+              //               // scrollDirection: Axis.horizontal,
+              //               autoPlay: true,
+              //               enableInfiniteScroll: _items.length > 1,
+              //               viewportFraction: 0.8,
+              //               autoPlayInterval: const Duration(seconds: 3),
+              //               autoPlayAnimationDuration: const Duration(
+              //                 milliseconds: 800,
+              //               ),
+              //               autoPlayCurve: Curves.fastOutSlowIn,
+              //               onPageChanged: (index, reason) {
+              //                 setState(() {
+              //                   _currentIndex = index;
+              //                 });
+              //               },
+              //             ),
+
+              //             items:
+              //                 _items.map((imageUrl) {
+              //                   return Builder(
+              //                     builder: (context) {
+              //                       return Container(
+              //                         width: MediaQuery.of(context).size.width,
+              //                         margin: EdgeInsets.symmetric(
+              //                           horizontal: 2.w,
+              //                         ),
+              //                         child: ClipRRect(
+              //                           borderRadius: BorderRadius.circular(
+              //                             4.r,
+              //                           ),
+              //                           //CachedNetworkImage
+              //                           child: Image.asset(
+              //                             imageUrl,
+              //                             fit: BoxFit.cover,
+              //                             // placeholder: (context, url) =>
+              //                             //     Container(
+              //                             //       color: Colors.grey[200],
+              //                             //       child: CircularProgressIndicator(
+              //                             //         color: kPrimaryColor,
+              //                             //         strokeWidth: 2.0.w,
+              //                             //       ),
+              //                             //     ),
+              //                             errorBuilder:
+              //                                 (context, url, error) =>
+              //                                     _buildErrorcImage(),
+              //                           ),
+              //                         ),
+              //                       );
+              //                     },
+              //                   );
+              //                 }).toList(),
+              //           ),
+              // ),
+              // if (_items.isNotEmpty)
+              //   Padding(
+              //     padding: const EdgeInsets.only(top: 10),
+              //     child: AnimatedSmoothIndicator(
+              //       activeIndex: _currentIndex,
+              //       count: _items.length,
+              //       effect: WormEffect(
+              //         dotHeight: 6.h,
+              //         dotWidth: 6.w,
+              //         spacing: 4.w,
+              //         activeDotColor: kPrimaryColor,
+              //         dotColor: Colors.grey,
+              //       ),
+              //       onDotClicked: (index) {
+              //         _carouselController.animateToPage(index);
+              //       },
+              //     ),
+              //   ),
+              SizedBox(height: 20.h),
+              IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+
+                  children: [
+                    Expanded(
+                      child: _buildActionCard(
+                        imagepath: "assets/images/deal.png",
+                        title: "Add Business",
+                        subtitle: "Add more business to get more leads",
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => businessCreation(),
                             ),
-                            autoPlayCurve: Curves.fastOutSlowIn,
-                            onPageChanged: (index, reason) {
-                              setState(() {
-                                _currentIndex = index;
-                              });
-                            },
-                          ),
-
-                          items:
-                              _items
-                                  .map(
-                                    (image) => ClipRect(
-                                      child: Image.asset(
-                                        image,
-                                        fit: BoxFit.cover,
-                                        errorBuilder: (
-                                          context,
-                                          error,
-                                          stackTrace,
-                                        ) {
-                                          return _buildErrorcImage();
-                                        },
-                                      ),
-                                    ),
-                                  )
-                                  .toList(),
-                        ),
-              ),
-              if (_items.isNotEmpty)
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: AnimatedSmoothIndicator(
-                    activeIndex: _currentIndex,
-                    count: _items.length,
-                    effect: WormEffect(
-                      dotHeight: 6.h,
-                      dotWidth: 6.w,
-                      spacing: 4.w,
-                      activeDotColor: kPrimaryColor,
-                      dotColor: Colors.grey,
+                          );
+                        },
+                      ),
                     ),
-                    onDotClicked: (index) {
-                      _carouselController.animateToPage(index);
-                    },
-                  ),
-                ),
-              SizedBox(height: 20.h),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: IntrinsicHeight(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-
-                    children: [
-                      Expanded(
-                        child: _buildActionCard(
-                          imagepath: "assets/images/deal.png",
-                          title: "Add Business",
-                          subtitle: "Add more business to get more leads",
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => businessCreation(),
-                              ),
-                            );
-                          },
-                        ),
+                    SizedBox(width: 16.w),
+                    Expanded(
+                      child: _buildActionCard(
+                        imagepath: "assets/images/deal.png",
+                        title: "Find you Match",
+                        subtitle:
+                            "Life is an Adventure When you the find right \n Partner to explore with",
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FindYouMatchcreation(),
+                            ),
+                          );
+                        },
                       ),
-                      SizedBox(width: 16.w),
-                      Expanded(
-                        child: _buildActionCard(
-                          imagepath: "assets/images/deal.png",
-                          title: "Find you Match",
-                          subtitle:
-                              "Life is an Adventure When you the find right \n Partner to explore with",
-                          onPressed: () {},
-                        ),
-                      ),
-                      //  "Find the right partner to explore with",
-                    ],
-                  ),
+                    ),
+                    //  "Find the right partner to explore with",
+                  ],
                 ),
               ),
               SizedBox(height: 20.h),
@@ -208,8 +228,7 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       "Activity",
                       textAlign: TextAlign.start,
-                      style: TextStyle(
-                        fontSize: 16,
+                      style: GTextStyle.bodyBold.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -220,8 +239,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       child: Text(
                         'view all',
-                        style: TextStyle(
-                          fontSize: 12,
+                        style: GTextStyle.bodyBold.copyWith(
                           fontWeight: FontWeight.w600,
                           color: kPrimaryColor,
                         ),
@@ -231,7 +249,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15),
+                padding: EdgeInsets.symmetric(vertical: 10.h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -241,14 +259,14 @@ class _HomePageState extends State<HomePage> {
                       label: 'Approved',
                       iconcolor: Colors.green.shade500,
                     ),
-                    //verticalDivider(),
+
                     buildStatusColumn(
                       icon: Ionicons.hourglass_outline,
                       count: '02',
                       label: 'Pending',
                       iconcolor: Colors.orange.shade500,
                     ),
-                    //verticalDivider(),
+
                     buildStatusColumn(
                       icon: Ionicons.close,
                       count: '01',
@@ -258,10 +276,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              // Padding(
-              //   padding: EdgeInsets.symmetric(horizontal: 20.0,vertical: 10),
-              //   child: Text('Recent',style: TextStyle(fontSize: 13,fontWeight: FontWeight.w600,),textAlign: TextAlign.start),
-              // ),
+
               if (historyItems.isEmpty)
                 Padding(
                   padding: const EdgeInsets.fromLTRB(30, 60, 30, 0),
@@ -276,7 +291,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Center(
                         child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 20.0),
+                          padding: EdgeInsets.symmetric(vertical: 20.0.h),
                           child: TextButton(
                             onPressed: () {
                               Navigator.push(
@@ -289,12 +304,12 @@ class _HomePageState extends State<HomePage> {
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
+                                  borderRadius: BorderRadius.circular(30.r),
                                 ),
                               ),
                               overlayColor: MaterialStateProperty.all(
                                 Colors.transparent,
-                              ), // optional
+                              ),
                               shadowColor: MaterialStateProperty.all(
                                 Colors.transparent,
                               ),
@@ -306,13 +321,9 @@ class _HomePageState extends State<HomePage> {
                                     if (states.contains(
                                       MaterialState.hovered,
                                     )) {
-                                      return kPrimaryColor.withOpacity(
-                                        0.7,
-                                      ); // Background when pressed
+                                      return kPrimaryColor.withOpacity(0.7);
                                     }
-                                    return kPrimaryColor.withOpacity(
-                                      0.1,
-                                    ); // Normal background
+                                    return kPrimaryColor.withOpacity(0.1);
                                   }),
                               foregroundColor:
                                   MaterialStateProperty.resolveWith<Color>((
@@ -321,15 +332,16 @@ class _HomePageState extends State<HomePage> {
                                     if (states.contains(
                                       MaterialState.hovered,
                                     )) {
-                                      return Colors
-                                          .white; // Text color when pressed
+                                      return Colors.white;
                                     }
-                                    return Colors.black; // Normal text color
+                                    return Colors.black;
                                   }),
                             ),
                             child: Text(
                               " Add more business",
-                              style: TextStyle(fontSize: 12),
+                              style: GTextStyle.bodyBold.copyWith(
+                                fontSize: 16.sp,
+                              ),
                             ),
                           ),
                         ),
@@ -341,7 +353,7 @@ class _HomePageState extends State<HomePage> {
                 ...historyItems
                     .map((item) => buildHistoryItem(item['status']!))
                     .toList(),
-              SizedBox(height: 30),
+              SizedBox(height: 30.h),
             ],
           ),
         ),
@@ -351,7 +363,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildHistoryItem(String status) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
+      padding: EdgeInsets.symmetric(vertical: 5.h),
       child: ListTile(
         title: Text(
           'Business name',
@@ -412,49 +424,59 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget sliderAds() {
-    return Stack(
-      alignment: Alignment.bottomCenter,
+    return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: CarouselSlider(
-              options: CarouselOptions(
-                viewportFraction: 1,
-                autoPlay: true,
-                height: 180,
-                autoPlayCurve: Curves.easeInOut,
-                autoPlayAnimationDuration: const Duration(milliseconds: 800),
-                autoPlayInterval: const Duration(seconds: 6),
-                onPageChanged: (index, reason) {
-                  setState(() {
-                    myCurrentIndex = index;
-                  });
-                },
+        Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.h),
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                    viewportFraction: 1,
+                    autoPlay: true,
+                    height: 180,
+                    autoPlayCurve: Curves.easeInOut,
+                    autoPlayAnimationDuration: const Duration(
+                      milliseconds: 800,
+                    ),
+                    autoPlayInterval: const Duration(seconds: 6),
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        myCurrentIndex = index;
+                      });
+                    },
+                  ),
+
+                  items:
+                      _items
+                          .map((imageUrl) => RoundedImages(imageUrl: imageUrl))
+                          .toList(),
+                ),
               ),
-              items:
-                  myitems
-                      .map((imageUrl) => RoundedImages(imageUrl: imageUrl))
-                      .toList(),
+            ),
+          ],
+        ),
+        if (_items.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: AnimatedSmoothIndicator(
+              activeIndex: _currentIndex,
+              count: _items.length,
+              effect: WormEffect(
+                dotHeight: 6.h,
+                dotWidth: 6.w,
+                spacing: 4.w,
+                activeDotColor: kPrimaryColor,
+                dotColor: Colors.grey,
+              ),
+              onDotClicked: (index) {
+                _carouselController.animateToPage(index);
+              },
             ),
           ),
-        ),
-        Positioned(
-          bottom: 10,
-          child: AnimatedSmoothIndicator(
-            activeIndex: myCurrentIndex,
-            count: myitems.length,
-            effect: JumpingDotEffect(
-              dotHeight: 3,
-              dotWidth: 12,
-              spacing: 7,
-              dotColor: Color(0xFFD5D5D5),
-              activeDotColor: kPrimaryColor,
-              paintStyle: PaintingStyle.fill,
-            ),
-          ),
-        ),
       ],
     );
   }
@@ -469,10 +491,10 @@ class _HomePageState extends State<HomePage> {
   }) {
     return Expanded(
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        margin: EdgeInsets.symmetric(horizontal: 10.w),
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(8.r),
           color: maincolor ?? Colors.grey.shade100,
         ),
         child: Column(
@@ -485,7 +507,7 @@ class _HomePageState extends State<HomePage> {
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w600,
-                color: color ?? Colors.black87!,
+                color: color ?? Colors.black87,
               ),
             ),
             Text(
@@ -501,15 +523,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
-  Widget verticalDivider() {
-    return Container(
-      height: 40, // adjust based on your layout
-      width: .5,
-      color: Colors.grey.shade300,
-      margin: EdgeInsets.symmetric(horizontal: 8),
-    );
-  }
 }
 
 class RoundedImages extends StatelessWidget {
@@ -519,10 +532,26 @@ class RoundedImages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 190,
-      width: double.infinity,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
-      child: Image.asset(imageUrl, fit: BoxFit.cover),
+      height: 190.h,
+      width: MediaQuery.of(context).size.width,
+      // margin: EdgeInsets.symmetric(horizontal: 2.w),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(4.r),
+        //CachedNetworkImage
+        child: Image.asset(
+          imageUrl,
+          fit: BoxFit.cover,
+          // placeholder: (context, url) =>
+          //     Container(
+          //       color: Colors.grey[200],
+          //       child: CircularProgressIndicator(
+          //         color: kPrimaryColor,
+          //         strokeWidth: 2.0.w,
+          //       ),
+          //     ),
+          errorBuilder: (context, url, error) => _buildErrorcImage(),
+        ),
+      ),
     );
   }
 }
@@ -561,7 +590,8 @@ Widget _buildActionCard({
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.r),
-        color: kBackgroundColor,
+        // color: kBackgroundColor
+        color: Colors.white,
         boxShadow: [
           BoxShadow(
             color: kPrimaryColor.withOpacity(0.1),

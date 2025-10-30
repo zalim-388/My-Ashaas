@@ -47,4 +47,4 @@ const kPrimaryLightColor = Color(0xFFFFE9EC);
 
 const double defaultPadding = 16.0;
 
-const Color kErrorcolor = Color(0xFFE60F2B);
+const Color kErrorcolor = Color.fromARGB(255, 191, 13, 37);

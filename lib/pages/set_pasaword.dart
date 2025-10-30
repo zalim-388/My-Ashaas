@@ -2,13 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:agent_porta/pages/Congratulation.dart';
 import 'package:agent_porta/pages/verify_screen.dart';
-import 'package:agent_porta/widgets/upload_image.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 import 'forget_pasword_page(1).dart';
-import '../layout_page.dart';
 import 'package:agent_porta/styles/constants.dart';
 import 'package:agent_porta/styles/style.dart';
 import '../widgets/custom_listTile.dart';
@@ -108,10 +106,6 @@ class _LoginPageState extends State<setpassword> {
           context,
           MaterialPageRoute(builder: (context) => Congratulation()),
         );
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => LayoutPage()),
-        );
       } else {
         final errorData = jsonDecode(response.body);
         print("LOGIN ERROR DATA:");
@@ -141,21 +135,20 @@ class _LoginPageState extends State<setpassword> {
       backgroundColor: kBackgroundColor,
 
       appBar: AppBar(
-        toolbarHeight: 70,
-
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => VerifyScreen()),
-            );
-          },
-          icon: Icon(Icons.arrow_back_ios, color: black),
+        leading: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: IconButton(
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => VerifyScreen()),
+              );
+            },
+            icon: Icon(Icons.arrow_back_ios, color: black),
+          ),
         ),
-        backgroundColor: kBackgroundColor,
-
+        backgroundColor: Colors.white.withOpacity(0.1),
         title: Text("Set Password", style: GTextStyle.heading1Bold),
-
         elevation: 0,
       ),
       body: SingleChildScrollView(

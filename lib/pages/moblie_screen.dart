@@ -23,7 +23,10 @@ class MoblieScreen extends StatefulWidget {
 
 class _MoblieScreenState extends State<MoblieScreen> {
   String? _selectedCountryCode = "+91";
-  String? _selectedCountryFlag;
+  String? _selectedCountryFlag = '🇮🇳';
+
+
+
 
   void _openCountryPicker() {
     showCountryPicker(
@@ -102,15 +105,20 @@ class _MoblieScreenState extends State<MoblieScreen> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+                          if (_selectedCountryFlag != null && _selectedCountryFlag!.isNotEmpty) ...[
+                            Text(
+                              _selectedCountryFlag!,
+                              style: GTextStyle.bodyLight,
+                            ),
+                            SizedBox(width: 6.w),
+                          ],
                           Text(
                             (_selectedCountryCode != null)
                                 ? (_selectedCountryCode!.startsWith('+')
                                     ? _selectedCountryCode!
                                     : '+${_selectedCountryCode}')
                                 : '+91',
-
                             textAlign: TextAlign.center,
-
                             style: GTextStyle.bodyLight,
                           ),
                           SizedBox(width: 5.w),

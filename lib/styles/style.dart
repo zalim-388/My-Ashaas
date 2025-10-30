@@ -121,7 +121,7 @@ class GTextStyle extends TextStyle {
   );
 
   static const label = GTextStyle._(
-    fontSize: 10,
+    fontSize: 11,
     fontWeight: FontWeight.w700,
     fontFamily: "qs'",
     textBaseline: TextBaseline.alphabetic,

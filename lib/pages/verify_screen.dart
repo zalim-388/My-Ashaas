@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:agent_porta/pages/moblie_screen.dart';
 import 'package:agent_porta/pages/set_pasaword.dart';
 import 'package:agent_porta/styles/constants.dart';
 import 'package:agent_porta/styles/style.dart';
@@ -22,9 +25,14 @@ class _VerifyScreenState extends State<VerifyScreen> {
     (index) => FocusNode(),
   );
 
+  Timer? _timer;
+  int _conutdowm = 30;
+  bool isResendDisable = true;
+
   @override
   void initState() {
     super.initState();
+    _startTimer();
     for (var node in _verifyfocusnode) {
       node.addListener(() {
         setState(() {});
@@ -34,6 +42,8 @@ class _VerifyScreenState extends State<VerifyScreen> {
 
   @override
   void dispose() {
+    _timer!.cancel();
+
     for (var controller in _verifycontroller) {
       controller.dispose();
     }
@@ -43,16 +53,54 @@ class _VerifyScreenState extends State<VerifyScreen> {
     super.dispose();
   }
 
+  void _startTimer() {
+    isResendDisable = true;
+    _conutdowm = 30;
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (_conutdowm > 0) {
+        setState(() {
+          _conutdowm--;
+        });
+      } else {
+        _timer!.cancel();
+        setState(() {
+          isResendDisable = false;
+        });
+      }
+    });
+  }
+
+  void ResendOtp() {
+    print('Resend Otp.....');
+    setState(() {
+      _startTimer();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackgroundColor,
-
+      appBar: AppBar(
+        leading: Padding(
+          padding: EdgeInsets.all(16.w),
+          child: IconButton(
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => MoblieScreen()),
+              );
+            },
+            icon: Icon(Icons.arrow_back_ios, color: black),
+          ),
+        ),
+        backgroundColor: kBackgroundColor,
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 110.h),
+            SizedBox(height: 60.h),
             buildlogo(),
             SizedBox(height: 10.h),
 
@@ -81,15 +129,15 @@ class _VerifyScreenState extends State<VerifyScreen> {
 
             SizedBox(height: 30.h),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 50.w),
+              padding: EdgeInsets.symmetric(horizontal: 45.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                 children: List.generate(6, (index) {
                   bool _isFcous = _verifyfocusnode[index].hasFocus;
                   return Container(
-                    height: 35.h,
-                    width: 35.w,
+                    height: 40.h,
+                    width: 40.w,
                     decoration: BoxDecoration(
                       color: kBackgroundColor,
                       borderRadius: BorderRadius.circular(8.r),
@@ -138,7 +186,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
 
             SizedBox(height: 40.h),
             Padding(
-              padding: EdgeInsets.all(16.w),
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: GestureDetector(
                 onTap: () {
                   Navigator.pushReplacement(
@@ -158,7 +206,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                       begin: Alignment.bottomLeft,
                       end: Alignment.bottomCenter,
                     ),
-                    borderRadius: BorderRadius.circular(25.r),
+                    borderRadius: BorderRadius.circular(30.r),
                   ),
                   alignment: Alignment.center,
                   child: Text(
@@ -171,6 +219,27 @@ class _VerifyScreenState extends State<VerifyScreen> {
                   ),
                 ),
               ),
+            ),
+            SizedBox(height: 15.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Didn't get OTP? ", style: GTextStyle.bodyMedium),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    minimumSize: Size(50, 30),
+                    padding: EdgeInsets.zero,
+                  ),
+                  onPressed: isResendDisable ? null : ResendOtp,
+                  child: Text(
+                    isResendDisable ? "Resend in $_conutdowm" : 'Resend',
+                    style: GTextStyle.bodyBold.copyWith(
+                      color: isResendDisable ? grey : kPrimaryColor,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

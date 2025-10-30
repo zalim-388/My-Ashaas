@@ -41,10 +41,7 @@ class ProfileScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return BackdropFilter(
-          filter: ImageFilter.blur(
-            sigmaX: 4.0,
-            sigmaY: 4.0,
-          ),
+          filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
           child: AlertDialog(
             backgroundColor: Colors.white38,
             shape: RoundedRectangleBorder(
@@ -58,19 +55,17 @@ class ProfileScreen extends StatelessWidget {
                   width: 24,
                   height: 24,
                   color: kPrimaryColor,
-                  errorBuilder: (context, error, stackTrace) => Icon(
-                    PhosphorIconsLight.money,
-                    size: 24,
-                    color: kPrimaryColor,
-                  ),
+                  errorBuilder:
+                      (context, error, stackTrace) => Icon(
+                        PhosphorIconsLight.money,
+                        size: 24,
+                        color: kPrimaryColor,
+                      ),
                 ),
                 const SizedBox(width: 12),
                 const Text(
                   'Request Money',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                 ),
               ],
             ),
@@ -80,10 +75,7 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 const Text(
                   'Enter the amount you want to request from Porta:',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.black,
-                  ),
+                  style: TextStyle(fontSize: 14, color: Colors.black),
                 ),
                 const SizedBox(height: 16),
                 TextField(
@@ -135,7 +127,9 @@ class ProfileScreen extends StatelessWidget {
                     // Show success message
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Money request of ₹$amount sent to Porta'),
+                        content: Text(
+                          'Money request of ₹$amount sent to Porta',
+                        ),
                         backgroundColor: kPrimaryColor,
                         behavior: SnackBarBehavior.floating,
                         shape: RoundedRectangleBorder(
@@ -159,7 +153,10 @@ class ProfileScreen extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
                 ),
                 child: const Text(
                   'Send',
@@ -185,7 +182,7 @@ class ProfileScreen extends StatelessWidget {
         elevation: 0,
         scrolledUnderElevation: 0,
         centerTitle: false,
-        title:  Text(
+        title: Text(
           'Profile',
           style: TextStyle(
             color: Colors.black,
@@ -194,8 +191,14 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
         leading: IconButton(
-          icon: Icon(UIcons.solidRounded.angle_left,size: 15, color: Colors.black),
-          onPressed: () { Navigator.pop(context); },
+          icon: Icon(
+            UIcons.solidRounded.angle_left,
+            size: 15,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
       body: Column(
@@ -205,7 +208,7 @@ class ProfileScreen extends StatelessWidget {
           // Profile card
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            padding: const EdgeInsets.symmetric(vertical: 30 , horizontal: 25),
+            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 25),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [kPrimaryColor, kPrimaryColor.withOpacity(.6)],
@@ -253,59 +256,78 @@ class ProfileScreen extends StatelessWidget {
                         SizedBox(height: 4),
                         Text(
                           'Agent ID: 4578420',
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 13,
-                          ),
+                          style: TextStyle(color: Colors.white70, fontSize: 13),
                         ),
                       ],
                     ),
                   ],
                 ),
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => CryptoWalletScreen()),
+                      MaterialPageRoute(
+                        builder: (context) => CryptoWalletScreen(),
+                      ),
                     );
                   },
                   child: Container(
                     margin: EdgeInsets.only(top: 20),
-                    padding: EdgeInsets.symmetric(horizontal: 20 ,vertical: 5),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: Colors.white.withOpacity(.2),
                     ),
                     child: Row(
                       children: [
-                        Image.asset('assets/images/wallet1.png',height: 50,color: white,),
+                        Image.asset(
+                          'assets/images/wallet1.png',
+                          height: 50,
+                          color: white,
+                        ),
                         //Icon(UIcons.boldRounded.money_check, color: Colors.white),
                         SizedBox(width: 20),
                         Column(
                           children: [
-                            Text('Wallet Balance', style: TextStyle(color: Colors.white, fontSize: 12)),
-                            Text(' 100,000', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
+                            Text(
+                              'Wallet Balance',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                              ),
+                            ),
+                            Text(
+                              ' 100,000',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ],
-                        )
+                        ),
                       ],
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
 
           // Menu items
           _buildMenuItem(
-              icon: PhosphorIconsLight.userFocus,
-              title: 'Agent Details',
-              subtitle: 'View your profile details',
-              onTap: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AgentDetails(image: 'assets/images/me.jpg',)),
-                );
-              }
+            icon: PhosphorIconsLight.userFocus,
+            title: 'Agent Details',
+            subtitle: 'View your profile details',
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (context) => AgentDetails(image: 'assets/images/me.jpg'),
+                ),
+              );
+            },
           ),
 
           _buildMenuItem(
@@ -324,7 +346,9 @@ class ProfileScreen extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const BankDetailsPage()),
+                MaterialPageRoute(
+                  builder: (context) => const BankDetailsPage(),
+                ),
               );
             },
           ),
@@ -344,13 +368,10 @@ class ProfileScreen extends StatelessWidget {
 
           // Version
           const Padding(
-            padding: EdgeInsets.only(bottom: 10,left: 25),
+            padding: EdgeInsets.only(bottom: 10, left: 25),
             child: Text(
               'Version 2.0',
-              style: TextStyle(
-                color: Colors.black54,
-                fontSize: 10,
-              ),
+              style: TextStyle(color: Colors.black54, fontSize: 10),
             ),
           ),
         ],
@@ -366,31 +387,21 @@ class ProfileScreen extends StatelessWidget {
   }) {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-      leading: Icon(
-        icon,
-        color: kPrimaryColor.withOpacity(.8),
-        size: 22,
-      ),
+      leading: Icon(icon, color: kPrimaryColor.withOpacity(.8), size: 22),
       title: Text(
         title,
-        style: const TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-        ),
+        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
       ),
       subtitle: Text(
         subtitle,
-        style: TextStyle(
-          fontSize: 11,
-          color: Colors.grey.shade500,
-        ),
+        style: TextStyle(fontSize: 11, color: Colors.grey.shade500),
       ),
     );
   }
 
   Widget _buildMenuItem({
     String? imagePath, // Optional image
-    IconData? icon,    // Optional icon
+    IconData? icon, // Optional icon
     required String title,
     String? subtitle,
     VoidCallback? onTap,
@@ -410,9 +421,11 @@ class ProfileScreen extends StatelessWidget {
                 width: 22,
                 height: 27,
                 color: kPrimaryColor,
-                errorBuilder: (context, error, stackTrace) => icon != null
-                    ? Icon(icon, size: 24, color: kPrimaryColor)
-                    : const SizedBox.shrink(),
+                errorBuilder:
+                    (context, error, stackTrace) =>
+                        icon != null
+                            ? Icon(icon, size: 24, color: kPrimaryColor)
+                            : const SizedBox.shrink(),
               )
             else if (icon != null)
               Icon(icon, size: size ?? 22, color: kPrimaryColor),
@@ -431,16 +444,12 @@ class ProfileScreen extends StatelessWidget {
                   if (subtitle != null && subtitle.isNotEmpty)
                     Text(
                       subtitle,
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: Colors.grey,
-                      ),
+                      style: TextStyle(fontSize: 11, color: Colors.grey),
                     ),
                 ],
               ),
             ),
-            if (showArrow)
-              const Icon(Icons.chevron_right, color: Colors.grey),
+            if (showArrow) const Icon(Icons.chevron_right, color: Colors.grey),
           ],
         ),
       ),

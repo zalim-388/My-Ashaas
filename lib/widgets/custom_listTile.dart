@@ -98,6 +98,10 @@ class CustomListTile extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.r),
                 borderSide: BorderSide(color: kPrimaryColor, width: 1.w),
               ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.r),
+                borderSide: BorderSide(color: kPrimaryColor, width: 1.w),
+              ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.r),
                 borderSide: BorderSide(color: kPrimaryColor, width: 1.w),

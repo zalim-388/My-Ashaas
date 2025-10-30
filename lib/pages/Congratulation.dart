@@ -1,6 +1,4 @@
 import 'dart:ui';
-
-import 'package:agent_porta/layout_page.dart';
 import 'package:agent_porta/pages/home_page.dart';
 import 'package:agent_porta/styles/constants.dart';
 import 'package:agent_porta/styles/style.dart';

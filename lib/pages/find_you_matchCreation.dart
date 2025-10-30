@@ -12,14 +12,14 @@ import 'package:uicons/uicons.dart';
 import '../styles/style.dart';
 import 'home_page.dart';
 
-class businessCreation extends StatefulWidget {
-  const businessCreation({super.key});
+class FindYouMatchcreation extends StatefulWidget {
+  const FindYouMatchcreation({super.key});
 
   @override
-  State<businessCreation> createState() => _ContactFormScreenState();
+  State<FindYouMatchcreation> createState() => _ContactFormScreenState();
 }
 
-class _ContactFormScreenState extends State<businessCreation> {
+class _ContactFormScreenState extends State<FindYouMatchcreation> {
   final _formKey = GlobalKey<FormState>();
 
   final _nameController = TextEditingController();
@@ -305,26 +305,26 @@ class _ContactFormScreenState extends State<businessCreation> {
           try {
             json.decode(response.body);
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('✅ Business created successfully')),
+              SnackBar(content: Text('Business created successfully')),
             );
             Navigator.pop(context);
           } catch (jsonError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text('✅ Success, but response format was unexpected'),
+                content: Text(' Success, but response format was unexpected'),
               ),
             );
             Navigator.pop(context);
           }
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('❌ Error: HTTP ${response.statusCode}')),
+            SnackBar(content: Text('Error: HTTP ${response.statusCode}')),
           );
         }
       } catch (err) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('❌ Error: ${err.toString()}')));
+        ).showSnackBar(SnackBar(content: Text(' Error: ${err.toString()}')));
       } finally {
         setState(() {
           _isLoading = false;
@@ -345,7 +345,7 @@ class _ContactFormScreenState extends State<businessCreation> {
         elevation: 0,
         centerTitle: true,
         title: Text(
-          'Add Business',
+          'Find You Match',
           style: GTextStyle.bodyBold.copyWith(
             fontSize: 18.sp,
             fontWeight: FontWeight.w800,
