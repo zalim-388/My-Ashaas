@@ -372,7 +372,7 @@ class _ContactFormScreenState extends State<businessCreation> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildBusinessField(
+                buildADDField(
                   label: 'Business Name',
                   icon: PhosphorIconsFill.buildings,
                   hintText: 'Enter Business Name',
@@ -385,7 +385,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                   },
                 ),
 
-                buildBusinessField(
+                buildADDField(
                   label: 'Owner Name',
                   icon: PhosphorIconsFill.userCircle,
                   hintText: 'Enter owner Name',
@@ -398,7 +398,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                   },
                 ),
 
-                buildBusinessField(
+                buildADDField(
                   label: 'Department',
                   icon: PhosphorIconsFill.suitcase,
                   hintText: 'Enter Department',
@@ -410,7 +410,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                     return null;
                   },
                 ),
-                buildBusinessField(
+                buildADDField(
                   label: 'Email Id',
                   icon: PhosphorIconsFill.envelope,
                   hintText: 'Enter Email Id',
@@ -429,7 +429,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                   },
                 ),
 
-                buildBusinessField(
+                buildADDField(
                   label: 'Mobile Number',
                   icon: UIcons.regularRounded.mobile_notch,
                   hintText: 'Enter 10 digit mobile number',
@@ -447,7 +447,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                   },
                 ),
 
-                buildBusinessField(
+                buildADDField(
                   label: 'Location',
                   icon: PhosphorIconsFill.mapPinArea,
                   hintText: 'Enter Location',
@@ -460,7 +460,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                   },
                 ),
 
-                buildBusinessField(
+                buildADDField(
                   label: 'District',
                   icon: PhosphorIconsFill.mapPin,
 
@@ -474,7 +474,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                   },
                 ),
 
-                buildBusinessField(
+                buildADDField(
                   label: 'State',
                   icon: PhosphorIconsFill.globeStand,
                   hintText: 'Enter state',
@@ -487,7 +487,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                   },
                 ),
 
-                buildBusinessField(
+                buildADDField(
                   label: 'Country',
                   icon: PhosphorIconsFill.globeHemisphereEast,
                   hintText: 'Enter country',
@@ -500,7 +500,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                   },
                 ),
 
-                buildBusinessField(
+                buildADDField(
                   label: 'GST Number',
                   icon: PhosphorIconsFill.pencilSimpleLine,
                   hintText: 'Enter GST number',
@@ -518,7 +518,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                   },
                 ),
 
-                buildBusinessField(
+                buildADDField(
                   label: 'Aadhaar Number',
                   icon: PhosphorIconsFill.creditCard,
                   hintText: 'Enter Aadhaar number',
@@ -534,7 +534,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                   },
                 ),
 
-                buildBusinessField(
+                buildADDField(
                   label: 'Nominee Name',
                   icon: PhosphorIconsFill.userCircle,
                   hintText: 'Enter nominee Name',
@@ -548,7 +548,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                   },
                 ),
 
-                buildBusinessField(
+                buildADDField(
                   label: 'Nominee Number',
                   icon: PhosphorIconsRegular.numpad,
                   hintText: 'Enter nominee 10 digit mobile number',

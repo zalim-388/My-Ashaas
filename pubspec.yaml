@@ -36,6 +36,8 @@ dependencies:
   country_picker: ^2.0.26
   lottie: ^3.1.2
   cached_network_image: ^3.4.1
+  language_info_plus: ^1.0.1
+  dropdown_search: ^6.0.2
   
 
 dev_dependencies:

@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:language_info_plus/language_info_plus.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:uicons/uicons.dart';
 
@@ -32,8 +33,8 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
   final _heigthController = TextEditingController();
   final _weightController = TextEditingController();
   final _districtController = TextEditingController();
-  final _stateController = TextEditingController();
-  final _countryController = TextEditingController();
+  final _religionController = TextEditingController();
+  final _bloodGroupController = TextEditingController();
   final _gstNumberController = TextEditingController();
   final _aadhaarNumberController = TextEditingController();
   final _nomineeController = TextEditingController();
@@ -44,10 +45,14 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
 
   final _page1FormKey = GlobalKey<FormState>();
   final _page2FormKey = GlobalKey<FormState>();
+  final _page3FormKey = GlobalKey<FormState>();
+  final _page4Formkey = GlobalKey<FormState>();
 
   Gender? _selectedGender = Gender.male;
-  String? selectedvalve;
-  final List<String> options = [
+  String? _selectedProfile;
+  String? _selectedMaritalStatus;
+  String? _selectedMotherTongue;
+  final List<String> Profileoptions = [
     "Self",
     "Parent",
     "Sibling",
@@ -55,9 +60,15 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
     "Relative",
   ];
 
-  final List<String> MaritalStatus=[
-   "Never", "Married" ,"Divorced" , "Widowed",  "Separated",
+  final List<String> MaritalStatusoptions = [
+    "Never",
+    "Married",
+    "Divorced",
+    "Widowed",
+    "Separated",
   ];
+
+  List<String> MotherTongueOptions = [];
 
   List<File> _selectedFiles = [];
   final int _maxFiles = 10;
@@ -290,8 +301,8 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
   @override
   void initState() {
     super.initState();
-    _countryController.text = 'India';
-    _stateController.text = 'Kerala';
+    MotherTongueOptions =
+        LanguageInfoPlus.languages.map((e) => e.name).toList();
   }
 
   @override
@@ -304,8 +315,8 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
     _heigthController.dispose();
     _weightController.dispose();
     _districtController.dispose();
-    _stateController.dispose();
-    _countryController.dispose();
+    _religionController.dispose();
+    _bloodGroupController.dispose();
     _gstNumberController.dispose();
     _aadhaarNumberController.dispose();
     _nomineeController.dispose();
@@ -361,17 +372,34 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
           },
           children: [
             buildregistrationscreen(_pageController),
+
             buildpersonalDetails(
               _pageController,
               _page2FormKey,
               _heigthController,
               _weightController,
-              context,
-              MaritalStatus.map((e) => e.,).toList();
-              selectedvalve,
-     
-              
-              
+              _religionController,
+              _bloodGroupController,
+
+              MaritalStatuisoptions: MaritalStatusoptions,
+              onMaritalStatusChanged: (newvalue) {
+                setState(() {
+                  _selectedMaritalStatus = newvalue;
+                });
+              },
+              selectedMaritalStatus:
+                  _selectedMaritalStatus ?? "Select Marital Status",
+
+              context: context,
+
+              onMotherTohgueChanged: (MotherTongue) {
+                setState(() {
+                  _selectedMotherTongue = MotherTongue;
+                });
+              },
+              selectedMotherTongue:
+                  _selectedMotherTongue ?? "Select Mother Tongue",
+              MotherTongueOptions: MotherTongueOptions,
             ),
           ],
         ),
@@ -390,6 +418,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
         buildFieldLabel(label: label, icon: icon, topPad: topPad),
 
         SegmentedButton<Gender>(
+          showSelectedIcon: false,
           segments: <ButtonSegment<Gender>>[
             ButtonSegment(
               value: Gender.male,
@@ -436,6 +465,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
   Widget buildregistrationscreen(PageController _pageController) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 23.w, vertical: 40.h),
+
       child: Form(
         key: _page1FormKey,
 
@@ -449,7 +479,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
               ),
               SizedBox(height: 20.h),
 
-              buildBusinessField(
+              buildADDField(
                 label: 'Full Name *',
                 icon: PhosphorIconsFill.userCircle,
                 hintText: 'Enter Full Name',
@@ -470,7 +500,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
               Row(
                 children: [
                   Expanded(
-                    child: buildBusinessField(
+                    child: buildADDField(
                       label: 'Date of Birth *',
                       icon: PhosphorIconsFill.calendar,
                       hintText: 'Select your Date of Birth',
@@ -489,7 +519,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
                   ),
                   SizedBox(width: 16.w),
                   Expanded(
-                    child: buildBusinessField(
+                    child: buildADDField(
                       label: 'Age *',
                       icon: PhosphorIconsFill.user,
                       hintText: 'your Age',
@@ -499,7 +529,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
                   ),
                 ],
               ),
-              buildBusinessField(
+              buildADDField(
                 label: 'Email Id',
                 icon: PhosphorIconsFill.envelope,
                 hintText: 'Enter Email Id',
@@ -522,13 +552,13 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
                 label: "Profile Created by",
                 onChanged: (newvalue) {
                   setState(() {
-                    selectedvalve = newvalue;
+                    _selectedProfile = newvalue;
                   });
                 },
                 context: context,
-                options: options.map((e) => e).toList(),
+                options: Profileoptions.map((e) => e).toList(),
                 hintText: "Select Profile Created by",
-                selectedValue: selectedvalve,
+                selectedValue: _selectedProfile,
                 icon: PhosphorIconsFill.userCircle,
               ),
 
@@ -539,7 +569,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
                 children: [
                   buildNextButton(
                     onTap: () {
-                      if (_page1FormKey.currentState!.validate()) {
+                      if (_page1FormKey.currentState?.validate() ?? false) {
                         _pageController.nextPage(
                           duration: Duration(milliseconds: 300),
                           curve: Curves.easeInOut,

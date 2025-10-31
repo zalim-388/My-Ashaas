@@ -301,35 +301,35 @@ class _HomePageState extends State<HomePage> {
                               );
                             },
                             style: ButtonStyle(
-                              shape: MaterialStateProperty.all(
+                              shape: WidgetStateProperty.all(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30.r),
                                 ),
                               ),
-                              overlayColor: MaterialStateProperty.all(
+                              overlayColor: WidgetStateProperty.all(
                                 Colors.transparent,
                               ),
-                              shadowColor: MaterialStateProperty.all(
+                              shadowColor: WidgetStateProperty.all(
                                 Colors.transparent,
                               ),
 
                               backgroundColor:
-                                  MaterialStateProperty.resolveWith<Color>((
+                                  WidgetStateProperty.resolveWith<Color>((
                                     states,
                                   ) {
                                     if (states.contains(
-                                      MaterialState.hovered,
+                                      WidgetState.hovered,
                                     )) {
                                       return kPrimaryColor.withOpacity(0.7);
                                     }
                                     return kPrimaryColor.withOpacity(0.1);
                                   }),
                               foregroundColor:
-                                  MaterialStateProperty.resolveWith<Color>((
+                                  WidgetStateProperty.resolveWith<Color>((
                                     states,
                                   ) {
                                     if (states.contains(
-                                      MaterialState.hovered,
+                                      WidgetState.hovered,
                                     )) {
                                       return Colors.white;
                                     }
@@ -350,8 +350,8 @@ class _HomePageState extends State<HomePage> {
                 )
               else
                 ...historyItems
-                    .map((item) => buildHistoryItem(item['status']!))
-                    .toList(),
+                    .map((item) => buildHistoryItem(item['status'] ?? "")),
+                    
               SizedBox(height: 30.h),
             ],
           ),
@@ -497,7 +497,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Icon(icon, size: 15, color: iconcolor ?? Colors.black45),
             Text(
-              count!,
+              count ?? "",
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w600,
@@ -505,7 +505,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Text(
-              label!,
+              label ?? "",
               style: TextStyle(
                 fontSize: 9,
                 fontWeight: FontWeight.w400,

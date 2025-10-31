@@ -5,80 +5,113 @@ import 'package:agent_porta/styles/style.dart';
 import 'package:agent_porta/widgets/Text_field.dart';
 import 'package:agent_porta/widgets/dropdown.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 Widget buildpersonalDetails(
   PageController _pageController,
   GlobalKey<FormState> key,
-  TextEditingController _heigthController,
+  TextEditingController _heightController,
   TextEditingController _weightController,
-  BuildContext context,
-     Function(String?) onChanged,
-  String? selectedValue,
-   List<String> options,
-) {
+  TextEditingController _ReligionController,
+  TextEditingController _BloodGroupController, {
+  required Function(String?) onMaritalStatusChanged,
+  required String selectedMaritalStatus,
+  required List<String> MaritalStatuisoptions,
+  required BuildContext context,
+  required Function(String?) onMotherTohgueChanged,
+  required String selectedMotherTongue,
+  required List<String> MotherTongueOptions,
+}) {
   return Form(
     key: key,
 
     child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: 23.w, vertical: 40.h),
+      padding: EdgeInsets.symmetric(horizontal: 23.w, vertical: 20.h),
 
-      child: Column(
-        children: [
-          Text(
-            "personal details",
-            style: GTextStyle.heading1Bold.copyWith(color: kPrimaryColor),
-          ),
-          SizedBox(height: 20.h),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Text(
+              "personal details",
+              style: GTextStyle.heading1Bold.copyWith(color: kPrimaryColor),
+            ),
+            SizedBox(height: 20.h),
 
-          buildBusinessField(
-            label: 'Height (in cm/ft) *',
-            icon: PhosphorIconsFill.ruler,
-            hintText: 'Enter your height',
-            Controller: _heigthController,
-            validator: (value) {
-              if (value == null || value.trim().isEmpty) {
-                return 'Please enter you heigth';
-              }
-              return null;
-            },
-          ),
-          buildBusinessField(
-            label: 'weight (in Kg) *',
-            icon: PhosphorIconsFill.barbell,
-            hintText: 'Enter your weight',
-            Controller: _weightController,
-            validator: (value) {
-              if (value == null || value.trim().isEmpty) {
-                return 'Please enter you weight';
-              }
-              return null;
-            },
-          ),
-          buildDropdown(label: "Marital Status", context: context,
-          options: options,
-          selectedValue: selectedValue,
-          onChanged: (p0) {
-            onChanged(p0);
-          },
-          
-          
-          ),
+            buildADDField(
+              label: 'Height (in cm/ft) *',
+              icon: PhosphorIconsFill.ruler,
+              hintText: 'Enter your height',
+              Controller: _heightController,
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return 'Please enter you heigth';
+                }
+                return null;
+              },
+            ),
+            buildADDField(
+              label: 'weight (in Kg) *',
+              icon: PhosphorIconsFill.barbell,
+              hintText: 'Enter your weight',
+              Controller: _weightController,
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return 'Please enter you weight';
+                }
+                return null;
+              },
+            ),
+            buildDropdown(
+              label: "Marital Status",
+              hintText: "Select Marital Status",
+              icon: PhosphorIconsFill.heart,
+              context: context,
+              options: MaritalStatuisoptions,
+              selectedValue: selectedMaritalStatus,
+              onChanged: onMaritalStatusChanged,
+            ),
+            buildDropdown(
+              label: "Mother Tongue",
+              hintText: "Select Mother Tongue",
+              icon: PhosphorIconsFill.globeStand,
+              context: context,
+              options: MotherTongueOptions,
+              selectedValue: selectedMotherTongue,
+              onChanged: onMotherTohgueChanged,
+              isSearchable: true,
+              // enabled: true,
+            ),
 
-          SizedBox(height: 20.h),
+            buildADDField(
+              label: 'Religion',
+              icon: PhosphorIconsFill.handsPraying,
 
-          buildNextButton(
-            onTap: () {
-              if (key.currentState?.validate() ?? false) {
-                _pageController.nextPage(
-                  duration: Duration(milliseconds: 300),
-                  curve: Curves.easeInOut,
-                );
-              }
-            },
-          ),
-        ],
+              hintText: 'Enter Religion',
+              Controller: _ReligionController,
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return 'Please enter your Religion';
+                }
+                return null;
+              },
+            ),
+
+            SizedBox(height: 20.h),
+
+            buildNextButton(
+              onTap: () {
+                if (key.currentState?.validate() ?? false) {
+                  _pageController.nextPage(
+                    duration: Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                  );
+                }
+              },
+            ),
+          ],
+        ),
       ),
     ),
   );
@@ -88,7 +121,7 @@ Widget buildpersonalDetails(
 
 
 
-                // buildBusinessField(
+                // buildADDField(
                 //   label: 'Mobile Number',
                 //   icon: UIcons.regularRounded.mobile_notch,
                 //   hintText: 'Enter 10 digit mobile number',
@@ -107,21 +140,8 @@ Widget buildpersonalDetails(
                 // ),
 
 
-                // buildBusinessField(
-                //   label: 'District',
-                //   icon: PhosphorIconsFill.mapPin,
 
-                //   hintText: 'Enter district',
-                //   Controller: _districtController,
-                //   validator: (value) {
-                //     if (value == null || value.trim().isEmpty) {
-                //       return 'Please enter district';
-                //     }
-                //     return null;
-                //   },
-                // ),
-
-                // buildBusinessField(
+                // buildADDField(
                 //   label: 'State',
                 //   icon: PhosphorIconsFill.globeStand,
                 //   hintText: 'Enter state',
@@ -134,7 +154,7 @@ Widget buildpersonalDetails(
                 //   },
                 // ),
 
-                // buildBusinessField(
+                // buildADDField(
                 //   label: 'Country',
                 //   icon: PhosphorIconsFill.globeHemisphereEast,
                 //   hintText: 'Enter country',
@@ -147,7 +167,7 @@ Widget buildpersonalDetails(
                 //   },
                 // ),
 
-                // buildBusinessField(
+                // buildADDField(
                 //   label: 'GST Number',
                 //   icon: PhosphorIconsFill.pencilSimpleLine,
                 //   hintText: 'Enter GST number',
@@ -165,7 +185,7 @@ Widget buildpersonalDetails(
                 //   },
                 // ),
 
-                // buildBusinessField(
+                // buildADDField(
                 //   label: 'Aadhaar Number',
                 //   icon: PhosphorIconsFill.creditCard,
                 //   hintText: 'Enter Aadhaar number',
@@ -181,7 +201,7 @@ Widget buildpersonalDetails(
                 //   },
                 // ),
 
-                // buildBusinessField(
+                // buildADDField(
                 //   label: 'Nominee Name',
                 //   icon: PhosphorIconsFill.userCircle,
                 //   hintText: 'Enter nominee Name',
@@ -195,7 +215,7 @@ Widget buildpersonalDetails(
                 //   },
                 // ),
 
-                // buildBusinessField(
+                // buildADDField(
                 //   label: 'Nominee Number',
                 //   icon: PhosphorIconsRegular.numpad,
                 //   hintText: 'Enter nominee 10 digit mobile number',

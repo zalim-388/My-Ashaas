@@ -134,11 +134,8 @@ class _LoginPageState extends State<setpassword> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: kBackgroundColor,
+        backgroundColor: kBackgroundColor,
 
-          statusBarBrightness: Brightness.light,
-        ),
         leading: Padding(
           padding: EdgeInsets.all(16.w),
           child: IconButton(
@@ -151,7 +148,6 @@ class _LoginPageState extends State<setpassword> {
             icon: Icon(Icons.arrow_back_ios, color: black),
           ),
         ),
-        backgroundColor: kBackgroundColor,
         title: Text("Set Password", style: GTextStyle.heading1Bold),
       ),
       body: Padding(
@@ -160,7 +156,7 @@ class _LoginPageState extends State<setpassword> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 100.h),
+              SizedBox(height: 80.h),
 
               GestureDetector(
                 onTap: _pikeprofileimage,
