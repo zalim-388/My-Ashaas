@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:agent_porta/styles/constants.dart';
+import 'package:agent_porta/widgets/Text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
@@ -371,7 +372,7 @@ class _ContactFormScreenState extends State<businessCreation> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildBusinessField(
+                buildBusinessField(
                   label: 'Business Name',
                   icon: PhosphorIconsFill.buildings,
                   hintText: 'Enter Business Name',
@@ -384,7 +385,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                   },
                 ),
 
-                _buildBusinessField(
+                buildBusinessField(
                   label: 'Owner Name',
                   icon: PhosphorIconsFill.userCircle,
                   hintText: 'Enter owner Name',
@@ -397,7 +398,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                   },
                 ),
 
-                _buildBusinessField(
+                buildBusinessField(
                   label: 'Department',
                   icon: PhosphorIconsFill.suitcase,
                   hintText: 'Enter Department',
@@ -409,7 +410,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                     return null;
                   },
                 ),
-                _buildBusinessField(
+                buildBusinessField(
                   label: 'Email Id',
                   icon: PhosphorIconsFill.envelope,
                   hintText: 'Enter Email Id',
@@ -428,7 +429,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                   },
                 ),
 
-                _buildBusinessField(
+                buildBusinessField(
                   label: 'Mobile Number',
                   icon: UIcons.regularRounded.mobile_notch,
                   hintText: 'Enter 10 digit mobile number',
@@ -446,7 +447,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                   },
                 ),
 
-                _buildBusinessField(
+                buildBusinessField(
                   label: 'Location',
                   icon: PhosphorIconsFill.mapPinArea,
                   hintText: 'Enter Location',
@@ -459,7 +460,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                   },
                 ),
 
-                _buildBusinessField(
+                buildBusinessField(
                   label: 'District',
                   icon: PhosphorIconsFill.mapPin,
 
@@ -473,7 +474,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                   },
                 ),
 
-                _buildBusinessField(
+                buildBusinessField(
                   label: 'State',
                   icon: PhosphorIconsFill.globeStand,
                   hintText: 'Enter state',
@@ -486,7 +487,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                   },
                 ),
 
-                _buildBusinessField(
+                buildBusinessField(
                   label: 'Country',
                   icon: PhosphorIconsFill.globeHemisphereEast,
                   hintText: 'Enter country',
@@ -499,7 +500,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                   },
                 ),
 
-                _buildBusinessField(
+                buildBusinessField(
                   label: 'GST Number',
                   icon: PhosphorIconsFill.pencilSimpleLine,
                   hintText: 'Enter GST number',
@@ -517,7 +518,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                   },
                 ),
 
-                _buildBusinessField(
+                buildBusinessField(
                   label: 'Aadhaar Number',
                   icon: PhosphorIconsFill.creditCard,
                   hintText: 'Enter Aadhaar number',
@@ -533,7 +534,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                   },
                 ),
 
-                _buildBusinessField(
+                buildBusinessField(
                   label: 'Nominee Name',
                   icon: PhosphorIconsFill.userCircle,
                   hintText: 'Enter nominee Name',
@@ -547,7 +548,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                   },
                 ),
 
-                _buildBusinessField(
+                buildBusinessField(
                   label: 'Nominee Number',
                   icon: PhosphorIconsRegular.numpad,
                   hintText: 'Enter nominee 10 digit mobile number',
@@ -563,7 +564,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                     return null;
                   },
                 ),
-                _buildFieldLabel(
+                buildFieldLabel(
                   label: 'Upload Pictures (Min: $_minFiles, Max: $_maxFiles)',
                   icon: PhosphorIconsFill.upload,
                 ),
@@ -729,97 +730,6 @@ class _ContactFormScreenState extends State<businessCreation> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildFieldLabel({
-    required String label,
-    IconData? icon,
-    double? topPad,
-  }) {
-    return Padding(
-      padding: EdgeInsets.only(
-        bottom: 5.0,
-        left: 10,
-        right: 5,
-        top: topPad ?? 20,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(label, style: GTextStyle.label.copyWith(color: kPrimaryColor)),
-          Icon(icon, size: 18, color: kPrimaryColor),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBusinessField({
-    required String label,
-    required String hintText,
-    required TextEditingController Controller,
-    String? Function(String?)? validator,
-    IconData? icon,
-    TextInputType? keybordType,
-    double? topPad,
-    TextCapitalization textCapitalization = TextCapitalization.none,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        _buildFieldLabel(label: label, icon: icon, topPad: topPad),
-
-        TextFormField(
-          cursorErrorColor: kPrimaryColor,
-          cursorColor: kPrimaryColor,
-          controller: Controller,
-          textCapitalization: textCapitalization,
-          decoration: InputDecoration(
-            hintText: hintText,
-            hintStyle: GTextStyle.bodyBold.copyWith(
-              color: Colors.black45,
-              fontSize: 12,
-              fontFamily: 'qs',
-            ),
-            errorStyle: GTextStyle.bodyLight.copyWith(
-              color: kErrorcolor,
-              // color: kPrimaryColor.withOpacity(.7),
-              fontWeight: FontWeight.w500,
-              fontSize: 11,
-              fontFamily: 'qs',
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.r),
-              borderSide: BorderSide.none,
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.r),
-              borderSide: BorderSide.none,
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.r),
-              borderSide: BorderSide.none,
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.r),
-              borderSide: BorderSide.none,
-            ),
-            filled: true,
-            fillColor: Colors.grey.shade100,
-            isDense: true,
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: 12.w,
-              vertical: 10.h,
-            ),
-          ),
-          style: GTextStyle.bodyBold.copyWith(
-            color: kPrimaryColor,
-            fontSize: 1,
-          ),
-          validator: validator,
-          keyboardType: keybordType,
-        ),
-      ],
     );
   }
 }

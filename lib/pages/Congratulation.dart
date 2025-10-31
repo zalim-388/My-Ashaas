@@ -30,12 +30,13 @@ class _CongratulationState extends State<Congratulation>
     // final size = MediaQuery.of(context).size;
     final padding = MediaQuery.of(context).padding;
     return Scaffold(
-      backgroundColor: Colors.white.withOpacity(0.1),
+      backgroundColor: kBackgroundColor,
+
       body: Stack(
         children: [
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 0.5, sigmaY: 0.5),
-            child: Container(color: Colors.white.withOpacity(0.1)),
+            child: Container(color: kBackgroundColor),
           ),
           Positioned.fill(
             child: Lottie.asset(
@@ -59,6 +60,13 @@ class _CongratulationState extends State<Congratulation>
                         decoration: BoxDecoration(
                           color: kPrimaryColor.withOpacity(0.1),
                           shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              spreadRadius: 10,
+                              color: kPrimaryColor.withOpacity(0.5),
+                              blurRadius: 20,
+                            ),
+                          ],
                         ),
                         child: Icon(
                           Icons.check_circle,
@@ -71,7 +79,7 @@ class _CongratulationState extends State<Congratulation>
                       Text(
                         "Congratulation 🎉",
                         style: GTextStyle.heading1Bold.copyWith(
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       ),
 

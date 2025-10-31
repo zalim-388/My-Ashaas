@@ -7,12 +7,7 @@ import 'package:agent_porta/styles/constants.dart';
 import 'package:agent_porta/styles/style.dart';
 import 'package:agent_porta/pages/verify_screen.dart';
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: MoblieScreen());
-  }
-}
+
 
 class MoblieScreen extends StatefulWidget {
   const MoblieScreen({super.key});

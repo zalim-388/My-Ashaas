@@ -96,7 +96,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
         ),
         backgroundColor: kBackgroundColor,
       ),
-      body: SingleChildScrollView(
+      body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

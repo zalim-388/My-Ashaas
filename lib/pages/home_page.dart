@@ -1,4 +1,4 @@
-import 'package:agent_porta/pages/find_you_matchCreation.dart';
+import 'package:agent_porta/pages/find%20you%20match/find_you_matchCreation.dart';
 import 'package:agent_porta/pages/profile_page.dart';
 import 'package:agent_porta/pages/businessCreation.dart';
 import 'package:carousel_slider/carousel_options.dart';
@@ -20,7 +20,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
   final CarouselSliderController _carouselController =
       CarouselSliderController();
 
@@ -221,7 +220,7 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: 20.h),
               Padding(
-                padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -363,7 +362,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildHistoryItem(String status) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 5.h),
+      padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
       child: ListTile(
         title: Text(
           'Business name',
@@ -429,32 +428,27 @@ class _HomePageState extends State<HomePage> {
         Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.h),
-                child: CarouselSlider(
-                  options: CarouselOptions(
-                    viewportFraction: 1,
-                    autoPlay: true,
-                    height: 180,
-                    autoPlayCurve: Curves.easeInOut,
-                    autoPlayAnimationDuration: const Duration(
-                      milliseconds: 800,
-                    ),
-                    autoPlayInterval: const Duration(seconds: 6),
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                        myCurrentIndex = index;
-                      });
-                    },
-                  ),
-
-                  items:
-                      _items
-                          .map((imageUrl) => RoundedImages(imageUrl: imageUrl))
-                          .toList(),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(4.h),
+              child: CarouselSlider(
+                options: CarouselOptions(
+                  viewportFraction: 1,
+                  autoPlay: true,
+                  height: 190,
+                  autoPlayCurve: Curves.easeInOut,
+                  autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                  autoPlayInterval: const Duration(seconds: 6),
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      myCurrentIndex = index;
+                    });
+                  },
                 ),
+
+                items:
+                    _items
+                        .map((imageUrl) => RoundedImages(imageUrl: imageUrl))
+                        .toList(),
               ),
             ),
           ],
@@ -463,12 +457,12 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.only(top: 10),
             child: AnimatedSmoothIndicator(
-              activeIndex: _currentIndex,
+              activeIndex: myCurrentIndex,
               count: _items.length,
               effect: WormEffect(
-                dotHeight: 6.h,
+                dotHeight: 5.h,
                 dotWidth: 6.w,
-                spacing: 4.w,
+                spacing: 3.w,
                 activeDotColor: kPrimaryColor,
                 dotColor: Colors.grey,
               ),
@@ -532,7 +526,7 @@ class RoundedImages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 190.h,
+      height: 200.h,
       width: MediaQuery.of(context).size.width,
       // margin: EdgeInsets.symmetric(horizontal: 2.w),
       child: ClipRRect(
@@ -602,7 +596,6 @@ Widget _buildActionCard({
         ],
       ),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         children: [
           Image.asset(imagepath, fit: BoxFit.cover, height: 40.h, width: 40.w),
           SizedBox(height: 12.h),

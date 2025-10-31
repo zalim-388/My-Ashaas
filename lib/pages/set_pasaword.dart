@@ -4,6 +4,7 @@ import 'package:agent_porta/pages/Congratulation.dart';
 import 'package:agent_porta/pages/verify_screen.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 import 'forget_pasword_page(1).dart';
@@ -102,10 +103,10 @@ class _LoginPageState extends State<setpassword> {
           context,
         ).showSnackBar(SnackBar(content: Text('Login successful')));
 
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => Congratulation()),
-        );
+        // Navigator.pushReplacement(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => Congratulation()),
+        // );
       } else {
         final errorData = jsonDecode(response.body);
         print("LOGIN ERROR DATA:");
@@ -132,11 +133,14 @@ class _LoginPageState extends State<setpassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackgroundColor,
-
       appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: kBackgroundColor,
+
+          statusBarBrightness: Brightness.light,
+        ),
         leading: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          padding: EdgeInsets.all(16.w),
           child: IconButton(
             onPressed: () {
               Navigator.pushReplacement(
@@ -147,13 +151,12 @@ class _LoginPageState extends State<setpassword> {
             icon: Icon(Icons.arrow_back_ios, color: black),
           ),
         ),
-        backgroundColor: Colors.white.withOpacity(0.1),
+        backgroundColor: kBackgroundColor,
         title: Text("Set Password", style: GTextStyle.heading1Bold),
-        elevation: 0,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(16.h),
+      body: Padding(
+        padding: EdgeInsets.all(16.h),
+        child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
