@@ -87,274 +87,203 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 23.w),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: 10.h),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 16.h),
 
-              sliderAds(),
-              // ClipRRect(
-              //   borderRadius: BorderRadius.circular(4.r),
-              //   child:
-              //       _items.isEmpty
-              //           ? _buildErrorcImage()
-              //           : CarouselSlider(
-              //             carouselController: _carouselController,
-              //             options: CarouselOptions(
-              //               height: 180.h,
-              //               // scrollDirection: Axis.horizontal,
-              //               autoPlay: true,
-              //               enableInfiniteScroll: _items.length > 1,
-              //               viewportFraction: 0.8,
-              //               autoPlayInterval: const Duration(seconds: 3),
-              //               autoPlayAnimationDuration: const Duration(
-              //                 milliseconds: 800,
-              //               ),
-              //               autoPlayCurve: Curves.fastOutSlowIn,
-              //               onPageChanged: (index, reason) {
-              //                 setState(() {
-              //                   _currentIndex = index;
-              //                 });
-              //               },
-              //             ),
+            sliderAds(),
 
-              //             items:
-              //                 _items.map((imageUrl) {
-              //                   return Builder(
-              //                     builder: (context) {
-              //                       return Container(
-              //                         width: MediaQuery.of(context).size.width,
-              //                         margin: EdgeInsets.symmetric(
-              //                           horizontal: 2.w,
-              //                         ),
-              //                         child: ClipRRect(
-              //                           borderRadius: BorderRadius.circular(
-              //                             4.r,
-              //                           ),
-              //                           //CachedNetworkImage
-              //                           child: Image.asset(
-              //                             imageUrl,
-              //                             fit: BoxFit.cover,
-              //                             // placeholder: (context, url) =>
-              //                             //     Container(
-              //                             //       color: Colors.grey[200],
-              //                             //       child: CircularProgressIndicator(
-              //                             //         color: kPrimaryColor,
-              //                             //         strokeWidth: 2.0.w,
-              //                             //       ),
-              //                             //     ),
-              //                             errorBuilder:
-              //                                 (context, url, error) =>
-              //                                     _buildErrorcImage(),
-              //                           ),
-              //                         ),
-              //                       );
-              //                     },
-              //                   );
-              //                 }).toList(),
-              //           ),
-              // ),
-              // if (_items.isNotEmpty)
-              //   Padding(
-              //     padding: const EdgeInsets.only(top: 10),
-              //     child: AnimatedSmoothIndicator(
-              //       activeIndex: _currentIndex,
-              //       count: _items.length,
-              //       effect: WormEffect(
-              //         dotHeight: 6.h,
-              //         dotWidth: 6.w,
-              //         spacing: 4.w,
-              //         activeDotColor: kPrimaryColor,
-              //         dotColor: Colors.grey,
-              //       ),
-              //       onDotClicked: (index) {
-              //         _carouselController.animateToPage(index);
-              //       },
-              //     ),
-              //   ),
-              SizedBox(height: 20.h),
-              IntrinsicHeight(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+            SizedBox(height: 20.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 23.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 16.h),
 
-                  children: [
-                    Expanded(
-                      child: _buildActionCard(
-                        imagepath: "assets/images/deal.png",
-                        title: "Add Business",
-                        subtitle: "Add more business to get more leads",
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => businessCreation(),
-                            ),
-                          );
-                        },
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _buildActionCard(
+                          imagepath: "assets/images/deal.png",
+                          title: "Add Business",
+                          subtitle: "Add more business to get more leads",
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => businessCreation(),
+                              ),
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 16.w),
-                    Expanded(
-                      child: _buildActionCard(
-                        imagepath: "assets/images/deal.png",
-                        title: "Find you Match",
-                        subtitle:
-                            "Life is an Adventure When you the find right \n Partner to explore with",
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => FindYouMatchcreation(),
-                            ),
-                          );
-                        },
+                      SizedBox(width: 16.w),
+                      Expanded(
+                        child: _buildActionCard(
+                          imagepath: "assets/images/deal.png",
+                          title: "Find you Match",
+                          subtitle:
+                              "Life is an Adventure When you the find right \n Partner to explore with",
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => FindYouMatchcreation(),
+                              ),
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                    //  "Find the right partner to explore with",
-                  ],
-                ),
+                      //  "Find the right partner to explore with",
+                    ],
+                  ),
+                ],
               ),
-              SizedBox(height: 20.h),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Activity",
-                      textAlign: TextAlign.start,
-                      style: GTextStyle.bodyBold.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      style: ButtonStyle(
-                        padding: MaterialStateProperty.all(EdgeInsets.zero),
-                      ),
-                      child: Text(
-                        'view all',
+            ),
+            // SizedBox(height: 20.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Activity",
+                        textAlign: TextAlign.start,
                         style: GTextStyle.bodyBold.copyWith(
                           fontWeight: FontWeight.w600,
-                          color: kPrimaryColor,
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 10.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    buildStatusColumn(
-                      icon: Ionicons.checkmark_done_outline,
-                      count: '06',
-                      label: 'Approved',
-                      iconcolor: Colors.green.shade500,
-                    ),
-
-                    buildStatusColumn(
-                      icon: Ionicons.hourglass_outline,
-                      count: '02',
-                      label: 'Pending',
-                      iconcolor: Colors.orange.shade500,
-                    ),
-
-                    buildStatusColumn(
-                      icon: Ionicons.close,
-                      count: '01',
-                      label: 'Declined',
-                      iconcolor: Colors.red.shade500,
-                    ),
-                  ],
-                ),
-              ),
-
-              if (historyItems.isEmpty)
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(30, 60, 30, 0),
-                  child: Column(
-                    children: [
-                      Center(
+                      TextButton(
+                        onPressed: () {},
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all(EdgeInsets.zero),
+                        ),
                         child: Text(
-                          "You haven't added any businesses yet.",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                      ),
-                      Center(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 20.0.h),
-                          child: TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => businessCreation(),
-                                ),
-                              );
-                            },
-                            style: ButtonStyle(
-                              shape: WidgetStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30.r),
-                                ),
-                              ),
-                              overlayColor: WidgetStateProperty.all(
-                                Colors.transparent,
-                              ),
-                              shadowColor: WidgetStateProperty.all(
-                                Colors.transparent,
-                              ),
-
-                              backgroundColor:
-                                  WidgetStateProperty.resolveWith<Color>((
-                                    states,
-                                  ) {
-                                    if (states.contains(
-                                      WidgetState.hovered,
-                                    )) {
-                                      return kPrimaryColor.withOpacity(0.7);
-                                    }
-                                    return kPrimaryColor.withOpacity(0.1);
-                                  }),
-                              foregroundColor:
-                                  WidgetStateProperty.resolveWith<Color>((
-                                    states,
-                                  ) {
-                                    if (states.contains(
-                                      WidgetState.hovered,
-                                    )) {
-                                      return Colors.white;
-                                    }
-                                    return Colors.black;
-                                  }),
-                            ),
-                            child: Text(
-                              " Add more business",
-                              style: GTextStyle.bodyBold.copyWith(
-                                fontSize: 16.sp,
-                              ),
-                            ),
+                          'view all',
+                          style: GTextStyle.bodyBold.copyWith(
+                            fontWeight: FontWeight.w600,
+                            color: kPrimaryColor,
                           ),
                         ),
                       ),
                     ],
                   ),
-                )
-              else
-                ...historyItems
-                    .map((item) => buildHistoryItem(item['status'] ?? "")),
-                    
-              SizedBox(height: 30.h),
-            ],
-          ),
+                ],
+              ),
+            ),
+            SizedBox(height: 12.h),
+
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 8.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  buildStatusColumn(
+                    icon: Ionicons.checkmark_done_outline,
+                    count: '06',
+                    label: 'Approved',
+                    iconcolor: Colors.green.shade500,
+                  ),
+
+                  buildStatusColumn(
+                    icon: Ionicons.hourglass_outline,
+                    count: '02',
+                    label: 'Pending',
+                    iconcolor: Colors.orange.shade500,
+                  ),
+
+                  buildStatusColumn(
+                    icon: Ionicons.close,
+                    count: '01',
+                    label: 'Declined',
+                    iconcolor: Colors.red.shade500,
+                  ),
+                ],
+              ),
+            ),
+
+            if (historyItems.isEmpty)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(30, 60, 30, 0),
+                child: Column(
+                  children: [
+                    Center(
+                      child: Text(
+                        "You haven't added any businesses yet.",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                    ),
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20.0.h),
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => businessCreation(),
+                              ),
+                            );
+                          },
+                          style: ButtonStyle(
+                            shape: WidgetStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.r),
+                              ),
+                            ),
+                            overlayColor: WidgetStateProperty.all(
+                              Colors.transparent,
+                            ),
+                            shadowColor: WidgetStateProperty.all(
+                              Colors.transparent,
+                            ),
+
+                            backgroundColor:
+                                WidgetStateProperty.resolveWith<Color>((
+                                  states,
+                                ) {
+                                  if (states.contains(WidgetState.hovered)) {
+                                    return kPrimaryColor.withOpacity(0.7);
+                                  }
+                                  return kPrimaryColor.withOpacity(0.1);
+                                }),
+                            foregroundColor:
+                                WidgetStateProperty.resolveWith<Color>((
+                                  states,
+                                ) {
+                                  if (states.contains(WidgetState.hovered)) {
+                                    return Colors.white;
+                                  }
+                                  return Colors.black;
+                                }),
+                          ),
+                          child: Text(
+                            " Add more business",
+                            style: GTextStyle.bodyBold.copyWith(
+                              fontSize: 16.sp,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            else
+              ...historyItems.map(
+                (item) => buildHistoryItem(item['status'] ?? ""),
+              ),
+
+            SizedBox(height: 30.h),
+          ],
         ),
       ),
     );
@@ -362,31 +291,45 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildHistoryItem(String status) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
+      padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 20.w),
       child: ListTile(
         title: Text(
           'Business name',
-          style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+          style: GTextStyle.bodyBold.copyWith(
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Department name',
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+              style: GTextStyle.bodyBold.copyWith(
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w300,
+              ),
             ),
             Text(
               'Location',
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+              style: GTextStyle.bodyBold.copyWith(
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w300,
+              ),
             ),
             Text(
               'Phone number',
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+              style: GTextStyle.bodyBold.copyWith(
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w300,
+              ),
             ),
           ],
         ),
         trailing: getStatusIcon(status),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.r),
+        ),
         dense: true,
         contentPadding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
         tileColor: Colors.grey.shade100,
@@ -407,71 +350,75 @@ class _HomePageState extends State<HomePage> {
       'Declined': Colors.red.shade500,
     };
 
-    return Column(
-      children: [
-        Icon(
-          icons[status] ?? Icons.help_outline,
-          color: colors[status] ?? Colors.grey,
-          size: 17,
-        ),
-        Text(
-          status,
-          style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600),
-        ),
-      ],
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 12.w),
+      child: Column(
+        children: [
+          Icon(
+            icons[status] ?? Icons.help_outline,
+            color: colors[status] ?? Colors.grey,
+            size: 24,
+          ),
+          Text(
+            status,
+            style: GTextStyle.bodyLight.copyWith(
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget sliderAds() {
-    return Column(
-      children: [
-        Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(4.h),
-              child: CarouselSlider(
-                options: CarouselOptions(
-                  viewportFraction: 1,
-                  autoPlay: true,
-                  height: 190,
-                  autoPlayCurve: Curves.easeInOut,
-                  autoPlayAnimationDuration: const Duration(milliseconds: 800),
-                  autoPlayInterval: const Duration(seconds: 6),
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      myCurrentIndex = index;
-                    });
-                  },
-                ),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 23.w),
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(4.h),
+            child: CarouselSlider(
+              options: CarouselOptions(
+                viewportFraction: 1,
+                autoPlay: true,
+                height: 190,
+                autoPlayCurve: Curves.easeInOut,
+                autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                autoPlayInterval: const Duration(seconds: 6),
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    myCurrentIndex = index;
+                  });
+                },
+              ),
 
-                items:
-                    _items
-                        .map((imageUrl) => RoundedImages(imageUrl: imageUrl))
-                        .toList(),
-              ),
-            ),
-          ],
-        ),
-        if (_items.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: AnimatedSmoothIndicator(
-              activeIndex: myCurrentIndex,
-              count: _items.length,
-              effect: WormEffect(
-                dotHeight: 5.h,
-                dotWidth: 6.w,
-                spacing: 3.w,
-                activeDotColor: kPrimaryColor,
-                dotColor: Colors.grey,
-              ),
-              onDotClicked: (index) {
-                _carouselController.animateToPage(index);
-              },
+              items:
+                  _items
+                      .map((imageUrl) => RoundedImages(imageUrl: imageUrl))
+                      .toList(),
             ),
           ),
-      ],
+          if (_items.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: AnimatedSmoothIndicator(
+                activeIndex: myCurrentIndex,
+                count: _items.length,
+                effect: WormEffect(
+                  dotHeight: 5.h,
+                  dotWidth: 6.w,
+                  spacing: 3.w,
+                  activeDotColor: kPrimaryColor,
+                  dotColor: Colors.grey,
+                ),
+                onDotClicked: (index) {
+                  _carouselController.animateToPage(index);
+                },
+              ),
+            ),
+        ],
+      ),
     );
   }
 
@@ -481,35 +428,33 @@ class _HomePageState extends State<HomePage> {
     String? label,
     Color? color,
     Color? maincolor,
-    Color? iconcolor,
+    required Color iconcolor,
   }) {
     return Expanded(
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10.w),
-        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+        margin: EdgeInsets.symmetric(horizontal: 5.w),
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 7.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.r),
           color: maincolor ?? Colors.grey.shade100,
+          border: Border.all(color: iconcolor.withOpacity(0.2), width: 1.w),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(icon, size: 15, color: iconcolor ?? Colors.black45),
+            Icon(icon, size: 24, color: iconcolor),
             Text(
               count ?? "",
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
-                color: color ?? Colors.black87,
+              style: GTextStyle.bodyBold.copyWith(
+                fontSize: 15.sp,
+                fontWeight: FontWeight.w500,
               ),
             ),
             Text(
               label ?? "",
-              style: TextStyle(
-                fontSize: 9,
-                fontWeight: FontWeight.w400,
-                color: Colors.black45,
+              style: GTextStyle.label.copyWith(
+                fontSize: 10.sp,
+                fontWeight: FontWeight.w300,
               ),
             ),
           ],
@@ -597,21 +542,39 @@ Widget _buildActionCard({
       ),
       child: Column(
         children: [
-          Image.asset(imagepath, fit: BoxFit.cover, height: 40.h, width: 40.w),
+          Container(
+            padding: EdgeInsets.all(12.w),
+            decoration: BoxDecoration(
+              color: kPrimaryColor.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: Image.asset(
+              imagepath,
+              fit: BoxFit.cover,
+              height: 35.h,
+              width: 35.w,
+            ),
+          ),
           SizedBox(height: 12.h),
           Text(
             title,
             textAlign: TextAlign.center,
-            style: GTextStyle.bodyBold.copyWith(fontSize: 16.sp),
+            style: GTextStyle.bodyBold.copyWith(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w600,
+            ),
           ),
 
           SizedBox(height: 4.h),
           Text(
             textAlign: TextAlign.center,
             subtitle,
+            maxLines: 2,
             style: GTextStyle.bodyBold.copyWith(
               fontSize: 12.sp,
-              color: Colors.grey[700],
+              color: Colors.grey[600],
+              fontWeight: FontWeight.w400,
+              height: 1.2,
             ),
           ),
           SizedBox(height: 5.h),

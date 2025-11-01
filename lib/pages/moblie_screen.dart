@@ -7,8 +7,6 @@ import 'package:agent_porta/styles/constants.dart';
 import 'package:agent_porta/styles/style.dart';
 import 'package:agent_porta/pages/verify_screen.dart';
 
-
-
 class MoblieScreen extends StatefulWidget {
   const MoblieScreen({super.key});
 
@@ -19,9 +17,6 @@ class MoblieScreen extends StatefulWidget {
 class _MoblieScreenState extends State<MoblieScreen> {
   String? _selectedCountryCode = "+91";
   String? _selectedCountryFlag = '🇮🇳';
-
-
-
 
   void _openCountryPicker() {
     showCountryPicker(
@@ -81,7 +76,10 @@ class _MoblieScreenState extends State<MoblieScreen> {
               Align(
                 alignment: Alignment.centerLeft,
 
-                child: Text("Moblie Number", style: GTextStyle.bodyMedium),
+                child: Text(
+                  "Moblie Number",
+                  style: GTextStyle.label.copyWith(color: kPrimaryColor),
+                ),
               ),
               SizedBox(height: 8.h),
               Row(
@@ -93,6 +91,8 @@ class _MoblieScreenState extends State<MoblieScreen> {
                       height: 40.h,
                       padding: EdgeInsets.all(9.r),
                       decoration: BoxDecoration(
+                        color: Colors.grey.shade100,
+
                         borderRadius: BorderRadius.circular(8.r),
                         border: Border.all(color: kPrimaryColor, width: 1.w),
                       ),
@@ -100,7 +100,8 @@ class _MoblieScreenState extends State<MoblieScreen> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          if (_selectedCountryFlag != null && _selectedCountryFlag!.isNotEmpty) ...[
+                          if (_selectedCountryFlag != null &&
+                              _selectedCountryFlag!.isNotEmpty) ...[
                             Text(
                               _selectedCountryFlag!,
                               style: GTextStyle.bodyLight,
@@ -129,6 +130,7 @@ class _MoblieScreenState extends State<MoblieScreen> {
                     child: Container(
                       height: 40.h,
                       decoration: ShapeDecoration(
+                        color: Colors.grey.shade100,
                         shape: RoundedRectangleBorder(
                           side: BorderSide(width: 1.w, color: kPrimaryColor),
                           borderRadius: BorderRadius.circular(8.r),
@@ -140,14 +142,30 @@ class _MoblieScreenState extends State<MoblieScreen> {
                           FilteringTextInputFormatter.digitsOnly,
                         ],
                         keyboardType: TextInputType.number,
+                        cursorColor: kPrimaryColor,
+
                         decoration: InputDecoration(
                           hintText: "Enter Your Moblie Number",
-                          hintStyle: GTextStyle.bodyLight,
-                          border: InputBorder.none,
+                          hintStyle: GTextStyle.bodyBold.copyWith(
+                            color: Colors.black45,
+                            fontSize: 15.sp,
+                            fontFamily: 'qs',
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.r),
+                            borderSide: BorderSide.none,
+                          ),
+
                           contentPadding: EdgeInsets.symmetric(
                             horizontal: 12.w,
-                            vertical: 8.h,
                           ),
+
+                          filled: true,
+                          fillColor: Colors.grey.shade100,
+                        ),
+                        style: GTextStyle.bodyBold.copyWith(
+                          color: kPrimaryColor,
+                          fontSize: 15.sp,
                         ),
                       ),
                     ),

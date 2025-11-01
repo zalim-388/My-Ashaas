@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:agent_porta/pages/Congratulation.dart';
 import 'package:agent_porta/pages/verify_screen.dart';
@@ -6,7 +5,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:http/http.dart' as http;
 import 'forget_pasword_page(1).dart';
 import 'package:agent_porta/styles/constants.dart';
 import 'package:agent_porta/styles/style.dart';
@@ -71,92 +69,32 @@ class _LoginPageState extends State<setpassword> {
     super.dispose();
   }
 
-  Future<void> login() async {
-    final email = usenameController.text.trim();
-    final password = passwordController.text.trim();
-
-    if (email.isEmpty || password.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please enter email and password')),
-      );
-      return;
-    }
-
-    setState(() => isLoading = true);
-
-    try {
-      final response = await http.post(
-        Uri.parse('http://localhost:8000/login'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'email': email, 'password': password}),
-      );
-
-      print("STATUS CODE: ${response.statusCode}");
-      print("RESPONSE BODY: ${response.body}");
-
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        print("LOGIN SUCCESS DATA:");
-        print(data); // prints full response
-
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('Login successful')));
-
-        // Navigator.pushReplacement(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => Congratulation()),
-        // );
-      } else {
-        final errorData = jsonDecode(response.body);
-        print("LOGIN ERROR DATA:");
-        print(errorData); // prints full error response
-
-        String errorMessage =
-            errorData['message'] ?? 'Login failed. Try again.';
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(errorMessage)));
-      }
-    } catch (e) {
-      print("EXCEPTION OCCURRED:");
-      print(e); // print error in console
-
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Something went wrong: $e')));
-    } finally {
-      setState(() => isLoading = false);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBackgroundColor,
+
       appBar: AppBar(
         backgroundColor: kBackgroundColor,
 
-        leading: Padding(
-          padding: EdgeInsets.all(16.w),
-          child: IconButton(
-            onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => VerifyScreen()),
-              );
-            },
-            icon: Icon(Icons.arrow_back_ios, color: black),
-          ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => VerifyScreen()),
+            );
+          },
+          icon: Icon(Icons.arrow_back_ios, color: black),
         ),
         title: Text("Set Password", style: GTextStyle.heading1Bold),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.h),
+        padding: EdgeInsets.symmetric(horizontal: 16.h),
         child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 80.h),
+              SizedBox(height: 0.h),
 
               GestureDetector(
                 onTap: _pikeprofileimage,

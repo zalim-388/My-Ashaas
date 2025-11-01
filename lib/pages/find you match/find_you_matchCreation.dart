@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:agent_porta/pages/find%20you%20match/family_details.dart';
 import 'package:agent_porta/pages/find%20you%20match/personal_Details.dart';
 import 'package:agent_porta/styles/constants.dart';
 import 'package:agent_porta/widgets/Text_field.dart';
@@ -32,9 +33,9 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
 
   final _heigthController = TextEditingController();
   final _weightController = TextEditingController();
+  final _motherTongueController = TextEditingController();
   final _districtController = TextEditingController();
-  final _religionController = TextEditingController();
-  final _bloodGroupController = TextEditingController();
+
   final _gstNumberController = TextEditingController();
   final _aadhaarNumberController = TextEditingController();
   final _nomineeController = TextEditingController();
@@ -52,6 +53,14 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
   String? _selectedProfile;
   String? _selectedMaritalStatus;
   String? _selectedMotherTongue;
+  bool? _selectedHoroscope;
+  String? _selectedReligion;
+  String? _selectedCast;
+  String? _selectedSubCast;
+  String? _selectedbloodGroup;
+
+  List<String> subCastOptions = [];
+
   final List<String> Profileoptions = [
     "Self",
     "Parent",
@@ -70,6 +79,52 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
 
   List<String> MotherTongueOptions = [];
 
+  List<String> Religionoptions = [
+    "Hindu",
+    "Muslim",
+    "Christian",
+    "Sikh",
+    "Jain",
+  ];
+
+  final List<String> Castoptions = ["cast A1", "cast A2", "cast A3"];
+  final List<String> SubCastoptions = [
+    "subcast A1",
+    "subcast A2",
+    "subcast A3",
+  ];
+
+  final List<String> bloodGroupOptions = [
+    "A+",
+    "A-",
+    "B+",
+    "B-",
+    "AB+",
+    "AB-",
+    "O+",
+    "O-",
+  ];
+
+  List<String> getCastForReligion(String? religion) {
+    if (religion == 'Hindu') {
+      return ["cast A1", "cast A2", "cast A3", "cast A4"];
+    }
+    if (religion == 'Muslim') {
+      return [];
+    }
+    if (religion == 'Christian') {
+      return ["cast B1", "cast B2", "cast B3"];
+    }
+    if (religion == 'Sikh') {
+      return [];
+    }
+    if (religion == 'Jain') {
+      return [];
+    }
+    return [];
+  }
+
+  @override
   List<File> _selectedFiles = [];
   final int _maxFiles = 10;
   final int _minFiles = 3;
@@ -303,6 +358,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
     super.initState();
     MotherTongueOptions =
         LanguageInfoPlus.languages.map((e) => e.name).toList();
+    MotherTongueOptions.sort();
   }
 
   @override
@@ -315,8 +371,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
     _heigthController.dispose();
     _weightController.dispose();
     _districtController.dispose();
-    _religionController.dispose();
-    _bloodGroupController.dispose();
+
     _gstNumberController.dispose();
     _aadhaarNumberController.dispose();
     _nomineeController.dispose();
@@ -360,6 +415,33 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
           },
           icon: Icon(UIcons.solidRounded.angle_left, size: 15),
         ),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              _pageController.nextPage(
+                duration: Duration(milliseconds: 300),
+                curve: Curves.easeIn,
+              );
+            },
+            child: Container(
+              height: 30.h,
+              width: 30.w,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.r),
+                color: kPrimaryColor,
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                "Skip",
+                style: GTextStyle.bodyBold.copyWith(
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
       body: SafeArea(
         child: PageView(
@@ -378,29 +460,77 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
               _page2FormKey,
               _heigthController,
               _weightController,
-              _religionController,
-              _bloodGroupController,
+              _motherTongueController,
 
-              MaritalStatuisoptions: MaritalStatusoptions,
+              religionoptions: Religionoptions,
+              selectedReligion: _selectedReligion,
+              onrReligionChanged: (newValue) {
+                setState(() {
+                  _selectedReligion = newValue;
+
+                  _selectedCast = null;
+                  _selectedSubCast = null;
+
+                  Religionoptions = getCastForReligion(newValue);
+                });
+              },
+
+              selectedCast: _selectedCast,
+              castoptions: Castoptions,
+              onrCastChanged: (newValue) {
+                setState(() {
+                  _selectedCast = newValue;
+                  _selectedSubCast = null;
+                  subCastOptions = getCastForReligion(newValue);
+                });
+              },
+
+              selectedSubCast: _selectedSubCast,
+              subCastoptions: SubCastoptions,
+              onSubCastChanged: (newValue) {
+                setState(() {
+                  _selectedSubCast = newValue;
+                });
+              },
+              selectBloodGroup: _selectedbloodGroup,
+              bloodGroupOptions: bloodGroupOptions,
+              onBloodGroupChanged: (newValue) {
+                setState(() {
+                  _selectedbloodGroup = newValue;
+                });
+              },
+
+              selectionHoroscope: _selectedHoroscope,
+              onHoroscopeChanged: (bool? newvalue) {
+                setState(() {
+                  _selectedHoroscope = newvalue;
+                });
+              },
+
+              maritalStatuisoptions: MaritalStatusoptions,
               onMaritalStatusChanged: (newvalue) {
                 setState(() {
                   _selectedMaritalStatus = newvalue;
                 });
               },
+
               selectedMaritalStatus:
                   _selectedMaritalStatus ?? "Select Marital Status",
 
               context: context,
 
-              onMotherTohgueChanged: (MotherTongue) {
+              onMotherTohgueChanged: (String? newValue) {
                 setState(() {
-                  _selectedMotherTongue = MotherTongue;
+                  _selectedMotherTongue = newValue;
+                  _motherTongueController.text = newValue!;
                 });
               },
               selectedMotherTongue:
                   _selectedMotherTongue ?? "Select Mother Tongue",
-              MotherTongueOptions: MotherTongueOptions,
+              motherTongueOptions: MotherTongueOptions,
             ),
+
+            buildFamilyDetails(_pageController, _page3FormKey),
           ],
         ),
       ),
@@ -419,6 +549,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
 
         SegmentedButton<Gender>(
           showSelectedIcon: false,
+          emptySelectionAllowed: true,
           segments: <ButtonSegment<Gender>>[
             ButtonSegment(
               value: Gender.male,
@@ -468,6 +599,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
 
       child: Form(
         key: _page1FormKey,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
 
         child: SingleChildScrollView(
           child: Column(
@@ -525,6 +657,12 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
                       hintText: 'your Age',
                       Controller: _agetController,
                       readOnly: true,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please select your date of birth';
+                        }
+                        return null;
+                      },
                     ),
                   ),
                 ],
@@ -549,7 +687,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
               ),
 
               buildDropdown(
-                label: "Profile Created by",
+                label: "Profile Created by *",
                 onChanged: (newvalue) {
                   setState(() {
                     _selectedProfile = newvalue;
@@ -560,6 +698,12 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
                 hintText: "Select Profile Created by",
                 selectedValue: _selectedProfile,
                 icon: PhosphorIconsFill.userCircle,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please select Profile Created by';
+                  }
+                  return null;
+                },
               ),
 
               SizedBox(height: 20.h),

@@ -67,7 +67,7 @@ class CustomListTile extends StatelessWidget {
       children: [
         Text(
           title!,
-          style: GTextStyle.bodyMedium,
+         style: GTextStyle.label.copyWith(color: kPrimaryColor)
 
           // color:
           // kPrimaryColor,
@@ -86,14 +86,14 @@ class CustomListTile extends StatelessWidget {
             cursorColor: kPrimaryColor,
             decoration: InputDecoration(
               prefix: prefix,
-              fillColor: kBackgroundColor,
+              fillColor: Colors.grey.shade100,
+              filled: true,
               hintText: hintText,
-
-              hintStyle: GTextStyle.bodyLight,
-              // hintStyle: GTextStyle.bodyBold.copyWith(
-              //   color: Colors.grey.shade500,
-              //   fontWeight: FontWeight.w500,
-              // ),
+              hintStyle: GTextStyle.bodyBold.copyWith(
+                color: Colors.black45,
+                fontSize: 15.sp,
+                fontFamily: 'qs',
+              ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.r),
                 borderSide: BorderSide(color: kPrimaryColor, width: 1.w),

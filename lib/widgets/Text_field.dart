@@ -85,6 +85,7 @@ Widget buildADDField({
             vertical: 10.h,
           ),
         ),
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         readOnly: readOnly,
         onTap: onTap,
         style: GTextStyle.bodyBold.copyWith(

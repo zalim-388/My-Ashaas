@@ -5,6 +5,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:http/http.dart';
 
 Widget buildDropdown({
   required String label,
@@ -13,152 +14,177 @@ Widget buildDropdown({
   required Function(String?) onChanged,
   required BuildContext context,
   String? selectedValue,
-  required List<String> options,
+  required List<String>? options,
   String? hintText,
   bool isSearchable = false,
-  bool enabled = true,
-  String Function(String?)? validator,
+  TextEditingController? controller,
+
+  String? Function(String?)? validator,
 }) {
-  final String? validValue =
-      (selectedValue != null && options.contains(selectedValue))
-          ? selectedValue
-          : null;
+  InputDecoration getIbputDecoration(String? hint) {
+    return InputDecoration(
+      contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
+
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8.r),
+        borderSide: BorderSide.none,
+      ),
+      fillColor: Colors.grey.shade100,
+      filled: true,
+      hintText: selectedValue ?? hintText!,
+      hintStyle: GTextStyle.bodyBold.copyWith(
+        color: Colors.black45,
+        fontSize: 15.sp,
+        fontFamily: 'qs',
+      ),
+
+      errorStyle: GTextStyle.bodyLight.copyWith(
+        color: kErrorcolor,
+        fontWeight: FontWeight.w500,
+        fontSize: 13.sp,
+        fontFamily: 'qs',
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8.r),
+        borderSide: BorderSide.none,
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8.r),
+        borderSide: BorderSide.none,
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8.r),
+        borderSide: BorderSide.none,
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8.r),
+        borderSide: BorderSide.none,
+      ),
+    );
+  }
 
   return Column(
     children: [
       buildFieldLabel(label: label, icon: icon, topPad: topPad),
 
       SizedBox(height: 8.h),
+      if (isSearchable)
+        Autocomplete(
+          fieldViewBuilder: (
+            BuildContext context,
 
-      DropdownSearch<String>(
-        items: (filter, ScrollProps) => options,
-        selectedItem: validValue,
-        onChanged: enabled ? onChanged : null,
-        enabled: enabled,
-
-        decoratorProps: DropDownDecoratorProps(
-          decoration: InputDecoration(
-            suffixIcon: Icon(
-              Icons.keyboard_arrow_down,
-              size: 24,
-              color: kPrimaryColor,
-            ),
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: 12.w,
-              vertical: 10.h,
-            ),
-
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.r),
-              borderSide: BorderSide.none,
-            ),
-            fillColor: Colors.grey.shade100,
-            filled: true,
-            hintText: selectedValue ?? hintText!,
-            hintStyle: GTextStyle.bodyBold.copyWith(
-              color: Colors.black45,
-              fontSize: 15.sp,
-              fontFamily: 'qs',
-            ),
-
-            errorStyle: GTextStyle.bodyLight.copyWith(
-              color: kErrorcolor,
-              fontWeight: FontWeight.w500,
-              fontSize: 13.sp,
-              fontFamily: 'qs',
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.r),
-              borderSide: BorderSide.none,
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.r),
-              borderSide: BorderSide.none,
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.r),
-              borderSide: BorderSide.none,
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.r),
-              borderSide: BorderSide.none,
-            ),
-          ),
-        ),
-        popupProps: PopupProps.menu(
-          showSearchBox: isSearchable,
-
-          searchFieldProps: TextFieldProps(
-            cursorErrorColor: kPrimaryColor,
-            cursorColor: kPrimaryColor,
-
-            decoration: InputDecoration(
-              hintText: "Search...",
-              hintStyle: GTextStyle.bodyBold.copyWith(
-                color: Colors.black45,
+            TextEditingController fieldController,
+            FocusNode fieldfocusNode,
+            VoidCallback onFieldSubmitted,
+          ) {
+            return TextFormField(
+              controller: controller ?? fieldController,
+              focusNode: fieldfocusNode,
+              style: GTextStyle.bodyBold.copyWith(
                 fontSize: 15.sp,
-                fontFamily: 'qs',
+                color: kPrimaryColor,
               ),
+              decoration: getIbputDecoration(hintText),
+              validator: validator,
+            );
+          },
 
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.r),
-                borderSide: BorderSide(color: kPrimaryColor, width: 1.5),
-              ),
-
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.r),
-                borderSide: BorderSide(color: kPrimaryColor, width: 1.5),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.r),
-                borderSide: BorderSide(color: kPrimaryColor, width: 1.5),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.r),
-                borderSide: BorderSide(color: kPrimaryColor, width: 1.5),
-              ),
-              filled: true,
-              fillColor: Colors.grey.shade100,
-              isDense: true,
-              contentPadding: EdgeInsets.symmetric(
-                horizontal: 12.w,
-                vertical: 10.h,
-              ),
-            ),
-
-            style: GTextStyle.bodyBold.copyWith(
-              color: kPrimaryColor,
-              fontSize: 15.sp,
-            ),
-          ),
-          itemBuilder: (context, item, isDisabled, isSelected) {
-            return Container(
-              margin: EdgeInsets.zero,
-              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.r),
+          optionsBuilder: (TextEditingValue textEditingValue) {
+            if (options == null) {
+              return const Iterable<String>.empty();
+            }
+            if (textEditingValue.text.isEmpty) {
+              return options;
+            }
+            return options.where((String option) {
+              return option.toLowerCase().contains(
+                textEditingValue.text.toLowerCase(),
+              );
+            });
+          },
+          optionsViewBuilder: (
+            BuildContext context,
+            AutocompleteOnSelected<String> onSelected,
+            Iterable<String> options,
+          ) {
+            return Align(
+              alignment: Alignment.topLeft,
+              child: Material(
+                elevation: 4.0,
                 color: Colors.grey.shade100,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Text(
-                      item,
-                      style: GTextStyle.bodyBold.copyWith(
-                        color: kPrimaryColor,
-                        fontSize: 15.sp,
-                      ),
-                    ),
+                borderRadius: BorderRadius.circular(8.r),
+
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(maxHeight: 250.h),
+                  child: ListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount: options.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final String option = options.elementAt(index);
+                      return GestureDetector(
+                        onTap: () {
+                          onSelected(option);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 12.w,
+                            vertical: 10.h,
+                          ),
+                          child: Text(
+                            option,
+                            style: GTextStyle.bodyBold.copyWith(
+                              color: kPrimaryColor,
+                              fontSize: 15.sp,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                ],
+                ),
               ),
             );
           },
-          searchDelay: Duration(milliseconds: 200),
+          onSelected: (String option) {
+            onChanged(option);
+          },
+        )
+      else
+        DropdownSearch<String>(
+          items: (filter, loadProps) => options ?? [],
+
+          selectedItem:
+              (selectedValue != null && (options ?? []).contains(selectedValue))
+                  ? selectedValue
+                  : null,
+          onChanged: onChanged,
+          decoratorProps: DropDownDecoratorProps(
+            decoration: getIbputDecoration(selectedValue ?? hintText),
+          ),
+          popupProps: PopupProps.menu(
+            fit: FlexFit.loose,
+            itemBuilder: (context, item, isDisabled, isSelected) {
+              return Container(
+                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
+                child: Text(
+                  item,
+                  style: GTextStyle.bodyBold.copyWith(
+                    color: kPrimaryColor,
+                    fontSize: 15.sp,
+                  ),
+                ),
+              );
+            },
+          ),
+          suffixProps: DropdownSuffixProps(
+            dropdownButtonProps: DropdownButtonProps(
+              iconClosed: Icon(Icons.keyboard_arrow_down, color: kPrimaryColor),
+              iconOpened: Icon(Icons.keyboard_arrow_up, color: kPrimaryColor),
+            ),
+          ),
+          autoValidateMode: AutovalidateMode.onUserInteraction,
+          validator: validator,
         ),
-        validator: validator,
-      ),
     ],
   );
 }

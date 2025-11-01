@@ -1,28 +1,51 @@
 import 'package:agent_porta/pages/find%20you%20match/find_you_matchCreation.dart';
 import 'package:agent_porta/styles/constants.dart';
-import 'package:agent_porta/styles/constants.dart' as Colors;
 import 'package:agent_porta/styles/style.dart';
 import 'package:agent_porta/widgets/Text_field.dart';
 import 'package:agent_porta/widgets/dropdown.dart';
+import 'package:agent_porta/widgets/toggle_boutton.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 Widget buildpersonalDetails(
-  PageController _pageController,
+  PageController pageController,
   GlobalKey<FormState> key,
-  TextEditingController _heightController,
-  TextEditingController _weightController,
-  TextEditingController _ReligionController,
-  TextEditingController _BloodGroupController, {
+  TextEditingController heightController,
+  TextEditingController weightController,
+  TextEditingController motherTongueController, {
+  //marital
   required Function(String?) onMaritalStatusChanged,
   required String selectedMaritalStatus,
-  required List<String> MaritalStatuisoptions,
+  required List<String> maritalStatuisoptions,
   required BuildContext context,
+  //Mothertohgue
   required Function(String?) onMotherTohgueChanged,
   required String selectedMotherTongue,
-  required List<String> MotherTongueOptions,
+  required List<String> motherTongueOptions,
+  //Horoscpe
+  required bool? selectionHoroscope,
+  required Function(bool?) onHoroscopeChanged,
+  // religion
+  required Function(String?) onrReligionChanged,
+  required List<String> religionoptions,
+  required String? selectedReligion,
+
+  //cast
+  required Function(String?) onrCastChanged,
+  required List<String> castoptions,
+  required String? selectedCast,
+  //subcast
+  required List<String> subCastoptions,
+  required String? selectedSubCast,
+  required Function(String?) onSubCastChanged,
+
+  //blood group
+  required String? selectBloodGroup,
+  required Function(String?) onBloodGroupChanged,
+  required List<String> bloodGroupOptions,
+
+  // required List<String> Function(String? religion) getCastForReligion,
 }) {
   return Form(
     key: key,
@@ -43,7 +66,8 @@ Widget buildpersonalDetails(
               label: 'Height (in cm/ft) *',
               icon: PhosphorIconsFill.ruler,
               hintText: 'Enter your height',
-              Controller: _heightController,
+              keybordType: TextInputType.number,
+              Controller: heightController,
               validator: (value) {
                 if (value == null || value.trim().isEmpty) {
                   return 'Please enter you heigth';
@@ -55,7 +79,8 @@ Widget buildpersonalDetails(
               label: 'weight (in Kg) *',
               icon: PhosphorIconsFill.barbell,
               hintText: 'Enter your weight',
-              Controller: _weightController,
+              keybordType: TextInputType.number,
+              Controller: weightController,
               validator: (value) {
                 if (value == null || value.trim().isEmpty) {
                   return 'Please enter you weight';
@@ -64,51 +89,116 @@ Widget buildpersonalDetails(
               },
             ),
             buildDropdown(
-              label: "Marital Status",
+              label: "Marital Status *",
               hintText: "Select Marital Status",
               icon: PhosphorIconsFill.heart,
+              controller: motherTongueController,
               context: context,
-              options: MaritalStatuisoptions,
+              options: maritalStatuisoptions,
               selectedValue: selectedMaritalStatus,
               onChanged: onMaritalStatusChanged,
             ),
             buildDropdown(
-              label: "Mother Tongue",
+              label: "Mother Tongue *",
               hintText: "Select Mother Tongue",
               icon: PhosphorIconsFill.globeStand,
               context: context,
-              options: MotherTongueOptions,
+              options: motherTongueOptions,
               selectedValue: selectedMotherTongue,
               onChanged: onMotherTohgueChanged,
               isSearchable: true,
+
               // enabled: true,
             ),
 
-            buildADDField(
-              label: 'Religion',
+            buildDropdown(
+              label: 'Religion *',
+              hintText: 'select Religion',
               icon: PhosphorIconsFill.handsPraying,
+              selectedValue: selectedReligion,
+              onChanged: onrReligionChanged,
+              context: context,
+              options: religionoptions,
 
-              hintText: 'Enter Religion',
-              Controller: _ReligionController,
               validator: (value) {
                 if (value == null || value.trim().isEmpty) {
-                  return 'Please enter your Religion';
+                  return 'Please select your Religion';
+                }
+                return null;
+              },
+            ),
+            if (selectedReligion != null && castoptions.isNotEmpty)
+              buildDropdown(
+                label: 'Cast ',
+                hintText: 'select Cast',
+                icon: PhosphorIconsFill.users,
+                selectedValue: selectedCast,
+                onChanged: onrCastChanged,
+                context: context,
+                options: castoptions,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return null;
+                  }
+                  return null;
+                },
+              ),
+            if (selectedCast != null && subCastoptions.isNotEmpty)
+              buildDropdown(
+                label: 'Sub Cast ',
+                hintText: 'select Sub Cast',
+                icon: PhosphorIconsFill.treeStructure,
+                selectedValue: selectedSubCast,
+                onChanged: onSubCastChanged,
+                context: context,
+                options: subCastoptions,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return null;
+                  }
+                  return null;
+                },
+              ),
+
+            buildDropdown(
+              label: 'Blood Group',
+              hintText: 'select Blood Group',
+              icon: PhosphorIconsFill.drop,
+              selectedValue: selectBloodGroup,
+              onChanged: onBloodGroupChanged,
+              context: context,
+              options: bloodGroupOptions,
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return null;
                 }
                 return null;
               },
             ),
 
+            buildToggle(
+              label: "Horoscope required? *",
+              selection: selectionHoroscope,
+              onChanged: onHoroscopeChanged,
+              title: "yes",
+              title1: "no",
+            ),
             SizedBox(height: 20.h),
 
-            buildNextButton(
-              onTap: () {
-                if (key.currentState?.validate() ?? false) {
-                  _pageController.nextPage(
-                    duration: Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                  );
-                }
-              },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                buildNextButton(
+                  onTap: () {
+                    if (key.currentState?.validate() ?? false) {
+                      pageController.nextPage(
+                        duration: Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      );
+                    }
+                  },
+                ),
+              ],
             ),
           ],
         ),

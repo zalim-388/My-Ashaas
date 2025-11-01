@@ -139,7 +139,8 @@ class _VerifyScreenState extends State<VerifyScreen> {
                     height: 40.h,
                     width: 40.w,
                     decoration: BoxDecoration(
-                      color: kBackgroundColor,
+                      color: Colors.grey.shade100,
+
                       borderRadius: BorderRadius.circular(8.r),
                       border: Border.all(
                         color:
