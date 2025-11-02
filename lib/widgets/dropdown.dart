@@ -5,7 +5,6 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:http/http.dart';
 
 Widget buildDropdown({
   required String label,
@@ -14,14 +13,14 @@ Widget buildDropdown({
   required Function(String?) onChanged,
   required BuildContext context,
   String? selectedValue,
-  required List<String>? options,
+   List<String>? options,
   String? hintText,
   bool isSearchable = false,
   TextEditingController? controller,
-
+  TextInputType? keyboardType,
   String? Function(String?)? validator,
 }) {
-  InputDecoration getIbputDecoration(String? hint) {
+  InputDecoration getInputDecoration(String? hint) {
     return InputDecoration(
       contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
 
@@ -31,19 +30,20 @@ Widget buildDropdown({
       ),
       fillColor: Colors.grey.shade100,
       filled: true,
-      hintText: selectedValue ?? hintText!,
-      hintStyle: GTextStyle.bodyBold.copyWith(
+      hintText: selectedValue ?? hintText
+      ,
+      hintStyle: GTextStyle.bodyLight.copyWith(
         color: Colors.black45,
-        fontSize: 15.sp,
+        fontSize: 14.sp,
         fontFamily: 'qs',
       ),
 
       errorStyle: GTextStyle.bodyLight.copyWith(
         color: kErrorcolor,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w300,
         fontSize: 13.sp,
-        fontFamily: 'qs',
       ),
+
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8.r),
         borderSide: BorderSide.none,
@@ -81,10 +81,12 @@ Widget buildDropdown({
               controller: controller ?? fieldController,
               focusNode: fieldfocusNode,
               style: GTextStyle.bodyBold.copyWith(
-                fontSize: 15.sp,
+                fontSize: 14.sp,
                 color: kPrimaryColor,
               ),
-              decoration: getIbputDecoration(hintText),
+              keyboardType: keyboardType,
+              cursorColor: kPrimaryColor,
+              decoration: getInputDecoration(hintText),
               validator: validator,
             );
           },
@@ -152,14 +154,14 @@ Widget buildDropdown({
       else
         DropdownSearch<String>(
           items: (filter, loadProps) => options ?? [],
-
           selectedItem:
               (selectedValue != null && (options ?? []).contains(selectedValue))
                   ? selectedValue
                   : null,
+
           onChanged: onChanged,
           decoratorProps: DropDownDecoratorProps(
-            decoration: getIbputDecoration(selectedValue ?? hintText),
+            decoration: getInputDecoration(selectedValue ?? hintText),
           ),
           popupProps: PopupProps.menu(
             fit: FlexFit.loose,
@@ -170,7 +172,7 @@ Widget buildDropdown({
                   item,
                   style: GTextStyle.bodyBold.copyWith(
                     color: kPrimaryColor,
-                    fontSize: 15.sp,
+                    fontSize: 14.sp,
                   ),
                 ),
               );

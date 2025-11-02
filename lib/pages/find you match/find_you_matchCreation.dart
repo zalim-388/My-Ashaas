@@ -1,4 +1,7 @@
 import 'dart:io';
+import 'package:agent_porta/pages/find%20you%20match/Education_&_Professional%20Details.dart';
+import 'package:agent_porta/pages/find%20you%20match/Lifestyle_&_Interests.dart';
+import 'package:agent_porta/pages/find%20you%20match/Partner_Preferences.dart';
 import 'package:agent_porta/pages/find%20you%20match/family_details.dart';
 import 'package:agent_porta/pages/find%20you%20match/personal_Details.dart';
 import 'package:agent_porta/styles/constants.dart';
@@ -34,12 +37,18 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
   final _heigthController = TextEditingController();
   final _weightController = TextEditingController();
   final _motherTongueController = TextEditingController();
-  final _districtController = TextEditingController();
+  final _starController = TextEditingController();
+  final _raasiController = TextEditingController();
+  final _differentlyController = TextEditingController();
 
-  final _gstNumberController = TextEditingController();
-  final _aadhaarNumberController = TextEditingController();
-  final _nomineeController = TextEditingController();
-  final _nomineeNumberController = TextEditingController();
+  final _fatherNameController = TextEditingController();
+  final _motherNameController = TextEditingController();
+  final _occupationFatherController = TextEditingController();
+  final _occupationMotherController = TextEditingController();
+  final _totalsistersController = TextEditingController();
+  final _totalbrothersController = TextEditingController();
+  final _hometownController = TextEditingController();
+
   final _pageController = PageController();
 
   int _currentPage = 0;
@@ -48,6 +57,8 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
   final _page2FormKey = GlobalKey<FormState>();
   final _page3FormKey = GlobalKey<FormState>();
   final _page4Formkey = GlobalKey<FormState>();
+  final _page5Formkey = GlobalKey<FormState>();
+  final _page6Formkey = GlobalKey<FormState>();
 
   Gender? _selectedGender = Gender.male;
   String? _selectedProfile;
@@ -58,7 +69,29 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
   String? _selectedCast;
   String? _selectedSubCast;
   String? _selectedbloodGroup;
+  String? _selectedStar;
+  String? _selectedRaasi;
+  bool? _selectionPhysicalStatus;
+  bool? _selectionFatherStatus;
+  bool? _selectionMotherStatus;
+  String? _selectedfamilystatus;
+  String? _selectFamilytype;
+  String? _selectBroCount;
+  String? _selectSisCount;
+  String? _selectBroMarried;
+  String? _selectSisMarried;
 
+  final List<String> familytypeOptions = [" Joint ", "Nuclea"];
+
+  final List<String> familystatusOptions = [
+    "Middle,"
+        "Upper",
+    "Middle",
+    "Rich",
+    "Affluent",
+  ];
+  List<String> starOptions = [];
+  List<String> raasiOptions = [];
   List<String> subCastOptions = [];
 
   final List<String> Profileoptions = [
@@ -87,12 +120,14 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
     "Jain",
   ];
 
-  final List<String> Castoptions = ["cast A1", "cast A2", "cast A3"];
-  final List<String> SubCastoptions = [
-    "subcast A1",
-    "subcast A2",
-    "subcast A3",
+  final List<String> Castoptions = [
+    "Iyer (Tamil)",
+    "Iyengar (Tamil)",
+    "Namboothiri (Kerala)",
+    "Havyaka (Karnataka)",
   ];
+
+  final List<String> SubCastoptions = [];
 
   final List<String> bloodGroupOptions = [
     "A+",
@@ -107,7 +142,17 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
 
   List<String> getCastForReligion(String? religion) {
     if (religion == 'Hindu') {
-      return ["cast A1", "cast A2", "cast A3", "cast A4"];
+      return [
+        "Iyer (Tamil)",
+        "Iyengar (Tamil)",
+        "Namboothiri (Kerala)",
+        "Havyaka (Karnataka)",
+        "Smartha (Karnataka)",
+        " adhwa (Karnataka)",
+        "Vaidiki(Andhra/Telangana)",
+        "Niyogi (Andhra/Telangana)",
+        " Velnadu Andhra/Telangana)",
+      ];
     }
     if (religion == 'Muslim') {
       return [];
@@ -116,7 +161,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
       return ["cast B1", "cast B2", "cast B3"];
     }
     if (religion == 'Sikh') {
-      return [];
+      return ["cast A1", "cast A2", "cast A3", "cast A4"];
     }
     if (religion == 'Jain') {
       return [];
@@ -368,14 +413,22 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
     _agetController.dispose();
     _dobtController.dispose();
     _emailController.dispose();
+
     _heigthController.dispose();
     _weightController.dispose();
-    _districtController.dispose();
+    _starController.dispose();
+    _raasiController.dispose();
+    _motherTongueController.dispose();
+    _differentlyController.dispose();
 
-    _gstNumberController.dispose();
-    _aadhaarNumberController.dispose();
-    _nomineeController.dispose();
-    _nomineeNumberController.dispose();
+    _fatherNameController.dispose();
+    _motherNameController.dispose();
+    _occupationFatherController.dispose();
+    _occupationMotherController.dispose();
+    _totalsistersController.dispose();
+    _totalbrothersController.dispose();
+    _hometownController.dispose();
+
     super.dispose();
   }
 
@@ -425,8 +478,13 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
             },
             child: Container(
               height: 30.h,
-              width: 30.w,
+              width: 40.w,
               decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [kPrimaryColor.withOpacity(0.610), kPrimaryColor],
+                  begin: Alignment.bottomLeft,
+                  end: Alignment.bottomRight,
+                ),
                 borderRadius: BorderRadius.circular(20.r),
                 color: kPrimaryColor,
               ),
@@ -461,7 +519,11 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
               _heigthController,
               _weightController,
               _motherTongueController,
+              _starController,
+              _raasiController,
+              _differentlyController,
 
+              //religion
               religionoptions: Religionoptions,
               selectedReligion: _selectedReligion,
               onrReligionChanged: (newValue) {
@@ -474,7 +536,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
                   Religionoptions = getCastForReligion(newValue);
                 });
               },
-
+              //cast
               selectedCast: _selectedCast,
               castoptions: Castoptions,
               onrCastChanged: (newValue) {
@@ -484,7 +546,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
                   subCastOptions = getCastForReligion(newValue);
                 });
               },
-
+              //sub cat
               selectedSubCast: _selectedSubCast,
               subCastoptions: SubCastoptions,
               onSubCastChanged: (newValue) {
@@ -492,6 +554,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
                   _selectedSubCast = newValue;
                 });
               },
+              //blood
               selectBloodGroup: _selectedbloodGroup,
               bloodGroupOptions: bloodGroupOptions,
               onBloodGroupChanged: (newValue) {
@@ -500,13 +563,14 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
                 });
               },
 
+              //horoscope
               selectionHoroscope: _selectedHoroscope,
               onHoroscopeChanged: (bool? newvalue) {
                 setState(() {
                   _selectedHoroscope = newvalue;
                 });
               },
-
+              //maital
               maritalStatuisoptions: MaritalStatusoptions,
               onMaritalStatusChanged: (newvalue) {
                 setState(() {
@@ -519,18 +583,121 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
 
               context: context,
 
-              onMotherTohgueChanged: (String? newValue) {
+              //motherTongue
+              selectedMotherTongue:
+                  _selectedMotherTongue ?? "Select Mother Tongue",
+              motherTongueOptions: MotherTongueOptions,
+              onMotherTohgueChanged: (newValue) {
                 setState(() {
                   _selectedMotherTongue = newValue;
                   _motherTongueController.text = newValue!;
                 });
               },
-              selectedMotherTongue:
-                  _selectedMotherTongue ?? "Select Mother Tongue",
-              motherTongueOptions: MotherTongueOptions,
+              //Star
+              selectStar: _selectedStar,
+              StarOptions: starOptions,
+              onStarChanged: (newvlaue) {
+                setState(() {
+                  _selectedStar = newvlaue;
+                  _starController.text = newvlaue!;
+                });
+              },
+              //raasi
+              selectRaasi: _selectedRaasi,
+              RaasiOptions: raasiOptions,
+              onRaasiChanged: (newValue) {
+                _selectedRaasi = newValue;
+                _raasiController.text = newValue!;
+              },
+
+              //physical
+              selectionPhysicalselection: _selectionPhysicalStatus,
+              onPhysicalStatusChanged: (bool? newvalue) {
+                setState(() {
+                  _selectionPhysicalStatus = newvalue;
+                  if (_selectionPhysicalStatus == true) {
+                    _differentlyController.clear();
+                  }
+                });
+              },
             ),
 
-            buildFamilyDetails(_pageController, _page3FormKey),
+            buildFamilyDetails(
+              _pageController,
+              _page3FormKey,
+              _fatherNameController,
+              _motherNameController,
+              _occupationFatherController,
+              _occupationMotherController,
+              _totalbrothersController,
+              _totalsistersController,
+              _hometownController,
+              context,
+              //siblings
+              selectBroCount: _selectBroCount,
+              onBroCountChanged: (value) {
+                setState(() {
+                  _selectBroMarried = null;
+                });
+              },
+
+              selectBroMarried: _selectBroMarried,
+              onBroMarriedChanged:
+                  (value) => setState(() => _selectBroMarried = value),
+
+              selectSisCount: _selectSisCount,
+              onSisCountChanged: (value) {
+                setState(() {
+                  _selectSisMarried = null;
+                });
+              },
+              selectSisMarried: _selectSisMarried,
+              onSisMarriedChanged:
+                  (value) => setState(() => _selectSisMarried = value),
+
+              // family type
+              selectfamilytype: _selectFamilytype,
+              familytypeOptions: familytypeOptions,
+              onfamilytypeChanged: (newValue) {
+                setState(() {
+                  _selectFamilytype = newValue;
+                });
+              },
+
+              //family status
+              selectfamilystatus: _selectedfamilystatus,
+              familystatusOptions: familystatusOptions,
+              onfamilystatusChanged: (newValue) {
+                setState(() {
+                  _selectedfamilystatus = newValue;
+                });
+              },
+
+              //mother
+              selectionMotherStatus: _selectionMotherStatus,
+              onMotherStatusChanged: (bool? newValue) {
+                setState(() {
+                  _selectionMotherStatus = newValue;
+                  if (_selectionMotherStatus == true) {
+                    _occupationMotherController.clear();
+                  }
+                });
+              },
+
+              //Father
+              selectionFatherStatus: _selectionFatherStatus,
+              onFatherStatusChanged: (bool? newValue) {
+                setState(() {
+                  _selectionFatherStatus = newValue;
+                  if (_selectionFatherStatus == true) {
+                    _occupationFatherController.clear();
+                  }
+                });
+              },
+            ),
+            buildEducationProfessionalDetails(_pageController, _page4Formkey),
+            buildLifestyleInterests(_pageController, _page5Formkey),
+            buildPartnerPreferences(_pageController, _page6Formkey),
           ],
         ),
       ),
@@ -572,9 +739,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
           onSelectionChanged: (Set<Gender> newSelection) {
             setState(() {
               if (newSelection.isNotEmpty) {
-                setState(() {
-                  _selectedGender = newSelection.first;
-                });
+                _selectedGender = newSelection.first;
               }
             });
           },
@@ -735,8 +900,8 @@ Widget buildNextButton({required VoidCallback onTap}) {
   return GestureDetector(
     onTap: onTap,
     child: Container(
-      width: 100.w,
-      height: 40.h,
+      width: 70.w,
+      height: 35.h,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [kPrimaryColor.withOpacity(0.610), kPrimaryColor],
@@ -752,13 +917,79 @@ Widget buildNextButton({required VoidCallback onTap}) {
           Text(
             'Next',
             style: GTextStyle.bodyBold.copyWith(
-              fontSize: 20.sp,
+              fontSize: 15.sp,
               color: Colors.white,
               fontWeight: FontWeight.w800,
             ),
           ),
           SizedBox(width: 5.w),
-          Icon(Icons.arrow_forward_ios_outlined, color: Colors.white),
+          Icon(Icons.arrow_forward_ios_outlined, color: Colors.white, size: 15),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget buildSkipButton({
+  required VoidCallback onTap,
+  double height = 42.0,
+  double width = 100.0,
+}) {
+  return GestureDetector(
+    onTap: onTap,
+    child: Container(
+      height: height.h,
+      width: width.w,
+      decoration: BoxDecoration(
+        // Glass morphism effect with gradient
+        gradient: LinearGradient(
+          colors: [
+            kPrimaryColor.withOpacity(0.85),
+            kPrimaryColor.withOpacity(0.6),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(25.r),
+        // Add border for premium feel
+        border: Border.all(color: Colors.white.withOpacity(0.3), width: 1.5),
+        // Subtle shadow
+        boxShadow: [
+          BoxShadow(
+            color: kPrimaryColor.withOpacity(0.3),
+            blurRadius: 8.r,
+            offset: Offset(0, 4),
+            spreadRadius: 0,
+          ),
+          // Inner shadow effect
+          BoxShadow(
+            color: Colors.white.withOpacity(0.1),
+            blurRadius: 4.r,
+            offset: Offset(-2, -2),
+            spreadRadius: 0,
+          ),
+        ],
+      ),
+      alignment: Alignment.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            Icons.arrow_forward_rounded,
+            size: 14.sp,
+            color: Colors.white.withOpacity(0.9),
+          ),
+          SizedBox(width: 6.w),
+          Text(
+            "Skip",
+            style: GTextStyle.bodyBold.copyWith(
+              fontSize: 13.sp,
+              fontWeight: FontWeight.w700,
+              color: Colors.white,
+              letterSpacing: 0.8,
+            ),
+          ),
         ],
       ),
     ),

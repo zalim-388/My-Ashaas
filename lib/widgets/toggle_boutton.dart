@@ -20,6 +20,7 @@ Widget buildToggle({
       buildFieldLabel(label: label, icon: icon, topPad: topPad),
 
       SegmentedButton<bool>(
+      
         emptySelectionAllowed: true,
         showSelectedIcon: false,
         segments: <ButtonSegment<bool>>[
@@ -35,7 +36,7 @@ Widget buildToggle({
           ),
         ],
 
-        selected: <bool>{if (selection != null) selection!},
+        selected: <bool>{if (selection != null) selection},
         onSelectionChanged: (Set<bool> newSelection) {
           if (newSelection.isEmpty) {
             onChanged(null);

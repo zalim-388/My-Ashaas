@@ -7,6 +7,7 @@ Widget buildFieldLabel({
   required String label,
   IconData? icon,
   double? topPad,
+  double ?fontSize,
 }) {
   return Padding(
     padding: EdgeInsets.only(
@@ -18,7 +19,9 @@ Widget buildFieldLabel({
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: GTextStyle.label.copyWith(color: kPrimaryColor)),
+        Text(label, style: GTextStyle.label.copyWith(color: kPrimaryColor,
+        fontSize: fontSize ?? 15.sp
+        )),
         Icon(icon, size: 18, color: kPrimaryColor),
       ],
     ),
@@ -36,6 +39,7 @@ Widget buildADDField({
   TextCapitalization textCapitalization = TextCapitalization.none,
   bool readOnly = false,
   VoidCallback? onTap,
+  Function(String)? onChanged,
 }) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -43,22 +47,23 @@ Widget buildADDField({
       buildFieldLabel(label: label, icon: icon, topPad: topPad),
 
       TextFormField(
+        onChanged: onChanged,
         cursorErrorColor: kPrimaryColor,
         cursorColor: kPrimaryColor,
         controller: Controller,
         textCapitalization: textCapitalization,
         decoration: InputDecoration(
           hintText: Controller.text.isEmpty ? hintText : null,
-          hintStyle: GTextStyle.bodyBold.copyWith(
+          hintStyle: GTextStyle.bodyLight.copyWith(
             color: Colors.black45,
-            fontSize: 15.sp,
+            fontSize: 14.sp,
             fontFamily: 'qs',
           ),
           errorStyle: GTextStyle.bodyLight.copyWith(
             color: kErrorcolor,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w300,
             fontSize: 13.sp,
-            fontFamily: 'qs',
+          
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.r),
@@ -83,7 +88,9 @@ Widget buildADDField({
           contentPadding: EdgeInsets.symmetric(
             horizontal: 12.w,
             vertical: 10.h,
+
           ),
+          
         ),
         autovalidateMode: AutovalidateMode.onUserInteraction,
         readOnly: readOnly,

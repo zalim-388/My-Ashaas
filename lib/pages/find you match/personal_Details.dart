@@ -5,6 +5,7 @@ import 'package:agent_porta/widgets/Text_field.dart';
 import 'package:agent_porta/widgets/dropdown.dart';
 import 'package:agent_porta/widgets/toggle_boutton.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
@@ -13,7 +14,10 @@ Widget buildpersonalDetails(
   GlobalKey<FormState> key,
   TextEditingController heightController,
   TextEditingController weightController,
-  TextEditingController motherTongueController, {
+  TextEditingController motherTongueController,
+  TextEditingController starController,
+  TextEditingController raasiController,
+  TextEditingController differentlyController, {
   //marital
   required Function(String?) onMaritalStatusChanged,
   required String selectedMaritalStatus,
@@ -46,6 +50,19 @@ Widget buildpersonalDetails(
   required List<String> bloodGroupOptions,
 
   // required List<String> Function(String? religion) getCastForReligion,
+
+  //star
+  required String? selectStar,
+  required Function(String?) onStarChanged,
+  required List<String> StarOptions,
+  //Raasi
+  required String? selectRaasi,
+  required Function(String?) onRaasiChanged,
+  required List<String> RaasiOptions,
+
+  /// physical status
+  required bool? selectionPhysicalselection,
+  required Function(bool?) onPhysicalStatusChanged,
 }) {
   return Form(
     key: key,
@@ -62,37 +79,47 @@ Widget buildpersonalDetails(
             ),
             SizedBox(height: 20.h),
 
-            buildADDField(
-              label: 'Height (in cm/ft) *',
-              icon: PhosphorIconsFill.ruler,
-              hintText: 'Enter your height',
-              keybordType: TextInputType.number,
-              Controller: heightController,
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return 'Please enter you heigth';
-                }
-                return null;
-              },
+            Row(
+              children: [
+                Expanded(
+                  child: buildADDField(
+                    label: 'Height (in cm/ft) *',
+                    icon: PhosphorIconsFill.ruler,
+                    hintText: 'Enter your height',
+                    keybordType: TextInputType.number,
+                    Controller: heightController,
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return 'Please enter you heigth';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+
+                SizedBox(width: 16.w),
+                Expanded(
+                  child: buildADDField(
+                    label: 'weight (in Kg) *',
+                    icon: PhosphorIconsFill.barbell,
+                    hintText: 'Enter your weight',
+                    keybordType: TextInputType.number,
+                    Controller: weightController,
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return 'Please enter you weight';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+              ],
             ),
-            buildADDField(
-              label: 'weight (in Kg) *',
-              icon: PhosphorIconsFill.barbell,
-              hintText: 'Enter your weight',
-              keybordType: TextInputType.number,
-              Controller: weightController,
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return 'Please enter you weight';
-                }
-                return null;
-              },
-            ),
+
             buildDropdown(
               label: "Marital Status *",
               hintText: "Select Marital Status",
               icon: PhosphorIconsFill.heart,
-              controller: motherTongueController,
               context: context,
               options: maritalStatuisoptions,
               selectedValue: selectedMaritalStatus,
@@ -103,6 +130,7 @@ Widget buildpersonalDetails(
               hintText: "Select Mother Tongue",
               icon: PhosphorIconsFill.globeStand,
               context: context,
+              // controller: motherTongueController,
               options: motherTongueOptions,
               selectedValue: selectedMotherTongue,
               onChanged: onMotherTohgueChanged,
@@ -160,8 +188,63 @@ Widget buildpersonalDetails(
                 },
               ),
 
+            buildToggle(
+              label: "Horoscope required? *",
+              selection: selectionHoroscope,
+              onChanged: onHoroscopeChanged,
+              title: "yes",
+              icon1: Icons.check,
+              title1: "no",
+              icon2: Icons.close,
+            ),
+
+            Row(
+              children: [
+                Expanded(
+                  child: buildDropdown(
+                    label: 'Star',
+                    hintText: 'select star',
+                    icon: PhosphorIconsFill.star,
+                    selectedValue: selectStar,
+                    onChanged: onStarChanged,
+                    context: context,
+                    controller: starController,
+                    options: StarOptions,
+                    isSearchable: true,
+                    // validator: (value) {
+                    //   if (value == null || value.trim().isEmpty) {
+                    //     return null;
+                    //   }
+                    //   return null;
+                    // },
+                  ),
+                ),
+                SizedBox(width: 16.w),
+
+                Expanded(
+                  child: buildDropdown(
+                    label: 'Raasi',
+                    hintText: 'select Raasi',
+                    icon: PhosphorIconsFill.sparkle,
+                    selectedValue: selectBloodGroup,
+                    onChanged: onBloodGroupChanged,
+                    controller: raasiController,
+                    context: context,
+                    options: bloodGroupOptions,
+                    isSearchable: true,
+                    // validator: (value) {
+                    //   if (value == null || value.trim().isEmpty) {
+                    //     return null;
+                    //   }
+                    //   return null;
+                    // },
+                  ),
+                ),
+              ],
+            ),
+
             buildDropdown(
-              label: 'Blood Group',
+              label: 'Blood Group *',
               hintText: 'select Blood Group',
               icon: PhosphorIconsFill.drop,
               selectedValue: selectBloodGroup,
@@ -177,12 +260,22 @@ Widget buildpersonalDetails(
             ),
 
             buildToggle(
-              label: "Horoscope required? *",
-              selection: selectionHoroscope,
-              onChanged: onHoroscopeChanged,
-              title: "yes",
-              title1: "no",
+              label: "Physical Status *",
+              selection: selectionPhysicalselection,
+              onChanged: onPhysicalStatusChanged,
+              title: "Normal ",
+              icon1: Icons.person,
+              title1: "Differently Abled",
+              icon2: Icons.accessible,
             ),
+            if (selectionPhysicalselection == false)
+              buildADDField(
+                label: "please Specify",
+                hintText: "Hearing impariment",
+                Controller: differentlyController,
+                icon: Icons.description,
+              ),
+
             SizedBox(height: 20.h),
 
             Row(
@@ -206,6 +299,7 @@ Widget buildpersonalDetails(
     ),
   );
 }
+
 
 
 

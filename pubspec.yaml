@@ -38,7 +38,7 @@ dependencies:
   cached_network_image: ^3.4.1
   language_info_plus: ^1.0.1
   dropdown_search: ^6.0.2
-  
+  csc_picker: ^0.2.7  
 
 dev_dependencies:
   flutter_test:

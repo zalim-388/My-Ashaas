@@ -62,7 +62,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
           _conutdowm--;
         });
       } else {
-        _timer!.cancel();
+        _timer?.cancel();
         setState(() {
           isResendDisable = false;
         });
@@ -82,19 +82,22 @@ class _VerifyScreenState extends State<VerifyScreen> {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
-        leading: Padding(
-          padding: EdgeInsets.all(16.w),
-          child: IconButton(
-            onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => MoblieScreen()),
-              );
-            },
-            icon: Icon(Icons.arrow_back_ios, color: black),
-          ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => MoblieScreen()),
+            );
+          },
+          padding: EdgeInsets.zero,
+
+          icon: Icon(Icons.arrow_back_ios, color: black, size: 20),
         ),
         backgroundColor: kBackgroundColor,
+        elevation: 0,
+        centerTitle: false,
+        toolbarHeight: 56.h,
+        leadingWidth: 56.w,
       ),
       body: SafeArea(
         child: Column(
@@ -176,7 +179,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                         if (value.isEmpty && index > 0) {
                           FocusScope.of(
                             context,
-                          ).requestFocus(_verifyfocusnode[index + -1]);
+                          ).requestFocus(_verifyfocusnode[index - 1]);
                         }
                       },
                     ),
@@ -192,10 +195,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                 onTap: () {
                   Navigator.pushReplacement(
                     context,
-                    DialogRoute(
-                      context: context,
-                      builder: (context) => setpassword(),
-                    ),
+                    MaterialPageRoute(builder: (context) => setpassword()),
                   );
                 },
                 child: Container(
