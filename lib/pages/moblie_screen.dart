@@ -179,10 +179,7 @@ class _MoblieScreenState extends State<MoblieScreen> {
                 onTap: () {
                   Navigator.pushReplacement(
                     context,
-                    DialogRoute(
-                      context: context,
-                      builder: (context) => VerifyScreen(),
-                    ),
+                    MaterialPageRoute(builder: (context) => VerifyScreen()),
                   );
                 },
                 child: Container(

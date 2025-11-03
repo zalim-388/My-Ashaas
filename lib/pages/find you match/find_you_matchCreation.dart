@@ -43,11 +43,18 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
 
   final _fatherNameController = TextEditingController();
   final _motherNameController = TextEditingController();
-  final _occupationFatherController = TextEditingController();
-  final _occupationMotherController = TextEditingController();
+  final _lateFatherController = TextEditingController();
+  final _lateMotherController = TextEditingController();
   final _totalsistersController = TextEditingController();
   final _totalbrothersController = TextEditingController();
   final _hometownController = TextEditingController();
+  final _othersfathersOccuptionController = TextEditingController();
+  final _othersmotherOccuptionController = TextEditingController();
+  final _totalmarriedController = TextEditingController();
+  final _countryController = TextEditingController();
+  final _stateController = TextEditingController();
+  final _cityController = TextEditingController();
+  final _districtController = TextEditingController();
 
   final _pageController = PageController();
 
@@ -76,16 +83,39 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
   bool? _selectionMotherStatus;
   String? _selectedfamilystatus;
   String? _selectFamilytype;
-  String? _selectBroCount;
-  String? _selectSisCount;
-  String? _selectBroMarried;
-  String? _selectSisMarried;
+  String? _selectFatherOccupation;
+  String? _selectMotherOccupation;
+  String? _selectCountry;
+  String? _selectState;
+  String? _selectCity;
+  String? _selectDistrict;
+
+  List<String> countries = [];
+  List<String> states = [];
+  List<String> cities = [];
+  List<String> districts = [];
+
+  final List<String> motherStatusOptions = [
+    "House Wife",
+    "Self Employed",
+    "Private",
+    "Government job",
+    "Business",
+    "Others",
+  ];
+
+  final List<String> fatherStatusOptions = [
+    "Self Employed",
+    "Private",
+    "Government job",
+    "Business",
+    "Others",
+  ];
 
   final List<String> familytypeOptions = [" Joint ", "Nuclea"];
 
   final List<String> familystatusOptions = [
-    "Middle,"
-        "Upper",
+    "Middle,",
     "Middle",
     "Rich",
     "Affluent",
@@ -423,11 +453,18 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
 
     _fatherNameController.dispose();
     _motherNameController.dispose();
-    _occupationFatherController.dispose();
-    _occupationMotherController.dispose();
+    _lateFatherController.dispose();
+    _lateMotherController.dispose();
     _totalsistersController.dispose();
     _totalbrothersController.dispose();
     _hometownController.dispose();
+    _othersfathersOccuptionController.dispose();
+    _othersmotherOccuptionController.dispose();
+    _districtController.dispose();
+    _totalmarriedController.dispose();
+    _countryController.dispose();
+    _stateController.dispose();
+    _cityController.dispose();
 
     super.dispose();
   }
@@ -627,33 +664,49 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
               _page3FormKey,
               _fatherNameController,
               _motherNameController,
-              _occupationFatherController,
-              _occupationMotherController,
+              _lateFatherController,
+              _lateMotherController,
               _totalbrothersController,
               _totalsistersController,
               _hometownController,
+              _othersfathersOccuptionController,
+              _othersmotherOccuptionController,
+              _totalmarriedController,
+              _countryController,
+              _stateController,
+              _cityController,
+              _districtController,
               context,
+              cities: cities,
+              districts: districts,
+              states: states,
+              countries: countries,
+              selectDistrict: _selectDistrict,
+              CityOptions: cities,
+              CountryOptions: countries,
+              StateOptions: states,
+
               //siblings
-              selectBroCount: _selectBroCount,
-              onBroCountChanged: (value) {
-                setState(() {
-                  _selectBroMarried = null;
-                });
-              },
+              // selectBroCount: _selectBroCount,
+              // onBroCountChanged: (value) {
+              //   setState(() {
+              //     _selectBroMarried = null;
+              //   });
+              // },
 
-              selectBroMarried: _selectBroMarried,
-              onBroMarriedChanged:
-                  (value) => setState(() => _selectBroMarried = value),
+              // selectBroMarried: _selectBroMarried,
+              // onBroMarriedChanged:
+              //     (value) => setState(() => _selectBroMarried = value),
 
-              selectSisCount: _selectSisCount,
-              onSisCountChanged: (value) {
-                setState(() {
-                  _selectSisMarried = null;
-                });
-              },
-              selectSisMarried: _selectSisMarried,
-              onSisMarriedChanged:
-                  (value) => setState(() => _selectSisMarried = value),
+              // selectSisCount: _selectSisCount,
+              // onSisCountChanged: (value) {
+              //   setState(() {
+              //     _selectSisMarried = null;
+              //   });
+              // },
+              // selectSisMarried: _selectSisMarried,
+              // onSisMarriedChanged:
+              //     (value) => setState(() => _selectSisMarried = value),
 
               // family type
               selectfamilytype: _selectFamilytype,
@@ -678,8 +731,22 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
               onMotherStatusChanged: (bool? newValue) {
                 setState(() {
                   _selectionMotherStatus = newValue;
-                  if (_selectionMotherStatus == true) {
-                    _occupationMotherController.clear();
+                  if (newValue == true) {
+                    _lateMotherController.clear();
+                  } else {
+                    _selectMotherOccupation = null;
+                    _othersmotherOccuptionController.clear();
+                  }
+                });
+              },
+              // late
+              selectMotherOccupation: _selectMotherOccupation,
+              motherStatusOptions: motherStatusOptions,
+              onOccupationMotherChanged: (newvalue) {
+                setState(() {
+                  _selectMotherOccupation = newvalue;
+                  if (newvalue != "Others") {
+                    _othersmotherOccuptionController.clear();
                   }
                 });
               },
@@ -689,14 +756,67 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
               onFatherStatusChanged: (bool? newValue) {
                 setState(() {
                   _selectionFatherStatus = newValue;
-                  if (_selectionFatherStatus == true) {
-                    _occupationFatherController.clear();
+                  if (newValue == true) {
+                    _lateFatherController.clear();
+                  } else {
+                    _selectFatherOccupation = null;
+                    _othersfathersOccuptionController.clear();
                   }
                 });
               },
+              // late
+              selectFatherOccupation: _selectFatherOccupation,
+              fatherstatusOptions: fatherStatusOptions,
+              onOccupationFatherChanged: (newValue) {
+                setState(() {
+                  _selectFatherOccupation = newValue;
+                  if (newValue != "Others") {
+                    _othersfathersOccuptionController.clear();
+                  }
+                });
+              },
+              //csc
+              selectCountry: _selectCountry,
+              onCountryChanged: (newValue) {
+                setState(() {
+                  _selectCountry = newValue;
+                  _stateController.clear();
+                  _cityController.clear();
+                  _districtController.clear();
+                  states = [];
+                  cities = [];
+                  districts = [];
+                });
+              },
+              selectState: _selectState,
+              onStateChanged: (newValue) {
+                setState(() {
+                  _selectState = newValue;
+                  _cityController.clear();
+                  _districtController.clear();
+                  cities = [];
+                  districts = [];
+                });
+              },
+              selectCity: _selectCity,
+              onCityChanged: (newValue) {
+                setState(() {
+                  _selectCity = newValue;
+                  _districtController.clear();
+                  districts = [];
+                });
+              },
+
+              onDistrictChanged: (value) {},
             ),
-            buildEducationProfessionalDetails(_pageController, _page4Formkey),
-            buildLifestyleInterests(_pageController, _page5Formkey),
+            EducationProfessionalDetails(
+              formkey: _page3FormKey,
+              pageController: _pageController,
+            ),
+            LifestyleInterests(
+              pageController: _pageController,
+              formkey: _page5Formkey,
+            ),
             buildPartnerPreferences(_pageController, _page6Formkey),
           ],
         ),

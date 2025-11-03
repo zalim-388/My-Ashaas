@@ -102,6 +102,7 @@ class GTextStyle extends TextStyle {
     fontFamily: _fontFamily,
     textBaseline: TextBaseline.alphabetic,
     letterSpacing: 0,
+    
   );
 
   static const caption = GTextStyle._(

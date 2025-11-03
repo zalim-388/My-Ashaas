@@ -7,6 +7,7 @@ Widget buildToggle({
   required String label,
   IconData? icon,
   double? topPad,
+  required List<String> options,
   required bool? selection,
   required ValueChanged<bool?> onChanged,
   required String title,
@@ -20,21 +21,17 @@ Widget buildToggle({
       buildFieldLabel(label: label, icon: icon, topPad: topPad),
 
       SegmentedButton<bool>(
-      
         emptySelectionAllowed: true,
         showSelectedIcon: false,
-        segments: <ButtonSegment<bool>>[
-          ButtonSegment(
-            value: true,
-            icon: icon1 != null ? Icon(icon1) : null,
-            label: Text(title),
-          ),
-          ButtonSegment(
-            value: false,
-            icon: icon2 != null ? Icon(icon2) : null,
-            label: Text(title1),
-          ),
-        ],
+        segments:
+            options.asMap().entries.map((entry) {
+              final index = entry.key;
+              final option = entry.value;
+              return ButtonSegment<bool>(
+                value: index == 0,
+                label: Text(option),
+              );
+            }).toList(),
 
         selected: <bool>{if (selection != null) selection},
         onSelectionChanged: (Set<bool> newSelection) {

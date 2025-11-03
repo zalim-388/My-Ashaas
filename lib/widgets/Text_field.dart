@@ -7,7 +7,7 @@ Widget buildFieldLabel({
   required String label,
   IconData? icon,
   double? topPad,
-  double ?fontSize,
+  double? fontSize,
 }) {
   return Padding(
     padding: EdgeInsets.only(
@@ -19,9 +19,17 @@ Widget buildFieldLabel({
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: GTextStyle.label.copyWith(color: kPrimaryColor,
-        fontSize: fontSize ?? 15.sp
-        )),
+        Expanded(
+          child: Text(
+            label,
+            overflow: TextOverflow.ellipsis,
+
+            style: GTextStyle.label.copyWith(
+              color: kPrimaryColor,
+              fontSize: fontSize ?? 15.sp,
+            ),
+          ),
+        ),
         Icon(icon, size: 18, color: kPrimaryColor),
       ],
     ),
@@ -40,11 +48,17 @@ Widget buildADDField({
   bool readOnly = false,
   VoidCallback? onTap,
   Function(String)? onChanged,
+  double? fontSize,
 }) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      buildFieldLabel(label: label, icon: icon, topPad: topPad),
+      buildFieldLabel(
+        label: label,
+        icon: icon,
+        topPad: topPad,
+        fontSize: fontSize,
+      ),
 
       TextFormField(
         onChanged: onChanged,
@@ -56,14 +70,13 @@ Widget buildADDField({
           hintText: Controller.text.isEmpty ? hintText : null,
           hintStyle: GTextStyle.bodyLight.copyWith(
             color: Colors.black45,
-            fontSize: 14.sp,
+            fontSize: fontSize ?? 14.sp,
             fontFamily: 'qs',
           ),
           errorStyle: GTextStyle.bodyLight.copyWith(
             color: kErrorcolor,
             fontWeight: FontWeight.w300,
             fontSize: 13.sp,
-          
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.r),
@@ -88,9 +101,7 @@ Widget buildADDField({
           contentPadding: EdgeInsets.symmetric(
             horizontal: 12.w,
             vertical: 10.h,
-
           ),
-          
         ),
         autovalidateMode: AutovalidateMode.onUserInteraction,
         readOnly: readOnly,
