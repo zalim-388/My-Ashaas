@@ -3,7 +3,6 @@ import 'package:agent_porta/styles/constants.dart';
 import 'package:agent_porta/styles/style.dart';
 import 'package:agent_porta/widgets/Text_field.dart';
 import 'package:agent_porta/widgets/dropdown.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -52,6 +51,9 @@ class _EducationProfessionalDetailsState
     "9-10 lakh",
     "Above 10 lakh",
   ];
+
+  bool _isLoading = false;
+
   @override
   void dispose() {
     jobTitleController.dispose();
@@ -94,8 +96,8 @@ class _EducationProfessionalDetailsState
               SizedBox(height: 20.h),
 
               buildDropdown(
-                label: "Eating Habits",
-                hintText: "Select Eating Habits",
+                label: "Education Qualification ",
+                hintText: "Select Education Qualification ",
                 icon: Icons.school,
                 onChanged: onEduChanged,
                 context: context,
@@ -188,6 +190,7 @@ class _EducationProfessionalDetailsState
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   buildNextButton(
+                    loading: _isLoading,
                     onTap: () {
                       if (widget.formkey.currentState?.validate() ?? false) {
                         widget.pageController.nextPage(

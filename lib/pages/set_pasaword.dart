@@ -71,6 +71,8 @@ class _LoginPageState extends State<setpassword> {
 
   @override
   Widget build(BuildContext context) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       backgroundColor: kBackgroundColor,
 
@@ -91,123 +93,128 @@ class _LoginPageState extends State<setpassword> {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.h),
         child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: 0.h),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: isLandscape ? 30.h : 60.h),
 
-              GestureDetector(
-                onTap: _pikeprofileimage,
-                child: CircleAvatar(
-                  child:
-                      _profileimage != null
-                          ? ClipOval(
-                            child: Image.file(
-                              _profileimage!,
-                              width: 90.r,
-                              height: 90.r,
-                              fit: BoxFit.cover,
-                            ),
-                          )
-                          : Icon(Icons.camera_alt, size: 40, color: grey),
-                  backgroundColor: Colors.grey[300],
-                  radius: 45.r,
-                ),
-              ),
-              SizedBox(height: 30.h),
-
-              CustomListTile(
-                title: 'User name',
-                hintText: 'Enter UserName',
-                controller: usenameController,
-                focusNode: _usernameFocusNode,
-
-                showBorder: true,
-                onTap: () {
-                  _usernameFocusNode.requestFocus();
-                },
-
-                keyboardType: TextInputType.name,
-
-                tileColor: Colors.grey[200],
-              ),
-              SizedBox(height: 15.h),
-              CustomListTile(
-                title: 'password',
-                hintText: 'Enter password',
-                controller: passwordController,
-                focusNode: _passwordFocusNode,
-                obscureText: !_isPasswordVisible,
-
-                onTap: () {
-                  _passwordFocusNode.requestFocus();
-                },
-
-                keyboardType: TextInputType.visiblePassword,
-                icon:
-                    _isPasswordVisible
-                        ? Icons.visibility_rounded
-                        : Icons.visibility_off_rounded,
-                onPressedIcon: () {
-                  setState(() {
-                    _isPasswordVisible = !_isPasswordVisible;
-                  });
-                },
-              ),
-              SizedBox(height: 50.h),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Congratulation()),
-                  );
-                },
-                child: Container(
-                  width: double.infinity,
-                  height: 48.h,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [kPrimaryColor.withOpacity(0.610), kPrimaryColor],
-                      begin: Alignment.bottomLeft,
-                      end: Alignment.bottomCenter,
-                    ),
-                    borderRadius: BorderRadius.circular(30.r),
+                GestureDetector(
+                  onTap: _pikeprofileimage,
+                  child: CircleAvatar(
+                    child:
+                        _profileimage != null
+                            ? ClipOval(
+                              child: Image.file(
+                                _profileimage!,
+                                width: 90.r,
+                                height: 90.r,
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                            : Icon(Icons.camera_alt, size: 40, color: grey),
+                    backgroundColor: Colors.grey[300],
+                    radius: 45.r,
                   ),
-                  alignment: Alignment.center,
+                ),
+                SizedBox(height: 30.h),
+
+                CustomListTile(
+                  title: 'User name',
+                  hintText: 'Enter UserName',
+                  controller: usenameController,
+                  focusNode: _usernameFocusNode,
+
+                  showBorder: true,
+                  onTap: () {
+                    _usernameFocusNode.requestFocus();
+                  },
+
+                  keyboardType: TextInputType.name,
+
+                  tileColor: Colors.grey[200],
+                ),
+                SizedBox(height: 15.h),
+                CustomListTile(
+                  title: 'password',
+                  hintText: 'Enter password',
+                  controller: passwordController,
+                  focusNode: _passwordFocusNode,
+                  obscureText: !_isPasswordVisible,
+
+                  onTap: () {
+                    _passwordFocusNode.requestFocus();
+                  },
+
+                  keyboardType: TextInputType.visiblePassword,
+                  icon:
+                      _isPasswordVisible
+                          ? Icons.visibility_rounded
+                          : Icons.visibility_off_rounded,
+                  onPressedIcon: () {
+                    setState(() {
+                      _isPasswordVisible = !_isPasswordVisible;
+                    });
+                  },
+                ),
+                SizedBox(height: 50.h),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Congratulation()),
+                    );
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 48.h,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          kPrimaryColor.withOpacity(0.610),
+                          kPrimaryColor,
+                        ],
+                        begin: Alignment.bottomLeft,
+                        end: Alignment.bottomCenter,
+                      ),
+                      borderRadius: BorderRadius.circular(30.r),
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Next',
+                      style: GTextStyle.bodyBold.copyWith(
+                        fontSize: 18.sp,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 15.h),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ForgotPasswordPage(),
+                      ),
+                    );
+                  },
+                  style: TextButton.styleFrom(
+                    minimumSize: Size.zero,
+                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 3),
+                  ),
                   child: Text(
-                    'Next',
-                    style: GTextStyle.bodyBold.copyWith(
-                      fontSize: 18.sp,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w800,
+                    'Forgot Password ?',
+                    style: GTextStyle.bodyMedium.copyWith(
+                      color: kPrimaryColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18,
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 15.h),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ForgotPasswordPage(),
-                    ),
-                  );
-                },
-                style: TextButton.styleFrom(
-                  minimumSize: Size.zero,
-                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 3),
-                ),
-                child: Text(
-                  'Forgot Password ?',
-                  style: GTextStyle.bodyMedium.copyWith(
-                    color: kPrimaryColor,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18,
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

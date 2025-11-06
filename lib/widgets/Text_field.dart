@@ -49,6 +49,9 @@ Widget buildADDField({
   VoidCallback? onTap,
   Function(String)? onChanged,
   double? fontSize,
+  int? maxlength,
+  int? maxlines,
+  int? minlines,
 }) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -103,6 +106,9 @@ Widget buildADDField({
             vertical: 10.h,
           ),
         ),
+        maxLength: maxlength,
+        maxLines: maxlines,
+        minLines: minlines,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         readOnly: readOnly,
         onTap: onTap,

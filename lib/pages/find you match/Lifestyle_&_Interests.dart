@@ -27,8 +27,13 @@ class _LifestyleInterestsState extends State<LifestyleInterests> {
   final workloctionController = TextEditingController();
 
   String? selectEatingHabits;
-  bool? selectionDrinkingHabits;
+  String? selectionDrinkingHabits;
   String? selectSalary;
+  String? selectionSmokingHabits;
+  Set<String>? selectHobbiesInterests;
+  String? selectedReligion;
+  String? selectedCast;
+  Set<String>? selecteLifestylePreferences;
 
   final List<String> eatingHabitsOptions = [
     "Vegetarian",
@@ -54,6 +59,65 @@ class _LifestyleInterestsState extends State<LifestyleInterests> {
     "9-10 lakh",
     "Above 10 lakh",
   ];
+  final List<Toggleoption> drinkingHabitsOptions = [
+    Toggleoption(label: "Yes", icon: Icons.check),
+    Toggleoption(label: "No", icon: Icons.close),
+    Toggleoption(label: "Occasionally", icon: PhosphorIconsFill.sparkle),
+  ];
+  final List<Toggleoption> smokingHabitsOptions = [
+    Toggleoption(label: "Yes", icon: Icons.check),
+    Toggleoption(label: "No", icon: Icons.close),
+    Toggleoption(label: "Occasionally", icon: PhosphorIconsFill.sparkle),
+  ];
+  final List<Toggleoption> hobbiesInterestsOptions = [
+    Toggleoption(label: "Music", icon: PhosphorIconsFill.musicNote),
+    Toggleoption(label: "Reading", icon: PhosphorIconsFill.bookOpen),
+    Toggleoption(label: "Movies ", icon: PhosphorIconsFill.filmStrip),
+    Toggleoption(label: "Travel", icon: PhosphorIconsFill.airplane),
+    Toggleoption(label: "Cooking", icon: PhosphorIconsFill.cookie),
+    Toggleoption(label: "Sports", icon: PhosphorIconsFill.bicycle),
+  ];
+  List<String> religionoptions = [
+    "Hindu",
+    "Muslim",
+    "Christian",
+    "Sikh",
+    "Jain",
+  ];
+  List<String> castoptions = [];
+  List<String> getCastForReligion(String? religion) {
+    if (religion == 'Hindu') {
+      return [
+        "Iyer ",
+        "Iyengar ",
+        "Namboothiri ",
+        "Havyaka ",
+        "Smartha ",
+        "adhwa ",
+      ];
+    }
+    if (religion == 'Muslim') {
+      return [];
+    }
+    if (religion == 'Christian') {
+      return ["cast B1", "cast B2", "cast B3"];
+    }
+    if (religion == 'Sikh') {
+      return ["cast A1", "cast A2", "cast A3", "cast A4"];
+    }
+    if (religion == 'Jain') {
+      return [];
+    }
+    return [];
+  }
+
+  final List<Toggleoption> lifestylePreferencesOptions = [
+    Toggleoption(label: "Veg", icon: PhosphorIconsFill.leaf),
+    Toggleoption(label: "Non-Veg", icon: Icons.set_meal),
+    Toggleoption(label: "Smoking", icon: PhosphorIconsFill.cigarette),
+    Toggleoption(label: "Drinking", icon: PhosphorIconsFill.wine),
+  ];
+
   @override
   void dispose() {
     jobTitleController.dispose();
@@ -68,7 +132,7 @@ class _LifestyleInterestsState extends State<LifestyleInterests> {
     });
   }
 
-  void onDrinkingHabitsChanged(bool? value) {
+  void onDrinkingHabitsChanged(String? value) {
     setState(() {
       selectionDrinkingHabits = value;
     });
@@ -77,6 +141,41 @@ class _LifestyleInterestsState extends State<LifestyleInterests> {
   void onSalaryChanged(String? value) {
     setState(() {
       selectSalary = value;
+    });
+  }
+
+  void onsmockingHabitsChanged(String? value) {
+    setState(() {
+      selectionSmokingHabits = value;
+    });
+  }
+
+  void onhobbiesInterestsChanged(Set<String>? value) {
+    setState(() {
+      selectHobbiesInterests = value;
+    });
+  }
+
+  void _onrReligionChanged(String? val) {
+    setState(() {
+      selectedReligion = val;
+      selectedCast = null;
+      // selectedSubCast = null;
+      castoptions = getCastForReligion(val);
+    });
+  }
+
+  void _onrCastChanged(String? val) {
+    setState(() {
+      selectedCast = val;
+      //  selectedCast = null;
+      // = getCastForReligion(val);
+    });
+  }
+
+  void _onLifestylePreferencesChanged(Set<String>? val) {
+    setState(() {
+      selecteLifestylePreferences = val;
     });
   }
 
@@ -96,8 +195,10 @@ class _LifestyleInterestsState extends State<LifestyleInterests> {
 
                 style: GTextStyle.heading1Bold.copyWith(color: kPrimaryColor),
               ),
+              SizedBox(height: 20.h),
+
               buildDropdown(
-                label: "Eating Habits",
+                label: "Eating Habits *",
                 hintText: "Select Eating Habits",
                 icon: PhosphorIconsFill.forkKnife,
                 onChanged: onEatingHabitsChanged,
@@ -111,14 +212,84 @@ class _LifestyleInterestsState extends State<LifestyleInterests> {
                   return null;
                 },
               ),
-              buildToggle(
+
+              buildToggleSingChip(
                 label: "Drinking Habits",
+                options: drinkingHabitsOptions,
                 selection: selectionDrinkingHabits,
                 onChanged: onDrinkingHabitsChanged,
-                title: "Yes",
-                title1: "No",
               ),
 
+              // buildToggle(
+              //   label: "Drinking Habits",
+              //   selection: selectionDrinkingHabits,
+              //   onChanged: onDrinkingHabitsChanged,
+              //   options: drinkingHabitsOptions,
+              //   // title: "Yes",
+              //   // title1: "No",
+              // ),
+              buildToggleSingChip(
+                label: "Smoking Habits",
+                options: smokingHabitsOptions,
+                selection: selectionSmokingHabits,
+                onChanged: onsmockingHabitsChanged,
+              ),
+
+              buildToggleMultiChip(
+                label: "Hobbies & Interests",
+                options: hobbiesInterestsOptions,
+                selection: selectHobbiesInterests,
+                onChanged: onhobbiesInterestsChanged,
+              ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                children: [
+                  Expanded(
+                    child: buildDropdown(
+                      label: "Religion",
+                      selectedValue: selectedReligion,
+                      hintText: "select Religion",
+                      options: religionoptions,
+                      icon: PhosphorIconsFill.handsPraying,
+                      onChanged: _onrReligionChanged,
+                      context: context,
+                      isSearchable: true,
+                    ),
+                  ),
+                  SizedBox(width: 16.w),
+                  if (castoptions.isNotEmpty)
+                    Expanded(
+                      child: buildDropdown(
+                        label: "Cast",
+                        selectedValue: selectedCast,
+                        options: castoptions,
+                        icon: PhosphorIconsFill.users,
+                        hintText: "select Cast",
+                        onChanged: _onrCastChanged,
+                        context: context,
+                        isSearchable: true,
+                      ),
+                    ),
+                ],
+              ),
+
+              buildToggleMultiChip(
+                label: "Lifestyle Preferences ",
+                options: lifestylePreferencesOptions,
+                selection: selecteLifestylePreferences,
+                onChanged: _onLifestylePreferencesChanged,
+              ),
+
+              // buildToggle(
+              //   label: "Smoking Habits",
+              //   selection: selectionSmokingHabits,
+              //   onChanged: onsmockingHabitsChanged,
+              //   options: SmokingHabitsOptions,
+              //   // title: "Yes",
+              //   // title1: "No",
+              // ),
               SizedBox(height: 48.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,

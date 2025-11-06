@@ -37,174 +37,167 @@ class _MoblieScreenState extends State<MoblieScreen> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
-  }
-
-  @override
-  void dispose() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       backgroundColor: kBackgroundColor,
 
-      body: Padding(
-        padding: EdgeInsets.all(16.w),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(height: 170.w),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: isLandscape ? 40.h : 170.w),
 
-              buildlogo(),
-              SizedBox(height: 30.h),
+                buildlogo(),
+                SizedBox(height: isLandscape ? 15.h : 25.h),
 
-              Align(
-                alignment: Alignment.centerLeft,
+                Align(
+                  alignment: Alignment.centerLeft,
 
-                child: Text(
-                  "Moblie Number",
-                  style: GTextStyle.label.copyWith(color: kPrimaryColor),
+                  child: Text(
+                    "Moblie Number",
+                    style: GTextStyle.label.copyWith(color: kPrimaryColor),
+                  ),
                 ),
-              ),
-              SizedBox(height: 8.h),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  GestureDetector(
-                    onTap: _openCountryPicker,
-                    child: Container(
-                      height: 40.h,
-                      padding: EdgeInsets.all(9.r),
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade100,
+                SizedBox(height: isLandscape ? 4.h : 8.h),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    GestureDetector(
+                      onTap: _openCountryPicker,
+                      child: Container(
+                        height: 40.h,
+                        padding: EdgeInsets.all(9.r),
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade100,
 
-                        borderRadius: BorderRadius.circular(8.r),
-                        border: Border.all(color: kPrimaryColor, width: 1.w),
-                      ),
-                      alignment: Alignment.center,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          if (_selectedCountryFlag != null &&
-                              _selectedCountryFlag!.isNotEmpty) ...[
+                          borderRadius: BorderRadius.circular(8.r),
+                          border: Border.all(
+                            color: kPrimaryColor,
+                            width: isLandscape ? 0.9 : 1.0.w,
+                          ),
+                        ),
+                        alignment: Alignment.center,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            if (_selectedCountryFlag != null &&
+                                _selectedCountryFlag!.isNotEmpty) ...[
+                              Text(
+                                _selectedCountryFlag!,
+                                style: GTextStyle.bodyLight,
+                              ),
+                              SizedBox(width: 6.w),
+                            ],
                             Text(
-                              _selectedCountryFlag!,
+                              (_selectedCountryCode != null)
+                                  ? (_selectedCountryCode!.startsWith('+')
+                                      ? _selectedCountryCode!
+                                      : '+${_selectedCountryCode}')
+                                  : '+91',
+                              textAlign: TextAlign.center,
                               style: GTextStyle.bodyLight,
                             ),
-                            SizedBox(width: 6.w),
+                            SizedBox(width: 5.w),
+                            Icon(Icons.arrow_drop_down),
                           ],
-                          Text(
-                            (_selectedCountryCode != null)
-                                ? (_selectedCountryCode!.startsWith('+')
-                                    ? _selectedCountryCode!
-                                    : '+${_selectedCountryCode}')
-                                : '+91',
-                            textAlign: TextAlign.center,
-                            style: GTextStyle.bodyLight,
-                          ),
-                          SizedBox(width: 5.w),
-                          Icon(Icons.arrow_drop_down),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(width: 8.w),
-
-                  Expanded(
-                    child: Container(
-                      height: 40.h,
-                      decoration: ShapeDecoration(
-                        color: Colors.grey.shade100,
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(width: 1.w, color: kPrimaryColor),
-                          borderRadius: BorderRadius.circular(8.r),
                         ),
                       ),
-                      child: TextFormField(
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(10),
-                          FilteringTextInputFormatter.digitsOnly,
-                        ],
-                        keyboardType: TextInputType.number,
-                        cursorColor: kPrimaryColor,
+                    ),
 
-                        decoration: InputDecoration(
-                          hintText: "Enter Your Moblie Number",
-                          hintStyle: GTextStyle.bodyBold.copyWith(
-                            color: Colors.black45,
-                            fontSize: 15.sp,
-                            fontFamily: 'qs',
-                          ),
-                          border: OutlineInputBorder(
+                    SizedBox(width: 8.w),
+
+                    Expanded(
+                      child: Container(
+                        height: 40.h,
+                        decoration: ShapeDecoration(
+                          color: Colors.grey.shade100,
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              width: isLandscape ? 0.9 : 1.0.w,
+                              color: kPrimaryColor,
+                            ),
                             borderRadius: BorderRadius.circular(8.r),
-                            borderSide: BorderSide.none,
                           ),
-
-                          contentPadding: EdgeInsets.symmetric(
-                            horizontal: 12.w,
-                          ),
-
-                          filled: true,
-                          fillColor: Colors.grey.shade100,
                         ),
-                        style: GTextStyle.bodyBold.copyWith(
-                          color: kPrimaryColor,
-                          fontSize: 15.sp,
+                        child: TextFormField(
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(10),
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                          keyboardType: TextInputType.number,
+                          cursorColor: kPrimaryColor,
+                          textAlignVertical: TextAlignVertical.center,
+                          decoration: InputDecoration(
+                            hintText: "Enter Your Moblie Number",
+                            hintStyle: GTextStyle.bodyBold.copyWith(
+                              color: Colors.black45,
+                              fontSize: isLandscape ? 8.sp : 15,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.r),
+                              borderSide: BorderSide.none,
+                            ),
+
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 12.w,
+                            ),
+                            isCollapsed: true,
+                            filled: true,
+                            fillColor: Colors.grey.shade100,
+                          ),
+                          style: GTextStyle.bodyBold.copyWith(
+                            color: kPrimaryColor,
+                            fontSize: 15.sp,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
 
-              SizedBox(height: 50.h),
+                SizedBox(height: 50.h),
 
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => VerifyScreen()),
-                  );
-                },
-                child: Container(
-                  width: double.infinity,
-                  height: 48.h,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [kPrimaryColor.withOpacity(0.610), kPrimaryColor],
-                      begin: Alignment.bottomLeft,
-                      end: Alignment.bottomCenter,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => VerifyScreen()),
+                    );
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 48.h,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          kPrimaryColor.withOpacity(0.610),
+                          kPrimaryColor,
+                        ],
+                        begin: Alignment.bottomLeft,
+                        end: Alignment.bottomCenter,
+                      ),
+                      borderRadius: BorderRadius.circular(30.r),
                     ),
-                    borderRadius: BorderRadius.circular(30.r),
-                  ),
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Continue',
-                    style: GTextStyle.bodyBold.copyWith(
-                      fontSize: 18.sp,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w800,
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Continue',
+                      style: GTextStyle.bodyBold.copyWith(
+                        fontSize: isLandscape ? 11.sp : 18.sp,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+
+                SizedBox(height: 50.h),
+              ],
+            ),
           ),
         ),
       ),
