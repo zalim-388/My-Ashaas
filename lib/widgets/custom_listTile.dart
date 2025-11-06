@@ -74,7 +74,7 @@ class CustomListTile extends StatelessWidget {
           // fontWeight: FontWeight.w500,
         ),
         SizedBox(height: 8.h),
-        Container(
+        SizedBox(
           height: 40.h,
           child: TextFormField(
             focusNode: focusNode,

@@ -214,6 +214,7 @@ class _LifestyleInterestsState extends State<LifestyleInterests> {
               ),
 
               buildToggleSingChip(
+                 context: context,
                 label: "Drinking Habits",
                 options: drinkingHabitsOptions,
                 selection: selectionDrinkingHabits,
@@ -229,6 +230,7 @@ class _LifestyleInterestsState extends State<LifestyleInterests> {
               //   // title1: "No",
               // ),
               buildToggleSingChip(
+                 context: context,
                 label: "Smoking Habits",
                 options: smokingHabitsOptions,
                 selection: selectionSmokingHabits,
@@ -236,6 +238,7 @@ class _LifestyleInterestsState extends State<LifestyleInterests> {
               ),
 
               buildToggleMultiChip(
+                 context: context,
                 label: "Hobbies & Interests",
                 options: hobbiesInterestsOptions,
                 selection: selectHobbiesInterests,
@@ -276,6 +279,7 @@ class _LifestyleInterestsState extends State<LifestyleInterests> {
               ),
 
               buildToggleMultiChip(
+                 context: context,
                 label: "Lifestyle Preferences ",
                 options: lifestylePreferencesOptions,
                 selection: selecteLifestylePreferences,

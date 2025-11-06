@@ -27,7 +27,8 @@ class _CongratulationState extends State<Congratulation>
 
   @override
   Widget build(BuildContext context) {
-    // final size = MediaQuery.of(context).size;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     final padding = MediaQuery.of(context).padding;
     return Scaffold(
       backgroundColor: kBackgroundColor,
@@ -119,7 +120,7 @@ class _CongratulationState extends State<Congratulation>
                           child: Text(
                             'Continue',
                             style: GTextStyle.bodyBold.copyWith(
-                              fontSize: 18.sp,
+                              fontSize: isLandscape ? 18 : 18.sp,
                               color: Colors.white,
                               fontWeight: FontWeight.w800,
                             ),

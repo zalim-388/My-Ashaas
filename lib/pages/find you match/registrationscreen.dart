@@ -116,6 +116,7 @@ class _registrationscreenState extends State<registrationscreen> {
               SizedBox(height: 20.h),
 
               buildADDField(
+                context: context,
                 label: 'Full Name *',
                 icon: PhosphorIconsFill.userCircle,
                 hintText: 'Enter Full Name',
@@ -129,6 +130,7 @@ class _registrationscreenState extends State<registrationscreen> {
               ),
 
               buildToggle(
+                 context: context,
                 label: "Gender",
                 options: genderoptions,
                 selection: _selectedGender,
@@ -138,6 +140,7 @@ class _registrationscreenState extends State<registrationscreen> {
                 children: [
                   Expanded(
                     child: buildADDField(
+                      context: context,
                       label: 'Date of Birth *',
                       icon: PhosphorIconsFill.calendar,
                       hintText: 'Select your Date of Birth',
@@ -157,6 +160,7 @@ class _registrationscreenState extends State<registrationscreen> {
                   SizedBox(width: 16.w),
                   Expanded(
                     child: buildADDField(
+                      context: context,
                       label: 'Age *',
                       icon: PhosphorIconsFill.user,
                       hintText: 'your Age',
@@ -173,6 +177,7 @@ class _registrationscreenState extends State<registrationscreen> {
                 ],
               ),
               buildADDField(
+                context: context,
                 label: 'Email Id',
                 icon: PhosphorIconsFill.envelope,
                 hintText: 'Enter Email Id',

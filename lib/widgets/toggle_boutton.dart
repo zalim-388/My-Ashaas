@@ -18,6 +18,7 @@ Widget buildToggle({
   required List<Toggleoption> options,
   required String? selection,
   required ValueChanged<String?> onChanged,
+  required BuildContext context,
   // required String title,
   // required String title1,
   // IconData? icon1,
@@ -26,7 +27,9 @@ Widget buildToggle({
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      buildFieldLabel(label: label, icon: icon, topPad: topPad),
+      buildFieldLabel(label: label, icon: icon, topPad: topPad,
+       context: context,
+      ),
 
       SegmentedButton<String>(
         emptySelectionAllowed: true,
@@ -70,12 +73,15 @@ Widget buildToggleMultiChip({
   required List<Toggleoption> options,
   required Set<String>? selection,
   required ValueChanged<Set<String>> onChanged,
+  required BuildContext context,
 }) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
     children: [
-      buildFieldLabel(label: label, icon: icon, topPad: topPad),
+      buildFieldLabel(label: label, icon: icon, topPad: topPad,
+       context: context,
+      ),
       SizedBox(height: 6.h),
       Wrap(
         spacing: 10.0.w,
@@ -147,11 +153,14 @@ Widget buildToggleSingChip({
   required List<Toggleoption> options,
   required String? selection,
   required ValueChanged<String?> onChanged,
+  required BuildContext context,
 }) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      buildFieldLabel(label: label, icon: icon, topPad: topPad),
+      buildFieldLabel(label: label, icon: icon, topPad: topPad,
+       context: context,
+      ),
       SizedBox(height: 6.h),
 
       Wrap(

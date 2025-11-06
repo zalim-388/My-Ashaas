@@ -48,11 +48,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
         backgroundColor: Colors.white.withOpacity(0.1),
-        toolbarHeight: 70,
+        toolbarHeight: 70.h,
         automaticallyImplyLeading: false,
         scrolledUnderElevation: 0,
         elevation: 2,
@@ -61,13 +63,13 @@ class _HomePageState extends State<HomePage> {
           children: [
             Image(
               image: AssetImage('assets/images/portalogoBg.png'),
-              height: 25.h,
+              height: isLandscape ? 35.h : 25.h,
             ),
             SizedBox(width: 10.w),
             Text(
               'Porta',
               style: GTextStyle.bodyBold.copyWith(
-                fontSize: 18.sp,
+                fontSize: isLandscape ? 3.sp : 18.sp,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -372,6 +374,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget sliderAds() {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 23.w),
       child: Column(
@@ -382,7 +386,7 @@ class _HomePageState extends State<HomePage> {
               options: CarouselOptions(
                 viewportFraction: 1,
                 autoPlay: true,
-                height: 190,
+                height: isLandscape ? 220.h : 190.h,
                 autoPlayCurve: Curves.easeInOut,
                 autoPlayAnimationDuration: const Duration(milliseconds: 800),
                 autoPlayInterval: const Duration(seconds: 6),

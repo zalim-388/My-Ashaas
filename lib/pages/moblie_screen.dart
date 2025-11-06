@@ -28,10 +28,33 @@ class _MoblieScreenState extends State<MoblieScreen> {
           _selectedCountryFlag = country.flagEmoji;
         });
       },
+
+      showWorldWide: true,
+      showSearch: true,
+      searchAutofocus: true,
+
       countryListTheme: CountryListThemeData(
         backgroundColor: Colors.white,
         bottomSheetHeight: 600.h,
         flagSize: 21.r,
+        inputDecoration: InputDecoration(
+          labelText: 'Search',
+          hintText: 'Start typing to search',
+          prefixIcon: const Icon(Icons.search),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: kPrimaryColor, width: 1.0.w),
+            borderRadius: BorderRadius.circular(8.r),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: kPrimaryColor, width: 1.0.w),
+            borderRadius: BorderRadius.circular(8.r),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: kPrimaryColor, width: 1.0.w),
+            borderRadius: BorderRadius.circular(8.r),
+          ),
+        ),
+        searchTextStyle: GTextStyle.bodyBold.copyWith(color: kPrimaryColor),
       ),
     );
   }
@@ -65,7 +88,7 @@ class _MoblieScreenState extends State<MoblieScreen> {
                 ),
                 SizedBox(height: isLandscape ? 4.h : 8.h),
                 Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                 
                   children: [
                     GestureDetector(
                       onTap: _openCountryPicker,
@@ -83,7 +106,7 @@ class _MoblieScreenState extends State<MoblieScreen> {
                         ),
                         alignment: Alignment.center,
                         child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                         mainAxisSize: MainAxisSize.min,
                           children: [
                             if (_selectedCountryFlag != null &&
                                 _selectedCountryFlag!.isNotEmpty) ...[
@@ -109,7 +132,7 @@ class _MoblieScreenState extends State<MoblieScreen> {
                       ),
                     ),
 
-                    SizedBox(width: 8.w),
+                    SizedBox(width: isLandscape ? 4.w : 8.w),
 
                     Expanded(
                       child: Container(
@@ -134,7 +157,7 @@ class _MoblieScreenState extends State<MoblieScreen> {
                           textAlignVertical: TextAlignVertical.center,
                           decoration: InputDecoration(
                             hintText: "Enter Your Moblie Number",
-                            hintStyle: GTextStyle.bodyBold.copyWith(
+                            hintStyle: GTextStyle.bodyLight.copyWith(
                               color: Colors.black45,
                               fontSize: isLandscape ? 8.sp : 15,
                             ),
@@ -145,14 +168,18 @@ class _MoblieScreenState extends State<MoblieScreen> {
 
                             contentPadding: EdgeInsets.symmetric(
                               horizontal: 12.w,
+                              vertical: isLandscape ? 9.h : 11.h,
                             ),
+                            alignLabelWithHint: true,
                             isCollapsed: true,
                             filled: true,
                             fillColor: Colors.grey.shade100,
                           ),
+
+                          cursorHeight: isLandscape ? 25.h : 25,
                           style: GTextStyle.bodyBold.copyWith(
                             color: kPrimaryColor,
-                            fontSize: 15.sp,
+                            fontSize: isLandscape ? 14 : 15.sp,
                           ),
                         ),
                       ),

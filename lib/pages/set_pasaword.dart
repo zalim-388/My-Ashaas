@@ -1,14 +1,13 @@
 import 'dart:io';
 import 'package:agent_porta/pages/Congratulation.dart';
 import 'package:agent_porta/pages/verify_screen.dart';
+import 'package:agent_porta/widgets/Text_field.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'forget_pasword_page(1).dart';
 import 'package:agent_porta/styles/constants.dart';
 import 'package:agent_porta/styles/style.dart';
-import '../widgets/custom_listTile.dart';
 
 class setpassword extends StatefulWidget {
   const setpassword({super.key});
@@ -19,7 +18,7 @@ class setpassword extends StatefulWidget {
 
 class _LoginPageState extends State<setpassword> {
   int? selectedTile;
-  bool _isPasswordVisible = false;
+  // bool _isPasswordVisible = false;
   File? _profileimage;
 
   final FocusNode _usernameFocusNode = FocusNode();
@@ -76,145 +75,216 @@ class _LoginPageState extends State<setpassword> {
     return Scaffold(
       backgroundColor: kBackgroundColor,
 
-      appBar: AppBar(
-        backgroundColor: kBackgroundColor,
+      appBar:
+          isLandscape
+              ? null
+              : AppBar(
+                backgroundColor: kBackgroundColor,
 
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => VerifyScreen()),
-            );
-          },
-          icon: Icon(Icons.arrow_back_ios, color: black),
-        ),
-        title: Text("Set Password", style: GTextStyle.heading1Bold),
-      ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.h),
-        child: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: isLandscape ? 30.h : 60.h),
-
-                GestureDetector(
-                  onTap: _pikeprofileimage,
-                  child: CircleAvatar(
-                    child:
-                        _profileimage != null
-                            ? ClipOval(
-                              child: Image.file(
-                                _profileimage!,
-                                width: 90.r,
-                                height: 90.r,
-                                fit: BoxFit.cover,
-                              ),
-                            )
-                            : Icon(Icons.camera_alt, size: 40, color: grey),
-                    backgroundColor: Colors.grey[300],
-                    radius: 45.r,
-                  ),
-                ),
-                SizedBox(height: 30.h),
-
-                CustomListTile(
-                  title: 'User name',
-                  hintText: 'Enter UserName',
-                  controller: usenameController,
-                  focusNode: _usernameFocusNode,
-
-                  showBorder: true,
-                  onTap: () {
-                    _usernameFocusNode.requestFocus();
-                  },
-
-                  keyboardType: TextInputType.name,
-
-                  tileColor: Colors.grey[200],
-                ),
-                SizedBox(height: 15.h),
-                CustomListTile(
-                  title: 'password',
-                  hintText: 'Enter password',
-                  controller: passwordController,
-                  focusNode: _passwordFocusNode,
-                  obscureText: !_isPasswordVisible,
-
-                  onTap: () {
-                    _passwordFocusNode.requestFocus();
-                  },
-
-                  keyboardType: TextInputType.visiblePassword,
-                  icon:
-                      _isPasswordVisible
-                          ? Icons.visibility_rounded
-                          : Icons.visibility_off_rounded,
-                  onPressedIcon: () {
-                    setState(() {
-                      _isPasswordVisible = !_isPasswordVisible;
-                    });
-                  },
-                ),
-                SizedBox(height: 50.h),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Congratulation()),
-                    );
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    height: 48.h,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          kPrimaryColor.withOpacity(0.610),
-                          kPrimaryColor,
-                        ],
-                        begin: Alignment.bottomLeft,
-                        end: Alignment.bottomCenter,
-                      ),
-                      borderRadius: BorderRadius.circular(30.r),
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Next',
-                      style: GTextStyle.bodyBold.copyWith(
-                        fontSize: 18.sp,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 15.h),
-                TextButton(
+                leading: IconButton(
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => ForgotPasswordPage(),
-                      ),
+                      MaterialPageRoute(builder: (context) => VerifyScreen()),
                     );
                   },
-                  style: TextButton.styleFrom(
-                    minimumSize: Size.zero,
-                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 3),
+
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.w,
+                    vertical: 10.h,
                   ),
+                  icon: Icon(Icons.arrow_back_ios, color: black),
+                ),
+                title: Text(
+                  "Set Password",
+                  style: GTextStyle.bodyBold.copyWith(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                titleSpacing: 30.w,
+                centerTitle: false,
+              ),
+      body:
+          isLandscape
+              ? NestedScrollView(
+                headerSliverBuilder: (context, innerBoxIsScrolled) {
+                  return <Widget>[
+                    SliverAppBar(
+                      backgroundColor: kBackgroundColor,
+                      leading: IconButton(
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => VerifyScreen(),
+                            ),
+                          );
+                        },
+
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 10.w,
+                          vertical: 10.h,
+                        ),
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          color: black,
+                          size: 20,
+                        ),
+                      ),
+                      title: Text(
+                        "Set Password",
+                        style: GTextStyle.bodyBold.copyWith(
+                          fontSize: isLandscape ? 25 : 18.sp,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      titleSpacing: 30.w,
+                      centerTitle: false,
+                    ),
+                  ];
+                },
+                body: _mainBody(isLandscape),
+              )
+              : _mainBody(isLandscape),
+    );
+  }
+
+  Widget _mainBody(bool isLandscape) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.h),
+      child: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: isLandscape ? 30.h : 80.h),
+
+              GestureDetector(
+                onTap: _pikeprofileimage,
+                child: Stack(
+                  alignment: AlignmentGeometry.center,
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.grey[300],
+                      radius: isLandscape ? 55.r : 45.r,
+                      backgroundImage:
+                          _profileimage != null
+                              ? FileImage(_profileimage!)
+                              : null,
+                    ),
+                    if (_profileimage == null)
+                      Icon(Icons.camera_alt, size: 40, color: grey),
+
+                    if (_profileimage == null)
+                      Positioned(
+                        bottom: isLandscape ? 5 : 0,
+                        top: isLandscape ? 5 : 0,
+                        child: CircleAvatar(
+                          backgroundColor: Colors.grey[300],
+                          radius: isLandscape ? 18.r : 15.r,
+                          child: Icon(
+                            Icons.camera_alt,
+                            size: isLandscape ? 25 : 16.sp,
+                            color: grey,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 30.h),
+
+              buildADDField(
+                context: context,
+                label: "User name",
+                hintText: "Enter UserName",
+                Controller: usenameController,
+                showBorderside: true,
+                keybordType: TextInputType.name,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Please enter Username';
+                  }
+                  return null;
+                },
+              ),
+
+              buildADDField(
+                label: "password",
+                hintText: "Enter password",
+                Controller: passwordController,
+                context: context,
+                keybordType: TextInputType.visiblePassword,
+                showBorderside: true,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Please enter Password';
+                  }
+                  if (value.trim().length < 4) {
+                    return 'Password must be at least 4 characters long';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 48.h),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Congratulation()),
+                  );
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 48.h,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [kPrimaryColor.withOpacity(0.610), kPrimaryColor],
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.bottomCenter,
+                    ),
+                    borderRadius: BorderRadius.circular(30.r),
+                  ),
+                  alignment: Alignment.center,
                   child: Text(
-                    'Forgot Password ?',
-                    style: GTextStyle.bodyMedium.copyWith(
-                      color: kPrimaryColor,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
+                    'Next',
+                    style: GTextStyle.bodyBold.copyWith(
+                      fontSize: isLandscape ? 11.sp : 18.sp,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+              SizedBox(height: 15.h),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ForgotPasswordPage(),
+                    ),
+                  );
+                },
+                style: TextButton.styleFrom(
+                  minimumSize: Size.zero,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 15.w,
+                    vertical: 3.h,
+                  ),
+                ),
+                child: Text(
+                  'Forgot Password ?',
+                  style: GTextStyle.bodyMedium.copyWith(
+                    color: kPrimaryColor,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+              SizedBox(height: 20.h),
+            ],
           ),
         ),
       ),

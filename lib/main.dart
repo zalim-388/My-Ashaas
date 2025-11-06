@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       useInheritedMediaQuery: true,
       splitScreenMode: true,
+      
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,

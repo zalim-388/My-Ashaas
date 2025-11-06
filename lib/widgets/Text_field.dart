@@ -8,7 +8,10 @@ Widget buildFieldLabel({
   IconData? icon,
   double? topPad,
   double? fontSize,
+  required BuildContext context,
 }) {
+  final isLandscape =
+      MediaQuery.of(context).orientation == Orientation.landscape;
   return Padding(
     padding: EdgeInsets.only(
       bottom: 5.0,
@@ -26,7 +29,7 @@ Widget buildFieldLabel({
 
             style: GTextStyle.label.copyWith(
               color: kPrimaryColor,
-              fontSize: fontSize ?? 15.sp,
+              fontSize: isLandscape ? 18 : fontSize ?? 15.sp,
             ),
           ),
         ),
@@ -52,11 +55,21 @@ Widget buildADDField({
   int? maxlength,
   int? maxlines,
   int? minlines,
+  bool showBorderside = false,
+  required BuildContext context,
 }) {
+  final isLandscape =
+      MediaQuery.of(context).orientation == Orientation.landscape;
+  final borderside =
+      showBorderside
+          ? BorderSide(color: kPrimaryColor, width: isLandscape ? 0.9 : 1.w)
+          : BorderSide.none;
+
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
       buildFieldLabel(
+        context: context,
         label: label,
         icon: icon,
         topPad: topPad,
@@ -73,8 +86,7 @@ Widget buildADDField({
           hintText: Controller.text.isEmpty ? hintText : null,
           hintStyle: GTextStyle.bodyLight.copyWith(
             color: Colors.black45,
-            fontSize: fontSize ?? 14.sp,
-            fontFamily: 'qs',
+            fontSize: isLandscape ? 22 : fontSize ?? 14.sp,
           ),
           errorStyle: GTextStyle.bodyLight.copyWith(
             color: kErrorcolor,
@@ -83,19 +95,19 @@ Widget buildADDField({
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.r),
-            borderSide: BorderSide.none,
+            borderSide: borderside,
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.r),
-            borderSide: BorderSide.none,
+            borderSide: borderside,
           ),
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.r),
-            borderSide: BorderSide.none,
+            borderSide: borderside,
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.r),
-            borderSide: BorderSide.none,
+            borderSide: borderside,
           ),
 
           filled: true,
@@ -114,7 +126,7 @@ Widget buildADDField({
         onTap: onTap,
         style: GTextStyle.bodyBold.copyWith(
           color: kPrimaryColor,
-          fontSize: 15.sp,
+          fontSize: isLandscape ? 18 : 15.sp,
         ),
         validator: validator,
         keyboardType: keybordType,

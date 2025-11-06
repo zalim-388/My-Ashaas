@@ -214,6 +214,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
               ),
 
               buildADDField(
+                context: context,
                 label: "Father Name *",
                 hintText: "Enter Father Name",
                 Controller: _fatherNameController,
@@ -228,6 +229,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
               ),
 
               buildToggle(
+                context: context,
                 label: "Father Status *",
                 selection: _selectionFatherStatus,
                 onChanged: _onFatherStatusChanged,
@@ -255,6 +257,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
               ],
               if (_selectFatherOccupation == "Others")
                 buildADDField(
+                  context: context,
                   label: "Please Specfiy",
                   hintText: "Enter Occupation",
                   Controller: _othersfathersOccuptionController,
@@ -269,6 +272,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                 )
               else if (_selectionFatherStatus == "Late") ...[
                 buildADDField(
+                  context: context,
                   label: "Which year",
                   hintText: "Enter year ",
                   Controller: _lateFatherController,
@@ -285,6 +289,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
               ],
 
               buildADDField(
+                context: context,
                 label: "Mother Name",
                 hintText: "Enter Mother Name",
                 Controller: _motherNameController,
@@ -299,6 +304,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                 },
               ),
               buildToggle(
+                context: context,
                 label: "Mother Status",
                 selection: _selectionMotherStatus,
                 onChanged: _onMotherStatusChanged,
@@ -328,6 +334,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
               ],
               if (_selectMotherOccupation == "Others")
                 buildADDField(
+                  context: context,
                   label: "Please Specfiy",
                   hintText: "Enter Occupation",
                   Controller: _othersmotherOccuptionController,
@@ -342,6 +349,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                 )
               else if (_selectionMotherStatus == "Late") ...[
                 buildADDField(
+                  context: context,
                   label: "which year",
                   hintText: "Enter year",
                   Controller: _lateMotherController,
@@ -387,12 +395,13 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                   return null;
                 },
               ),
-              buildFieldLabel(label: "Sibilings"),
+              buildFieldLabel(label: "Sibilings", context: context),
 
               Row(
                 children: [
                   Expanded(
                     child: buildADDField(
+                      context: context,
                       label: "Number of brothers",
                       fontSize: 12.sp,
                       Controller: _totalbrothersController,
@@ -405,6 +414,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                   SizedBox(width: 5.w),
                   Expanded(
                     child: buildADDField(
+                      context: context,
                       label: "Numbers of Sisters",
                       fontSize: 12.sp,
                       Controller: _totalsistersController,
@@ -419,6 +429,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                   if (totalBro > 0 || totalSis > 0)
                     Expanded(
                       child: buildADDField(
+                        context: context,
                         label: "TotalMarried Count",
                         fontSize: 12.sp,
                         Controller: _totalmarriedController,
@@ -439,6 +450,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
               ),
 
               buildADDField(
+                context: context,
                 label: "Native Place / Hometown",
                 hintText: "Enter your home",
                 Controller: _hometownController,

@@ -128,6 +128,7 @@ class _EducationProfessionalDetailsState
               ),
 
               buildADDField(
+                context: context,
                 label: "Occupation / Job Title",
                 hintText: "Enter Job Title",
                 Controller: jobTitleController,
@@ -142,6 +143,7 @@ class _EducationProfessionalDetailsState
               ),
 
               buildADDField(
+                context: context,
                 label: "Company / Organization Name ",
                 hintText: "Enter Company Name",
                 Controller: companyController,
@@ -171,6 +173,7 @@ class _EducationProfessionalDetailsState
                 },
               ),
               buildADDField(
+                context: context,
                 label: " Work Location (City / Country)",
                 hintText: "Enter work location",
                 Controller: workloctionController,

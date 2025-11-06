@@ -219,6 +219,7 @@ class _personalDetailsState extends State<personalDetails> {
                 children: [
                   Expanded(
                     child: buildADDField(
+                      context: context,
                       label: 'Height (in cm/ft) *',
                       icon: PhosphorIconsFill.ruler,
                       hintText: 'Enter your height',
@@ -236,6 +237,7 @@ class _personalDetailsState extends State<personalDetails> {
                   SizedBox(width: 16.w),
                   Expanded(
                     child: buildADDField(
+                      context: context,
                       label: 'weight (in Kg) *',
                       icon: PhosphorIconsFill.barbell,
                       hintText: 'Enter your weight',
@@ -325,6 +327,7 @@ class _personalDetailsState extends State<personalDetails> {
                 ),
 
               buildToggle(
+                 context: context,
                 label: "Horoscope required? *",
                 selection: selectionHoroscope,
                 onChanged: _onHoroscopeChanged,
@@ -397,6 +400,7 @@ class _personalDetailsState extends State<personalDetails> {
               ),
 
               buildToggle(
+                 context: context,
                 label: "Physical Status *",
                 selection: selectionPhysicalselection,
                 onChanged: _onPhysicalStatusChanged,
@@ -409,6 +413,7 @@ class _personalDetailsState extends State<personalDetails> {
               ),
               if (selectionPhysicalselection == "Differently Abled")
                 buildADDField(
+                  context: context,
                   label: "please Specify",
                   hintText: "Hearing impariment",
                   Controller: _differentlyController,

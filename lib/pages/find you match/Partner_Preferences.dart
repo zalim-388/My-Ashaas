@@ -325,6 +325,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
               ),
 
               buildADDField(
+                context: context,
                 label: "Short Bio / About Me ",
                 hintText: "Write a little bit about yourself....",
                 Controller: _bioControllar,
@@ -341,6 +342,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                 },
               ),
               buildADDField(
+                context: context,
                 label: "Partner Expectation",
                 hintText: "Describe what you're Looking for in a partner ....",
                 Controller: _partnerExpectaionControoler,
@@ -409,6 +411,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
     return Column(
       children: [
         buildFieldLabel(
+           context: context,
           label: label ?? "Profile Images",
           icon: icon ?? PhosphorIconsFill.upload,
         ),
@@ -482,6 +485,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
     return Column(
       children: [
         buildFieldLabel(
+           context: context,
           label: label ?? "Profile Images",
           icon: icon ?? PhosphorIconsFill.upload,
         ),
@@ -782,6 +786,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
       child: Column(
         children: [
           buildFieldLabel(
+             context: context,
             label: label ?? "",
             icon: icon ?? PhosphorIconsFill.scroll,
           ),
