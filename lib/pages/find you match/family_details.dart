@@ -2,9 +2,10 @@ import 'package:agent_porta/pages/find%20you%20match/find_you_matchCreation.dart
 import 'package:agent_porta/styles/constants.dart';
 import 'package:agent_porta/styles/style.dart';
 import 'package:agent_porta/widgets/Text_field.dart';
-import 'package:agent_porta/widgets/csc_picker.dart';
+
 import 'package:agent_porta/widgets/dropdown.dart';
 import 'package:agent_porta/widgets/toggle_boutton.dart';
+import 'package:country_state_city/country_state_city.dart' as csc;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -44,9 +45,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
   String? _selectFamilytype;
   String? _selectFatherOccupation;
   String? _selectMotherOccupation;
-  String? _selectCountry;
-  String? _selectState;
-  String? _selectCity;
   String? _selectDistrict;
 
   final List<String> occuptionmotherOptions = [
@@ -86,11 +84,25 @@ class _FamilyDetailsState extends State<FamilyDetails> {
     Toggleoption(label: "Late", icon: Icons.bookmark),
   ];
 
-  List<String> countries = [];
-  List<String> states = [];
-  List<String> cities = [];
-  List<String> districts = [];
+  List<csc.Country> _countries = [];
+  List<csc.State> _states = [];
+  List<csc.City> _cities = [];
+  List<String> _districts = [];
+
+  List<String> countryOptions = [];
+  List<String> stateOptions = [];
+  List<String> cityOptions = [];
+
+  csc.Country? _selectCountry;
+  csc.State? _selectState;
+  csc.City? _selectCity;
+
   @override
+  void initState() {
+    super.initState();
+    _loadCountries();
+  }
+
   void dispose() {
     super.dispose();
     _fatherNameController.dispose();
@@ -99,6 +111,49 @@ class _FamilyDetailsState extends State<FamilyDetails> {
     _totalsistersController.dispose();
   }
 
+  void _loadCountries() async {
+    _countries = await csc.getAllCountries();
+    setState(() {
+      countryOptions = _countries.map((country) => country.name).toList();
+    });
+  }
+
+  void onCountryChanged(String? value) async {
+    if (value != null) return;
+    _selectCountry = _countries.firstWhere((country) => country.name == value);
+    _states = await csc.getStatesOfCountry(_selectCountry!.isoCode);
+
+    setState(() {
+      stateOptions = _states.map((state) => state.name).toList();
+      _selectState = null;
+      _stateController.clear();
+      cityOptions = [];
+      _selectCity = null;
+      _cityController.clear();
+    });
+  }
+
+  void onStateChanged(String? value) async {
+    if (value != null) return;
+    _selectState = _states.firstWhere((state) => state.name == value);
+    _cities = await csc.getStateCities(
+      _selectCountry!.isoCode,
+      _selectState!.isoCode,
+    );
+
+    setState(() {
+      cityOptions = _cities.map((city) => city.name).toList();
+      _selectCity = null;
+      _cityController.clear();
+    });
+  }
+
+  void onCityChanged(String? value) async {
+    if (value != null) return;
+    _selectCity = _cities.firstWhere((city) => city.name == value);
+  }
+
+  void onDistrictChanged(String? value) async {}
   void _onFatherStatusChanged(newValue) {
     setState(() {
       _selectionFatherStatus = newValue;
@@ -183,18 +238,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
         _totalmarriedController.clear();
       }
     });
-  }
-
-  void _onCountryChanged(newValue) {
-    setState(() {});
-  }
-
-  void _onCityChanged(newValue) {
-    setState(() {});
-  }
-
-  void _onStateChanged(newValue) {
-    setState(() {});
   }
 
   @override
@@ -464,86 +507,80 @@ class _FamilyDetailsState extends State<FamilyDetails> {
               ),
 
               //  buildFieldLabel(label: ""),
-              buildCscField(
-                label: "Current Residence Address",
-                onCountryChanged: _onCountryChanged,
-                onStateChanged: _onStateChanged,
-                onCityChanged: _onCityChanged,
-                cityController: _cityController,
-                countryController: _countryController,
-                stateController: _stateController,
+              // buildCscField(
+              //   label: "Current Residence Address",
+              //   onCountryChanged: _onCountryChanged,
+              //   onStateChanged: _onStateChanged,
+              //   onCityChanged: _onCityChanged,
+              //   cityController: _cityController,
+              //   countryController: _countryController,
+              //   stateController: _stateController,
+              //   context: context,
+              //   countries: [],
+              //   states: [],
+              //   cities: [],
+              // districtController: districtController,
+              // onDistrictChanged: onDistrictChanged,
+              // cities: cities,
+              // countries: countries,
+              // states: states,
+              // districts: districts,
+              // ),
+              buildDropdown(
                 context: context,
-                countries: [],
-                states: [],
-                cities: [],
-                // districtController: districtController,
-                // onDistrictChanged: onDistrictChanged,
-                // cities: cities,
-                // countries: countries,
-                // states: states,
-                // districts: districts,
+                label: "Country *",
+                hintText: "Search your country",
+                icon: PhosphorIconsFill.mapTrifold,
+                options: countryOptions,
+                controller: _countryController,
+                isSearchable: true,
+                onChanged: onCountryChanged,
+                validator:
+                    (value) =>
+                        (value == null || value.isEmpty)
+                            ? "Please select a country"
+                            : null,
               ),
 
-              // buildDropdown(
-              //   context: context,
-              //   label: "Country *",
-              //   hintText: "Search your country",
-              //   icon: PhosphorIconsFill.mapTrifold,
-              //   options: CountryOptions,
-              //   controller: countryController,
-              //   isSearchable: true,
-              //   onChanged: onCountryChanged,
-              //   validator:
-              //       (value) =>
-              //           (value == null || value.isEmpty)
-              //               ? "Please select a country"
-              //               : null,
-              // ),
+              if (_selectCountry != null && stateOptions.isNotEmpty)
+                buildDropdown(
+                  context: context,
+                  label: "State *",
+                  hintText: "Search your state",
+                  icon: PhosphorIconsFill.mapTrifold,
+                  options: stateOptions,
+                  controller: _stateController,
+                  isSearchable: true,
+                  onChanged: onStateChanged,
+                  validator:
+                      (value) =>
+                          (value == null || value.isEmpty)
+                              ? "Please select a state"
+                              : null,
+                ),
 
-              // if (selectCountry != null && StateOptions.isNotEmpty)
-              //   Padding(
-              //     padding: EdgeInsets.only(top: 16.h),
-              //     child: buildDropdown(
-              //       context: context,
-              //       label: "State *",
-              //       hintText: "Search your state",
-              //       icon: PhosphorIconsFill.mapTrifold,
-              //       options: StateOptions,
-              //       controller: stateController,
-              //       isSearchable: true,
-              //       onChanged: onStateChanged,
-              //       validator:
-              //           (value) =>
-              //               (value == null || value.isEmpty)
-              //                   ? "Please select a state"
-              //                   : null,
-              //     ),
-              //   ),
-
-              // if (selectState != null && CityOptions.isNotEmpty)
-              //   Padding(
-              //     padding: EdgeInsets.only(top: 16.h),
-              //     child: buildDropdown(
-              //       context: context,
-              //       label: "City *",
-              //       hintText: "Search your city",
-              //       icon: PhosphorIconsFill.mapTrifold,
-              //       options: CityOptions,
-              //       controller: cityController,
-              //       isSearchable: true,
-              //       onChanged: onCityChanged,
-              //       validator:
-              //           (value) =>
-              //               (value == null || value.isEmpty)
-              //                   ? "Please select a city"
-              //                   : null,
-              //     ),
-              //   ),
+              if (_selectState != null && cityOptions.isNotEmpty)
+                buildDropdown(
+                  context: context,
+                  label: "City *",
+                  hintText: "Search your city",
+                  icon: PhosphorIconsFill.mapTrifold,
+                  options: cityOptions,
+                  controller: _cityController,
+                  isSearchable: true,
+                  onChanged: onCityChanged,
+                  validator:
+                      (value) =>
+                          (value == null || value.isEmpty)
+                              ? "Please select a city"
+                              : null,
+                ),
               SizedBox(height: 48.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   buildNextButton(
+                    context: context,
                     onTap: () {
                       if (widget.formkey.currentState?.validate() ?? false) {
                         widget.pageController.nextPage(

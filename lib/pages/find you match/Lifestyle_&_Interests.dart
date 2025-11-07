@@ -181,6 +181,9 @@ class _LifestyleInterestsState extends State<LifestyleInterests> {
 
   @override
   Widget build(BuildContext context) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
     return Form(
       key: widget.formkey,
 
@@ -213,32 +216,49 @@ class _LifestyleInterestsState extends State<LifestyleInterests> {
                 },
               ),
 
-              buildToggleSingChip(
-                 context: context,
-                label: "Drinking Habits",
-                options: drinkingHabitsOptions,
-                selection: selectionDrinkingHabits,
-                onChanged: onDrinkingHabitsChanged,
-              ),
+              if (isLandscape) ...[
+                Row(
+                  children: [
+                    Expanded(
+                      child: buildToggleSingChip(
+                        context: context,
+                        label: "Drinking Habits",
+                        options: drinkingHabitsOptions,
+                        selection: selectionDrinkingHabits,
+                        onChanged: onDrinkingHabitsChanged,
+                      ),
+                    ),
+                    SizedBox(width: 16.w),
+                    Expanded(
+                      child: buildToggleSingChip(
+                        context: context,
+                        label: "Smoking Habits",
+                        options: smokingHabitsOptions,
+                        selection: selectionSmokingHabits,
+                        onChanged: onsmockingHabitsChanged,
+                      ),
+                    ),
+                  ],
+                ),
+              ] else ...[
+                buildToggleSingChip(
+                  context: context,
+                  label: "Drinking Habits",
+                  options: drinkingHabitsOptions,
+                  selection: selectionDrinkingHabits,
+                  onChanged: onDrinkingHabitsChanged,
+                ),
 
-              // buildToggle(
-              //   label: "Drinking Habits",
-              //   selection: selectionDrinkingHabits,
-              //   onChanged: onDrinkingHabitsChanged,
-              //   options: drinkingHabitsOptions,
-              //   // title: "Yes",
-              //   // title1: "No",
-              // ),
-              buildToggleSingChip(
-                 context: context,
-                label: "Smoking Habits",
-                options: smokingHabitsOptions,
-                selection: selectionSmokingHabits,
-                onChanged: onsmockingHabitsChanged,
-              ),
-
+                buildToggleSingChip(
+                  context: context,
+                  label: "Smoking Habits",
+                  options: smokingHabitsOptions,
+                  selection: selectionSmokingHabits,
+                  onChanged: onsmockingHabitsChanged,
+                ),
+              ],
               buildToggleMultiChip(
-                 context: context,
+                context: context,
                 label: "Hobbies & Interests",
                 options: hobbiesInterestsOptions,
                 selection: selectHobbiesInterests,
@@ -261,8 +281,10 @@ class _LifestyleInterestsState extends State<LifestyleInterests> {
                       isSearchable: true,
                     ),
                   ),
-                  SizedBox(width: 16.w),
-                  if (castoptions.isNotEmpty)
+
+                  if (castoptions.isNotEmpty) ...[
+                    SizedBox(width: 16.w),
+
                     Expanded(
                       child: buildDropdown(
                         label: "Cast",
@@ -275,11 +297,12 @@ class _LifestyleInterestsState extends State<LifestyleInterests> {
                         isSearchable: true,
                       ),
                     ),
+                  ],
                 ],
               ),
 
               buildToggleMultiChip(
-                 context: context,
+                context: context,
                 label: "Lifestyle Preferences ",
                 options: lifestylePreferencesOptions,
                 selection: selecteLifestylePreferences,
@@ -299,6 +322,7 @@ class _LifestyleInterestsState extends State<LifestyleInterests> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   buildNextButton(
+                    context: context,
                     onTap: () {
                       if (widget.formkey.currentState?.validate() ?? false) {
                         widget.pageController.nextPage(

@@ -27,8 +27,11 @@ Widget buildToggle({
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      buildFieldLabel(label: label, icon: icon, topPad: topPad,
-       context: context,
+      buildFieldLabel(
+        label: label,
+        icon: icon,
+        topPad: topPad,
+        context: context,
       ),
 
       SegmentedButton<String>(
@@ -75,17 +78,22 @@ Widget buildToggleMultiChip({
   required ValueChanged<Set<String>> onChanged,
   required BuildContext context,
 }) {
+  final isLandscape =
+      MediaQuery.of(context).orientation == Orientation.landscape;
   return Column(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
     children: [
-      buildFieldLabel(label: label, icon: icon, topPad: topPad,
-       context: context,
+      buildFieldLabel(
+        label: label,
+        icon: icon,
+        topPad: topPad,
+        context: context,
       ),
       SizedBox(height: 6.h),
       Wrap(
-        spacing: 10.0.w,
-        runSpacing: 10.0.h,
+        spacing: isLandscape ? 8.0.w : 10.0.w,
+        runSpacing: isLandscape ? 4.0.h : 10.0.h,
         children:
             options.map((option) {
               final bool isSelected =
@@ -127,7 +135,7 @@ Widget buildToggleMultiChip({
                   borderRadius: BorderRadius.circular(8.r),
                 ),
                 labelPadding: EdgeInsets.symmetric(
-                  horizontal: 11.0.w,
+                  horizontal: isLandscape ? 6.0.w : 11.0.w,
                   vertical: 4.0.h,
                 ),
                 onSelected: (bool? value) {
@@ -155,17 +163,22 @@ Widget buildToggleSingChip({
   required ValueChanged<String?> onChanged,
   required BuildContext context,
 }) {
+  final isLandscape =
+      MediaQuery.of(context).orientation == Orientation.landscape;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      buildFieldLabel(label: label, icon: icon, topPad: topPad,
-       context: context,
+      buildFieldLabel(
+        label: label,
+        icon: icon,
+        topPad: topPad,
+        context: context,
       ),
       SizedBox(height: 6.h),
 
       Wrap(
-        spacing: 10.0.w,
-        runSpacing: 10.0.h,
+        spacing: isLandscape ? 3.0.w : 10.0.w,
+        runSpacing: isLandscape ? 4.0.h : 10.0.h,
         children:
             options.map((option) {
               final bool isSelected = selection == option.label;
@@ -203,7 +216,7 @@ Widget buildToggleSingChip({
                   borderRadius: BorderRadius.circular(8.r),
                 ),
                 labelPadding: EdgeInsets.symmetric(
-                  horizontal: 14.0.w,
+                  horizontal: isLandscape ? 7.0.w : 14.0.w,
                   vertical: 4.0.h,
                 ),
                 onSelected: (bool value) {

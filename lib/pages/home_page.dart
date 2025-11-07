@@ -52,44 +52,102 @@ class _HomePageState extends State<HomePage> {
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      appBar: AppBar(
-        backgroundColor: Colors.white.withOpacity(0.1),
-        toolbarHeight: 70.h,
-        automaticallyImplyLeading: false,
-        scrolledUnderElevation: 0,
-        elevation: 2,
-        centerTitle: false,
-        title: Row(
-          children: [
-            Image(
-              image: AssetImage('assets/images/portalogoBg.png'),
-              height: isLandscape ? 35.h : 25.h,
-            ),
-            SizedBox(width: 10.w),
-            Text(
-              'Porta',
-              style: GTextStyle.bodyBold.copyWith(
-                fontSize: isLandscape ? 3.sp : 18.sp,
-                fontWeight: FontWeight.w700,
+      appBar:
+          isLandscape
+              ? null
+              : AppBar(
+                backgroundColor: Colors.white.withOpacity(0.1),
+                automaticallyImplyLeading: false,
+                scrolledUnderElevation: 0,
+                elevation: 2,
+                centerTitle: false,
+                title: Row(
+                  children: [
+                    Image(
+                      image: AssetImage('assets/images/portalogoBg.png'),
+                      height: isLandscape ? 35.h : 25.h,
+                    ),
+                    SizedBox(width: 10.w),
+                    Text(
+                      'Porta',
+                      style: GTextStyle.bodyBold.copyWith(
+                        fontSize: isLandscape ? 11.sp : 18.sp,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+                titleSpacing: 30.w,
+                actionsPadding: EdgeInsets.symmetric(horizontal: 15.w),
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProfileScreen(),
+                        ),
+                      );
+                    },
+                    icon: Icon(PhosphorIconsBold.user, size: 23),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
-        titleSpacing: 30,
-        actionsPadding: EdgeInsets.symmetric(horizontal: 15),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ProfileScreen()),
-              );
-            },
-            icon: Icon(PhosphorIconsBold.user, size: 23),
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
+      body:
+          isLandscape
+              ? NestedScrollView(
+                headerSliverBuilder: (context, innerBoxIsScrolled) {
+                  return <Widget>[
+                    SliverAppBar(
+                      backgroundColor: Colors.white.withOpacity(0.1),
+                      automaticallyImplyLeading: false,
+                      elevation: 2,
+                      centerTitle: false,
+                      title: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Image(
+                            image: AssetImage('assets/images/portalogoBg.png'),
+                            height: isLandscape ? 35.h : 25.h,
+                          ),
+                          SizedBox(width: 10.w),
+                          Text(
+                            'Porta',
+                            style: GTextStyle.bodyBold.copyWith(
+                              fontSize: isLandscape ? 13.sp : 18.sp,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      titleSpacing: isLandscape ? 40 : 30.w,
+                      actionsPadding: EdgeInsets.symmetric(horizontal: 15.w),
+                      actions: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProfileScreen(),
+                              ),
+                            );
+                          },
+                          icon: Icon(PhosphorIconsBold.user, size: 23),
+                        ),
+                      ],
+                    ),
+                  ];
+                },
+                body: _mainbody(isLandscape),
+              )
+              : _mainbody(isLandscape),
+    );
+  }
+
+  Widget _mainbody(bool isLandscape) {
+    return SafeArea(
+      child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -98,7 +156,7 @@ class _HomePageState extends State<HomePage> {
 
             sliderAds(),
 
-            SizedBox(height: 20.h),
+            SizedBox(height: 10.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 23.w),
               child: Column(
@@ -110,6 +168,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Expanded(
                         child: _buildActionCard(
+                          context: context,
                           imagepath: "assets/images/deal.png",
                           title: "Add Business",
                           subtitle: "Add more business to get more leads",
@@ -126,6 +185,7 @@ class _HomePageState extends State<HomePage> {
                       SizedBox(width: 16.w),
                       Expanded(
                         child: _buildActionCard(
+                          context: context,
                           imagepath: "assets/images/deal.png",
                           title: "Find you Match",
                           subtitle:
@@ -160,6 +220,7 @@ class _HomePageState extends State<HomePage> {
                         textAlign: TextAlign.start,
                         style: GTextStyle.bodyBold.copyWith(
                           fontWeight: FontWeight.w600,
+                          fontSize: isLandscape ? 8.sp : 16.0.sp,
                         ),
                       ),
                       TextButton(
@@ -172,6 +233,7 @@ class _HomePageState extends State<HomePage> {
                           style: GTextStyle.bodyBold.copyWith(
                             fontWeight: FontWeight.w600,
                             color: kPrimaryColor,
+                            fontSize: isLandscape ? 8.sp : 16.0.sp,
                           ),
                         ),
                       ),
@@ -183,7 +245,10 @@ class _HomePageState extends State<HomePage> {
             SizedBox(height: 12.h),
 
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 8.h),
+              padding: EdgeInsets.symmetric(
+                horizontal: 18.w,
+                vertical: isLandscape ? 6.h : 8.h,
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -292,13 +357,18 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget buildHistoryItem(String status) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 20.w),
+      padding: EdgeInsets.symmetric(
+        vertical: isLandscape ? 8 : 5.h,
+        horizontal: 20.w,
+      ),
       child: ListTile(
         title: Text(
           'Business name',
           style: GTextStyle.bodyBold.copyWith(
-            fontSize: 15,
+            fontSize: isLandscape ? 8.sp : 15.sp,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -308,21 +378,21 @@ class _HomePageState extends State<HomePage> {
             Text(
               'Department name',
               style: GTextStyle.bodyBold.copyWith(
-                fontSize: 13.sp,
+                fontSize: isLandscape ? 8.sp : 13.sp,
                 fontWeight: FontWeight.w300,
               ),
             ),
             Text(
               'Location',
               style: GTextStyle.bodyBold.copyWith(
-                fontSize: 13.sp,
+                fontSize: isLandscape ? 8.sp : 13.sp,
                 fontWeight: FontWeight.w300,
               ),
             ),
             Text(
               'Phone number',
               style: GTextStyle.bodyBold.copyWith(
-                fontSize: 13.sp,
+                fontSize: isLandscape ? 8.sp : 13.sp,
                 fontWeight: FontWeight.w300,
               ),
             ),
@@ -352,19 +422,23 @@ class _HomePageState extends State<HomePage> {
       'Declined': Colors.red.shade500,
     };
 
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 12.w),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
             icons[status] ?? Icons.help_outline,
             color: colors[status] ?? Colors.grey,
-            size: 24,
+            size: 20,
           ),
+          SizedBox(height: 2.h),
           Text(
             status,
             style: GTextStyle.bodyLight.copyWith(
-              fontSize: 12.sp,
+              fontSize: isLandscape ? 8.sp : 12.sp,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -377,7 +451,7 @@ class _HomePageState extends State<HomePage> {
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 23.w),
+      padding: EdgeInsets.symmetric(horizontal: isLandscape ? 80 : 23.w),
       child: Column(
         children: [
           ClipRRect(
@@ -386,9 +460,9 @@ class _HomePageState extends State<HomePage> {
               options: CarouselOptions(
                 viewportFraction: 1,
                 autoPlay: true,
-                height: isLandscape ? 220.h : 190.h,
+                height: isLandscape ? 250.h : 180.h,
                 autoPlayCurve: Curves.easeInOut,
-                autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                // autoPlayAnimationDuration: const Duration(milliseconds: 00),
                 autoPlayInterval: const Duration(seconds: 6),
                 onPageChanged: (index, reason) {
                   setState(() {
@@ -410,8 +484,8 @@ class _HomePageState extends State<HomePage> {
                 activeIndex: myCurrentIndex,
                 count: _items.length,
                 effect: WormEffect(
-                  dotHeight: 5.h,
-                  dotWidth: 6.w,
+                  dotHeight: isLandscape ? 4.h : 5.h,
+                  dotWidth: isLandscape ? 3.w : 6.w,
                   spacing: 3.w,
                   activeDotColor: kPrimaryColor,
                   dotColor: Colors.grey,
@@ -434,6 +508,8 @@ class _HomePageState extends State<HomePage> {
     Color? maincolor,
     required Color iconcolor,
   }) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Expanded(
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 5.w),
@@ -450,14 +526,14 @@ class _HomePageState extends State<HomePage> {
             Text(
               count ?? "",
               style: GTextStyle.bodyBold.copyWith(
-                fontSize: 15.sp,
+                fontSize: isLandscape ? 12.sp : 5.sp,
                 fontWeight: FontWeight.w500,
               ),
             ),
             Text(
               label ?? "",
               style: GTextStyle.label.copyWith(
-                fontSize: 10.sp,
+                fontSize: isLandscape ? 8.sp : 10.sp,
                 fontWeight: FontWeight.w300,
               ),
             ),
@@ -526,11 +602,17 @@ Widget _buildActionCard({
   required String title,
   required String subtitle,
   required VoidCallback onPressed,
+  required BuildContext context,
 }) {
+  final isLandscape =
+      MediaQuery.of(context).orientation == Orientation.landscape;
   return InkWell(
     onTap: onPressed,
     child: Container(
-      padding: EdgeInsets.all(16.w),
+      padding: EdgeInsets.symmetric(
+        horizontal: isLandscape ? 25.w : 16.w,
+        vertical: isLandscape ? 25.h : 16.h,
+      ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.r),
         // color: kBackgroundColor
@@ -547,7 +629,7 @@ Widget _buildActionCard({
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(12.w),
+            padding: EdgeInsets.all(isLandscape ? 8.w : 12.w),
             decoration: BoxDecoration(
               color: kPrimaryColor.withOpacity(0.1),
               borderRadius: BorderRadius.circular(12.r),
@@ -555,16 +637,16 @@ Widget _buildActionCard({
             child: Image.asset(
               imagepath,
               fit: BoxFit.cover,
-              height: 35.h,
-              width: 35.w,
+              height: isLandscape ? 35.h : 35.h,
+              width: isLandscape ? 35.h : 35.h,
             ),
           ),
-          SizedBox(height: 12.h),
+          SizedBox(height: isLandscape ? 8.h : 12.h),
           Text(
             title,
             textAlign: TextAlign.center,
             style: GTextStyle.bodyBold.copyWith(
-              fontSize: 16.sp,
+              fontSize: isLandscape ? 12.sp : 16.sp,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -575,7 +657,7 @@ Widget _buildActionCard({
             subtitle,
             maxLines: 2,
             style: GTextStyle.bodyBold.copyWith(
-              fontSize: 12.sp,
+              fontSize: isLandscape ? 8.sp : 12.sp,
               color: Colors.grey[600],
               fontWeight: FontWeight.w400,
               height: 1.2,

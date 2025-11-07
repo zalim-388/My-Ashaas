@@ -3,8 +3,8 @@ import 'package:agent_porta/styles/style.dart';
 import 'package:agent_porta/widgets/Text_field.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 Widget buildDropdown({
   required String label,
@@ -13,16 +13,22 @@ Widget buildDropdown({
   required Function(String?) onChanged,
   required BuildContext context,
   String? selectedValue,
-   List<String>? options,
+  List<String>? options,
   String? hintText,
   bool isSearchable = false,
   TextEditingController? controller,
   TextInputType? keyboardType,
   String? Function(String?)? validator,
 }) {
+  final isLandscape =
+      MediaQuery.of(context).orientation == Orientation.landscape;
+
   InputDecoration getInputDecoration(String? hint) {
     return InputDecoration(
-      contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
+      contentPadding: EdgeInsets.symmetric(
+        horizontal: isLandscape ? 8.w : 12.w,
+        vertical: 10.h,
+      ),
 
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8.r),
@@ -30,18 +36,17 @@ Widget buildDropdown({
       ),
       fillColor: Colors.grey.shade100,
       filled: true,
-      hintText: selectedValue ?? hintText
-      ,
+
+      hintText: selectedValue ?? hintText,
       hintStyle: GTextStyle.bodyLight.copyWith(
         color: Colors.black45,
-        fontSize: 14.sp,
-        fontFamily: 'qs',
+        fontSize: isLandscape ? 8.sp : 14.sp,
       ),
 
       errorStyle: GTextStyle.bodyLight.copyWith(
         color: kErrorcolor,
         fontWeight: FontWeight.w300,
-        fontSize: 13.sp,
+        fontSize: isLandscape ? 7.sp : 13.sp,
       ),
 
       enabledBorder: OutlineInputBorder(
@@ -60,13 +65,17 @@ Widget buildDropdown({
         borderRadius: BorderRadius.circular(8.r),
         borderSide: BorderSide.none,
       ),
+      isDense: true,
     );
   }
 
   return Column(
     children: [
-      buildFieldLabel(label: label, icon: icon, topPad: topPad,
-       context: context,
+      buildFieldLabel(
+        label: label,
+        icon: icon,
+        topPad: topPad,
+        context: context,
       ),
 
       SizedBox(height: 8.h),
@@ -82,10 +91,12 @@ Widget buildDropdown({
             return TextFormField(
               controller: controller ?? fieldController,
               focusNode: fieldfocusNode,
+
               style: GTextStyle.bodyBold.copyWith(
-                fontSize: 14.sp,
+                fontSize: isLandscape ? 8.sp : 14.sp,
                 color: kPrimaryColor,
               ),
+
               keyboardType: keyboardType,
               cursorColor: kPrimaryColor,
               decoration: getInputDecoration(hintText),
@@ -138,7 +149,7 @@ Widget buildDropdown({
                             option,
                             style: GTextStyle.bodyBold.copyWith(
                               color: kPrimaryColor,
-                              fontSize: 15.sp,
+                              fontSize: isLandscape ? 8.sp : 15.sp,
                             ),
                           ),
                         ),
@@ -174,7 +185,7 @@ Widget buildDropdown({
                   item,
                   style: GTextStyle.bodyBold.copyWith(
                     color: kPrimaryColor,
-                    fontSize: 14.sp,
+                    fontSize: isLandscape ? 8.sp : 14.sp,
                   ),
                 ),
               );

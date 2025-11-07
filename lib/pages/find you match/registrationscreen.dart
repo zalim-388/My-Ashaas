@@ -222,6 +222,7 @@ class _registrationscreenState extends State<registrationscreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   buildNextButton(
+                    context: context,
                     onTap: () {
                       if (widget.formkey.currentState?.validate() ?? false) {
                         widget.pageController.nextPage(

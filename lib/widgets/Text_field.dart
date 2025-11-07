@@ -14,10 +14,10 @@ Widget buildFieldLabel({
       MediaQuery.of(context).orientation == Orientation.landscape;
   return Padding(
     padding: EdgeInsets.only(
-      bottom: 5.0,
-      left: 10,
-      right: 5,
-      top: topPad ?? 20,
+      bottom: 5.0.h,
+      left: 10.w,
+      right: 5.w,
+      top: topPad ?? 20.h,
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -29,11 +29,11 @@ Widget buildFieldLabel({
 
             style: GTextStyle.label.copyWith(
               color: kPrimaryColor,
-              fontSize: isLandscape ? 18 : fontSize ?? 15.sp,
+              fontSize: isLandscape ? 8.sp : fontSize ?? 15.sp,
             ),
           ),
         ),
-        Icon(icon, size: 18, color: kPrimaryColor),
+        Icon(icon, size: isLandscape ? 10.sp : 18.sp, color: kPrimaryColor),
       ],
     ),
   );
@@ -62,7 +62,7 @@ Widget buildADDField({
       MediaQuery.of(context).orientation == Orientation.landscape;
   final borderside =
       showBorderside
-          ? BorderSide(color: kPrimaryColor, width: isLandscape ? 0.9 : 1.w)
+          ? BorderSide(color: kPrimaryColor, width: isLandscape ? 0.5.w : 1.w)
           : BorderSide.none;
 
   return Column(
@@ -86,12 +86,12 @@ Widget buildADDField({
           hintText: Controller.text.isEmpty ? hintText : null,
           hintStyle: GTextStyle.bodyLight.copyWith(
             color: Colors.black45,
-            fontSize: isLandscape ? 22 : fontSize ?? 14.sp,
+            fontSize: isLandscape ? 8.sp : fontSize ?? 14.sp,
           ),
           errorStyle: GTextStyle.bodyLight.copyWith(
             color: kErrorcolor,
             fontWeight: FontWeight.w300,
-            fontSize: 13.sp,
+            fontSize: isLandscape ? 7.sp : 13.sp,
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.r),
@@ -114,7 +114,7 @@ Widget buildADDField({
           fillColor: Colors.grey.shade100,
           isDense: true,
           contentPadding: EdgeInsets.symmetric(
-            horizontal: 12.w,
+            horizontal: isLandscape ? 8.w : 12.w,
             vertical: 10.h,
           ),
         ),
@@ -126,7 +126,7 @@ Widget buildADDField({
         onTap: onTap,
         style: GTextStyle.bodyBold.copyWith(
           color: kPrimaryColor,
-          fontSize: isLandscape ? 18 : 15.sp,
+          fontSize: isLandscape ? 8.sp : 15.sp,
         ),
         validator: validator,
         keyboardType: keybordType,

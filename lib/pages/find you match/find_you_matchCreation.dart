@@ -46,6 +46,8 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
 
   @override
   Widget build(BuildContext context) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
@@ -58,7 +60,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
         title: Text(
           'Find You Match',
           style: GTextStyle.bodyBold.copyWith(
-            fontSize: 18.sp,
+            fontSize: isLandscape ? 11.sp : 18.sp,
             fontWeight: FontWeight.w800,
           ),
         ),
@@ -90,7 +92,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
             },
             child: Container(
               height: 30.h,
-              width: 40.w,
+              width: isLandscape ? 20.w : 40.w,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [kPrimaryColor.withOpacity(0.610), kPrimaryColor],
@@ -104,7 +106,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
               child: Text(
                 "Skip",
                 style: GTextStyle.bodyBold.copyWith(
-                  fontSize: 12.sp,
+                  fontSize: isLandscape ? 7.sp : 12.sp,
                   fontWeight: FontWeight.w600,
                   color: Colors.white,
                 ),
@@ -155,12 +157,18 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
   }
 }
 
-Widget buildNextButton({required VoidCallback onTap, bool loading = false}) {
+Widget buildNextButton({
+  required VoidCallback onTap,
+  bool loading = false,
+  required BuildContext context,
+}) {
+  final isLandscape =
+      MediaQuery.of(context).orientation == Orientation.landscape;
   return GestureDetector(
     onTap: loading ? null : onTap,
     child: Container(
-      width: 70.w,
-      height: 35.h,
+      width: isLandscape ? 40.w : 70.w,
+      height: isLandscape ? 40.h : 35.h,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [kPrimaryColor.withOpacity(0.610), kPrimaryColor],
@@ -176,16 +184,16 @@ Widget buildNextButton({required VoidCallback onTap, bool loading = false}) {
           Text(
             'Next',
             style: GTextStyle.bodyBold.copyWith(
-              fontSize: 15.sp,
+              fontSize: isLandscape ? 9.sp : 15.sp,
               color: Colors.white,
               fontWeight: FontWeight.w800,
             ),
           ),
-          SizedBox(width: 5.w),
+          SizedBox(width: isLandscape ? 3.w : 5.w),
           if (loading)
             SizedBox(
-              height: 15,
-              width: 15,
+              height: isLandscape ? 20.h : 15.h,
+              width: isLandscape ? 20.w : 15.w,
               child: CircularProgressIndicator(
                 color: Colors.white,
                 strokeWidth: 2,

@@ -12,6 +12,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:country_state_city/country_state_city.dart' as csc;
 
 enum imageType { profile, horoscope, idproof }
 
@@ -31,6 +32,10 @@ class PartnerPreferences extends StatefulWidget {
 class _PartnerPreferencesState extends State<PartnerPreferences> {
   final _bioControllar = TextEditingController();
   final _partnerExpectaionControoler = TextEditingController();
+  final _countryController = TextEditingController();
+  final _stateController = TextEditingController();
+  final _cityController = TextEditingController();
+
   String? _selectedAgeRange;
   String? _selectedHeightRange;
   String? _selectEdupref;
@@ -69,6 +74,17 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
   final List<File?> selectedImages = List.filled(4, null, growable: false);
   final List<File?> iDProofUpload = List.filled(4, null, growable: true);
   final List<File?> othersIdproof = [];
+  List<csc.Country> _countries = [];
+  List<csc.State> _states = [];
+  List<csc.City> _cities = [];
+
+  List<String> countryOptions = [];
+  List<String> stateOptions = [];
+  List<String> cityOptions = [];
+
+  csc.Country? _selectCountry;
+  csc.State? _selectState;
+  csc.City? _selectCity;
 
   bool _isLoading = false;
 
@@ -134,57 +150,62 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
   Future<void> _mulitpleimages() async {
     PermissionStatus status;
     if (Platform.isAndroid) {
-      status = await Permission.photos.request();
+      final androidinfo = await DeviceInfoPlugin().androidInfo;
+      if (androidinfo.version.sdkInt >= 33) {
+        status = await Permission.photos.request();
 
-      if (status.isDenied) {
-        status = await Permission.storage.request();
-      }
-    } else {
-      status = await Permission.photos.request();
-    }
-
-    if (status.isDenied || status.isPermanentlyDenied) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("permiusiion is requird to pick imagees")),
-      );
-    }
-
-    int availableslots = selectedImages.where((slot) => slot == null).length;
-    if (availableslots == 0) {
-      if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text("All images Slots Are full. ")));
-        return;
-      }
-    }
-
-    final List<XFile> pickedd = await _picker.pickMultiImage(imageQuality: 85);
-
-    if (pickedd.isEmpty) return;
-
-    setState(() {
-      int pikedfileindex = 0;
-      int filetoTake = min(availableslots, pickedd.length);
-
-      for (int i = 0; i < selectedImages.length; i++) {
-        if (selectedImages[i] == null && pikedfileindex < filetoTake) {
-          selectedImages[i] = File(pickedd[pikedfileindex].path);
-          pikedfileindex++;
+        if (status.isDenied) {
+          status = await Permission.storage.request();
         }
+      } else {
+        status = await Permission.photos.request();
       }
 
-      if (pikedfileindex < pickedd.length) {
+      if (status.isDenied || status.isPermanentlyDenied) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("permiusiion is requird to pick imagees")),
+        );
+      }
+
+      int availableslots = selectedImages.where((slot) => slot == null).length;
+      if (availableslots == 0) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text("not all iamge could be added.Slotes are full"),
-            ),
+            SnackBar(content: Text("All images Slots Are full. ")),
           );
           return;
         }
       }
-    });
+
+      final List<XFile> pickedd = await _picker.pickMultiImage(
+        imageQuality: 85,
+      );
+
+      if (pickedd.isEmpty) return;
+
+      setState(() {
+        int pikedfileindex = 0;
+        int filetoTake = min(availableslots, pickedd.length);
+
+        for (int i = 0; i < selectedImages.length; i++) {
+          if (selectedImages[i] == null && pikedfileindex < filetoTake) {
+            selectedImages[i] = File(pickedd[pikedfileindex].path);
+            pikedfileindex++;
+          }
+        }
+
+        if (pikedfileindex < pickedd.length) {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text("not all iamge could be added.Slotes are full"),
+              ),
+            );
+            return;
+          }
+        }
+      });
+    }
   }
 
   void _removeProfileimage(int index) {
@@ -200,10 +221,57 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _loadCountries();
+  }
+
   void dispose() {
     _bioControllar.dispose();
     _partnerExpectaionControoler.dispose();
     super.dispose();
+  }
+
+  void _loadCountries() async {
+    _countries = await csc.getAllCountries();
+    setState(() {
+      countryOptions = _countries.map((country) => country.name).toList();
+    });
+  }
+
+  void onCountryChanged(String? value) async {
+    if (value != null) return;
+    _selectCountry = _countries.firstWhere((country) => country.name == value);
+    _states = await csc.getStatesOfCountry(_selectCountry!.isoCode);
+
+    setState(() {
+      stateOptions = _states.map((state) => state.name).toList();
+      _selectState = null;
+      _stateController.clear();
+      cityOptions = [];
+      _selectCity = null;
+      _cityController.clear();
+    });
+  }
+
+  void onStateChanged(String? value) async {
+    if (value != null) return;
+    _selectState = _states.firstWhere((state) => state.name == value);
+    _cities = await csc.getStateCities(
+      _selectCountry!.isoCode,
+      _selectState!.isoCode,
+    );
+
+    setState(() {
+      cityOptions = _cities.map((city) => city.name).toList();
+      _selectCity = null;
+      _cityController.clear();
+    });
+  }
+
+  void onCityChanged(String? value) async {
+    if (value != null) return;
+    _selectCity = _cities.firstWhere((city) => city.name == value);
   }
 
   void _onAgeRangeChanged(String? value) {
@@ -366,6 +434,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   buildNextButton(
+                    context: context,
                     loading: _isLoading,
                     onTap: () {
                       bool isFormvalid =
@@ -403,15 +472,18 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
   Widget buildIDProofUpload({
     required String? label,
     IconData? icon,
-    String? Subtitle,
     dynamic Subtitle1,
     dynamic Subtitle2,
     dynamic Subtitle3,
   }) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+
       children: [
         buildFieldLabel(
-           context: context,
+          context: context,
           label: label ?? "Profile Images",
           icon: icon ?? PhosphorIconsFill.upload,
         ),
@@ -419,41 +491,43 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
           scrollDirection: Axis.horizontal,
           child: Container(
             height: 100.h,
-
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8.r),
               color: kBackgroundColor,
             ),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(width: 10.w),
-
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Aadhaar", style: GTextStyle.bodySmall),
-                    SizedBox(height: 5.h),
+                    SizedBox(height: 4.h),
                     _imageslotId(0),
                   ],
                 ),
-                SizedBox(width: 10.w),
+                SizedBox(width: isLandscape ? 15.w : 10.w),
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+
                   children: [
                     Text(Subtitle1, style: GTextStyle.bodySmall),
-                    SizedBox(height: 5.h),
+                    SizedBox(height: 4.h),
 
                     _imageslotId(1),
                   ],
                 ),
-                SizedBox(width: 10.w),
+                SizedBox(width: isLandscape ? 15.w : 10.w),
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(Subtitle2, style: GTextStyle.bodySmall),
-                    SizedBox(height: 5.h),
+                    SizedBox(height: 4.h),
 
                     _imageslotId(2),
                   ],
                 ),
-                SizedBox(width: 10.w),
+                SizedBox(width: isLandscape ? 15.w : 10.w),
 
                 // ...List.generate(othersIdproof.length, (index) {
                 //   return Column(
@@ -465,14 +539,17 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                 //   );
                 // }),
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+
                   children: [
                     Text(Subtitle3, style: GTextStyle.bodySmall),
-                    SizedBox(height: 5.h),
+                    SizedBox(height: 4.h),
                     _imageslotId(3),
 
                     // _OthersimageslotId(),
                   ],
                 ),
+                SizedBox(width: isLandscape ? 25.w : 10.w),
               ],
             ),
           ),
@@ -482,10 +559,13 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
   }
 
   Widget buildimageGrid({required String? label, IconData? icon}) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         buildFieldLabel(
-           context: context,
+          context: context,
           label: label ?? "Profile Images",
           icon: icon ?? PhosphorIconsFill.upload,
         ),
@@ -499,14 +579,17 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(width: 10.w),
                 _imageslot(0, isPrimary: true),
-                SizedBox(width: 10.w),
+                SizedBox(width: isLandscape ? 15.w : 10.w),
+
                 _imageslot(1),
-                SizedBox(width: 10.w),
+                SizedBox(width: isLandscape ? 15.w : 10.w),
+
                 _imageslot(2),
-                SizedBox(width: 10.w),
+                SizedBox(width: isLandscape ? 15.w : 10.w),
+
                 _imageslot(3),
               ],
             ),
@@ -609,6 +692,8 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
 
   Widget _imageslot(int index, {bool isPrimary = false}) {
     final file = selectedImages[index];
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     return GestureDetector(
       onTap: () {
@@ -617,7 +702,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
 
       child: Container(
         height: 80.h,
-        width: 80.w,
+        width: isLandscape ? 65.w : 80.w,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.r),
           color: Colors.grey.shade200,
@@ -678,7 +763,8 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
 
   Widget _imageslotId(int index, {bool isOthers = false}) {
     final file = isOthers ? othersIdproof[index] : iDProofUpload[index];
-
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return GestureDetector(
       onTap: () {
         buildimageSelectSheet(context, index: index, imageType.idproof);
@@ -686,7 +772,8 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
 
       child: Container(
         height: 80.h,
-        width: 80.w,
+        width: isLandscape ? 65.w : 80.w,
+
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.r),
           color: Colors.grey.shade200,
@@ -708,6 +795,8 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                   ),
                 )
                 : Container(
+                  height: 80.h,
+                  width: isLandscape ? 65.w : 80.w,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.r),
                     gradient: LinearGradient(
@@ -718,16 +807,14 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.add_a_photo_rounded,
                         size: 20,
                         color: Colors.grey,
                       ),
-                      SizedBox(height: 8.h),
-
                       Text("Upload", style: GTextStyle.bodySmall),
+                      SizedBox(height: 8.h),
                     ],
                   ),
                 ),
@@ -786,7 +873,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
       child: Column(
         children: [
           buildFieldLabel(
-             context: context,
+            context: context,
             label: label ?? "",
             icon: icon ?? PhosphorIconsFill.scroll,
           ),
@@ -797,9 +884,8 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                 color: kPrimaryColor,
                 strokeWidth: 2,
                 dashPattern: [8, 6],
+                borderType: BorderType.RRect,
                 radius: Radius.circular(10.r),
-                padding: EdgeInsets.symmetric(horizontal: 2.w),
-
                 child: Container(
                   height: 150.h,
                   width: double.infinity,
