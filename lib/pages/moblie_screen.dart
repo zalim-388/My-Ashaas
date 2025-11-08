@@ -88,7 +88,6 @@ class _MoblieScreenState extends State<MoblieScreen> {
                 ),
                 SizedBox(height: isLandscape ? 4.h : 8.h),
                 Row(
-                 
                   children: [
                     GestureDetector(
                       onTap: _openCountryPicker,
@@ -106,7 +105,7 @@ class _MoblieScreenState extends State<MoblieScreen> {
                         ),
                         alignment: Alignment.center,
                         child: Row(
-                         mainAxisSize: MainAxisSize.min,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             if (_selectedCountryFlag != null &&
                                 _selectedCountryFlag!.isNotEmpty) ...[
@@ -120,7 +119,7 @@ class _MoblieScreenState extends State<MoblieScreen> {
                               (_selectedCountryCode != null)
                                   ? (_selectedCountryCode!.startsWith('+')
                                       ? _selectedCountryCode!
-                                      : '+${_selectedCountryCode}')
+                                      : '+$_selectedCountryCode')
                                   : '+91',
                               textAlign: TextAlign.center,
                               style: GTextStyle.bodyLight,
@@ -187,7 +186,7 @@ class _MoblieScreenState extends State<MoblieScreen> {
                   ],
                 ),
 
-                SizedBox(height: 50.h),
+                SizedBox(height: 40.h),
 
                 GestureDetector(
                   onTap: () {
@@ -198,7 +197,7 @@ class _MoblieScreenState extends State<MoblieScreen> {
                   },
                   child: Container(
                     width: double.infinity,
-                    height: 48.h,
+                    height: 40.h,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [

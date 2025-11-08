@@ -52,7 +52,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
         backgroundColor: kBackgroundColor,
-        toolbarHeight: 70.h,
+        toolbarHeight: 30.h,
         automaticallyImplyLeading: false,
         scrolledUnderElevation: 0,
         elevation: 0,

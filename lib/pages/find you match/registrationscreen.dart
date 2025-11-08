@@ -40,7 +40,7 @@ class _registrationscreenState extends State<registrationscreen> {
   ];
   List<Toggleoption> genderoptions = [
     Toggleoption(label: "Male", icon: Icons.male),
-    Toggleoption(label: "Female", icon:Icons.female ),
+    Toggleoption(label: "Female", icon: Icons.female),
     Toggleoption(label: "Others", icon: Icons.help_outline_outlined),
   ];
 
@@ -130,7 +130,7 @@ class _registrationscreenState extends State<registrationscreen> {
               ),
 
               buildToggle(
-                 context: context,
+                context: context,
                 label: "Gender",
                 options: genderoptions,
                 selection: _selectedGender,
@@ -143,7 +143,7 @@ class _registrationscreenState extends State<registrationscreen> {
                       context: context,
                       label: 'Date of Birth *',
                       icon: PhosphorIconsFill.calendar,
-                      hintText: 'Select your Date of Birth',
+                      hintText: 'DD/MM/YYYY',
                       Controller: _dobtController,
                       readOnly: true,
                       onTap: () async {

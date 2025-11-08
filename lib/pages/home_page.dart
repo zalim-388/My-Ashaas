@@ -1,9 +1,7 @@
 import 'package:agent_porta/pages/find%20you%20match/find_you_matchCreation.dart';
 import 'package:agent_porta/pages/profile_page.dart';
 import 'package:agent_porta/pages/businessCreation.dart';
-import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ionicons/ionicons.dart';
@@ -58,8 +56,8 @@ class _HomePageState extends State<HomePage> {
               : AppBar(
                 backgroundColor: Colors.white.withOpacity(0.1),
                 automaticallyImplyLeading: false,
-                scrolledUnderElevation: 0,
-                elevation: 2,
+
+                // elevation: 0,
                 centerTitle: false,
                 title: Row(
                   children: [
@@ -460,7 +458,7 @@ class _HomePageState extends State<HomePage> {
               options: CarouselOptions(
                 viewportFraction: 1,
                 autoPlay: true,
-                height: isLandscape ? 250.h : 180.h,
+                height: isLandscape ? 250.h : 170.h,
                 autoPlayCurve: Curves.easeInOut,
                 // autoPlayAnimationDuration: const Duration(milliseconds: 00),
                 autoPlayInterval: const Duration(seconds: 6),

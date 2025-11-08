@@ -226,9 +226,13 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
     _loadCountries();
   }
 
+  @override
   void dispose() {
     _bioControllar.dispose();
     _partnerExpectaionControoler.dispose();
+    _cityController.dispose();
+    _stateController.dispose();
+    _countryController.dispose();
     super.dispose();
   }
 
@@ -240,22 +244,22 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
   }
 
   void onCountryChanged(String? value) async {
-    if (value != null) return;
+    if (value == null) return;
     _selectCountry = _countries.firstWhere((country) => country.name == value);
     _states = await csc.getStatesOfCountry(_selectCountry!.isoCode);
 
     setState(() {
       stateOptions = _states.map((state) => state.name).toList();
       _selectState = null;
-      _stateController.clear();
+      // _stateController.clear();
       cityOptions = [];
       _selectCity = null;
-      _cityController.clear();
+      // _cityController.clear();
     });
   }
 
   void onStateChanged(String? value) async {
-    if (value != null) return;
+    if (value == null) return;
     _selectState = _states.firstWhere((state) => state.name == value);
     _cities = await csc.getStateCities(
       _selectCountry!.isoCode,
@@ -265,13 +269,15 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
     setState(() {
       cityOptions = _cities.map((city) => city.name).toList();
       _selectCity = null;
-      _cityController.clear();
+      // _cityController.clear();
     });
   }
 
   void onCityChanged(String? value) async {
-    if (value != null) return;
-    _selectCity = _cities.firstWhere((city) => city.name == value);
+    if (value == null) return;
+    setState(() {
+      _selectCity = _cities.firstWhere((city) => city.name == value);
+    });
   }
 
   void _onAgeRangeChanged(String? value) {
@@ -358,6 +364,68 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                   return null;
                 },
               ),
+              buildFieldLabel(
+                label: "Location Preference *",
+                context: context,
+                icon: Icons.location_on_outlined,
+              ),
+
+              buildDropdown(
+                context: context,
+                label: "Country *",
+                fontSize: 12.sp,
+                hintText: "Search your country",
+                icon: Icons.public,
+                options: countryOptions,
+                // controller: _countryController,
+                selectedValue: _selectCountry?.name,
+                isSearchable: true,
+                onChanged: onCountryChanged,
+                validator:
+                    (value) =>
+                        (value == null || value.isEmpty)
+                            ? "Please select a country"
+                            : null,
+              ),
+
+              if (_selectCountry != null && stateOptions.isNotEmpty)
+                buildDropdown(
+                  context: context,
+                  label: "State *",
+                  hintText: "Search your state",
+                  fontSize: 12.sp,
+                  icon: Icons.map_outlined,
+                  options: stateOptions,
+                  // controller: _stateController,
+                  isSearchable: true,
+                  selectedValue: _selectState?.name,
+                  onChanged: onStateChanged,
+                  validator:
+                      (value) =>
+                          (value == null || value.isEmpty)
+                              ? "Please select a state"
+                              : null,
+                ),
+
+              if (_selectState != null && cityOptions.isNotEmpty)
+                buildDropdown(
+                  context: context,
+                  label: "City *",
+                  hintText: "Search your city",
+                  fontSize: 12.sp,
+                  icon: Icons.location_city_outlined,
+                  options: cityOptions,
+                  // controller: _cityController,
+                  isSearchable: true,
+                  selectedValue: _selectCity?.name,
+                  onChanged: onCityChanged,
+                  validator:
+                      (value) =>
+                          (value == null || value.isEmpty)
+                              ? "Please select a city"
+                              : null,
+                ),
+
               buildDropdown(
                 label: "Profession Preference *",
                 hintText: "Select Profession Preference",

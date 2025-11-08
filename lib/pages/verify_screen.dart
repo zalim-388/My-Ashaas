@@ -26,7 +26,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
   );
 
   Timer? _timer;
-  int _conutdowm = 30;
+  int _conutdowm = 60;
   bool isResendDisable = true;
 
   @override
@@ -70,7 +70,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
     });
   }
 
-  void ResendOtp() {
+  void resendOtp() {
     print('Resend Otp.....');
     setState(() {
       _startTimer();
@@ -99,7 +99,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                     vertical: 10.h,
                   ),
 
-                  icon: Icon(Icons.arrow_back_ios, color: black, size: 20),
+                  icon: Icon(Icons.arrow_back_ios, color: black, size: 20.sp),
                 ),
                 backgroundColor: kBackgroundColor,
 
@@ -247,12 +247,12 @@ class _VerifyScreenState extends State<VerifyScreen> {
                 onTap: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => setpassword()),
+                    MaterialPageRoute(builder: (context) => Setpassword()),
                   );
                 },
                 child: Container(
                   width: double.infinity,
-                  height: 48.h,
+                  height: 40.h,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [kPrimaryColor.withOpacity(0.610), kPrimaryColor],
@@ -283,7 +283,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                     minimumSize: Size(50, 30),
                     padding: EdgeInsets.zero,
                   ),
-                  onPressed: isResendDisable ? null : ResendOtp,
+                  onPressed: isResendDisable ? null : resendOtp,
                   child: Text(
                     isResendDisable ? "Resend in $_conutdowm" : 'Resend',
                     style: GTextStyle.bodyBold.copyWith(

@@ -37,7 +37,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
   final _countryController = TextEditingController();
   final _stateController = TextEditingController();
   final _cityController = TextEditingController();
-  final _districtController = TextEditingController();
+  // final _districtController = TextEditingController();
 
   String? _selectionFatherStatus;
   String? _selectionMotherStatus;
@@ -45,7 +45,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
   String? _selectFamilytype;
   String? _selectFatherOccupation;
   String? _selectMotherOccupation;
-  String? _selectDistrict;
+  // String? _selectDistrict;
 
   final List<String> occuptionmotherOptions = [
     "House Wife",
@@ -87,7 +87,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
   List<csc.Country> _countries = [];
   List<csc.State> _states = [];
   List<csc.City> _cities = [];
-  List<String> _districts = [];
+  // List<String> _districts = [];
 
   List<String> countryOptions = [];
   List<String> stateOptions = [];
@@ -109,6 +109,9 @@ class _FamilyDetailsState extends State<FamilyDetails> {
     _motherNameController.dispose();
     _totalbrothersController.dispose();
     _totalsistersController.dispose();
+    _cityController.dispose();
+    _stateController.dispose();
+    _countryController.dispose();
   }
 
   void _loadCountries() async {
@@ -119,22 +122,22 @@ class _FamilyDetailsState extends State<FamilyDetails> {
   }
 
   void onCountryChanged(String? value) async {
-    if (value != null) return;
+    if (value == null) return;
     _selectCountry = _countries.firstWhere((country) => country.name == value);
     _states = await csc.getStatesOfCountry(_selectCountry!.isoCode);
 
     setState(() {
       stateOptions = _states.map((state) => state.name).toList();
       _selectState = null;
-      _stateController.clear();
+      // _stateController.clear();
       cityOptions = [];
       _selectCity = null;
-      _cityController.clear();
+      // _cityController.clear();
     });
   }
 
   void onStateChanged(String? value) async {
-    if (value != null) return;
+    if (value == null) return;
     _selectState = _states.firstWhere((state) => state.name == value);
     _cities = await csc.getStateCities(
       _selectCountry!.isoCode,
@@ -144,13 +147,15 @@ class _FamilyDetailsState extends State<FamilyDetails> {
     setState(() {
       cityOptions = _cities.map((city) => city.name).toList();
       _selectCity = null;
-      _cityController.clear();
+      // _cityController.clear();
     });
   }
 
   void onCityChanged(String? value) async {
-    if (value != null) return;
-    _selectCity = _cities.firstWhere((city) => city.name == value);
+    if (value == null) return;
+    setState(() {
+      _selectCity = _cities.firstWhere((city) => city.name == value);
+    });
   }
 
   void onDistrictChanged(String? value) async {}
@@ -499,40 +504,26 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                 Controller: _hometownController,
                 icon: PhosphorIconsFill.mapPin,
                 validator: (value) {
-                  if (value != null || value?.isEmpty == false) {
+                  if (value == null || value.isEmpty == false) {
                     return 'pleasse enter your hometown';
                   }
                   return null;
                 },
               ),
 
-              //  buildFieldLabel(label: ""),
-              // buildCscField(
-              //   label: "Current Residence Address",
-              //   onCountryChanged: _onCountryChanged,
-              //   onStateChanged: _onStateChanged,
-              //   onCityChanged: _onCityChanged,
-              //   cityController: _cityController,
-              //   countryController: _countryController,
-              //   stateController: _stateController,
-              //   context: context,
-              //   countries: [],
-              //   states: [],
-              //   cities: [],
-              // districtController: districtController,
-              // onDistrictChanged: onDistrictChanged,
-              // cities: cities,
-              // countries: countries,
-              // states: states,
-              // districts: districts,
-              // ),
+              buildFieldLabel(
+                label: "Current Residence Address",
+                context: context,
+                icon: PhosphorIconsFill.house,
+              ),
               buildDropdown(
                 context: context,
                 label: "Country *",
                 hintText: "Search your country",
-                icon: PhosphorIconsFill.mapTrifold,
+                icon: Icons.public,
                 options: countryOptions,
-                controller: _countryController,
+                // controller: _countryController,
+                selectedValue: _selectCountry?.name,
                 isSearchable: true,
                 onChanged: onCountryChanged,
                 validator:
@@ -547,10 +538,11 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                   context: context,
                   label: "State *",
                   hintText: "Search your state",
-                  icon: PhosphorIconsFill.mapTrifold,
+                  icon: Icons.map,
                   options: stateOptions,
-                  controller: _stateController,
+                  // controller: _stateController,
                   isSearchable: true,
+                  selectedValue: _selectState?.name,
                   onChanged: onStateChanged,
                   validator:
                       (value) =>
@@ -564,10 +556,11 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                   context: context,
                   label: "City *",
                   hintText: "Search your city",
-                  icon: PhosphorIconsFill.mapTrifold,
+                  icon: PhosphorIconsFill.city,
                   options: cityOptions,
-                  controller: _cityController,
+                  // controller: _cityController,
                   isSearchable: true,
+                  selectedValue: _selectCity?.name,
                   onChanged: onCityChanged,
                   validator:
                       (value) =>

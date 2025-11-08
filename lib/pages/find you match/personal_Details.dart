@@ -368,7 +368,7 @@ class _personalDetailsState extends State<personalDetails> {
                       icon: PhosphorIconsFill.sparkle,
                       selectedValue: selectBloodGroup,
                       onChanged: _onRaasiChanged,
-                      controller: _raasiController,
+                       controller: _raasiController,
                       context: context,
                       options: bloodGroupOptions,
                       isSearchable: true,

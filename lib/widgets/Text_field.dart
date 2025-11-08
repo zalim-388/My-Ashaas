@@ -40,7 +40,8 @@ Widget buildFieldLabel({
 }
 
 Widget buildADDField({
-  required String label,
+  String? label,
+  String? helperText,
   required String hintText,
   required TextEditingController Controller,
   String? Function(String?)? validator,
@@ -70,7 +71,7 @@ Widget buildADDField({
     children: [
       buildFieldLabel(
         context: context,
-        label: label,
+        label: label ?? "",
         icon: icon,
         topPad: topPad,
         fontSize: fontSize,
@@ -83,6 +84,12 @@ Widget buildADDField({
         controller: Controller,
         textCapitalization: textCapitalization,
         decoration: InputDecoration(
+          helperText: helperText,
+          helperStyle: GTextStyle.bodyLight.copyWith(
+            color: kPrimaryColor,
+            fontSize: isLandscape ? 8.sp : fontSize ?? 14.sp,
+          ),
+
           hintText: Controller.text.isEmpty ? hintText : null,
           hintStyle: GTextStyle.bodyLight.copyWith(
             color: Colors.black45,

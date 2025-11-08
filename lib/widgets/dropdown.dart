@@ -4,7 +4,6 @@ import 'package:agent_porta/widgets/Text_field.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 Widget buildDropdown({
   required String label,
@@ -19,6 +18,7 @@ Widget buildDropdown({
   TextEditingController? controller,
   TextInputType? keyboardType,
   String? Function(String?)? validator,
+  double? fontSize,
 }) {
   final isLandscape =
       MediaQuery.of(context).orientation == Orientation.landscape;
@@ -40,7 +40,7 @@ Widget buildDropdown({
       hintText: selectedValue ?? hintText,
       hintStyle: GTextStyle.bodyLight.copyWith(
         color: Colors.black45,
-        fontSize: isLandscape ? 8.sp : 14.sp,
+        fontSize: isLandscape ? 8.sp : fontSize ?? 14.sp,
       ),
 
       errorStyle: GTextStyle.bodyLight.copyWith(
@@ -76,27 +76,26 @@ Widget buildDropdown({
         icon: icon,
         topPad: topPad,
         context: context,
+        fontSize: fontSize,
       ),
 
       SizedBox(height: 8.h),
       if (isSearchable)
-        Autocomplete(
+        Autocomplete<String>(
+          initialValue: TextEditingValue(text: selectedValue ?? ""),
           fieldViewBuilder: (
             BuildContext context,
-
             TextEditingController fieldController,
             FocusNode fieldfocusNode,
             VoidCallback onFieldSubmitted,
           ) {
             return TextFormField(
-              controller: controller ?? fieldController,
+              controller: fieldController,
               focusNode: fieldfocusNode,
-
               style: GTextStyle.bodyBold.copyWith(
                 fontSize: isLandscape ? 8.sp : 14.sp,
                 color: kPrimaryColor,
               ),
-
               keyboardType: keyboardType,
               cursorColor: kPrimaryColor,
               decoration: getInputDecoration(hintText),
@@ -112,7 +111,7 @@ Widget buildDropdown({
               return options;
             }
             return options.where((String option) {
-              return option.toLowerCase().contains(
+              return option.toLowerCase().startsWith(
                 textEditingValue.text.toLowerCase(),
               );
             });
@@ -128,7 +127,6 @@ Widget buildDropdown({
                 elevation: 4.0,
                 color: Colors.grey.shade100,
                 borderRadius: BorderRadius.circular(8.r),
-
                 child: ConstrainedBox(
                   constraints: BoxConstraints(maxHeight: 250.h),
                   child: ListView.builder(
@@ -178,6 +176,8 @@ Widget buildDropdown({
           ),
           popupProps: PopupProps.menu(
             fit: FlexFit.loose,
+            showSelectedItems: true,
+            disabledItemFn: (String item) => false,
             itemBuilder: (context, item, isDisabled, isSelected) {
               return Container(
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),

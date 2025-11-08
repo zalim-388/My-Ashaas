@@ -24,7 +24,6 @@ const kBodyText2 = TextStyle(
   color: Colors.white,
 );
 
-const kBackgroundColor = Color(0xFFE8ECE7);
 const kSecondaryColor = Color(0xFFFAB609);
 const Color primary = Color(0xB5FFFFFF);
 const Color primary0 = Color(0xFFFFB820);
@@ -40,10 +39,12 @@ const kGradient = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
 );
-
+const kBackgroundColor = Color(0xFFE8ECE7);
 const kPrimaryColor = Color(0xFF3E775F);
 const kBackgroundColor1 = Color(0xFFe4eae1);
 const kPrimaryLightColor = Color(0xFFFFE9EC);
+const  kprimaryGreen = Color(0xFF5E8A78);
+const  klightGreen = Color(0xFFE8F3EF);
 
 const double defaultPadding = 16.0;
 

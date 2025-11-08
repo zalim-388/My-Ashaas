@@ -5,18 +5,18 @@ import 'package:agent_porta/widgets/Text_field.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'forget_pasword_page(1).dart';
+import 'Forget password/forget_pasword.dart';
 import 'package:agent_porta/styles/constants.dart';
 import 'package:agent_porta/styles/style.dart';
 
-class setpassword extends StatefulWidget {
-  const setpassword({super.key});
+class Setpassword extends StatefulWidget {
+  const Setpassword({super.key});
 
   @override
-  State<setpassword> createState() => _LoginPageState();
+  State<Setpassword> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<setpassword> {
+class _LoginPageState extends State<Setpassword> {
   int? selectedTile;
   // bool _isPasswordVisible = false;
   File? _profileimage;
@@ -227,7 +227,7 @@ class _LoginPageState extends State<setpassword> {
                   return null;
                 },
               ),
-              SizedBox(height: 48.h),
+              SizedBox(height: 40.h),
               GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -237,7 +237,7 @@ class _LoginPageState extends State<setpassword> {
                 },
                 child: Container(
                   width: double.infinity,
-                  height: 48.h,
+                  height: 45.h,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [kPrimaryColor.withOpacity(0.610), kPrimaryColor],
