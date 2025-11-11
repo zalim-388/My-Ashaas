@@ -1,4 +1,4 @@
-import 'package:agent_porta/pages/request_money.dart';
+import 'package:agent_porta/pages/Profile/request_money.dart';
 import 'package:agent_porta/styles/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';

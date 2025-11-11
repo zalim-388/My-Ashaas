@@ -73,7 +73,7 @@ class _MoblieScreenState extends State<MoblieScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: isLandscape ? 40.h : 170.w),
+                SizedBox(height: isLandscape ? 40.h : 220.w),
 
                 buildlogo(),
                 SizedBox(height: isLandscape ? 15.h : 25.h),
@@ -93,40 +93,50 @@ class _MoblieScreenState extends State<MoblieScreen> {
                       onTap: _openCountryPicker,
                       child: Container(
                         height: 40.h,
-                        padding: EdgeInsets.all(9.r),
+
+                        padding: EdgeInsets.zero,
                         decoration: BoxDecoration(
                           color: Colors.grey.shade100,
-
                           borderRadius: BorderRadius.circular(8.r),
                           border: Border.all(
                             color: kPrimaryColor,
                             width: isLandscape ? 0.9 : 1.0.w,
                           ),
                         ),
-                        alignment: Alignment.center,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            if (_selectedCountryFlag != null &&
-                                _selectedCountryFlag!.isNotEmpty) ...[
-                              Text(
-                                _selectedCountryFlag!,
-                                style: GTextStyle.bodyLight,
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(maxWidth: 90.w),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 6.w),
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  if (_selectedCountryFlag != null &&
+                                      _selectedCountryFlag!.isNotEmpty) ...[
+                                    Text(
+                                      _selectedCountryFlag!,
+                                      style: TextStyle(fontSize: 16.w),
+                                    ),
+                                    SizedBox(width: 2.w), // change4
+                                  ],
+                                  Text(
+                                    (_selectedCountryCode != null)
+                                        ? (_selectedCountryCode!.startsWith('+')
+                                            ? _selectedCountryCode!
+                                            : '+$_selectedCountryCode')
+                                        : '+91',
+                                    textAlign: TextAlign.center,
+                                    style: GTextStyle.bodyLight.copyWith(
+                                      fontSize: 12.sp,
+                                    ),
+                                  ),
+                                  SizedBox(width: 2.w), // change5
+                                  Icon(Icons.arrow_drop_down),
+                                ],
                               ),
-                              SizedBox(width: 6.w),
-                            ],
-                            Text(
-                              (_selectedCountryCode != null)
-                                  ? (_selectedCountryCode!.startsWith('+')
-                                      ? _selectedCountryCode!
-                                      : '+$_selectedCountryCode')
-                                  : '+91',
-                              textAlign: TextAlign.center,
-                              style: GTextStyle.bodyLight,
                             ),
-                            SizedBox(width: 5.w),
-                            Icon(Icons.arrow_drop_down),
-                          ],
+                          ),
                         ),
                       ),
                     ),
@@ -153,7 +163,7 @@ class _MoblieScreenState extends State<MoblieScreen> {
                           ],
                           keyboardType: TextInputType.number,
                           cursorColor: kPrimaryColor,
-                          textAlignVertical: TextAlignVertical.center,
+
                           decoration: InputDecoration(
                             hintText: "Enter Your Moblie Number",
                             hintStyle: GTextStyle.bodyLight.copyWith(
@@ -167,9 +177,9 @@ class _MoblieScreenState extends State<MoblieScreen> {
 
                             contentPadding: EdgeInsets.symmetric(
                               horizontal: 12.w,
-                              vertical: isLandscape ? 9.h : 11.h,
+                              vertical: isLandscape ? 9.h : 13.5.h,
                             ),
-                            alignLabelWithHint: true,
+
                             isCollapsed: true,
                             filled: true,
                             fillColor: Colors.grey.shade100,

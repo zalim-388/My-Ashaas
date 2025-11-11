@@ -158,7 +158,7 @@ class _LoginPageState extends State<Setpassword> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: isLandscape ? 30.h : 80.h),
+              SizedBox(height: isLandscape ? 30.h : 120.h),
 
               GestureDetector(
                 onTap: _pikeprofileimage,

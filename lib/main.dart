@@ -2,6 +2,7 @@ import 'package:agent_porta/pages/moblie_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(360, 690),
+      designSize: const Size(375, 812),
       minTextAdapt: true,
       useInheritedMediaQuery: true,
       splitScreenMode: true,
@@ -29,8 +30,8 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          //  theme: ThemeData(textTheme: GoogleFonts.montserratTextTheme()),
-          theme: ThemeData(fontFamily: 'qs'),
+          theme: ThemeData(textTheme: GoogleFonts.poppinsTextTheme()),
+          // montserratTextTheme()
           home: const MoblieScreen(),
         );
       },

@@ -105,7 +105,7 @@ class _registrationscreenState extends State<registrationscreen> {
 
       child: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 23.w, vertical: 40.h),
+          padding: EdgeInsets.symmetric(horizontal: 23.w, vertical: 30.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

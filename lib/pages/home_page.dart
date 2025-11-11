@@ -1,5 +1,5 @@
+import 'package:agent_porta/pages/Profile/profile_page.dart';
 import 'package:agent_porta/pages/find%20you%20match/find_you_matchCreation.dart';
-import 'package:agent_porta/pages/profile_page.dart';
 import 'package:agent_porta/pages/businessCreation.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -56,27 +56,30 @@ class _HomePageState extends State<HomePage> {
               : AppBar(
                 backgroundColor: Colors.white.withOpacity(0.1),
                 automaticallyImplyLeading: false,
-
-                // elevation: 0,
                 centerTitle: false,
-                title: Row(
-                  children: [
-                    Image(
-                      image: AssetImage('assets/images/portalogoBg.png'),
-                      height: isLandscape ? 35.h : 25.h,
-                    ),
-                    SizedBox(width: 10.w),
-                    Text(
-                      'Porta',
-                      style: GTextStyle.bodyBold.copyWith(
-                        fontSize: isLandscape ? 11.sp : 18.sp,
-                        fontWeight: FontWeight.w700,
+                title: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image(
+                        image: AssetImage('assets/images/portalogoBg.png'),
+                        height: isLandscape ? 32.h : 26.h,
                       ),
-                    ),
-                  ],
+                      SizedBox(width: 8.w),
+                      Text(
+                        'Porta',
+                        style: GTextStyle.bodyBold.copyWith(
+                          fontSize: isLandscape ? 11.sp : 19.sp,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: -0.3,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                titleSpacing: 30.w,
-                actionsPadding: EdgeInsets.symmetric(horizontal: 15.w),
+                titleSpacing: 16.w,
+                actionsPadding: EdgeInsets.zero,
                 actions: [
                   IconButton(
                     onPressed: () {
@@ -87,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       );
                     },
-                    icon: Icon(PhosphorIconsBold.user, size: 23),
+                    icon: Icon(PhosphorIconsBold.user, size: 23.sp),
                   ),
                 ],
               ),
@@ -207,35 +210,35 @@ class _HomePageState extends State<HomePage> {
             // SizedBox(height: 20.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Activity",
-                        textAlign: TextAlign.start,
+                  Expanded(
+                    child: Text(
+                      "Activity",
+                      textAlign: TextAlign.start,
+                      style: GTextStyle.bodyBold.copyWith(
+                        fontWeight: FontWeight.w600,
+                        fontSize: isLandscape ? 8.sp : 16.0.sp,
+                      ),
+                    ),
+                  ),
+                  Spacer(),
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {},
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all(EdgeInsets.zero),
+                      ),
+                      child: Text(
+                        'view all',
                         style: GTextStyle.bodyBold.copyWith(
                           fontWeight: FontWeight.w600,
+                          color: kPrimaryColor,
                           fontSize: isLandscape ? 8.sp : 16.0.sp,
                         ),
                       ),
-                      TextButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all(EdgeInsets.zero),
-                        ),
-                        child: Text(
-                          'view all',
-                          style: GTextStyle.bodyBold.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: kPrimaryColor,
-                            fontSize: isLandscape ? 8.sp : 16.0.sp,
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ],
               ),
@@ -400,8 +403,8 @@ class _HomePageState extends State<HomePage> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.r),
         ),
-        dense: true,
-        contentPadding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+        dense: false,
+        contentPadding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
         tileColor: Colors.grey.shade100,
       ),
     );
@@ -422,21 +425,22 @@ class _HomePageState extends State<HomePage> {
 
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 12.w),
+    return FittedBox(
+      fit: BoxFit.scaleDown,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
             icons[status] ?? Icons.help_outline,
             color: colors[status] ?? Colors.grey,
-            size: 20,
+            size: isLandscape ? 16.sp : 18.sp,
           ),
-          SizedBox(height: 2.h),
+          SizedBox(height: 1.h),
           Text(
             status,
             style: GTextStyle.bodyLight.copyWith(
-              fontSize: isLandscape ? 8.sp : 12.sp,
+              fontSize: isLandscape ? 9.sp : 10.sp,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -458,7 +462,7 @@ class _HomePageState extends State<HomePage> {
               options: CarouselOptions(
                 viewportFraction: 1,
                 autoPlay: true,
-                height: isLandscape ? 250.h : 170.h,
+                height: isLandscape ? 250.h : 160.h,
                 autoPlayCurve: Curves.easeInOut,
                 // autoPlayAnimationDuration: const Duration(milliseconds: 00),
                 autoPlayInterval: const Duration(seconds: 6),

@@ -1,5 +1,5 @@
+
 import 'package:agent_porta/styles/style.dart';
-import 'package:agent_porta/styles/theme_helper.dart';
 import 'package:agent_porta/widgets/logo.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -28,8 +28,8 @@ class _ResetPasswordVerifyState extends State<ResetPasswordVerify> {
   );
 
   final _formKey = GlobalKey<FormState>();
-  bool _pinSuccess = false;
-  String _enteredOtp = '';
+  // bool _pinSuccess = false;
+  // String _enteredOtp = '';
 
   @override
   Widget build(BuildContext context) {
@@ -187,16 +187,16 @@ class _ResetPasswordVerifyState extends State<ResetPasswordVerify> {
                                 recognizer:
                                     TapGestureRecognizer()
                                       ..onTap = () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return ThemeHelper().alartDialog(
-                                              "Successful",
-                                              "Verification code resend successful.",
-                                              context,
-                                            );
-                                          },
-                                        );
+                                        // showDialog(
+                                        //   context: context,
+                                        //   builder: (BuildContext context) {
+                                        //     return ThemeHelper().alartDialog(
+                                        //       "Successful",
+                                        //       "Verification code resend successful.",
+                                        //       context,
+                                        //     );
+                                        //   },
+                                        // );
                                       },
                                 style: GoogleFonts.varela(
                                   fontWeight: FontWeight.bold,

@@ -1,3 +1,4 @@
+import 'package:agent_porta/pages/moblie_screen.dart';
 import 'package:agent_porta/widgets/Text_field.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -193,10 +194,10 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                 recognizer:
                                     TapGestureRecognizer()
                                       ..onTap = () {
-                                        Navigator.push(
+                                        Navigator.pushReplacement(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => Setpassword(),
+                                            builder: (context) => MoblieScreen(),
                                           ),
                                         );
                                       },

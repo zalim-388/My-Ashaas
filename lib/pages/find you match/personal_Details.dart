@@ -204,7 +204,7 @@ class _personalDetailsState extends State<personalDetails> {
       key: widget.formkey,
 
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 23.w, vertical: 20.h),
+        padding: EdgeInsets.symmetric(horizontal: 23.w, vertical: 30.h),
 
         child: SingleChildScrollView(
           child: Column(

@@ -1,5 +1,6 @@
 import 'package:agent_porta/pages/find%20you%20match/find_you_matchCreation.dart';
-import 'package:agent_porta/widgets/Bg_continer.dart';
+import 'package:agent_porta/styles/constants.dart';
+import 'package:agent_porta/styles/style.dart';
 import 'package:agent_porta/widgets/Text_field.dart';
 import 'package:agent_porta/widgets/dropdown.dart';
 import 'package:flutter/material.dart';
@@ -125,169 +126,134 @@ class _EducationProfessionalDetailsState
     return Form(
       key: widget.formkey,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 23.w, vertical: 20.h),
+        padding: EdgeInsets.symmetric(horizontal: 23.w, vertical: 30.h),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              buildFindyouTitle("Education & Professional Details"),
-              SizedBox(height: 24.h),
-              buildBgCard(
-                context: context,
-
-                child: Column(
-                  children: [
-                    buildBgCardTitle(
-                      context: context,
-                      title: "Education Details",
-                      icon: Icons.school,
-                    ),
-
-                    SizedBox(height: 16.h),
-
-                    buildDropdown(
-                      label: "Education Qualification ",
-                      hintText: "Select Education Qualification ",
-                      icon: Icons.school,
-                      onChanged: onEduChanged,
-                      context: context,
-                      selectedValue: selectEdu,
-                      options: educationOptions,
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Please selcet education Qualification';
-                        }
-                        return null;
-                      },
-                    ),
-
-                    buildDropdown(
-                      label: "Education Field ",
-                      hintText: "Select Education Field ",
-                      icon: Icons.school,
-                      onChanged: onEduFieldChanged,
-                      context: context,
-                      selectedValue: selectEduField,
-                      options: educationFieldOptions,
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Please selcet Education Field ';
-                        }
-                        return null;
-                      },
-                    ),
-                  ],
-                ),
+              Text(
+                "Education & Professional Details",
+                style: GTextStyle.heading1Bold.copyWith(color: kPrimaryColor),
               ),
               SizedBox(height: 20.h),
 
-              buildBgCard(
+              buildDropdown(
+                label: "Education Qualification ",
+                hintText: "Select Education Qualification ",
+                icon: Icons.school,
+                onChanged: onEduChanged,
                 context: context,
-                child: Column(
-                  children: [
-                    buildBgCardTitle(
-                      context: context,
-                      title: "Professional Details",
-                      icon: Icons.work,
-                    ),
-                    SizedBox(height: 16.h),
-
-                    buildADDField(
-                      context: context,
-                      label: "Occupation / Job Title",
-                      hintText: "Enter Job Title",
-                      Controller: jobTitleController,
-                      icon: Icons.work_outline,
-                      keybordType: TextInputType.name,
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Please  Enter Occupation /Job Title';
-                        }
-                        return null;
-                      },
-                    ),
-                    buildADDField(
-                      context: context,
-                      label: "Company / Organization Name ",
-                      hintText: "Enter Company Name",
-                      Controller: companyController,
-                      icon: Icons.business,
-                      keybordType: TextInputType.name,
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Please  Enter  Company / Organization Name';
-                        }
-                        return null;
-                      },
-                    ),
-
-                    buildDropdown(
-                      label: "Annual Income / Salary Range",
-                      hintText: "Select your salary range ",
-                      icon: Icons.money,
-                      onChanged: onSalaryChanged,
-                      context: context,
-                      selectedValue: selectSalary,
-                      options: salaryOptions,
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Please selcet your income';
-                        }
-                        return null;
-                      },
-                    ),
-                  ],
-                ),
+                selectedValue: selectEdu,
+                options: educationOptions,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Please selcet education Qualification';
+                  }
+                  return null;
+                },
               ),
-              SizedBox(height: 20.h),
-              buildBgCard(
+
+              buildDropdown(
+                label: "Education Field ",
+                hintText: "Select Education Field ",
+                icon: Icons.school,
+                onChanged: onEduFieldChanged,
                 context: context,
-                child: Column(
-                  children: [
-                    buildBgCardTitle(
-                      context: context,
-                      title: "Work Location",
-                      icon: PhosphorIconsFill.buildings,
-                    ),
-
-                    SizedBox(height: 16.h),
-
-                    buildDropdown(
-                      context: context,
-                      label: "Country *",
-                      fontSize: 12.sp,
-                      hintText: "Search your country",
-                      icon: Icons.public,
-                      options: countryOptions,
-                      selectedValue: _selectCountry?.name,
-                      isSearchable: true,
-                      onChanged: onCountryChanged,
-                      validator:
-                          (value) =>
-                              (value == null || value.isEmpty)
-                                  ? "Please select a country"
-                                  : null,
-                    ),
-
-                    if (_selectCountry != null && cityOptions.isNotEmpty)
-                      buildDropdown(
-                        context: context,
-                        label: "City *",
-                        hintText: "Search your City",
-                        fontSize: 12.sp,
-                        icon: Icons.map_outlined,
-                        options: cityOptions,
-                        isSearchable: true,
-                        selectedValue: _selectcity?.name,
-                        onChanged: onCityChanged,
-                        validator:
-                            (value) =>
-                                (value == null || value.isEmpty)
-                                    ? "Please select a state"
-                                    : null,
-                      ),
-                  ],
-                ),
+                selectedValue: selectEduField,
+                options: educationFieldOptions,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Please selcet Education Field ';
+                  }
+                  return null;
+                },
               ),
+
+              buildADDField(
+                context: context,
+                label: "Occupation / Job Title",
+                hintText: "Enter Job Title",
+                Controller: jobTitleController,
+                icon: Icons.work_outline,
+                keybordType: TextInputType.name,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Please  Enter Occupation /Job Title';
+                  }
+                  return null;
+                },
+              ),
+
+              buildADDField(
+                context: context,
+                label: "Company / Organization Name ",
+                hintText: "Enter Company Name",
+                Controller: companyController,
+                icon: Icons.business,
+                keybordType: TextInputType.name,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Please  Enter  Company / Organization Name';
+                  }
+                  return null;
+                },
+              ),
+
+              buildDropdown(
+                label: "Annual Income / Salary Range",
+                hintText: "Select your salary range ",
+                icon: Icons.money,
+                onChanged: onSalaryChanged,
+                context: context,
+                selectedValue: selectSalary,
+                options: salaryOptions,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Please selcet your income';
+                  }
+                  return null;
+                },
+              ),
+
+              buildFieldLabel(
+                label: "Work Location *",
+                context: context,
+                icon: PhosphorIconsFill.buildings,
+              ),
+
+              buildDropdown(
+                context: context,
+                label: "Country *",
+                fontSize: 12.sp,
+                hintText: "Search your country",
+                icon: Icons.public,
+                options: countryOptions,
+                selectedValue: _selectCountry?.name,
+                isSearchable: true,
+                onChanged: onCountryChanged,
+                validator:
+                    (value) =>
+                        (value == null || value.isEmpty)
+                            ? "Please select a country"
+                            : null,
+              ),
+
+              if (_selectCountry != null && cityOptions.isNotEmpty)
+                buildDropdown(
+                  context: context,
+                  label: "City *",
+                  hintText: "Search your City",
+                  fontSize: 12.sp,
+                  icon: Icons.map_outlined,
+                  options: cityOptions,
+                  isSearchable: true,
+                  selectedValue: _selectcity?.name,
+                  onChanged: onCityChanged,
+                  validator:
+                      (value) =>
+                          (value == null || value.isEmpty)
+                              ? "Please select  City"
+                              : null,
+                ),
 
               SizedBox(height: 48.h),
 
@@ -321,9 +287,34 @@ class _EducationProfessionalDetailsState
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import 'package:agent_porta/pages/find%20you%20match/find_you_matchCreation.dart';
-// import 'package:agent_porta/styles/constants.dart';
-// import 'package:agent_porta/styles/style.dart';
+// import 'package:agent_porta/widgets/Bg_continer.dart';
 // import 'package:agent_porta/widgets/Text_field.dart';
 // import 'package:agent_porta/widgets/dropdown.dart';
 // import 'package:flutter/material.dart';
@@ -453,130 +444,165 @@ class _EducationProfessionalDetailsState
 //         child: SingleChildScrollView(
 //           child: Column(
 //             children: [
-//               Text(
-//                 "Education & Professional Details",
-//                 style: GTextStyle.heading1Bold.copyWith(color: kPrimaryColor),
+//               buildFindyouTitle("Education & Professional Details"),
+//               SizedBox(height: 24.h),
+//               buildBgCard(
+//                 context: context,
+
+//                 child: Column(
+//                   children: [
+//                     buildBgCardTitle(
+//                       context: context,
+//                       title: "Education Details",
+//                       icon: Icons.school,
+//                     ),
+
+//                     SizedBox(height: 16.h),
+
+//                     buildDropdown(
+//                       label: "Education Qualification ",
+//                       hintText: "Select Education Qualification ",
+//                       icon: Icons.school,
+//                       onChanged: onEduChanged,
+//                       context: context,
+//                       selectedValue: selectEdu,
+//                       options: educationOptions,
+//                       validator: (value) {
+//                         if (value == null || value.trim().isEmpty) {
+//                           return 'Please selcet education Qualification';
+//                         }
+//                         return null;
+//                       },
+//                     ),
+
+//                     buildDropdown(
+//                       label: "Education Field ",
+//                       hintText: "Select Education Field ",
+//                       icon: Icons.school,
+//                       onChanged: onEduFieldChanged,
+//                       context: context,
+//                       selectedValue: selectEduField,
+//                       options: educationFieldOptions,
+//                       validator: (value) {
+//                         if (value == null || value.trim().isEmpty) {
+//                           return 'Please selcet Education Field ';
+//                         }
+//                         return null;
+//                       },
+//                     ),
+//                   ],
+//                 ),
 //               ),
 //               SizedBox(height: 20.h),
 
-//               buildDropdown(
-//                 label: "Education Qualification ",
-//                 hintText: "Select Education Qualification ",
-//                 icon: Icons.school,
-//                 onChanged: onEduChanged,
+//               buildBgCard(
 //                 context: context,
-//                 selectedValue: selectEdu,
-//                 options: educationOptions,
-//                 validator: (value) {
-//                   if (value == null || value.trim().isEmpty) {
-//                     return 'Please selcet education Qualification';
-//                   }
-//                   return null;
-//                 },
-//               ),
+//                 child: Column(
+//                   children: [
+//                     buildBgCardTitle(
+//                       context: context,
+//                       title: "Professional Details",
+//                       icon: Icons.work,
+//                     ),
+//                     SizedBox(height: 16.h),
 
-//               buildDropdown(
-//                 label: "Education Field ",
-//                 hintText: "Select Education Field ",
-//                 icon: Icons.school,
-//                 onChanged: onEduFieldChanged,
-//                 context: context,
-//                 selectedValue: selectEduField,
-//                 options: educationFieldOptions,
-//                 validator: (value) {
-//                   if (value == null || value.trim().isEmpty) {
-//                     return 'Please selcet Education Field ';
-//                   }
-//                   return null;
-//                 },
-//               ),
+//                     buildADDField(
+//                       context: context,
+//                       label: "Occupation / Job Title",
+//                       hintText: "Enter Job Title",
+//                       Controller: jobTitleController,
+//                       icon: Icons.work_outline,
+//                       keybordType: TextInputType.name,
+//                       validator: (value) {
+//                         if (value == null || value.trim().isEmpty) {
+//                           return 'Please  Enter Occupation /Job Title';
+//                         }
+//                         return null;
+//                       },
+//                     ),
+//                     buildADDField(
+//                       context: context,
+//                       label: "Company / Organization Name ",
+//                       hintText: "Enter Company Name",
+//                       Controller: companyController,
+//                       icon: Icons.business,
+//                       keybordType: TextInputType.name,
+//                       validator: (value) {
+//                         if (value == null || value.trim().isEmpty) {
+//                           return 'Please  Enter  Company / Organization Name';
+//                         }
+//                         return null;
+//                       },
+//                     ),
 
-//               buildADDField(
-//                 context: context,
-//                 label: "Occupation / Job Title",
-//                 hintText: "Enter Job Title",
-//                 Controller: jobTitleController,
-//                 icon: Icons.work_outline,
-//                 keybordType: TextInputType.name,
-//                 validator: (value) {
-//                   if (value == null || value.trim().isEmpty) {
-//                     return 'Please  Enter Occupation /Job Title';
-//                   }
-//                   return null;
-//                 },
-//               ),
-
-//               buildADDField(
-//                 context: context,
-//                 label: "Company / Organization Name ",
-//                 hintText: "Enter Company Name",
-//                 Controller: companyController,
-//                 icon: Icons.business,
-//                 keybordType: TextInputType.name,
-//                 validator: (value) {
-//                   if (value == null || value.trim().isEmpty) {
-//                     return 'Please  Enter  Company / Organization Name';
-//                   }
-//                   return null;
-//                 },
-//               ),
-
-//               buildDropdown(
-//                 label: "Annual Income / Salary Range",
-//                 hintText: "Select your salary range ",
-//                 icon: Icons.money,
-//                 onChanged: onSalaryChanged,
-//                 context: context,
-//                 selectedValue: selectSalary,
-//                 options: salaryOptions,
-//                 validator: (value) {
-//                   if (value == null || value.trim().isEmpty) {
-//                     return 'Please selcet your income';
-//                   }
-//                   return null;
-//                 },
-//               ),
-
-//               buildFieldLabel(
-//                 label: "Work Location *",
-//                 context: context,
-//                 icon: PhosphorIconsFill.buildings,
-//               ),
-
-//               buildDropdown(
-//                 context: context,
-//                 label: "Country *",
-//                 fontSize: 12.sp,
-//                 hintText: "Search your country",
-//                 icon: Icons.public,
-//                 options: countryOptions,
-//                 selectedValue: _selectCountry?.name,
-//                 isSearchable: true,
-//                 onChanged: onCountryChanged,
-//                 validator:
-//                     (value) =>
-//                         (value == null || value.isEmpty)
-//                             ? "Please select a country"
-//                             : null,
-//               ),
-
-//               if (_selectCountry != null && cityOptions.isNotEmpty)
-//                 buildDropdown(
-//                   context: context,
-//                   label: "City *",
-//                   hintText: "Search your City",
-//                   fontSize: 12.sp,
-//                   icon: Icons.map_outlined,
-//                   options: cityOptions,
-//                   isSearchable: true,
-//                   selectedValue: _selectcity?.name,
-//                   onChanged: onCityChanged,
-//                   validator:
-//                       (value) =>
-//                           (value == null || value.isEmpty)
-//                               ? "Please select  City"
-//                               : null,
+//                     buildDropdown(
+//                       label: "Annual Income / Salary Range",
+//                       hintText: "Select your salary range ",
+//                       icon: Icons.money,
+//                       onChanged: onSalaryChanged,
+//                       context: context,
+//                       selectedValue: selectSalary,
+//                       options: salaryOptions,
+//                       validator: (value) {
+//                         if (value == null || value.trim().isEmpty) {
+//                           return 'Please selcet your income';
+//                         }
+//                         return null;
+//                       },
+//                     ),
+//                   ],
 //                 ),
+//               ),
+//               SizedBox(height: 20.h),
+//               buildBgCard(
+//                 context: context,
+//                 child: Column(
+//                   children: [
+//                     buildBgCardTitle(
+//                       context: context,
+//                       title: "Work Location",
+//                       icon: PhosphorIconsFill.buildings,
+//                     ),
+
+//                     SizedBox(height: 16.h),
+
+//                     buildDropdown(
+//                       context: context,
+//                       label: "Country *",
+//                       fontSize: 12.sp,
+//                       hintText: "Search your country",
+//                       icon: Icons.public,
+//                       options: countryOptions,
+//                       selectedValue: _selectCountry?.name,
+//                       isSearchable: true,
+//                       onChanged: onCountryChanged,
+//                       validator:
+//                           (value) =>
+//                               (value == null || value.isEmpty)
+//                                   ? "Please select a country"
+//                                   : null,
+//                     ),
+
+//                     if (_selectCountry != null && cityOptions.isNotEmpty)
+//                       buildDropdown(
+//                         context: context,
+//                         label: "City *",
+//                         hintText: "Search your City",
+//                         fontSize: 12.sp,
+//                         icon: Icons.map_outlined,
+//                         options: cityOptions,
+//                         isSearchable: true,
+//                         selectedValue: _selectcity?.name,
+//                         onChanged: onCityChanged,
+//                         validator:
+//                             (value) =>
+//                                 (value == null || value.isEmpty)
+//                                     ? "Please select a state"
+//                                     : null,
+//                       ),
+//                   ],
+//                 ),
+//               ),
 
 //               SizedBox(height: 48.h),
 
@@ -604,3 +630,6 @@ class _EducationProfessionalDetailsState
 //     );
 //   }
 // }
+
+
+

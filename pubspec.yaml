@@ -65,36 +65,36 @@ flutter:
 
 
 
-  fonts:
-    - family: Outfit
-      fonts:
-        - asset: assets/fonts/Outfit-Black.ttf
-        - asset: assets/fonts/Outfit-Bold.ttf
-        - asset: assets/fonts/Outfit-ExtraBold.ttf
-        - asset: assets/fonts/Outfit-ExtraLight.ttf
-        - asset: assets/fonts/Outfit-Light.ttf
-        - asset: assets/fonts/Outfit-Medium.ttf
-        - asset: assets/fonts/Outfit-Regular.ttf
-        - asset: assets/fonts/Outfit-SemiBold.ttf
-        - asset: assets/fonts/Outfit-Thin.ttf
+  # fonts:
+    # - family: Outfit
+    #   fonts:
+    #     - asset: assets/fonts/Outfit-Black.ttf
+    #     - asset: assets/fonts/Outfit-Bold.ttf
+    #     - asset: assets/fonts/Outfit-ExtraBold.ttf
+    #     - asset: assets/fonts/Outfit-ExtraLight.ttf
+    #     - asset: assets/fonts/Outfit-Light.ttf
+    #     - asset: assets/fonts/Outfit-Medium.ttf
+    #     - asset: assets/fonts/Outfit-Regular.ttf
+    #     - asset: assets/fonts/Outfit-SemiBold.ttf
+    #     - asset: assets/fonts/Outfit-Thin.ttf
 
-    - family: Oxygen
-      fonts:
-        - asset: assets/fonts/Oxygen-Bold.ttf
-        - asset: assets/fonts/Oxygen-Regular.ttf
-        - asset: assets/fonts/Oxygen-Light.ttf
+    # - family: Oxygen
+    #   fonts:
+    #     - asset: assets/fonts/Oxygen-Bold.ttf
+    #     - asset: assets/fonts/Oxygen-Regular.ttf
+    #     - asset: assets/fonts/Oxygen-Light.ttf
 
-    - family: Varela
-      fonts:
-        - asset: assets/fonts/VarelaRound-Regular.ttf
+    # - family: Varela
+    #   fonts:
+    #     - asset: assets/fonts/VarelaRound-Regular.ttf
 
-    - family: qs
-      fonts:
-        - asset: assets/fonts/QS/Quicksand-Bold.otf
-        - asset: assets/fonts/QS/Quicksand-Light.otf
-        - asset: assets/fonts/QS/Quicksand-Medium.otf
-        - asset: assets/fonts/QS/Quicksand-Regular.otf
-        - asset: assets/fonts/QS/Quicksand-SemiBold.otf
+    # - family: qs
+    #   fonts:
+    #     - asset: assets/fonts/QS/Quicksand-Bold.otf
+    #     - asset: assets/fonts/QS/Quicksand-Light.otf
+    #     - asset: assets/fonts/QS/Quicksand-Medium.otf
+    #     - asset: assets/fonts/QS/Quicksand-Regular.otf
+    #     - asset: assets/fonts/QS/Quicksand-SemiBold.otf
 
 
 

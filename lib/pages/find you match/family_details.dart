@@ -253,7 +253,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
       key: widget.formkey,
       child: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 23.w, vertical: 20.h),
+          padding: EdgeInsets.symmetric(horizontal: 23.w, vertical: 30.h),
           child: Column(
             children: [
               Text(
@@ -276,7 +276,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                 },
               ),
 
-              buildToggle(
+              buildToggleSingChip(
                 context: context,
                 label: "Father Status *",
                 selection: _selectionFatherStatus,
@@ -351,7 +351,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                   return null;
                 },
               ),
-              buildToggle(
+              buildToggleSingChip(
                 context: context,
                 label: "Mother Status",
                 selection: _selectionMotherStatus,

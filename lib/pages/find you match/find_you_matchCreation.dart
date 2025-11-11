@@ -52,7 +52,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
         backgroundColor: kBackgroundColor,
-        toolbarHeight: 30.h,
+        toolbarHeight: 50.h,
         automaticallyImplyLeading: false,
         scrolledUnderElevation: 0,
         elevation: 0,
@@ -115,6 +115,8 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
           ),
         ],
       ),
+      extendBodyBehindAppBar: true,
+
       body: SafeArea(
         child: PageView(
           controller: _pageController,
@@ -161,6 +163,7 @@ Widget buildNextButton({
   required VoidCallback onTap,
   bool loading = false,
   required BuildContext context,
+  String text = "Next",
 }) {
   final isLandscape =
       MediaQuery.of(context).orientation == Orientation.landscape;
@@ -178,34 +181,37 @@ Widget buildNextButton({
         borderRadius: BorderRadius.circular(30.r),
       ),
       alignment: Alignment.center,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Next',
-            style: GTextStyle.bodyBold.copyWith(
-              fontSize: isLandscape ? 9.sp : 15.sp,
-              color: Colors.white,
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-          SizedBox(width: isLandscape ? 3.w : 5.w),
-          if (loading)
-            SizedBox(
-              height: isLandscape ? 20.h : 15.h,
-              width: isLandscape ? 20.w : 15.w,
-              child: CircularProgressIndicator(
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Next',
+              style: GTextStyle.bodyBold.copyWith(
+                fontSize: isLandscape ? 9.sp : 15.sp,
                 color: Colors.white,
-                strokeWidth: 2,
+                fontWeight: FontWeight.w800,
               ),
-            )
-          else
-            Icon(
-              Icons.arrow_forward_ios_outlined,
-              color: Colors.white,
-              size: 15,
             ),
-        ],
+            SizedBox(width: isLandscape ? 3.w : 5.w),
+            if (loading)
+              SizedBox(
+                height: isLandscape ? 20.h : 15.h,
+                width: isLandscape ? 20.w : 15.w,
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                  strokeWidth: 2,
+                ),
+              )
+            else
+              Icon(
+                Icons.arrow_forward_ios_outlined,
+                color: Colors.white,
+                size: 15,
+              ),
+          ],
+        ),
       ),
     ),
   );

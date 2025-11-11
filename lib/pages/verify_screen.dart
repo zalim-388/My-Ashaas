@@ -152,7 +152,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: isLandscape ? 20.h : 60.h),
+            SizedBox(height: isLandscape ? 20.h : 120.h),
             buildlogo(),
             SizedBox(height: isLandscape ? 15.h : 10.h),
 
@@ -274,26 +274,52 @@ class _VerifyScreenState extends State<VerifyScreen> {
               ),
             ),
             SizedBox(height: 15.h),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text("Didn't get OTP? ", style: GTextStyle.bodyMedium),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    minimumSize: Size(50, 30),
-                    padding: EdgeInsets.zero,
-                  ),
-                  onPressed: isResendDisable ? null : resendOtp,
-                  child: Text(
-                    isResendDisable ? "Resend in $_conutdowm" : 'Resend',
-                    style: GTextStyle.bodyBold.copyWith(
-                      color: isResendDisable ? grey : kPrimaryColor,
-                      fontWeight: FontWeight.w800,
+
+            RichText(
+              text: TextSpan(
+                text: "Didn't get OTP? ",
+                style: GTextStyle.bodyMedium.copyWith(
+                  fontSize: isLandscape ? 8.sp : 13,
+                  color: Colors.black54,
+                ),
+                children: [
+                  WidgetSpan(
+                    child: GestureDetector(
+                      onTap: isResendDisable ? null : resendOtp,
+                      child: Text(
+                        isResendDisable ? "Resend in $_conutdowm" : 'Resend',
+                        style: GTextStyle.bodyBold.copyWith(
+                          fontSize: isLandscape ? 8.sp : 14,
+                          color: isResendDisable ? grey : kPrimaryColor,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
+
+            // Row(
+            //   mainAxisSize: MainAxisSize.min,
+            //   children: [
+            //     Text("Didn't get OTP? ", style: GTextStyle.bodyMedium),
+            //     TextButton(
+            //       style: TextButton.styleFrom(
+            //         minimumSize: Size(50, 30),
+            //         padding: EdgeInsets.zero,
+            //       ),
+            //       onPressed: isResendDisable ? null : resendOtp,
+            //       child: Text(
+            //         isResendDisable ? "Resend in $_conutdowm" : 'Resend',
+            //         style: GTextStyle.bodyBold.copyWith(
+            //           color: isResendDisable ? grey : kPrimaryColor,
+            //           fontWeight: FontWeight.w800,
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
             SizedBox(height: 20.h),
           ],
         ),
