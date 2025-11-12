@@ -1,4 +1,4 @@
-import 'package:agent_porta/pages/moblie_screen.dart';
+import 'package:agent_porta/pages/mobile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,13 +26,16 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       useInheritedMediaQuery: true,
       splitScreenMode: true,
-
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(textTheme: GoogleFonts.poppinsTextTheme()),
+          theme: ThemeData(
+            textTheme: GoogleFonts.poppinsTextTheme(
+              Theme.of(context).textTheme,
+            ),
+          ),
           // montserratTextTheme()
-          home: const MoblieScreen(),
+          home: const MobileScreen(),
         );
       },
     );

@@ -27,17 +27,18 @@ class _CongratulationState extends State<Congratulation>
 
   @override
   Widget build(BuildContext context) {
-    final isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    // final isLandscape =
+    //     MediaQuery.of(context).orientation == Orientation.landscape;
     final padding = MediaQuery.of(context).padding;
     return Scaffold(
-      backgroundColor: kBackgroundColor,
+      backgroundColor: Colors.transparent,
 
       body: Stack(
         children: [
+          Container(color: Colors.black.withOpacity(0.6)),
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 0.5, sigmaY: 0.5),
-            child: Container(color: kBackgroundColor),
+            child: Container(color: Colors.transparent),
           ),
           Positioned.fill(
             child: Lottie.asset(
@@ -50,7 +51,12 @@ class _CongratulationState extends State<Congratulation>
             child: Center(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(24, 32, 24, 24 + padding.bottom),
+                  padding: EdgeInsets.fromLTRB(
+                    24.w,
+                    32.h,
+                    24.w,
+                    24.h + padding.bottom,
+                  ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -63,16 +69,16 @@ class _CongratulationState extends State<Congratulation>
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              spreadRadius: 10,
+                              spreadRadius: 10.r,
                               color: kPrimaryColor.withOpacity(0.5),
-                              blurRadius: 20,
+                              blurRadius: 20.r,
                             ),
                           ],
                         ),
                         child: Icon(
                           Icons.check_circle,
                           color: kPrimaryColor,
-                          size: 80,
+                          size: 80.spMin,
                         ),
                       ),
 
@@ -80,7 +86,7 @@ class _CongratulationState extends State<Congratulation>
                       Text(
                         "Congratulation 🎉",
                         style: GTextStyle.heading1Bold.copyWith(
-                          color: Colors.black,
+                          color: Colors.white,
                         ),
                       ),
 
@@ -89,8 +95,7 @@ class _CongratulationState extends State<Congratulation>
                       Text(
                         'Your account has been verified successfully!\nYou can now access all features.',
                         style: GTextStyle.bodyBold.copyWith(
-                          color: Colors.grey[600],
-                          height: 1.5,
+                          color: Colors.grey[400],
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -119,10 +124,9 @@ class _CongratulationState extends State<Congratulation>
                           alignment: Alignment.center,
                           child: Text(
                             'Continue',
-                            style: GTextStyle.bodyBold.copyWith(
-                              fontSize: isLandscape ? 18 : 18.sp,
+                            style: GTextStyle.button.copyWith(
+                              // fontSize: isLandscape ? 18 : 18.sp,
                               color: Colors.white,
-                              fontWeight: FontWeight.w800,
                             ),
                           ),
                         ),

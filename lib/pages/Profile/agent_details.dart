@@ -1,8 +1,8 @@
 import 'package:agent_porta/styles/constants.dart';
 import 'package:agent_porta/styles/style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:uicons/uicons.dart';
 
@@ -12,6 +12,8 @@ class AgentDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -20,7 +22,7 @@ class AgentDetails extends StatelessWidget {
         leading: IconButton(
           icon: Icon(
             UIcons.solidRounded.angle_left,
-            size: 15,
+            size: isLandscape ? 10.sp : 15.sp,
             color: Colors.white,
           ),
           onPressed: () {
@@ -33,9 +35,9 @@ class AgentDetails extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
+            top: 0.h,
+            left: 0.w,
+            right: 0.w,
             height: 220.h,
             child: Container(
               width: double.infinity,
@@ -50,7 +52,7 @@ class AgentDetails extends StatelessWidget {
           ),
 
           Positioned.fill(
-            top: 170.h,
+            top: isLandscape ? 190.h : 170.h,
             child: Container(
               decoration: BoxDecoration(
                 color: kBackgroundColor,
@@ -65,12 +67,12 @@ class AgentDetails extends StatelessWidget {
                       Text(
                         'name',
                         style: GTextStyle.bodyBold.copyWith(
-                          fontSize: 20.sp,
+                          fontSize: isLandscape ? 12.sp : 20.sp,
                           fontWeight: FontWeight.w700,
                           color: Colors.black87,
                         ),
                       ),
-                      SizedBox(height: 8.h),
+                      SizedBox(height: isLandscape ? 4.h : 8.h),
                       Container(
                         padding: EdgeInsets.symmetric(
                           horizontal: 12.w,
@@ -83,7 +85,7 @@ class AgentDetails extends StatelessWidget {
                         child: Text(
                           'Youmail@gmail.com',
                           style: GTextStyle.bodyMedium.copyWith(
-                            fontSize: 15.sp,
+                            fontSize: isLandscape ? 10.sp : 15.sp,
                             color: Colors.black54,
                           ),
                         ),
@@ -100,23 +102,37 @@ class AgentDetails extends StatelessWidget {
                           ),
                           _buildMenuItem(
                             context: context,
-                            icon: UIcons.regularRounded.address_book,
+                            icon: UIcons.regularRounded.home,
                             heading: 'Address',
                             data:
                                 'Kattukulath house , kelamkulam , chettiyamKinar , malappuram , kerala , india  \nPOST : klari  \nPIN : 676501',
                           ),
                           _buildMenuItem(
                             context: context,
-                            icon: UIcons.regularRounded.credit_card,
+                            icon: UIcons.regularRounded.id_badge,
                             heading: 'Pan card',
                             data: 'HSDFB5325J',
                           ),
                           _buildMenuItem(
                             context: context,
-                            icon: Ionicons.id_card_outline,
+                            icon: UIcons.regularRounded.portrait,
                             heading: 'Aadhar card',
                             data: '123456789012',
                           ),
+
+                          _buildMenuItem(
+                            context: context,
+                            icon: UIcons.regularRounded.phone_call,
+                            heading: 'Alternate Mobile',
+                            data: '9865421752',
+                          ),
+                          _buildMenuItem(
+                            context: context,
+                            icon: UIcons.regularRounded.users,
+                            heading: 'Nominee',
+                            data: '9865421752',
+                          ),
+
                           SizedBox(height: 50.h),
                         ],
                       ),
@@ -128,14 +144,14 @@ class AgentDetails extends StatelessWidget {
           ),
 
           Positioned(
-            top: 170.h - (110.h / 2),
+            top: isLandscape ? 100.h : 170.h - (110.h / 2),
             left: 0,
             right: 0,
 
             child: Center(
               child: Container(
-                height: 110.h,
-                width: 110.h,
+                height: isLandscape ? 120 : 110.h,
+                width: isLandscape ? 120 : 110.h,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(color: Colors.white, width: 4.w),
@@ -155,7 +171,11 @@ class AgentDetails extends StatelessWidget {
                     errorBuilder: (context, error, stackTrace) {
                       return Container(
                         color: Colors.grey[300],
-                        child: Icon(Icons.person, size: 30, color: Colors.grey),
+                        child: Icon(
+                          Icons.person,
+                          size: 30.sp,
+                          color: Colors.grey,
+                        ),
                       );
                     },
                   ),
@@ -174,68 +194,112 @@ class AgentDetails extends StatelessWidget {
     required String heading,
     String? data,
   }) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Card(
-      elevation: 0,
-      margin: EdgeInsets.symmetric(vertical: 8.h),
+      color: Colors.grey.shade100,
+      shadowColor: Colors.grey.shade100,
+      elevation: 5,
+      margin: EdgeInsets.symmetric(vertical: isLandscape ? 8.h : 6.h),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.r),
         side: BorderSide(color: Colors.grey.shade100),
       ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-        child: Row(
-          children: [
-            Container(
-              padding: EdgeInsets.all(10.w),
+      child: InkWell(
+        onLongPress: () {
+          _copyToClipboard(context, heading);
+        },
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: isLandscape ? 10.w : 16.w,
+            vertical: 14.h,
+          ),
+          child: Row(
+            children: [
+              Container(
+                padding: EdgeInsets.all(isLandscape ? 6.w : 6.w),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12.r),
+                  color: kPrimaryColor.withOpacity(0.1),
+                ),
 
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.r),
-                color: kPrimaryColor.withOpacity(0.1),
-              ),
-
-              child: Icon(icon, color: kPrimaryColor, size: 22.sp),
-            ),
-
-            SizedBox(width: 16.w),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    heading,
-                    style: GTextStyle.bodyBold.copyWith(
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.grey.shade600,
-                    ),
-                  ),
-                  SizedBox(height: 6.h),
-                  if (data != null && data.isNotEmpty)
-                    Text(
-                      data,
-                      style: TextStyle(
-                        fontSize: 14.h,
-                        color: Colors.black87,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                ],
-              ),
-            ),
-
-            GestureDetector(
-              child: Padding(
-                padding: EdgeInsets.only(left: 8.w),
                 child: Icon(
-                  PhosphorIconsLight.copy,
-                  size: 18.sp,
-                  color: Colors.grey.shade400,
+                  icon,
+                  color: kprimaryGreen,
+                  size: isLandscape ? 12.sp : 22.sp,
                 ),
               ),
-            ),
-          ],
+
+              SizedBox(width: isLandscape ? 10.w : 16.w),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      heading,
+                      style: GTextStyle.bodyBold.copyWith(
+                        fontSize: isLandscape ? 10.sp : 14.sp,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.grey.shade600,
+                      ),
+                    ),
+                    SizedBox(height: 6.h),
+                    if (data != null && data.isNotEmpty)
+                      Text(
+                        data,
+                        style: TextStyle(
+                          fontSize: isLandscape ? 8.sp : 13.h,
+                          color: Colors.black87,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+
+              GestureDetector(
+                onTap: () {
+                  _copyToClipboard(context, heading);
+                },
+
+                child: Padding(
+                  padding: EdgeInsets.only(left: 8.w),
+                  child: Icon(
+                    PhosphorIconsLight.copy,
+                    size: isLandscape ? 12.sp : 18.sp,
+                    color: Colors.grey.shade400,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  void _copyToClipboard(BuildContext context, String text) {
+    if (text.isEmpty) return;
+
+    Clipboard.setData(ClipboardData(text: text)).then((_) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            "$text Copied",
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.white, fontSize: 12.sp),
+          ),
+          duration: Duration(milliseconds: 2001),
+          backgroundColor: kprimaryGreen,
+          behavior: SnackBarBehavior.floating,
+          margin: EdgeInsets.only(left: 120.w, right: 120.w, bottom: 50.h),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(35.r),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
+          elevation: 0,
+        ),
+      );
+    });
   }
 }

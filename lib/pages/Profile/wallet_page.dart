@@ -1,6 +1,8 @@
 import 'package:agent_porta/pages/Profile/request_money.dart';
 import 'package:agent_porta/styles/constants.dart';
+import 'package:agent_porta/styles/style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:uicons/uicons.dart';
 
@@ -21,25 +23,6 @@ class Transaction {
     required this.amount,
     required this.amountColor,
   });
-}
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Crypto Wallet',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        fontFamily: 'qs',
-      ),
-      home: CryptoWalletScreen(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
 }
 
 class CryptoWalletScreen extends StatelessWidget {
@@ -116,7 +99,10 @@ class CryptoWalletScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
-      appBar: PreferredSize(preferredSize: Size.fromHeight(1), child: AppBar(backgroundColor: Colors.black,)),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(1),
+        child: AppBar(backgroundColor: Colors.black),
+      ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -124,20 +110,18 @@ class CryptoWalletScreen extends StatelessWidget {
             // Profile Picture
             Container(
               decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [
-                        kPrimaryColor,
-                        kPrimaryColor.withOpacity(.8)
-                      ])
+                gradient: LinearGradient(
+                  colors: [kPrimaryColor, kPrimaryColor.withOpacity(.8)],
+                ),
               ),
               child: Stack(
                 children: [
                   Positioned(
-                    top: -50,
-                    right: -30,
+                    top: -50.h,
+                    right: -30.w,
                     child: Container(
-                      width: 150,
-                      height: 150,
+                      width: 150.w,
+                      height: 150.h,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.white.withOpacity(0.1),
@@ -145,11 +129,11 @@ class CryptoWalletScreen extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    top: 80,
-                    left: -40,
+                    top: 80.h,
+                    left: -40.w,
                     child: Container(
-                      width: 100,
-                      height: 100,
+                      width: 100.w,
+                      height: 100.h,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.white.withOpacity(0.08),
@@ -157,11 +141,11 @@ class CryptoWalletScreen extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    bottom: -90,
-                    right: 20,
+                    bottom: -90.h,
+                    right: 20.w,
                     child: Container(
-                      width: 160,
-                      height: 160,
+                      width: 160.w,
+                      height: 160.h,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.white.withOpacity(0.06),
@@ -170,7 +154,7 @@ class CryptoWalletScreen extends StatelessWidget {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(25,25,25,40),
+                    padding: EdgeInsets.fromLTRB(10.w, 10.h, 25.w, 40.w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -179,24 +163,34 @@ class CryptoWalletScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             IconButton(
-                              icon: Icon(UIcons.solidRounded.angle_left,size: 15, color: Colors.white),
-                              onPressed: () { Navigator.pop(context); },
+                              icon: Icon(
+                                UIcons.solidRounded.angle_left,
+                                size: 15.sp,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
                               style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(Colors.white12)
+                                backgroundColor: MaterialStateProperty.all(
+                                  Colors.white12,
+                                ),
                               ),
                             ),
                             Align(
                               alignment: Alignment.centerRight,
                               child: CircleAvatar(
-                                radius: 20,
+                                radius: 20.r,
                                 backgroundColor: Colors.white12,
-                                backgroundImage: AssetImage('assets/images/me.jpg'),
+                                backgroundImage: AssetImage(
+                                  'assets/images/man.png',
+                                ),
                               ),
                             ),
                           ],
                         ),
 
-                        SizedBox(height: 60),
+                        SizedBox(height: 60.h),
 
                         // Overall Balance
                         Column(
@@ -204,28 +198,28 @@ class CryptoWalletScreen extends StatelessWidget {
                           children: [
                             Text(
                               'Balance Amount',
-                              style: TextStyle(
+                              style: GTextStyle.bodyLight.copyWith(
                                 fontSize: 17,
-                                color: Colors.white30,
+                                color: Colors.white38,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            SizedBox(height: 8),
+                            SizedBox(height: 8.w),
                             RichText(
                               text: TextSpan(
                                 children: [
                                   TextSpan(
                                     text: '\₹1,614',
-                                    style: TextStyle(
-                                      fontSize: 35,
+                                    style: GTextStyle.heading1Medium.copyWith(
+                                      fontSize: 30.sp,
                                       fontWeight: FontWeight.w500,
                                       color: Colors.white,
                                     ),
                                   ),
                                   TextSpan(
                                     text: '.00',
-                                    style: TextStyle(
-                                      fontSize: 30,
+                                    style: GTextStyle.bodyLight.copyWith(
+                                      fontSize: 30.sp,
                                       fontWeight: FontWeight.w300,
                                       color: Colors.grey[400],
                                     ),
@@ -242,35 +236,38 @@ class CryptoWalletScreen extends StatelessWidget {
               ),
             ),
 
-            SizedBox(height: 30),
+            SizedBox(height: 25.h),
 
-            // Buy and Sell Buttons
             Row(
               children: [
                 Expanded(
                   child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 20),
-                    height: 50,
+                    margin: EdgeInsets.symmetric(horizontal: 20.w),
+                    height: 45.h,
                     child: ElevatedButton(
-                      onPressed: (){
+                      onPressed: () {
                         RequestMoneyDialog.show(context);
-                        },
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: kPrimaryColor,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
+                          borderRadius: BorderRadius.circular(25.r),
                         ),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(PhosphorIconsRegular.handArrowDown, color: Colors.white, size: 18),
-                          SizedBox(width: 10),
+                          Icon(
+                            PhosphorIconsRegular.handArrowDown,
+                            color: Colors.white,
+                            size: 18.sp,
+                          ),
+                          SizedBox(width: 10.w),
                           Text(
                             'Request Money',
-                            style: TextStyle(
+                            style: GTextStyle.bodyBold.copyWith(
                               color: Colors.white,
-                              fontSize: 16,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -281,44 +278,40 @@ class CryptoWalletScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 25.h),
 
             // Transactions Section
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal:20.0),
+              padding: EdgeInsets.symmetric(horizontal: 20.0.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'Recent History',
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: GTextStyle.heading1Medium.copyWith(fontSize: 15.sp),
                   ),
                   Row(
                     children: [
                       Text(
                         'See all ',
                         textAlign: TextAlign.justify,
-                        style: TextStyle(
-                          fontSize: 13,
+                        style: GTextStyle.bodyMedium.copyWith(
+                          fontSize: 14.sp,
                           color: Colors.grey[500],
                         ),
                       ),
-                      Icon(Icons.chevron_right,size: 17,)
+                      Icon(Icons.chevron_right, size: 20.sp),
                     ],
                   ),
                 ],
               ),
             ),
 
-            SizedBox(height: 20),
+            SizedBox(height: 20.h),
 
-            // Transaction Items using ListView.builder
             Expanded(
               child: ListView.builder(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
                 itemCount: transactions.length,
                 itemBuilder: (context, index) {
                   final transaction = transactions[index];
@@ -361,52 +354,43 @@ class TransactionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(0,16,16,16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      padding: EdgeInsets.symmetric(vertical: 8.h),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.r)),
       child: Row(
         children: [
           Container(
-            width: 40,
-            height: 40,
+            width: 40.w,
+            height: 40.h,
             decoration: BoxDecoration(
               color: iconColor.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(10.r),
             ),
-            child: Icon(
-              icon,
-              color: iconColor,
-              size: 17,
-            ),
+            child: Icon(icon, color: iconColor, size: 17.sp),
           ),
-          SizedBox(width: 15),
+          SizedBox(width: 15.w),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
-                  style: TextStyle(
-                    fontSize: 14,
+                  style: GTextStyle.bodySmall.copyWith(
+                    fontSize: 13.sp,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(height: 4),
+                SizedBox(height: 4.h),
                 Text(
                   subtitle,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey[500],
-                  ),
+                  style: TextStyle(fontSize: 12.sp, color: Colors.grey[500]),
                 ),
               ],
             ),
           ),
           Text(
             '${amount}\$',
-            style: TextStyle(
-              fontSize: 15,
+            style: GTextStyle.bodyBold.copyWith(
+              fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               color: amountColor,
             ),

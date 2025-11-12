@@ -1,119 +1,197 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class GTextStyle extends TextStyle {
-  const GTextStyle._({
-    super.fontSize,
-    super.fontWeight,
-    super.textBaseline,
-    super.letterSpacing,
-    super.height,
-  });
+class GTextStyle {
+  GTextStyle._();
 
-
-
-  static const display = GTextStyle._(
-    fontSize: 26.0,
-    fontWeight: FontWeight.w600,
-    textBaseline: TextBaseline.alphabetic,
-    letterSpacing: -1,
-    height: 1.2,
+  static get display => TextStyle(
+    fontSize: 40.spMin,
+    fontWeight: FontWeight.bold,
+    letterSpacing: -0.5,
   );
 
-  static const heading1Light = GTextStyle._(
-    fontSize: 24.0,
+  static get displayMedium => TextStyle(
+    fontSize: 26.0.spMin,
+    fontWeight: FontWeight.w600,
+    letterSpacing: -0.5,
+    height: 1.3.h,
+  );
+
+  /// heading  1 style
+
+  static get heading1 => TextStyle(
+    fontSize: 24.0.spMin,
+    fontWeight: FontWeight.w600,
+    letterSpacing: -0.5,
+    height: 1.3.h,
+  );
+
+  static get heading1Medium => TextStyle(
+    fontSize: 24.0.spMin,
+    fontWeight: FontWeight.w500,
+    letterSpacing: -0.5,
+    height: 1.2.h,
+  );
+
+  static get heading1Bold => TextStyle(
+    fontSize: 24.0.spMin,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0,
+  );
+
+  /// heading  2 style
+
+  static get heading2 => TextStyle(
+    fontSize: 20.0.spMin,
+    fontWeight: FontWeight.w600,
+    letterSpacing: -0.2,
+    height: 1.3.h,
+  );
+
+  static get heading2Medium => TextStyle(
+    fontSize: 20.0.sp.spMin,
+    fontWeight: FontWeight.w500,
+    letterSpacing: -0.3,
+    height: 1.2.sp,
+  );
+
+  static get heading2Light => TextStyle(
+    fontSize: 20.0.spMin,
+    fontWeight: FontWeight.w300,
+    textBaseline: TextBaseline.alphabetic,
+    letterSpacing: -0.3,
+    height: 1.2.h,
+  );
+
+  static get heading2Bold => TextStyle(
+    fontSize: 18.0.spMin,
+    fontWeight: FontWeight.w600,
+    textBaseline: TextBaseline.alphabetic,
+    letterSpacing: 0,
+  );
+
+  /// heading  3 style
+
+  static get heading3 => TextStyle(
+    fontSize: 18.0.spMin,
+    fontWeight: FontWeight.w600,
+    textBaseline: TextBaseline.alphabetic,
+    letterSpacing: -0.1,
+    height: 1.4,
+  );
+
+  static get heading3Medium => TextStyle(
+    fontSize: 18.0.spMin,
+    fontWeight: FontWeight.w500,
+    letterSpacing: -0.1,
+    height: 1.4.h,
+  );
+
+  /// body 1 style (main contant)
+
+  static get body => TextStyle(
+    fontSize: 16.0.spMin,
+    fontWeight: FontWeight.w400,
+    textBaseline: TextBaseline.alphabetic,
+    letterSpacing: 0,
+    height: 1.5.h,
+  );
+
+  static get bodyMedium => TextStyle(
+    fontSize: 16.0.spMin,
+    fontWeight: FontWeight.w500,
+    textBaseline: TextBaseline.alphabetic,
+    letterSpacing: 0,
+    height: 1.5.h,
+  );
+
+  static get bodyBold => TextStyle(
+    fontSize: 16.0.spMin,
+    fontWeight: FontWeight.w600,
+    textBaseline: TextBaseline.alphabetic,
+    letterSpacing: 0,
+    height: 1.5.h,
+  );
+
+  static get bodyLight => TextStyle(
+    fontSize: 16.0.spMin,
     fontWeight: FontWeight.w200,
-
-    textBaseline: TextBaseline.alphabetic,
     letterSpacing: 0,
+    height: 1.5.h,
   );
 
-  static const heading1Medium = GTextStyle._(
-    fontSize: 24.0,
+  //body secondy contant
+
+  static get bodySmall => TextStyle(
+    fontSize: 14.0.spMin,
     fontWeight: FontWeight.w400,
-
-    textBaseline: TextBaseline.alphabetic,
-    letterSpacing: 0,
+    letterSpacing: 0.1,
+    height: 1.5.h,
   );
 
-  static const heading1Bold = GTextStyle._(
-    fontSize: 24.0,
-    fontWeight: FontWeight.w600,
-
-    textBaseline: TextBaseline.alphabetic,
-    letterSpacing: 0,
+  static get bodySmallMedium => TextStyle(
+    fontSize: 14.0.spMin,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.1,
+    height: 1.5.h,
+  );
+  static get bodySmallbold => TextStyle(
+    fontSize: 14.0.spMin,
+    fontWeight: FontWeight.w700,
+    letterSpacing: 0.1,
+    height: 1.5.h,
   );
 
-  static const heading2Light = GTextStyle._(
-    fontSize: 18.0,
-    fontWeight: FontWeight.w200,
+  //caption styles (labels...)
 
-    textBaseline: TextBaseline.alphabetic,
-    letterSpacing: 0,
-  );
-
-  static const heading2Medium = GTextStyle._(
-    fontSize: 18.0,
+  static get caption => TextStyle(
+    fontSize: 12.0.spMin,
     fontWeight: FontWeight.w400,
-    textBaseline: TextBaseline.alphabetic,
-    letterSpacing: 0,
+    letterSpacing: 0.2,
+    height: 1.4.h,
   );
 
-  static const heading2Bold = GTextStyle._(
-    fontSize: 18.0,
+  static get captionMedium => TextStyle(
+    fontSize: 12.0.spMin,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.2,
+    height: 1.4.h,
+  );
+
+  static get captionBold => TextStyle(
+    fontSize: 12.0.spMin,
     fontWeight: FontWeight.w600,
-    
-    textBaseline: TextBaseline.alphabetic,
-    letterSpacing: 0,
+    letterSpacing: 0.2,
+    height: 1.4.h,
   );
 
-  static const bodyLight = GTextStyle._(
-    fontSize: 16.0,
-    fontWeight: FontWeight.w200,
-  
-    textBaseline: TextBaseline.alphabetic,
-    letterSpacing: 0,
+  /// button and label
+
+  static get button => TextStyle(
+    fontSize: 18.0.spMin,
+    fontWeight: FontWeight.w800,
+    letterSpacing: 0.5,
+    height: 1.2.h,
   );
 
-  static const bodyMedium = GTextStyle._(
-    fontSize: 16.0,
-    fontWeight: FontWeight.w400,
-
-    textBaseline: TextBaseline.alphabetic,
-    letterSpacing: 0,
+  static get buttonSmall => TextStyle(
+    fontSize: 14.0.spMin,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.1,
+    height: 1.3.h,
   );
 
-  static const bodyBold = GTextStyle._(
-    fontSize: 16.0,
-    fontWeight: FontWeight.w600,
-    textBaseline: TextBaseline.alphabetic,
-    letterSpacing: 0,
+  static get label => TextStyle(
+    fontSize: 14.0.spMin,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.1,
+    height: 1.3.h,
   );
 
-  static const bodySmall = GTextStyle._(
-    fontSize: 14.0,
-    fontWeight: FontWeight.w400,
-    textBaseline: TextBaseline.alphabetic,
-    letterSpacing: 0,
-  );
-
-  static const caption = GTextStyle._(
-    fontSize: 13.0,
-    fontWeight: FontWeight.w400,
-    textBaseline: TextBaseline.alphabetic,
-    letterSpacing: 0,
-  );
-
-  static const captionBold = GTextStyle._(
-    fontSize: 13.0,
-    fontWeight: FontWeight.w600,
-    textBaseline: TextBaseline.alphabetic,
-    letterSpacing: 0,
-  );
-
-  static const label = GTextStyle._(
-    fontSize: 17,
-    fontWeight: FontWeight.w600,
-    textBaseline: TextBaseline.alphabetic,
-    letterSpacing: 0,
+  static get labelSmall => TextStyle(
+    fontSize: 12.0.spMin,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.2,
+    height: 1.3.h,
   );
 }

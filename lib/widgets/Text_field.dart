@@ -29,7 +29,7 @@ Widget buildFieldLabel({
 
             style: GTextStyle.label.copyWith(
               color: kPrimaryColor,
-              fontSize: isLandscape ? 8.sp : fontSize ?? 15.sp,
+              fontSize: fontSize ?? 17.spMin,
             ),
           ),
         ),
@@ -58,6 +58,7 @@ Widget buildADDField({
   int? minlines,
   bool showBorderside = false,
   required BuildContext context,
+  String? perfixText,
 }) {
   final isLandscape =
       MediaQuery.of(context).orientation == Orientation.landscape;
@@ -84,21 +85,26 @@ Widget buildADDField({
         controller: Controller,
         textCapitalization: textCapitalization,
         decoration: InputDecoration(
+          prefixText: perfixText,
+          prefixStyle: GTextStyle.bodyBold.copyWith(
+            color: kPrimaryColor,
+            // fontSize: 18.sp,
+          ),
           helperText: helperText,
           helperStyle: GTextStyle.bodyLight.copyWith(
             color: kPrimaryColor,
-            fontSize: isLandscape ? 8.sp : fontSize ?? 14.sp,
+            // fontSize: isLandscape ? 8.sp : fontSize ?? 14.sp,
           ),
 
           hintText: Controller.text.isEmpty ? hintText : null,
           hintStyle: GTextStyle.bodyLight.copyWith(
             color: Colors.black45,
-            fontSize: isLandscape ? 8.sp : fontSize ?? 14.sp,
+            // fontSize: isLandscape ? 8.sp : fontSize ?? 14.sp,
           ),
           errorStyle: GTextStyle.bodyLight.copyWith(
             color: kErrorcolor,
             fontWeight: FontWeight.w300,
-            fontSize: isLandscape ? 7.sp : 13.sp,
+            // fontSize: isLandscape ? 7.sp : 13.sp,
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.r),
@@ -133,7 +139,7 @@ Widget buildADDField({
         onTap: onTap,
         style: GTextStyle.bodyBold.copyWith(
           color: kPrimaryColor,
-          fontSize: isLandscape ? 8.sp : 15.sp,
+          // fontSize: isLandscape ? 8.sp : 15.sp,
         ),
         validator: validator,
         keyboardType: keybordType,

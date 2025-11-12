@@ -7,14 +7,14 @@ import 'package:agent_porta/styles/constants.dart';
 import 'package:agent_porta/styles/style.dart';
 import 'package:agent_porta/pages/verify_screen.dart';
 
-class MoblieScreen extends StatefulWidget {
-  const MoblieScreen({super.key});
+class MobileScreen extends StatefulWidget {
+  const MobileScreen({super.key});
 
   @override
-  State<MoblieScreen> createState() => _MoblieScreenState();
+  State<MobileScreen> createState() => _MoblieScreenState();
 }
 
-class _MoblieScreenState extends State<MoblieScreen> {
+class _MoblieScreenState extends State<MobileScreen> {
   String? _selectedCountryCode = "+91";
   String? _selectedCountryFlag = '🇮🇳';
 
@@ -65,7 +65,7 @@ class _MoblieScreenState extends State<MoblieScreen> {
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       backgroundColor: kBackgroundColor,
-
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -73,11 +73,11 @@ class _MoblieScreenState extends State<MoblieScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: isLandscape ? 40.h : 220.w),
+                SizedBox(height: isLandscape ? 40.h : 200.h),
 
                 buildlogo(),
-                SizedBox(height: isLandscape ? 15.h : 25.h),
-
+                SizedBox(height: 25.h),
+                // isLandscape ? 15.h :
                 Align(
                   alignment: Alignment.centerLeft,
 
@@ -86,21 +86,20 @@ class _MoblieScreenState extends State<MoblieScreen> {
                     style: GTextStyle.label.copyWith(color: kPrimaryColor),
                   ),
                 ),
-                SizedBox(height: isLandscape ? 4.h : 8.h),
+                SizedBox(height: 6.h),
                 Row(
                   children: [
                     GestureDetector(
                       onTap: _openCountryPicker,
                       child: Container(
                         height: 40.h,
-
                         padding: EdgeInsets.zero,
                         decoration: BoxDecoration(
                           color: Colors.grey.shade100,
                           borderRadius: BorderRadius.circular(8.r),
                           border: Border.all(
                             color: kPrimaryColor,
-                            width: isLandscape ? 0.9 : 1.0.w,
+                            width: isLandscape ? 0.5.w : 1.0.w,
                           ),
                         ),
                         child: ConstrainedBox(
@@ -116,7 +115,7 @@ class _MoblieScreenState extends State<MoblieScreen> {
                                       _selectedCountryFlag!.isNotEmpty) ...[
                                     Text(
                                       _selectedCountryFlag!,
-                                      style: TextStyle(fontSize: 16.w),
+                                      style: TextStyle(fontSize: 16.spMin),
                                     ),
                                     SizedBox(width: 2.w), // change4
                                   ],
@@ -127,9 +126,7 @@ class _MoblieScreenState extends State<MoblieScreen> {
                                             : '+$_selectedCountryCode')
                                         : '+91',
                                     textAlign: TextAlign.center,
-                                    style: GTextStyle.bodyLight.copyWith(
-                                      fontSize: 12.sp,
-                                    ),
+                                    style: GTextStyle.bodyLight,
                                   ),
                                   SizedBox(width: 2.w), // change5
                                   Icon(Icons.arrow_drop_down),
@@ -141,7 +138,7 @@ class _MoblieScreenState extends State<MoblieScreen> {
                       ),
                     ),
 
-                    SizedBox(width: isLandscape ? 4.w : 8.w),
+                    SizedBox(width: 6.w),
 
                     Expanded(
                       child: Container(
@@ -150,7 +147,7 @@ class _MoblieScreenState extends State<MoblieScreen> {
                           color: Colors.grey.shade100,
                           shape: RoundedRectangleBorder(
                             side: BorderSide(
-                              width: isLandscape ? 0.9 : 1.0.w,
+                              width: isLandscape ? 0.5.w : 1.0.w,
                               color: kPrimaryColor,
                             ),
                             borderRadius: BorderRadius.circular(8.r),
@@ -168,16 +165,16 @@ class _MoblieScreenState extends State<MoblieScreen> {
                             hintText: "Enter Your Moblie Number",
                             hintStyle: GTextStyle.bodyLight.copyWith(
                               color: Colors.black45,
-                              fontSize: isLandscape ? 8.sp : 15,
+                              // fontSize: isLandscape ? 8.sp : 15.sp,
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.r),
                               borderSide: BorderSide.none,
                             ),
-
                             contentPadding: EdgeInsets.symmetric(
                               horizontal: 12.w,
-                              vertical: isLandscape ? 9.h : 13.5.h,
+                              vertical: 9.0.h,
+                              // isLandscape ? 9.h
                             ),
 
                             isCollapsed: true,
@@ -185,18 +182,21 @@ class _MoblieScreenState extends State<MoblieScreen> {
                             fillColor: Colors.grey.shade100,
                           ),
 
-                          cursorHeight: isLandscape ? 25.h : 25,
+                          cursorHeight: 25.0.spMin,
+
+                          //  isLandscape ? 25.h : 25.h,
                           style: GTextStyle.bodyBold.copyWith(
                             color: kPrimaryColor,
-                            fontSize: isLandscape ? 14 : 15.sp,
                           ),
                         ),
+
+                        // fontSize: isLandscape ? 14.sp : 15.sp,
                       ),
                     ),
                   ],
                 ),
 
-                SizedBox(height: 40.h),
+                SizedBox(height: 45.h),
 
                 GestureDetector(
                   onTap: () {
@@ -207,7 +207,7 @@ class _MoblieScreenState extends State<MoblieScreen> {
                   },
                   child: Container(
                     width: double.infinity,
-                    height: 40.h,
+                    height: 45.h,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
@@ -222,21 +222,55 @@ class _MoblieScreenState extends State<MoblieScreen> {
                     alignment: Alignment.center,
                     child: Text(
                       'Continue',
-                      style: GTextStyle.bodyBold.copyWith(
-                        fontSize: isLandscape ? 11.sp : 18.sp,
+                      style: GTextStyle.button.copyWith(
                         color: Colors.white,
-                        fontWeight: FontWeight.w800,
+
+                        // fontSize: isLandscape ? 11.sp : 18.sp,
                       ),
                     ),
                   ),
                 ),
-
-                SizedBox(height: 50.h),
+                SizedBox(height: 20.h),
               ],
             ),
           ),
         ),
       ),
+      // bottomNavigationBar: Padding(
+      //   padding: EdgeInsets.only(
+      //     bottom: MediaQuery.of(context).viewInsets.bottom + 200.h,
+      //   ),
+
+      //   child: GestureDetector(
+      //     onTap: () {
+      //       Navigator.pushReplacement(
+      //         context,
+      //         MaterialPageRoute(builder: (context) => VerifyScreen()),
+      //       );
+      //     },
+      //     child: Container(
+      //       width: double.infinity,
+      //       height: 45.h,
+      //       decoration: BoxDecoration(
+      //         gradient: LinearGradient(
+      //           colors: [kPrimaryColor.withOpacity(0.610), kPrimaryColor],
+      //           begin: Alignment.bottomLeft,
+      //           end: Alignment.bottomCenter,
+      //         ),
+      //         borderRadius: BorderRadius.circular(30.r),
+      //       ),
+      //       alignment: Alignment.center,
+      //       child: Text(
+      //         'Continue',
+      //         style: GTextStyle.bodyBold.copyWith(
+      //           fontSize: isLandscape ? 11.sp : 18.sp,
+      //           color: Colors.white,
+      //           fontWeight: FontWeight.w800,
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      // ),
     );
   }
 }

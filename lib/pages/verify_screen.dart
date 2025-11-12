@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:agent_porta/pages/moblie_screen.dart';
+import 'package:agent_porta/pages/mobile_screen.dart';
 import 'package:agent_porta/pages/set_pasaword.dart';
 import 'package:agent_porta/styles/constants.dart';
 import 'package:agent_porta/styles/style.dart';
@@ -91,7 +91,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => MoblieScreen()),
+                      MaterialPageRoute(builder: (context) => MobileScreen()),
                     );
                   },
                   padding: EdgeInsets.symmetric(
@@ -99,7 +99,11 @@ class _VerifyScreenState extends State<VerifyScreen> {
                     vertical: 10.h,
                   ),
 
-                  icon: Icon(Icons.arrow_back_ios, color: black, size: 20.sp),
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: kPrimaryColor,
+                    size: 20.spMin,
+                  ),
                 ),
                 backgroundColor: kBackgroundColor,
 
@@ -116,26 +120,25 @@ class _VerifyScreenState extends State<VerifyScreen> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => MoblieScreen(),
+                              builder: (context) => MobileScreen(),
                             ),
                           );
                         },
+
                         padding: EdgeInsets.symmetric(
                           horizontal: 10.w,
                           vertical: 10.h,
                         ),
-
                         icon: Icon(
                           Icons.arrow_back_ios,
-                          color: black,
-                          size: 20,
+                          color: kPrimaryColor,
+                          size: 20.spMin,
                         ),
                       ),
                       backgroundColor: kBackgroundColor,
-
-                      elevation: isLandscape ? 0 : 1,
+                      elevation: 1,
                       centerTitle: false,
-                      toolbarHeight: isLandscape ? 30.h : 56.h,
+                      toolbarHeight: 56.h,
                     ),
                   ];
                 },
@@ -158,19 +161,17 @@ class _VerifyScreenState extends State<VerifyScreen> {
 
             Text(
               "Verify Your Code",
-              style: GTextStyle.heading2Light.copyWith(
-                fontWeight: FontWeight.bold,
-                fontSize: isLandscape ? 12.sp : 20.sp,
-              ),
+              style: GTextStyle.heading2Bold.copyWith(color: kPrimaryColor),
+              // fontWeight: FontWeight.bold,
+              // fontSize: isLandscape ? 12.sp : 20.sp,
             ),
-            SizedBox(height: isLandscape ? 4.h : 6.h),
 
             RichText(
               textAlign: TextAlign.center,
               text: TextSpan(
-                style: GTextStyle.bodyBold.copyWith(
+                style: GTextStyle.bodySmall.copyWith(
                   color: black,
-                  fontSize: isLandscape ? 8.sp : 12.sp,
+                  // fontSize: isLandscape ? 8.sp : 12.sp,
                 ),
                 children: const [
                   TextSpan(text: 'Enter the 6 -digit code sent to\n'),
@@ -216,10 +217,10 @@ class _VerifyScreenState extends State<VerifyScreen> {
                       ),
                       style: GTextStyle.bodyBold.copyWith(
                         color: kPrimaryColor,
-                        fontSize: isLandscape ? 11.sp : 18.sp,
+                        // fontSize: isLandscape ? 11.sp : 18.sp,
                       ),
                       cursorColor: kPrimaryColor,
-                      cursorHeight: isLandscape ? 30.h : 25,
+                      cursorHeight: isLandscape ? 30.h : 25.h,
                       maxLength: 1,
                       textAlign: TextAlign.center,
                       onChanged: (value) {
@@ -240,9 +241,9 @@ class _VerifyScreenState extends State<VerifyScreen> {
               ),
             ),
 
-            SizedBox(height: 40.h),
+            SizedBox(height: 45.h),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: GestureDetector(
                 onTap: () {
                   Navigator.pushReplacement(
@@ -252,7 +253,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                 },
                 child: Container(
                   width: double.infinity,
-                  height: 40.h,
+                  height: 45.h,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [kPrimaryColor.withOpacity(0.610), kPrimaryColor],
@@ -264,10 +265,9 @@ class _VerifyScreenState extends State<VerifyScreen> {
                   alignment: Alignment.center,
                   child: Text(
                     'verify',
-                    style: GTextStyle.bodyBold.copyWith(
-                      fontSize: isLandscape ? 11.sp : 18.sp,
+                    style: GTextStyle.button.copyWith(
+                      // fontSize: isLandscape ? 11.sp : 18.sp,
                       color: Colors.white,
-                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ),
@@ -278,8 +278,8 @@ class _VerifyScreenState extends State<VerifyScreen> {
             RichText(
               text: TextSpan(
                 text: "Didn't get OTP? ",
-                style: GTextStyle.bodyMedium.copyWith(
-                  fontSize: isLandscape ? 8.sp : 13,
+                style: GTextStyle.bodySmall.copyWith(
+                  // fontSize: isLandscape ? 8.sp : 13.sp,
                   color: Colors.black54,
                 ),
                 children: [
@@ -288,10 +288,10 @@ class _VerifyScreenState extends State<VerifyScreen> {
                       onTap: isResendDisable ? null : resendOtp,
                       child: Text(
                         isResendDisable ? "Resend in $_conutdowm" : 'Resend',
-                        style: GTextStyle.bodyBold.copyWith(
-                          fontSize: isLandscape ? 8.sp : 14,
+                        style: GTextStyle.bodySmallbold.copyWith(
+                          // fontSize: isLandscape ? 8.sp : 14.sp,
                           color: isResendDisable ? grey : kPrimaryColor,
-                          fontWeight: FontWeight.w800,
+                          // fontWeight: FontWeight.w800,
                         ),
                       ),
                     ),

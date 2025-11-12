@@ -1,4 +1,4 @@
-import 'package:agent_porta/pages/moblie_screen.dart';
+import 'package:agent_porta/pages/mobile_screen.dart';
 import 'package:agent_porta/widgets/Text_field.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,7 +7,6 @@ import '../../styles/constants.dart';
 import 'package:agent_porta/styles/style.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'Reset_password_verify.dart';
 import '../set_pasaword.dart';
 
@@ -64,8 +63,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    final isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    // final isLandscape =
+    //     MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
@@ -82,7 +81,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           icon: Icon(
             Icons.arrow_back_ios,
             color: kPrimaryColor,
-            size: isLandscape ? 25 : 20.sp,
+            size: 20.spMin,
           ),
         ),
         backgroundColor: kBackgroundColor,
@@ -94,26 +93,20 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         child: SingleChildScrollView(
           child: SafeArea(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 23.w),
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
                     'Forgot\nPassword?',
-                    style: GoogleFonts.poppins(
-                      color: kPrimaryColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: isLandscape ? 40 : 30.sp,
-                      letterSpacing: 0.5,
-                    ),
+                    style: GTextStyle.display.copyWith(color: kPrimaryColor),
                   ),
                   SizedBox(height: 4.h),
                   Text(
                     'Don\'t worry! It happens. Please enter the email address\nassociated with your account.',
                     style: GTextStyle.bodyMedium.copyWith(
                       color: Colors.black54,
-                      // fontFamily: "Outfit",
                     ),
                   ),
 
@@ -146,15 +139,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                               context,
                               MaterialPageRoute(
                                 builder:
-                                    (context) => ResetPasswordVerify(
-                                      otp: '2323',
-                                    ),
+                                    (context) =>
+                                        ResetPasswordVerify(otp: '2323'),
                               ),
                             );
                           },
                           child: Container(
                             width: double.infinity,
-                            height: 40.h,
+                            height: 45.h,
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
                                 colors: [
@@ -164,15 +156,15 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                 begin: Alignment.bottomLeft,
                                 end: Alignment.bottomCenter,
                               ),
-                              borderRadius: BorderRadius.circular(25.r),
+                              borderRadius: BorderRadius.circular(30.r),
                             ),
                             alignment: Alignment.center,
                             child: Text(
                               'Rest Password',
                               style: GTextStyle.bodyBold.copyWith(
-                                fontSize: isLandscape ? 8.sp : 18.sp,
+                                // fontSize: isLandscape ? 8.sp : 18.sp,
                                 color: Colors.white,
-                                fontWeight: FontWeight.w800,
+                                // fontWeight: FontWeight.w800,
                               ),
                             ),
                           ),
@@ -184,9 +176,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                             children: [
                               TextSpan(
                                 text: "Remember your password? ",
-                                style: GTextStyle.bodyBold.copyWith(
-                                  fontSize: isLandscape ? 7.sp : 14.sp,
-                                  fontWeight: FontWeight.w400,
+                                style: GTextStyle.bodyLight.copyWith(
+                                  // fontSize: isLandscape ? 7.sp : 14.sp,
+                                  // fontWeight: FontWeight.w400,
                                 ),
                               ),
                               TextSpan(
@@ -197,12 +189,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                         Navigator.pushReplacement(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => MoblieScreen(),
+                                            builder:
+                                                (context) => MobileScreen(),
                                           ),
                                         );
                                       },
                                 style: GTextStyle.bodyBold.copyWith(
-                                  fontWeight: FontWeight.bold,
                                   color: kPrimaryColor,
                                 ),
                               ),

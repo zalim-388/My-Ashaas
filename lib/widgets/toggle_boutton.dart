@@ -203,8 +203,8 @@ Widget buildToggleSingChip({
   required ValueChanged<String?> onChanged,
   required BuildContext context,
 }) {
-  final isLandscape =
-      MediaQuery.of(context).orientation == Orientation.landscape;
+  // final isLandscape =
+  //     MediaQuery.of(context).orientation == Orientation.landscape;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [

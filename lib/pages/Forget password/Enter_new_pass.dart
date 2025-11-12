@@ -5,7 +5,6 @@ import 'package:agent_porta/widgets/Text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class EnterNewPass extends StatefulWidget {
   final String otp;
@@ -54,40 +53,33 @@ class _EnterNewPassState extends State<EnterNewPass> {
       backgroundColor: kBackgroundColor,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 23.w),
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
 
             children: [
-              SizedBox(height: isLandscape ? 30.h : 40),
+              SizedBox(height: isLandscape ? 30.h : 40.h),
 
-              Container(
-                decoration: BoxDecoration(
-                  color: kPrimaryColor.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(12.r),
+              IconButton(
+                icon: Icon(
+                  Icons.arrow_back_ios_new,
+                  color: kPrimaryColor,
+                  size: 20.spMin,
                 ),
-                child: IconButton(
-                  icon: Icon(
-                    Icons.arrow_back_ios_new,
-                    color: kPrimaryColor,
-                    size: 20,
-                  ),
-                  onPressed: () {
-                    HapticFeedback.lightImpact();
-                    Navigator.pop(context);
-                  },
-                ),
+                onPressed: () {
+                  HapticFeedback.lightImpact();
+                  Navigator.pop(context);
+                },
               ),
-              SizedBox(height: 150.h),
+              SizedBox(height: isLandscape ? 30.h : 130.h),
 
               Center(
                 child: Text(
                   'Create New\n  Password',
-                  style: GoogleFonts.poppins(
-                    fontSize: isLandscape ? 50 : 30.sp,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: -0.5,
+                  style: GTextStyle.display.copyWith(
+                    // fontSize: isLandscape ? 50 : 30.sp,
+                    // fontWeight: FontWeight.bold,
                     color: kPrimaryColor,
                   ),
                 ),
@@ -97,9 +89,9 @@ class _EnterNewPassState extends State<EnterNewPass> {
                 child: Text(
                   'Your new password must be different\nfrom previously used passwords',
                   style: GTextStyle.bodyMedium.copyWith(
-                    fontSize: isLandscape ? 10.sp : 15.sp,
+                    // fontSize: isLandscape ? 10.sp : 15.sp,
                     color: Colors.black54,
-                    fontWeight: FontWeight.w400,
+                    // fontWeight: FontWeight.w400,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -144,7 +136,10 @@ class _EnterNewPassState extends State<EnterNewPass> {
                       showBorderside: true,
                     ),
 
-                    SizedBox(height: 40.0),
+                    SizedBox(height: 45.h),
+
+buildButton()
+
                     GestureDetector(
                       onTap: () {
                         Navigator.pushReplacement(
@@ -156,7 +151,7 @@ class _EnterNewPassState extends State<EnterNewPass> {
                       },
                       child: Container(
                         width: double.infinity,
-                        height: 40.h,
+                        height: 45.h,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
@@ -166,20 +161,18 @@ class _EnterNewPassState extends State<EnterNewPass> {
                             begin: Alignment.bottomLeft,
                             end: Alignment.bottomCenter,
                           ),
-                          borderRadius: BorderRadius.circular(25.r),
+                          borderRadius: BorderRadius.circular(30.r),
                         ),
                         alignment: Alignment.center,
                         child: Text(
                           'Save & Continue',
-                          style: GTextStyle.bodyBold.copyWith(
-                            fontSize: isLandscape ? 8.sp : 18.sp,
+                          style: GTextStyle.button.copyWith(
                             color: Colors.white,
-                            fontWeight: FontWeight.w800,
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(height: 30.0),
+                    SizedBox(height: 30.0.h),
                   ],
                 ),
               ),

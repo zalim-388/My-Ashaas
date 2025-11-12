@@ -1,7 +1,10 @@
 import 'dart:ui';
 
 import 'package:agent_porta/styles/constants.dart';
+import 'package:agent_porta/styles/style.dart';
+import 'package:agent_porta/widgets/Text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class RequestMoneyDialog {
@@ -12,166 +15,141 @@ class RequestMoneyDialog {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
+        final isLandscape =
+            MediaQuery.of(context).orientation == Orientation.landscape;
         return BackdropFilter(
-          filter: ImageFilter.blur(
-            sigmaX: 4.0,
-            sigmaY: 4.0,
-          ),
-          child: AlertDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
+          filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
+          child: Dialog(
+            insetPadding: EdgeInsets.symmetric(
+              horizontal: 20.w,
+              vertical: 24.h,
             ),
-            contentPadding: EdgeInsets.zero,
-            content: SingleChildScrollView(
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.85,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: Colors.white,
-                ),
+            backgroundColor: Colors.transparent,
+            // shape: RoundedRectangleBorder(
+            //   borderRadius: BorderRadius.circular(16.r),
+            // ),
+            elevation: 0,
+
+            child: Container(
+              width: isLandscape ? 500 : double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16.r),
+                color: Colors.white,
+              ),
+              child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    // Header
                     Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.all(20),
+                      padding: EdgeInsets.all(isLandscape ? 12.w : 20.w),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [kPrimaryColor, kPrimaryColor.withOpacity(.7)],
+                          colors: [
+                            kPrimaryColor,
+                            kPrimaryColor.withOpacity(.7),
+                          ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(16),
-                          topRight: Radius.circular(16),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(16.r),
+                          topRight: Radius.circular(16.r),
                         ),
                       ),
                       child: Column(
                         children: [
                           Image.asset(
                             'assets/images/save-money.png',
-                            width: 40,
-                            height: 40,
+                            width: isLandscape ? 50 : 40.w,
+                            height: isLandscape ? 50 : 40.h,
                             color: Colors.white,
-                            errorBuilder: (context, error, stackTrace) => Icon(
-                              PhosphorIconsLight.money,
-                              size: 40,
-                              color: Colors.white,
-                            ),
+                            errorBuilder:
+                                (context, error, stackTrace) => Icon(
+                                  PhosphorIconsLight.money,
+                                  size: 40.sp,
+                                  color: Colors.white,
+                                ),
                           ),
-                          const SizedBox(height: 12),
-                          const Text(
+                          SizedBox(height: 12.w),
+                          Text(
                             'Request Money',
-                            style: TextStyle(
+                            style: GTextStyle.bodyBold.copyWith(
                               color: Colors.white,
-                              fontSize: 18,
+                              fontSize: isLandscape ? 23 : 18.sp,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(height: 4),
-                          const Text(
+                          SizedBox(height: isLandscape ? 2 : 4.h),
+                          Text(
                             'Send request to Porta',
-                            style: TextStyle(
+                            style: GTextStyle.bodyMedium.copyWith(
                               color: Colors.white70,
-                              fontSize: 14,
+                              fontSize: isLandscape ? 20 : 14.sp,
                             ),
                           ),
                         ],
                       ),
                     ),
-              
-                    // Content
+
                     Padding(
-                      padding: const EdgeInsets.all(20),
+                      padding: EdgeInsets.all(isLandscape ? 12.w : 20.w),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Enter Amount',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black87,
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-              
-                          // Amount Input
-                          TextFormField(
-                            cursorColor: kPrimaryColor,
-                            controller: amountController,
-                            keyboardType: TextInputType.number,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                            ),
+                          buildADDField(
+                            label: "Enter Amount",
+                            hintText: "Enter Amount",
+                            Controller: amountController,
+                            context: context,
+                            keybordType: TextInputType.number,
+                            perfixText: "₹ ",
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter an amount';
                               }
                               return null;
                             },
-                            decoration: InputDecoration(
-                              prefixText: '₹ ',
-                              prefixStyle: TextStyle(
-                                color: kPrimaryColor,
-                                fontSize: 18,
-                                fontFamily: 'nunito',
-                                fontWeight: FontWeight.w600,
-                              ),
-                              hintText: 'Enter amount',
-                              hintStyle: TextStyle(
-                                color: Colors.grey.shade400,
-                                fontSize: 16,
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide: BorderSide.none,
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide: BorderSide.none,
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide: BorderSide.none,
-                              ),
-                              contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 14,
-                              ),
-                              filled: true,
-                              fillColor: Colors.grey.shade50,
-                            ),
                           ),
-              
-                          const SizedBox(height: 16),
-              
+
+                          SizedBox(height: 16.h),
+
                           // Quick Amount Buttons
-                          const Text(
+                          Text(
                             'Quick Select',
-                            style: TextStyle(
-                              fontSize: 14,
+                            style: GTextStyle.bodyLight.copyWith(
+                              fontSize: isLandscape ? 12 : 14.sp,
                               fontWeight: FontWeight.w500,
                               color: Colors.black54,
                             ),
                           ),
-                          const SizedBox(height: 8),
-              
+                          SizedBox(height: 8.h),
+
                           Row(
                             children: [
-                              _buildQuickButton(context, amountController, ' 500'),
-                              const SizedBox(width: 8),
-                              _buildQuickButton(context, amountController, ' 1000'),
-                              const SizedBox(width: 8),
-                              _buildQuickButton(context, amountController, ' 2000'),
+                              _buildQuickButton(
+                                context,
+                                amountController,
+                                ' 500',
+                              ),
+                              SizedBox(width: 8.w),
+                              _buildQuickButton(
+                                context,
+                                amountController,
+                                ' 1000',
+                              ),
+                              SizedBox(width: 8.w),
+                              _buildQuickButton(
+                                context,
+                                amountController,
+                                ' 2000',
+                              ),
                             ],
                           ),
-              
-                          const SizedBox(height: 24),
-              
-                          // Buttons
+
+                          SizedBox(height: 24.h),
+
                           Row(
                             children: [
                               Expanded(
@@ -180,23 +158,27 @@ class RequestMoneyDialog {
                                     Navigator.of(context).pop();
                                   },
                                   style: OutlinedButton.styleFrom(
-                                    side: BorderSide(color: Colors.grey.shade300),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30),
+                                    side: BorderSide(
+                                      color: Colors.grey.shade300,
                                     ),
-                                    padding: const EdgeInsets.symmetric(vertical: 5),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30.r),
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: 5.h,
+                                    ),
                                   ),
-                                  child: const Text(
+                                  child: Text(
                                     'Cancel',
-                                    style: TextStyle(
+                                    style: GTextStyle.bodyLight.copyWith(
                                       color: Colors.grey,
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 16,
+                                      fontSize: isLandscape ? 11.sp : 14.sp,
                                     ),
                                   ),
                                 ),
                               ),
-                              const SizedBox(width: 12),
+                              SizedBox(width: isLandscape ? 6.w : 12.w),
                               Expanded(
                                 child: ElevatedButton(
                                   onPressed: () {
@@ -205,17 +187,18 @@ class RequestMoneyDialog {
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: kPrimaryColor,
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30),
+                                      borderRadius: BorderRadius.circular(30.r),
                                     ),
-                                    padding: const EdgeInsets.symmetric(vertical:5),
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: 5.r,
+                                    ),
                                     elevation: 2,
                                   ),
-                                  child: const Text(
+                                  child: Text(
                                     'Send',
-                                    style: TextStyle(
+                                    style: GTextStyle.bodyBold.copyWith(
                                       color: Colors.white,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 16,
+                                      fontSize: isLandscape ? 11.sp : 14.sp,
                                     ),
                                   ),
                                 ),
@@ -235,26 +218,32 @@ class RequestMoneyDialog {
     );
   }
 
-  static Widget _buildQuickButton(BuildContext context, TextEditingController controller, String amount) {
+  static Widget _buildQuickButton(
+    BuildContext context,
+    TextEditingController controller,
+    String amount,
+  ) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Expanded(
       child: GestureDetector(
         onTap: () {
           controller.text = amount;
         },
         child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 8),
+          padding: EdgeInsets.symmetric(vertical: isLandscape ? 6.h : 8.h),
           decoration: BoxDecoration(
             border: Border.all(color: kPrimaryColor.withOpacity(0.3)),
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(30.r),
             color: kPrimaryColor.withOpacity(0.05),
           ),
           child: Text(
             '₹$amount',
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: GTextStyle.bodyLight.copyWith(
               color: kPrimaryColor,
               fontWeight: FontWeight.w500,
-              fontSize: 12,
+              fontSize: isLandscape ? 10.sp : 11.sp,
             ),
           ),
         ),
@@ -262,24 +251,26 @@ class RequestMoneyDialog {
     );
   }
 
-  static void _sendRequest(BuildContext context, TextEditingController amountController) {
+  static void _sendRequest(
+    BuildContext context,
+    TextEditingController amountController,
+  ) {
     String amount = amountController.text.trim();
 
     if (amount.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text('Please enter an amount'),
           backgroundColor: Colors.red,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderRadius: BorderRadius.all(Radius.circular(10.r)),
           ),
         ),
       );
       return;
     }
 
-    // Close dialog first
     Navigator.of(context).pop();
 
     // Show success message
@@ -288,8 +279,8 @@ class RequestMoneyDialog {
         content: Text('Money request of ₹$amount sent to Porta successfully!'),
         backgroundColor: kPrimaryColor,
         behavior: SnackBarBehavior.floating,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.r)),
         ),
         duration: const Duration(seconds: 3),
       ),
@@ -297,145 +288,139 @@ class RequestMoneyDialog {
   }
 }
 
+// void _showRequestMoneyDialog(BuildContext context) {
+//   final TextEditingController amountController = TextEditingController();
 
+//   showDialog(
+//     context: context,
+//     builder: (BuildContext context) {
+//       return BackdropFilter(
+//         filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
+//         child: AlertDialog(
+//           backgroundColor: Colors.white38,
+//           shape: RoundedRectangleBorder(
+//             borderRadius: BorderRadius.circular(12),
+//           ),
+//           title: Row(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: [
+//               Image.asset(
+//                 'assets/images/save-money.png',
+//                 width: 24,
+//                 height: 24,
+//                 color: kPrimaryColor,
+//                 errorBuilder:
+//                     (context, error, stackTrace) => Icon(
+//                       PhosphorIconsLight.money,
+//                       size: 24,
+//                       color: kPrimaryColor,
+//                     ),
+//               ),
+//               const SizedBox(width: 12),
+//               const Text(
+//                 'Request Money',
+//                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+//               ),
+//             ],
+//           ),
+//           content: Column(
+//             mainAxisSize: MainAxisSize.min,
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: [
+//               const Text(
+//                 'Enter the amount you want to request from Porta:',
+//                 style: TextStyle(fontSize: 14, color: Colors.black),
+//               ),
+//               const SizedBox(height: 16),
+//               TextField(
+//                 controller: amountController,
+//                 keyboardType: TextInputType.number,
+//                 decoration: InputDecoration(
+//                   prefixText: '₹ ',
+//                   prefixStyle: TextStyle(
+//                     color: kPrimaryColor,
+//                     fontWeight: FontWeight.w500,
+//                   ),
+//                   hintText: 'Enter amount',
+//                   border: OutlineInputBorder(
+//                     borderRadius: BorderRadius.circular(8),
+//                     borderSide: BorderSide(color: Colors.grey.shade300),
+//                   ),
+//                   focusedBorder: OutlineInputBorder(
+//                     borderRadius: BorderRadius.circular(8),
+//                     borderSide: BorderSide(color: kPrimaryColor),
+//                   ),
+//                   contentPadding: const EdgeInsets.symmetric(
+//                     horizontal: 16,
+//                     vertical: 12,
+//                   ),
+//                 ),
+//               ),
+//             ],
+//           ),
+//           actions: [
+//             TextButton(
+//               onPressed: () {
+//                 Navigator.of(context).pop();
+//               },
+//               child: const Text(
+//                 'Cancel',
+//                 style: TextStyle(
+//                   color: Colors.grey,
+//                   fontWeight: FontWeight.w500,
+//                 ),
+//               ),
+//             ),
+//             ElevatedButton(
+//               onPressed: () {
+//                 String amount = amountController.text.trim();
+//                 if (amount.isNotEmpty) {
+//                   // Handle the send request logic here
+//                   Navigator.of(context).pop();
 
-
- void _showRequestMoneyDialog(BuildContext context) {
-    final TextEditingController amountController = TextEditingController();
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
-          child: AlertDialog(
-            backgroundColor: Colors.white38,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'assets/images/save-money.png',
-                  width: 24,
-                  height: 24,
-                  color: kPrimaryColor,
-                  errorBuilder:
-                      (context, error, stackTrace) => Icon(
-                        PhosphorIconsLight.money,
-                        size: 24,
-                        color: kPrimaryColor,
-                      ),
-                ),
-                const SizedBox(width: 12),
-                const Text(
-                  'Request Money',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                ),
-              ],
-            ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Enter the amount you want to request from Porta:',
-                  style: TextStyle(fontSize: 14, color: Colors.black),
-                ),
-                const SizedBox(height: 16),
-                TextField(
-                  controller: amountController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    prefixText: '₹ ',
-                    prefixStyle: TextStyle(
-                      color: kPrimaryColor,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    hintText: 'Enter amount',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(color: Colors.grey.shade300),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(color: kPrimaryColor),
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 12,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text(
-                  'Cancel',
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  String amount = amountController.text.trim();
-                  if (amount.isNotEmpty) {
-                    // Handle the send request logic here
-                    Navigator.of(context).pop();
-
-                    // Show success message
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          'Money request of ₹$amount sent to Porta',
-                        ),
-                        backgroundColor: kPrimaryColor,
-                        behavior: SnackBarBehavior.floating,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                    );
-                  } else {
-                    // Show error message
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Please enter an amount'),
-                        backgroundColor: Colors.red,
-                        behavior: SnackBarBehavior.floating,
-                      ),
-                    );
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: kPrimaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 24,
-                    vertical: 12,
-                  ),
-                ),
-                child: const Text(
-                  'Send',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
+//                   // Show success message
+//                   ScaffoldMessenger.of(context).showSnackBar(
+//                     SnackBar(
+//                       content: Text('Money request of ₹$amount sent to Porta'),
+//                       backgroundColor: kPrimaryColor,
+//                       behavior: SnackBarBehavior.floating,
+//                       shape: RoundedRectangleBorder(
+//                         borderRadius: BorderRadius.circular(8),
+//                       ),
+//                     ),
+//                   );
+//                 } else {
+//                   // Show error message
+//                   ScaffoldMessenger.of(context).showSnackBar(
+//                     const SnackBar(
+//                       content: Text('Please enter an amount'),
+//                       backgroundColor: Colors.red,
+//                       behavior: SnackBarBehavior.floating,
+//                     ),
+//                   );
+//                 }
+//               },
+//               style: ElevatedButton.styleFrom(
+//                 backgroundColor: kPrimaryColor,
+//                 shape: RoundedRectangleBorder(
+//                   borderRadius: BorderRadius.circular(8),
+//                 ),
+//                 padding: const EdgeInsets.symmetric(
+//                   horizontal: 24,
+//                   vertical: 12,
+//                 ),
+//               ),
+//               child: const Text(
+//                 'Send',
+//                 style: TextStyle(
+//                   color: Colors.white,
+//                   fontWeight: FontWeight.w600,
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
+//       );
+//     },
+//   );
+// }

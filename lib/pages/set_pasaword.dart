@@ -90,19 +90,23 @@ class _LoginPageState extends State<Setpassword> {
                   },
 
                   padding: EdgeInsets.symmetric(
-                    horizontal: 10.w,
+                    horizontal: 15.w,
                     vertical: 10.h,
                   ),
-                  icon: Icon(Icons.arrow_back_ios, color: black),
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: kPrimaryColor,
+                    size: 20.spMin,
+                  ),
                 ),
                 title: Text(
                   "Set Password",
-                  style: GTextStyle.bodyBold.copyWith(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w800,
+                  style: GTextStyle.heading2Medium.copyWith(
+                    // fontSize: 18.sp,
+                    // fontWeight: FontWeight.w800,
                   ),
                 ),
-                titleSpacing: 30.w,
+                titleSpacing: 10.w,
                 centerTitle: false,
               ),
       body:
@@ -128,18 +132,18 @@ class _LoginPageState extends State<Setpassword> {
                         ),
                         icon: Icon(
                           Icons.arrow_back_ios,
-                          color: black,
-                          size: 20,
+                          color: kPrimaryColor,
+                          size: 20.spMin,
                         ),
                       ),
                       title: Text(
                         "Set Password",
-                        style: GTextStyle.bodyBold.copyWith(
-                          fontSize: isLandscape ? 25 : 18.sp,
-                          fontWeight: FontWeight.w800,
+                        style: GTextStyle.heading2Bold.copyWith(
+                          //fontSize: isLandscape ? 15.sp : 18.sp,
+                          // fontWeight: FontWeight.w800,
                         ),
                       ),
-                      titleSpacing: 30.w,
+                      titleSpacing: 10.w,
                       centerTitle: false,
                     ),
                   ];
@@ -158,7 +162,7 @@ class _LoginPageState extends State<Setpassword> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: isLandscape ? 30.h : 120.h),
+              SizedBox(height: isLandscape ? 30.h : 130.h),
 
               GestureDetector(
                 onTap: _pikeprofileimage,
@@ -211,7 +215,7 @@ class _LoginPageState extends State<Setpassword> {
               ),
 
               buildADDField(
-                label: "password",
+                label: "Password",
                 hintText: "Enter password",
                 Controller: passwordController,
                 context: context,
@@ -232,7 +236,22 @@ class _LoginPageState extends State<Setpassword> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Congratulation()),
+                    PageRouteBuilder(
+                      opaque: false,
+                      barrierColor: Colors.black.withOpacity(0.5),
+                      pageBuilder: (BuildContext context, _, _) {
+                        return const Congratulation();
+                      },
+
+                      transitionsBuilder: (
+                        context,
+                        animation,
+                        secondaryAnimation,
+                        child,
+                      ) {
+                        return FadeTransition(opacity: animation, child: child);
+                      },
+                    ),
                   );
                 },
                 child: Container(
@@ -249,10 +268,9 @@ class _LoginPageState extends State<Setpassword> {
                   alignment: Alignment.center,
                   child: Text(
                     'Next',
-                    style: GTextStyle.bodyBold.copyWith(
-                      fontSize: isLandscape ? 11.sp : 18.sp,
+                    style: GTextStyle.button.copyWith(
+                      // fontSize: isLandscape ? 11.sp : 18.sp,
                       color: Colors.white,
-                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ),
@@ -276,10 +294,10 @@ class _LoginPageState extends State<Setpassword> {
                 ),
                 child: Text(
                   'Forgot Password ?',
-                  style: GTextStyle.bodyMedium.copyWith(
+                  style: GTextStyle.bodyBold.copyWith(
                     color: kPrimaryColor,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18,
+                    // fontWeight: FontWeight.w600,
+                    // fontSize: 18.sp,
                   ),
                 ),
               ),
