@@ -14,7 +14,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:country_state_city/country_state_city.dart' as csc;
 
-enum imageType { profile, horoscope, idproof }
+enum ImageType { profile, horoscope, idproof }
 
 class PartnerPreferences extends StatefulWidget {
   final PageController pageController;
@@ -92,7 +92,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
 
   Future<void> _imagepicker({
     required ImageSource source,
-    required imageType type,
+    required ImageType type,
     int? index,
   }) async {
     PermissionStatus status;
@@ -126,20 +126,20 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
       setState(() {
         File imagefile = File(picked.path);
         switch (type) {
-          case imageType.profile:
+          case ImageType.profile:
             if (index != null) {
               selectedImages[index] = imagefile;
             }
             break;
 
-          case imageType.idproof:
+          case ImageType.idproof:
             if (index != null) {
               iDProofUpload[index] = imagefile;
             } else {
               iDProofUpload.add(imagefile);
             }
             break;
-          case imageType.horoscope:
+          case ImageType.horoscope:
             _selecthoroscope = File(picked.path);
             break;
         }
@@ -317,7 +317,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
             children: [
               Text(
                 "Partner Preferences",
-                style: GTextStyle.heading1Bold.copyWith(color: kPrimaryColor),
+                style: GTextStyle.heading1.copyWith(color: kPrimaryColor),
               ),
               SizedBox(height: 20.h),
               buildDropdown(
@@ -373,7 +373,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
               buildDropdown(
                 context: context,
                 label: "Country *",
-                fontSize: 12.sp,
+                fontSize: 16.spMin,
                 hintText: "Search your country",
                 icon: Icons.public,
                 options: countryOptions,
@@ -393,7 +393,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                   context: context,
                   label: "State *",
                   hintText: "Search your state",
-                  fontSize: 12.sp,
+                  fontSize: 16.spMin,
                   icon: Icons.map_outlined,
                   options: stateOptions,
                   // controller: _stateController,
@@ -412,7 +412,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                   context: context,
                   label: "City *",
                   hintText: "Search your city",
-                  fontSize: 12.sp,
+                  fontSize: 16.spMin,
                   icon: Icons.location_city_outlined,
                   options: cityOptions,
                   // controller: _cityController,
@@ -559,7 +559,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Container(
-            height: 100.h,
+            height: 120.h,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8.r),
               color: kBackgroundColor,
@@ -670,15 +670,15 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
 
   Future<void> buildimageSelectSheet(
     BuildContext context,
-    imageType type, {
+    ImageType type, {
     int? index,
   }) async {
     await showModalBottomSheet(
       context: context,
       builder: (context) {
-        bool isprofile = (type == imageType.profile);
-        bool ishoroscope = (type == imageType.horoscope);
-        bool isIdproof = (type == imageType.idproof);
+        bool isprofile = (type == ImageType.profile);
+        bool ishoroscope = (type == ImageType.horoscope);
+        bool isIdproof = (type == ImageType.idproof);
         bool canRemove = false;
 
         if (isprofile && index != null && selectedImages[index] != null) {
@@ -741,11 +741,11 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                   title: Text("Remove Image"),
                   onTap: () {
                     Navigator.of(context).pop();
-                    if (type == imageType.profile && index != null) {
+                    if (type == ImageType.profile && index != null) {
                       _removeProfileimage(index);
-                    } else if (type == imageType.idproof && index != null) {
+                    } else if (type == ImageType.idproof && index != null) {
                       _removeIdproofimage(index);
-                    } else if (type == imageType.horoscope) {
+                    } else if (type == ImageType.horoscope) {
                       setState(() {
                         _selecthoroscope = null;
                       });
@@ -766,7 +766,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
 
     return GestureDetector(
       onTap: () {
-        buildimageSelectSheet(context, index: index, imageType.profile);
+        buildimageSelectSheet(context, index: index, ImageType.profile);
       },
 
       child: Container(
@@ -809,7 +809,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                         isPrimary
                             ? Icons.camera_alt
                             : Icons.add_a_photo_rounded,
-                        size: 20,
+                        size: 20.spMin,
                         color: isPrimary ? kPrimaryColor : Colors.grey,
                       ),
                       SizedBox(height: 8.h),
@@ -817,7 +817,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                       Text(
                         isPrimary ? "mandatory" : "Optional",
                         style: GTextStyle.bodyMedium.copyWith(
-                          fontSize: isPrimary ? 14 : 12,
+                          // fontSize: isPrimary ? 14 : 12,
                           color: isPrimary ? kPrimaryColor : Colors.grey,
                           fontWeight: isPrimary ? FontWeight.w600 : null,
                         ),
@@ -836,11 +836,11 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
         MediaQuery.of(context).orientation == Orientation.landscape;
     return GestureDetector(
       onTap: () {
-        buildimageSelectSheet(context, index: index, imageType.idproof);
+        buildimageSelectSheet(context, index: index, ImageType.idproof);
       },
 
       child: Container(
-        height: 80.h,
+        height: isLandscape ? 65.h : 80.h,
         width: isLandscape ? 65.w : 80.w,
 
         decoration: BoxDecoration(
@@ -879,7 +879,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                     children: [
                       Icon(
                         Icons.add_a_photo_rounded,
-                        size: 20,
+                        size: 20.spMin,
                         color: Colors.grey,
                       ),
                       Text("Upload", style: GTextStyle.bodySmall),
@@ -897,7 +897,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
   //       buildimageSelectSheet(
   //         context,
   //         index: othersIdproof.length - 1,
-  //         imageType.idproof,
+  //         ImageType.idproof,
   //       );
   //       setState(() {
   //         othersIdproof.add(null);
@@ -937,7 +937,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
     final file = _selecthoroscope;
     return InkWell(
       onTap: () {
-        buildimageSelectSheet(context, imageType.horoscope);
+        buildimageSelectSheet(context, ImageType.horoscope);
       },
       child: Column(
         children: [
@@ -967,7 +967,11 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                     mainAxisAlignment: MainAxisAlignment.center,
 
                     children: [
-                      Icon(Icons.upload_file, size: 30, color: kPrimaryColor),
+                      Icon(
+                        Icons.upload_file,
+                        size: 30.spMin,
+                        color: kPrimaryColor,
+                      ),
                       SizedBox(height: 10.h),
                       Text("upload horoscope ", style: GTextStyle.bodyMedium),
                       SizedBox(height: 6.h),

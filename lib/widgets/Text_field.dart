@@ -10,8 +10,6 @@ Widget buildFieldLabel({
   double? fontSize,
   required BuildContext context,
 }) {
-  final isLandscape =
-      MediaQuery.of(context).orientation == Orientation.landscape;
   return Padding(
     padding: EdgeInsets.only(
       bottom: 5.0.h,
@@ -33,7 +31,7 @@ Widget buildFieldLabel({
             ),
           ),
         ),
-        Icon(icon, size: isLandscape ? 10.sp : 18.sp, color: kPrimaryColor),
+        Icon(icon, size: 20.spMin, color: kPrimaryColor),
       ],
     ),
   );

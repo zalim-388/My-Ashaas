@@ -5,6 +5,7 @@ import 'package:agent_porta/widgets/Text_field.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:uicons/uicons.dart';
 import 'Forget password/forget_pasword.dart';
 import 'package:agent_porta/styles/constants.dart';
 import 'package:agent_porta/styles/style.dart';
@@ -94,9 +95,9 @@ class _LoginPageState extends State<Setpassword> {
                     vertical: 10.h,
                   ),
                   icon: Icon(
-                    Icons.arrow_back_ios,
+                    UIcons.solidRounded.angle_left,
+                    size: 18.spMin,
                     color: kPrimaryColor,
-                    size: 20.spMin,
                   ),
                 ),
                 title: Text(

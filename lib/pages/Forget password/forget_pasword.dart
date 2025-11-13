@@ -1,7 +1,9 @@
 import 'package:agent_porta/pages/mobile_screen.dart';
 import 'package:agent_porta/widgets/Text_field.dart';
+import 'package:agent_porta/widgets/logo.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:uicons/uicons.dart';
 
 import '../../styles/constants.dart';
 import 'package:agent_porta/styles/style.dart';
@@ -76,12 +78,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               MaterialPageRoute(builder: (context) => Setpassword()),
             );
           },
-          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
 
           icon: Icon(
-            Icons.arrow_back_ios,
+            UIcons.solidRounded.angle_left,
+            size: 18.spMin,
             color: kPrimaryColor,
-            size: 20.spMin,
           ),
         ),
         backgroundColor: kBackgroundColor,
@@ -98,6 +100,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  SizedBox(height: 5.h),
                   Text(
                     'Forgot\nPassword?',
                     style: GTextStyle.display.copyWith(color: kPrimaryColor),
@@ -132,8 +135,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         ),
 
                         SizedBox(height: 32.h),
-
-                        GestureDetector(
+                        buildButton(
+                          title: 'Rest Password',
                           onTap: () {
                             Navigator.pushReplacement(
                               context,
@@ -144,30 +147,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                               ),
                             );
                           },
-                          child: Container(
-                            width: double.infinity,
-                            height: 45.h,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  kPrimaryColor.withOpacity(0.610),
-                                  kPrimaryColor,
-                                ],
-                                begin: Alignment.bottomLeft,
-                                end: Alignment.bottomCenter,
-                              ),
-                              borderRadius: BorderRadius.circular(30.r),
-                            ),
-                            alignment: Alignment.center,
-                            child: Text(
-                              'Rest Password',
-                              style: GTextStyle.bodyBold.copyWith(
-                                // fontSize: isLandscape ? 8.sp : 18.sp,
-                                color: Colors.white,
-                                // fontWeight: FontWeight.w800,
-                              ),
-                            ),
-                          ),
                         ),
 
                         SizedBox(height: 30.h),

@@ -94,6 +94,8 @@ class CryptoWalletScreen extends StatelessWidget {
     ),
   ];
 
+  CryptoWalletScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,216 +106,215 @@ class CryptoWalletScreen extends StatelessWidget {
         child: AppBar(backgroundColor: Colors.black),
       ),
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // Profile Picture
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [kPrimaryColor, kPrimaryColor.withOpacity(.8)],
-                ),
-              ),
-              child: Stack(
+        child: CustomScrollView(
+          physics: BouncingScrollPhysics(),
+          slivers: [
+            SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Positioned(
-                    top: -50.h,
-                    right: -30.w,
-                    child: Container(
-                      width: 150.w,
-                      height: 150.h,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white.withOpacity(0.1),
+                  // Profile Picture
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [kPrimaryColor, kPrimaryColor.withOpacity(.8)],
                       ),
                     ),
-                  ),
-                  Positioned(
-                    top: 80.h,
-                    left: -40.w,
-                    child: Container(
-                      width: 100.w,
-                      height: 100.h,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white.withOpacity(0.08),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: -90.h,
-                    right: 20.w,
-                    child: Container(
-                      width: 160.w,
-                      height: 160.h,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white.withOpacity(0.06),
-                      ),
-                    ),
-                  ),
-
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(10.w, 10.h, 25.w, 40.w),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                    child: Stack(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            IconButton(
-                              icon: Icon(
-                                UIcons.solidRounded.angle_left,
-                                size: 15.sp,
-                                color: Colors.white,
-                              ),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                  Colors.white12,
-                                ),
-                              ),
+                        Positioned(
+                          top: -50.h,
+                          right: -30.w,
+                          child: Container(
+                            width: 150.w,
+                            height: 150.h,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white.withOpacity(0.1),
                             ),
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: CircleAvatar(
-                                radius: 20.r,
-                                backgroundColor: Colors.white12,
-                                backgroundImage: AssetImage(
-                                  'assets/images/man.png',
-                                ),
-                              ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 80.h,
+                          left: -40.w,
+                          child: Container(
+                            width: 100.w,
+                            height: 100.h,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white.withOpacity(0.08),
                             ),
-                          ],
+                          ),
+                        ),
+                        Positioned(
+                          bottom: -90.h,
+                          right: 20.w,
+                          child: Container(
+                            width: 160.w,
+                            height: 160.h,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white.withOpacity(0.06),
+                            ),
+                          ),
                         ),
 
-                        SizedBox(height: 60.h),
-
-                        // Overall Balance
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Balance Amount',
-                              style: GTextStyle.bodyLight.copyWith(
-                                fontSize: 17,
-                                color: Colors.white38,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            SizedBox(height: 8.w),
-                            RichText(
-                              text: TextSpan(
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(10.w, 10.h, 25.w, 40.w),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  TextSpan(
-                                    text: '\₹1,614',
-                                    style: GTextStyle.heading1Medium.copyWith(
-                                      fontSize: 30.sp,
-                                      fontWeight: FontWeight.w500,
+                                  IconButton(
+                                    icon: Icon(
+                                      UIcons.solidRounded.angle_left,
+                                      size: 18.spMin,
                                       color: Colors.white,
                                     ),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                            Colors.white12,
+                                          ),
+                                    ),
                                   ),
-                                  TextSpan(
-                                    text: '.00',
-                                    style: GTextStyle.bodyLight.copyWith(
-                                      fontSize: 30.sp,
-                                      fontWeight: FontWeight.w300,
-                                      color: Colors.grey[400],
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: CircleAvatar(
+                                      radius: 20.r,
+                                      backgroundColor: Colors.white12,
+                                      backgroundImage: AssetImage(
+                                        'assets/images/man.png',
+                                      ),
                                     ),
                                   ),
                                 ],
                               ),
+
+                              SizedBox(height: 60.h),
+
+                              // Overall Balance
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Balance Amount',
+                                    style: GTextStyle.heading2Medium.copyWith(
+                                      color: Colors.white54,
+                                    ),
+                                  ),
+                                  SizedBox(height: 8.w),
+                                  RichText(
+                                    text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: '\₹1,614',
+                                          style: GTextStyle.heading1Bold
+                                              .copyWith(color: Colors.white),
+                                        ),
+                                        TextSpan(
+                                          text: '.00',
+                                          style: GTextStyle.body.copyWith(
+                                            fontWeight: FontWeight.w300,
+                                            color: Colors.grey[400],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(height: 25.h),
+
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 20.w),
+                          height: 45.h,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              RequestMoneyDialog.show(context);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: kPrimaryColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25.r),
+                              ),
                             ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  PhosphorIconsRegular.handArrowDown,
+                                  color: Colors.white,
+                                  size: 18.spMin,
+                                ),
+                                SizedBox(width: 10.w),
+                                Text(
+                                  'Request Money',
+                                  style: GTextStyle.bodyBold.copyWith(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 25.h),
+
+                  // Transactions Section
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.0.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Recent History',
+                          style: GTextStyle.bodyBold.copyWith(),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'See all ',
+                              textAlign: TextAlign.justify,
+                              style: GTextStyle.bodyMedium.copyWith(
+                                color: Colors.grey[500],
+                              ),
+                            ),
+                            Icon(Icons.chevron_right, size: 20.spMin),
                           ],
                         ),
                       ],
                     ),
                   ),
+
+                  SizedBox(height: 20.h),
                 ],
               ),
             ),
 
-            SizedBox(height: 25.h),
-
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 20.w),
-                    height: 45.h,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        RequestMoneyDialog.show(context);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: kPrimaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.r),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            PhosphorIconsRegular.handArrowDown,
-                            color: Colors.white,
-                            size: 18.sp,
-                          ),
-                          SizedBox(width: 10.w),
-                          Text(
-                            'Request Money',
-                            style: GTextStyle.bodyBold.copyWith(
-                              color: Colors.white,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 25.h),
-
-            // Transactions Section
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Recent History',
-                    style: GTextStyle.heading1Medium.copyWith(fontSize: 15.sp),
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        'See all ',
-                        textAlign: TextAlign.justify,
-                        style: GTextStyle.bodyMedium.copyWith(
-                          fontSize: 14.sp,
-                          color: Colors.grey[500],
-                        ),
-                      ),
-                      Icon(Icons.chevron_right, size: 20.sp),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-
-            SizedBox(height: 20.h),
-
-            Expanded(
-              child: ListView.builder(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                itemCount: transactions.length,
-                itemBuilder: (context, index) {
+            SliverPadding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              sliver: SliverList(
+                delegate: SliverChildBuilderDelegate((context, index) {
                   final transaction = transactions[index];
                   return TransactionItem(
                     icon: transaction.icon,
@@ -323,9 +324,11 @@ class CryptoWalletScreen extends StatelessWidget {
                     amount: transaction.amount,
                     amountColor: transaction.amountColor,
                   );
-                },
+                }, childCount: transactions.length),
               ),
             ),
+
+            SliverToBoxAdapter(child: SizedBox(height: 20.h)),
           ],
         ),
       ),
@@ -353,47 +356,39 @@ class TransactionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Container(
       padding: EdgeInsets.symmetric(vertical: 8.h),
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.r)),
       child: Row(
         children: [
           Container(
-            width: 40.w,
-            height: 40.h,
+            width: isLandscape ? 30.w : 40.w,
+            height: isLandscape ? 30.h : 40.h,
             decoration: BoxDecoration(
               color: iconColor.withOpacity(0.1),
               borderRadius: BorderRadius.circular(10.r),
             ),
-            child: Icon(icon, color: iconColor, size: 17.sp),
+            child: Icon(icon, color: iconColor, size: 17.spMin),
           ),
           SizedBox(width: 15.w),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: GTextStyle.bodySmall.copyWith(
-                    fontSize: 13.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                Text(title, style: GTextStyle.bodySmall.copyWith()),
                 SizedBox(height: 4.h),
                 Text(
                   subtitle,
-                  style: TextStyle(fontSize: 12.sp, color: Colors.grey[500]),
+                  style: GTextStyle.bodySmall.copyWith(color: Colors.grey[500]),
                 ),
               ],
             ),
           ),
           Text(
             '${amount}\$',
-            style: GTextStyle.bodyBold.copyWith(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
-              color: amountColor,
-            ),
+            style: GTextStyle.bodyBold.copyWith(color: amountColor),
           ),
         ],
       ),

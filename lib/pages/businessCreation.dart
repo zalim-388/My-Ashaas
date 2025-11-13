@@ -349,9 +349,8 @@ class _ContactFormScreenState extends State<businessCreation> {
         centerTitle: true,
         title: Text(
           'Add Business',
-          style: GTextStyle.bodyBold.copyWith(
-            fontSize: isLandscape ? 11.sp : 18.sp,
-            fontWeight: FontWeight.w800,
+          style: GTextStyle.heading2Bold.copyWith(
+            // fontSize: isLandscape ? 11.sp : 18.sp,
           ),
         ),
         titleSpacing: 30.w,
@@ -363,12 +362,16 @@ class _ContactFormScreenState extends State<businessCreation> {
               MaterialPageRoute(builder: (context) => HomePage()),
             );
           },
-          icon: Icon(UIcons.solidRounded.angle_left, size: 15),
+          icon: Icon(
+            UIcons.solidRounded.angle_left,
+            size: 18.spMin,
+            color: kPrimaryColor,
+          ),
         ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 23.w),
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Form(
             key: _formKey,
             child: Column(
@@ -601,24 +604,22 @@ class _ContactFormScreenState extends State<businessCreation> {
                                 children: [
                                   Icon(
                                     Ionicons.image,
-                                    size: isLandscape ? 20.sp : 40.sp,
+                                    size: 40.spMin,
                                     color: Colors.black38,
                                   ),
-                                  SizedBox(height: isLandscape ? 4.h : 8.h),
+                                  SizedBox(height: 8.h),
                                   Text(
                                     'Tap to capture or upload pictures',
-                                    style: TextStyle(
-                                      fontFamily: 'qs',
+                                    style: GTextStyle.bodyMedium.copyWith(
                                       fontWeight: FontWeight.w500,
                                       color: Colors.grey,
-                                      fontSize: isLandscape ? 8.sp : 12.sp,
+                                      // fontSize: isLandscape ? 8.sp : 12.sp,
                                     ),
                                   ),
                                   Text(
                                     'Min: $_minFiles, Max: $_maxFiles files',
-                                    style: TextStyle(
-                                      fontFamily: 'qs',
-                                      fontSize: isLandscape ? 8.sp : 11.sp,
+                                    style: GTextStyle.bodyMedium.copyWith(
+                                      // fontSize: isLandscape ? 8.sp : 11.sp,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -645,14 +646,15 @@ class _ContactFormScreenState extends State<businessCreation> {
                                                     BorderRadius.circular(8.r),
                                                 child: Image.file(
                                                   file,
-                                                  width: 80.w,
+                                                  width:
+                                                      isLandscape ? 60.w : 80.w,
                                                   height: 80.h,
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
                                               Positioned(
-                                                top: 4,
-                                                right: 4.w,
+                                                top: 4.h,
+                                                right: 3.w,
                                                 child: GestureDetector(
                                                   onTap:
                                                       () => _removeFile(index),
@@ -664,13 +666,13 @@ class _ContactFormScreenState extends State<businessCreation> {
                                                       color: kPrimaryColor,
                                                       borderRadius:
                                                           BorderRadius.circular(
-                                                            10,
+                                                            10.r,
                                                           ),
                                                     ),
                                                     child: Icon(
                                                       Ionicons.trash_outline,
                                                       color: Colors.white,
-                                                      size: 14.sp,
+                                                      size: 14.spMin,
                                                     ),
                                                   ),
                                                 ),
@@ -687,24 +689,24 @@ class _ContactFormScreenState extends State<businessCreation> {
 
                 if (_selectedFiles.isNotEmpty)
                   Padding(
-                    padding: const EdgeInsets.only(top: 8.0, left: 10),
+                    padding: EdgeInsets.only(top: 8.0.h, left: 10.w),
                     child: Text(
                       '${_selectedFiles.length} file(s) selected',
-                      style: TextStyle(
-                        fontSize: isLandscape ? 8.sp : 12.sp,
+                      style: GTextStyle.bodyMedium.copyWith(
+                        // fontSize: isLandscape ? 8.sp : 12.sp,
                         color: Colors.grey[600],
-                        fontFamily: 'qs',
                       ),
                     ),
                   ),
 
-                SizedBox(height: isLandscape ? 14.h : 24.h),
+                SizedBox(height: 20.h),
 
                 GestureDetector(
                   onTap: _isLoading ? null : _submitForm,
 
                   child: Container(
-                    height: 40.h,
+                    height: 45.h,
+                    width: double.infinity,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -731,10 +733,8 @@ class _ContactFormScreenState extends State<businessCreation> {
                             )
                             : Text(
                               'SUBMIT',
-                              style: GTextStyle.bodyBold.copyWith(
-                                fontSize: isLandscape ? 8.sp : 18.sp,
+                              style: GTextStyle.button.copyWith(
                                 color: Colors.white,
-                                fontWeight: FontWeight.w800,
                               ),
                             ),
                   ),

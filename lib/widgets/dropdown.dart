@@ -27,7 +27,7 @@ Widget buildDropdown({
     return InputDecoration(
       contentPadding: EdgeInsets.symmetric(
         horizontal: isLandscape ? 8.w : 12.w,
-        vertical: 10.h,
+        vertical: 11.h,
       ),
 
       border: OutlineInputBorder(
@@ -40,13 +40,13 @@ Widget buildDropdown({
       hintText: selectedValue ?? hintText,
       hintStyle: GTextStyle.bodyLight.copyWith(
         color: Colors.black45,
-        fontSize: isLandscape ? 8.sp : fontSize ?? 14.sp,
+        // fontSize: isLandscape ? 8.sp : fontSize ?? 14.sp,
       ),
 
       errorStyle: GTextStyle.bodyLight.copyWith(
         color: kErrorcolor,
-        fontWeight: FontWeight.w300,
-        fontSize: isLandscape ? 7.sp : 13.sp,
+        // fontWeight: FontWeight.w300,
+        // fontSize: isLandscape ? 7.sp : 13.sp,
       ),
 
       enabledBorder: OutlineInputBorder(
@@ -93,13 +93,14 @@ Widget buildDropdown({
               controller: fieldController,
               focusNode: fieldfocusNode,
               style: GTextStyle.bodyBold.copyWith(
-                fontSize: isLandscape ? 8.sp : 14.sp,
+                // fontSize: isLandscape ? 8.sp : 14.sp,
                 color: kPrimaryColor,
               ),
               keyboardType: keyboardType,
               cursorColor: kPrimaryColor,
               decoration: getInputDecoration(hintText),
               validator: validator,
+              
             );
           },
 
@@ -145,9 +146,9 @@ Widget buildDropdown({
                           ),
                           child: Text(
                             option,
-                            style: GTextStyle.bodyBold.copyWith(
+                            style: GTextStyle.bodyMedium.copyWith(
                               color: kPrimaryColor,
-                              fontSize: isLandscape ? 8.sp : 15.sp,
+                              // fontSize: isLandscape ? 8.sp : 15.sp,
                             ),
                           ),
                         ),
@@ -172,6 +173,7 @@ Widget buildDropdown({
 
           onChanged: onChanged,
           decoratorProps: DropDownDecoratorProps(
+            baseStyle: GTextStyle.bodyMedium.copyWith(color: kPrimaryColor),
             decoration: getInputDecoration(selectedValue ?? hintText),
           ),
           popupProps: PopupProps.menu(
@@ -183,9 +185,9 @@ Widget buildDropdown({
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
                 child: Text(
                   item,
-                  style: GTextStyle.bodyBold.copyWith(
+                  style: GTextStyle.bodyMedium.copyWith(
                     color: kPrimaryColor,
-                    fontSize: isLandscape ? 8.sp : 14.sp,
+                    // fontSize: isLandscape ? 8.sp : 14.sp,
                   ),
                 ),
               );
@@ -193,8 +195,16 @@ Widget buildDropdown({
           ),
           suffixProps: DropdownSuffixProps(
             dropdownButtonProps: DropdownButtonProps(
-              iconClosed: Icon(Icons.keyboard_arrow_down, color: kPrimaryColor),
-              iconOpened: Icon(Icons.keyboard_arrow_up, color: kPrimaryColor),
+              iconClosed: Icon(
+                Icons.keyboard_arrow_down,
+                color: kPrimaryColor,
+                size: 18.spMin,
+              ),
+              iconOpened: Icon(
+                Icons.keyboard_arrow_up,
+                color: kPrimaryColor,
+                size: 18.spMin,
+              ),
             ),
           ),
           autoValidateMode: AutovalidateMode.onUserInteraction,

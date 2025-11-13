@@ -75,18 +75,15 @@ class RequestMoneyDialog {
                           SizedBox(height: 12.w),
                           Text(
                             'Request Money',
-                            style: GTextStyle.bodyBold.copyWith(
+                            style: GTextStyle.heading2Bold.copyWith(
                               color: Colors.white,
-                              fontSize: isLandscape ? 23 : 18.sp,
-                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: isLandscape ? 2 : 4.h),
+                          SizedBox(height: 2.h),
                           Text(
                             'Send request to Porta',
                             style: GTextStyle.bodyMedium.copyWith(
                               color: Colors.white70,
-                              fontSize: isLandscape ? 20 : 14.sp,
                             ),
                           ),
                         ],
@@ -119,7 +116,6 @@ class RequestMoneyDialog {
                           Text(
                             'Quick Select',
                             style: GTextStyle.bodyLight.copyWith(
-                              fontSize: isLandscape ? 12 : 14.sp,
                               fontWeight: FontWeight.w500,
                               color: Colors.black54,
                             ),
@@ -172,8 +168,6 @@ class RequestMoneyDialog {
                                     'Cancel',
                                     style: GTextStyle.bodyLight.copyWith(
                                       color: Colors.grey,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: isLandscape ? 11.sp : 14.sp,
                                     ),
                                   ),
                                 ),
@@ -198,7 +192,6 @@ class RequestMoneyDialog {
                                     'Send',
                                     style: GTextStyle.bodyBold.copyWith(
                                       color: Colors.white,
-                                      fontSize: isLandscape ? 11.sp : 14.sp,
                                     ),
                                   ),
                                 ),
@@ -240,11 +233,7 @@ class RequestMoneyDialog {
           child: Text(
             '₹$amount',
             textAlign: TextAlign.center,
-            style: GTextStyle.bodyLight.copyWith(
-              color: kPrimaryColor,
-              fontWeight: FontWeight.w500,
-              fontSize: isLandscape ? 10.sp : 11.sp,
-            ),
+            style: GTextStyle.bodyLight.copyWith(color: kPrimaryColor),
           ),
         ),
       ),

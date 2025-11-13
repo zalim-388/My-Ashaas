@@ -1,10 +1,13 @@
 import 'package:agent_porta/pages/Congratulation.dart';
+import 'package:agent_porta/pages/Forget%20password/Reset_password_verify.dart';
 import 'package:agent_porta/styles/constants.dart';
 import 'package:agent_porta/styles/style.dart';
 import 'package:agent_porta/widgets/Text_field.dart';
+import 'package:agent_porta/widgets/logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:uicons/uicons.dart';
 
 class EnterNewPass extends StatefulWidget {
   final String otp;
@@ -59,20 +62,25 @@ class _EnterNewPassState extends State<EnterNewPass> {
             crossAxisAlignment: CrossAxisAlignment.start,
 
             children: [
-              SizedBox(height: isLandscape ? 30.h : 40.h),
+              SizedBox(height: isLandscape ? 30.h : 30.h),
 
               IconButton(
                 icon: Icon(
-                  Icons.arrow_back_ios_new,
+                  UIcons.solidRounded.angle_left,
+                  size: 18.spMin,
                   color: kPrimaryColor,
-                  size: 20.spMin,
                 ),
+
                 onPressed: () {
-                  HapticFeedback.lightImpact();
-                  Navigator.pop(context);
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ResetPasswordVerify(otp: ''),
+                    ),
+                  );
                 },
               ),
-              SizedBox(height: isLandscape ? 30.h : 130.h),
+              SizedBox(height: isLandscape ? 30.h : 150.h),
 
               Center(
                 child: Text(
@@ -138,9 +146,8 @@ class _EnterNewPassState extends State<EnterNewPass> {
 
                     SizedBox(height: 45.h),
 
-buildButton()
-
-                    GestureDetector(
+                    buildButton(
+                      title: "Save & Continue",
                       onTap: () {
                         Navigator.pushReplacement(
                           context,
@@ -149,29 +156,8 @@ buildButton()
                           ),
                         );
                       },
-                      child: Container(
-                        width: double.infinity,
-                        height: 45.h,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              kPrimaryColor.withOpacity(0.610),
-                              kPrimaryColor,
-                            ],
-                            begin: Alignment.bottomLeft,
-                            end: Alignment.bottomCenter,
-                          ),
-                          borderRadius: BorderRadius.circular(30.r),
-                        ),
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Save & Continue',
-                          style: GTextStyle.button.copyWith(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
                     ),
+
                     SizedBox(height: 30.0.h),
                   ],
                 ),

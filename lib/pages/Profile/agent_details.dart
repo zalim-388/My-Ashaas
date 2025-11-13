@@ -22,7 +22,7 @@ class AgentDetails extends StatelessWidget {
         leading: IconButton(
           icon: Icon(
             UIcons.solidRounded.angle_left,
-            size: isLandscape ? 10.sp : 15.sp,
+            size: 18.spMin,
             color: Colors.white,
           ),
           onPressed: () {
@@ -52,7 +52,7 @@ class AgentDetails extends StatelessWidget {
           ),
 
           Positioned.fill(
-            top: isLandscape ? 190.h : 170.h,
+            top: 190.h,
             child: Container(
               decoration: BoxDecoration(
                 color: kBackgroundColor,
@@ -61,14 +61,14 @@ class AgentDetails extends StatelessWidget {
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(20.w, 60.h, 20.w, 30.h),
+                  padding: EdgeInsets.fromLTRB(20.w, 50.h, 20.w, 30.h),
                   child: Column(
                     children: [
                       Text(
-                        'name',
-                        style: GTextStyle.bodyBold.copyWith(
-                          fontSize: isLandscape ? 12.sp : 20.sp,
-                          fontWeight: FontWeight.w700,
+                        'Your Name',
+                        style: GTextStyle.heading1Bold.copyWith(
+                          // fontSize: isLandscape ? 12.sp : 20.sp,
+                          // fontWeight: FontWeight.w700,
                           color: Colors.black87,
                         ),
                       ),
@@ -80,12 +80,11 @@ class AgentDetails extends StatelessWidget {
                         ),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.r),
-                          color: Colors.grey.shade200,
+                          color: Colors.grey.shade300,
                         ),
                         child: Text(
                           'Youmail@gmail.com',
                           style: GTextStyle.bodyMedium.copyWith(
-                            fontSize: isLandscape ? 10.sp : 15.sp,
                             color: Colors.black54,
                           ),
                         ),
@@ -173,7 +172,7 @@ class AgentDetails extends StatelessWidget {
                         color: Colors.grey[300],
                         child: Icon(
                           Icons.person,
-                          size: 30.sp,
+                          size: 30.spMin,
                           color: Colors.grey,
                         ),
                       );
@@ -200,12 +199,10 @@ class AgentDetails extends StatelessWidget {
       color: Colors.grey.shade100,
       shadowColor: Colors.grey.shade100,
       elevation: 5,
-      margin: EdgeInsets.symmetric(vertical: isLandscape ? 8.h : 6.h),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.r),
-        side: BorderSide(color: Colors.grey.shade100),
-      ),
+      margin: EdgeInsets.symmetric(vertical: 6.h),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
       child: InkWell(
+        borderRadius: BorderRadius.circular(12.r),
         onLongPress: () {
           _copyToClipboard(context, heading);
         },
@@ -217,20 +214,16 @@ class AgentDetails extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                padding: EdgeInsets.all(isLandscape ? 6.w : 6.w),
+                padding: EdgeInsets.all(5.w),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.r),
                   color: kPrimaryColor.withOpacity(0.1),
                 ),
 
-                child: Icon(
-                  icon,
-                  color: kprimaryGreen,
-                  size: isLandscape ? 12.sp : 22.sp,
-                ),
+                child: Icon(icon, color: kprimaryGreen, size: 24.spMin),
               ),
 
-              SizedBox(width: isLandscape ? 10.w : 16.w),
+              SizedBox(width: 8.w),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -238,19 +231,15 @@ class AgentDetails extends StatelessWidget {
                     Text(
                       heading,
                       style: GTextStyle.bodyBold.copyWith(
-                        fontSize: isLandscape ? 10.sp : 14.sp,
-                        fontWeight: FontWeight.w500,
                         color: Colors.grey.shade600,
                       ),
                     ),
-                    SizedBox(height: 6.h),
+                    SizedBox(height: 2.h),
                     if (data != null && data.isNotEmpty)
                       Text(
                         data,
-                        style: TextStyle(
-                          fontSize: isLandscape ? 8.sp : 13.h,
+                        style: GTextStyle.bodySmall.copyWith(
                           color: Colors.black87,
-                          fontWeight: FontWeight.w500,
                         ),
                       ),
                   ],
@@ -266,7 +255,7 @@ class AgentDetails extends StatelessWidget {
                   padding: EdgeInsets.only(left: 8.w),
                   child: Icon(
                     PhosphorIconsLight.copy,
-                    size: isLandscape ? 12.sp : 18.sp,
+                    size: 18.spMin,
                     color: Colors.grey.shade400,
                   ),
                 ),
@@ -287,16 +276,16 @@ class AgentDetails extends StatelessWidget {
           content: Text(
             "$text Copied",
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.white, fontSize: 12.sp),
+            style: GTextStyle.bodySmall.copyWith(color: Colors.white),
           ),
           duration: Duration(milliseconds: 2001),
           backgroundColor: kprimaryGreen,
           behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.only(left: 120.w, right: 120.w, bottom: 50.h),
+          margin: EdgeInsets.only(left: 140.w, right: 120.w, bottom: 50.h),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(35.r),
           ),
-          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
+          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
           elevation: 0,
         ),
       );

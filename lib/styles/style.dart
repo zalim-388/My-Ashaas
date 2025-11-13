@@ -34,8 +34,8 @@ class GTextStyle {
   );
 
   static get heading1Bold => TextStyle(
-    fontSize: 24.0.spMin,
-    fontWeight: FontWeight.w600,
+    fontSize: 25.0.spMin,
+    fontWeight: FontWeight.w800,
     letterSpacing: 0,
   );
 
@@ -49,25 +49,31 @@ class GTextStyle {
   );
 
   static get heading2Medium => TextStyle(
-    fontSize: 20.0.sp.spMin,
+    fontSize: 20.0.spMin,
     fontWeight: FontWeight.w500,
     letterSpacing: -0.3,
-    height: 1.2.sp,
+    height: 1.2.h,
   );
 
   static get heading2Light => TextStyle(
     fontSize: 20.0.spMin,
     fontWeight: FontWeight.w300,
-    textBaseline: TextBaseline.alphabetic,
     letterSpacing: -0.3,
     height: 1.2.h,
   );
 
   static get heading2Bold => TextStyle(
     fontSize: 18.0.spMin,
-    fontWeight: FontWeight.w600,
-    textBaseline: TextBaseline.alphabetic,
+    fontWeight: FontWeight.w700,
+
     letterSpacing: 0,
+  );
+
+  static get heading2Small => TextStyle(
+    fontSize: 20.0.spMin,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0,
+    height: 1.3.h,
   );
 
   /// heading  3 style
@@ -75,9 +81,8 @@ class GTextStyle {
   static get heading3 => TextStyle(
     fontSize: 18.0.spMin,
     fontWeight: FontWeight.w600,
-    textBaseline: TextBaseline.alphabetic,
     letterSpacing: -0.1,
-    height: 1.4,
+    height: 1.4.h,
   );
 
   static get heading3Medium => TextStyle(
@@ -92,7 +97,6 @@ class GTextStyle {
   static get body => TextStyle(
     fontSize: 16.0.spMin,
     fontWeight: FontWeight.w400,
-    textBaseline: TextBaseline.alphabetic,
     letterSpacing: 0,
     height: 1.5.h,
   );
@@ -100,15 +104,13 @@ class GTextStyle {
   static get bodyMedium => TextStyle(
     fontSize: 16.0.spMin,
     fontWeight: FontWeight.w500,
-    textBaseline: TextBaseline.alphabetic,
     letterSpacing: 0,
     height: 1.5.h,
   );
 
   static get bodyBold => TextStyle(
     fontSize: 16.0.spMin,
-    fontWeight: FontWeight.w600,
-    textBaseline: TextBaseline.alphabetic,
+    fontWeight: FontWeight.w700,
     letterSpacing: 0,
     height: 1.5.h,
   );
@@ -124,7 +126,7 @@ class GTextStyle {
 
   static get bodySmall => TextStyle(
     fontSize: 14.0.spMin,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w300,
     letterSpacing: 0.1,
     height: 1.5.h,
   );

@@ -23,19 +23,12 @@ class ProfileScreen extends StatelessWidget {
         backgroundColor: kBackgroundColor,
 
         centerTitle: false,
-        title: Text(
-          'Profile',
-          style: GTextStyle.bodyBold.copyWith(
-            fontSize: isLandscape ? 11.sp : 19.sp,
-            fontWeight: FontWeight.w700,
-            letterSpacing: -0.3,
-          ),
-        ),
+        title: Text('Profile', style: GTextStyle.heading1Medium),
         leading: IconButton(
           icon: Icon(
             UIcons.solidRounded.angle_left,
-            size: isLandscape ? 9.sp : 15.sp,
-            color: Colors.black,
+            size: 18.spMin,
+            color: kPrimaryColor,
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -50,9 +43,7 @@ class ProfileScreen extends StatelessWidget {
             SizedBox(height: 10.h),
             // Profile card
             Container(
-              margin: EdgeInsets.symmetric(
-                horizontal: isLandscape ? 30.w : 25.w,
-              ),
+              margin: EdgeInsets.symmetric(horizontal: 25.w),
               padding: EdgeInsets.symmetric(vertical: 25.h, horizontal: 20.w),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -68,7 +59,7 @@ class ProfileScreen extends StatelessWidget {
                   Row(
                     children: [
                       CircleAvatar(
-                        radius: isLandscape ? 45.r : 22.r,
+                        radius: 22.r,
                         backgroundColor: Colors.white,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(50.r),
@@ -80,14 +71,14 @@ class ProfileScreen extends StatelessWidget {
                                 PhosphorIconsLight.detective,
                                 duotoneSecondaryColor: kPrimaryColor,
                                 duotoneSecondaryOpacity: 0.4,
-                                size: 25.sp,
+                                size: 25.spMin,
                                 color: Colors.black,
                               );
                             },
                           ),
                         ),
                       ),
-                      SizedBox(width: isLandscape ? 10.w : 12.w),
+                      SizedBox(width: 8.w),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -95,16 +86,16 @@ class ProfileScreen extends StatelessWidget {
                             'John Doe',
                             style: GTextStyle.bodyMedium.copyWith(
                               color: Colors.white,
-                              fontSize: isLandscape ? 11.sp : 14.sp,
-                              fontWeight: FontWeight.bold,
+                              // fontSize: isLandscape ? 11.sp : 14.sp,
+                              // fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: isLandscape ? 2.h : 4.h),
+                          SizedBox(height: 2.h),
                           Text(
                             'Agent ID: 4578420',
                             style: GTextStyle.bodySmall.copyWith(
                               color: Colors.white70,
-                              fontSize: isLandscape ? 9.sp : 13.sp,
+                              // fontSize: isLandscape ? 9.sp : 13.sp,
                             ),
                           ),
                         ],
@@ -121,7 +112,7 @@ class ProfileScreen extends StatelessWidget {
                       );
                     },
                     child: Container(
-                      width: isLandscape ? 150.w : 230.w,
+                      width: isLandscape ? 100.w : 230.w,
                       margin: EdgeInsets.only(top: 20.h),
                       padding: EdgeInsets.symmetric(
                         horizontal: isLandscape ? 10.w : 20.w,
@@ -135,7 +126,7 @@ class ProfileScreen extends StatelessWidget {
                         children: [
                           Image.asset(
                             'assets/images/wallet1.png',
-                            height: isLandscape ? 65.h : 40.h,
+                            height: 40.h,
                             color: white,
                           ),
 
@@ -146,15 +137,15 @@ class ProfileScreen extends StatelessWidget {
                                 'Wallet Balance',
                                 style: GTextStyle.bodyLight.copyWith(
                                   color: Colors.white,
-                                  fontSize: isLandscape ? 10.w : 12.sp,
+                                  // fontSize: isLandscape ? 10.w : 12.sp,
                                 ),
                               ),
                               Text(
                                 '100,000',
-                                style: TextStyle(
+                                style: GTextStyle.bodySmallbold.copyWith(
                                   color: Colors.white,
-                                  fontSize: isLandscape ? 9.sp : 14.sp,
-                                  fontWeight: FontWeight.bold,
+                                  // fontSize: isLandscape ? 9.sp : 14.sp,
+                                  // fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ],
@@ -176,10 +167,8 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   Text(
                     "Account Settings",
-                    style: GTextStyle.bodyBold.copyWith(
-                      fontSize: isLandscape ? 10.sp : 14.sp,
+                    style: GTextStyle.bodyMedium.copyWith(
                       color: Colors.grey.shade600,
-                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   SizedBox(height: 8.h),
@@ -279,19 +268,11 @@ class ProfileScreen extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  'Log Out',
-                  style: GTextStyle.heading1Bold.copyWith(
-                    fontSize: isLandScape ? 12.sp : 18.sp,
-                  ),
-                ),
+                Text('Log Out', style: GTextStyle.heading1.copyWith()),
                 SizedBox(height: 10.h),
                 Text(
                   'Are you sure you want to log out?',
-                  style: GTextStyle.bodyBold.copyWith(
-                    fontWeight: FontWeight.w500,
-                    fontSize: isLandScape ? 10.sp : 14.sp,
-                  ),
+                  style: GTextStyle.bodySmall.copyWith(),
                 ),
                 SizedBox(height: 20.h),
 
@@ -302,9 +283,7 @@ class ProfileScreen extends StatelessWidget {
                       onPressed: () => Navigator.of(context).pop(),
                       child: Text(
                         'Cancel',
-                        style: GTextStyle.bodyBold.copyWith(
-                          fontSize: isLandScape ? 10.sp : 15.sp,
-                        ),
+                        style: GTextStyle.button.copyWith(),
                       ),
                     ),
                     SizedBox(width: 16.w),
@@ -314,10 +293,7 @@ class ProfileScreen extends StatelessWidget {
                       },
                       child: Text(
                         'Log Out',
-                        style: GTextStyle.bodyBold.copyWith(
-                          fontSize: isLandScape ? 10.sp : 16.sp,
-                          color: Colors.red,
-                        ),
+                        style: GTextStyle.button.copyWith(color: Colors.red),
                       ),
                     ),
                   ],
@@ -353,13 +329,17 @@ Widget _buildMenuItem({
 
         onTap: onTap,
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 14.w),
+          padding: EdgeInsets.symmetric(
+            vertical: 16.h,
+            horizontal: isLandScape ? 4.w : 14.w,
+          ),
           decoration: BoxDecoration(
             color: onTap != null ? Colors.white : Colors.transparent,
             borderRadius: BorderRadius.circular(12.r),
           ),
           // alignment: Alignment.topLeft,
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // Container(
               //   padding: EdgeInsets.all(10.w),
@@ -368,49 +348,57 @@ Widget _buildMenuItem({
               //     borderRadius: BorderRadius.circular(12.r),
               //   ),
               //   child:
-              if (imagePath != null)
-                Image.asset(
-                  imagePath,
-                  width: isLandScape ? 18.w : 22.w,
-                  height: isLandScape ? 18.w : 27.h,
-                  color:
-                      title == 'Logout' ? Colors.red.shade200 : kPrimaryColor,
-                  errorBuilder:
-                      (context, error, stackTrace) =>
-                          icon != null
-                              ? Icon(
-                                icon,
-                                size: isLandScape ? 18.sp : 24.sp,
-                                color: kPrimaryColor,
-                              )
-                              : const SizedBox.shrink(),
-                )
-              else if (icon != null)
-                PhosphorIcon(
-                  icon,
-                  size: isLandScape ? 18.sp : size ?? 22.sp,
-                  color:
-                      title == "Logout" ? Colors.red.shade200 : kPrimaryColor,
-                ),
+              Container(
+                width: 35.w,
+                alignment: Alignment.center,
+                child:
+                    imagePath != null
+                        ? Image.asset(
+                          imagePath,
+                          width: 24.w,
+                          height: 24.h,
+                          color:
+                              title == 'Logout'
+                                  ? Colors.red.shade200
+                                  : kPrimaryColor,
+                          errorBuilder:
+                              (context, error, stackTrace) =>
+                                  icon != null
+                                      ? Icon(
+                                        icon,
+                                        size: 26.spMin,
+                                        color: kPrimaryColor,
+                                      )
+                                      : const SizedBox.shrink(),
+                        )
+                        : Icon(
+                          icon,
+                          size: size ?? 24.spMin,
+                          color:
+                              title == "Logout"
+                                  ? Colors.red.shade200
+                                  : kPrimaryColor,
+                        ),
+              ),
 
-              SizedBox(width: isLandScape ? 8.w : 10.w),
+              //  icon != null
+              // SizedBox(width: 8.w),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       title,
                       style: GTextStyle.bodyBold.copyWith(
-                        fontSize: isLandScape ? 10.sp : 13.sp,
-                        fontWeight: FontWeight.w500,
+                        color: Colors.grey.shade600,
                       ),
                     ),
                     if (subtitle != null && subtitle.isNotEmpty)
                       Text(
                         subtitle,
-                        style: GTextStyle.bodyLight.copyWith(
-                          fontSize: isLandScape ? 8.sp : 11.sp,
-                          color: Colors.grey,
+                        style: GTextStyle.bodySmall.copyWith(
+                          color: Colors.black87,
                         ),
                       ),
                   ],

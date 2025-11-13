@@ -15,12 +15,16 @@ Widget buildlogo() {
   );
 }
 
-Widget buildButton({required String title, required VoidCallback onTap}) {
+Widget buildButton({
+  required String title,
+  required VoidCallback onTap,
+  double? height,
+}) {
   return GestureDetector(
     onTap: onTap,
     child: Container(
       width: double.infinity,
-      height: 45.h,
+      height: height ?? 45.h,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [kPrimaryColor.withOpacity(0.610), kPrimaryColor],

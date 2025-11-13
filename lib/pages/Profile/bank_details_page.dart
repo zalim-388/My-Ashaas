@@ -63,16 +63,12 @@ class BankDetailsPage extends StatelessWidget {
             centerTitle: true,
             title: Text(
               'Bank Details',
-              style: GTextStyle.bodyBold.copyWith(
-                fontSize: isLandscape ? 11.sp : 17.sp,
-                fontWeight: FontWeight.w800,
-                color: Colors.white,
-              ),
+              style: GTextStyle.heading1Medium.copyWith(color: Colors.white),
             ),
             leading: IconButton(
               icon: Icon(
                 UIcons.solidRounded.angle_left,
-                size: isLandscape ? 9.sp : 15.sp,
+                size: 18.spMin,
                 color: Colors.white,
               ),
               onPressed: () {
@@ -88,7 +84,7 @@ class BankDetailsPage extends StatelessWidget {
           children: [
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 24.h, vertical: 35.h),
+              padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 35.h),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [kPrimaryColor, kPrimaryColor.withOpacity(.6)],
@@ -98,23 +94,20 @@ class BankDetailsPage extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  Icon(PhosphorIconsLight.bank, size: 48, color: Colors.white),
+                  Icon(
+                    PhosphorIconsLight.bank,
+                    size: 48.spMin,
+                    color: Colors.white,
+                  ),
                   SizedBox(height: 12.h),
                   Text(
                     'Your Bank Information',
-                    style: GTextStyle.bodyMedium.copyWith(
-                      color: Colors.white,
-                      fontSize: isLandscape ? 11.sp : 17.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: GTextStyle.bodyMedium.copyWith(color: Colors.white),
                   ),
                   SizedBox(height: isLandscape ? 2.h : 4.h),
                   Text(
                     'Secure banking details',
-                    style: GTextStyle.bodyLight.copyWith(
-                      color: Colors.white70,
-                      fontSize: isLandscape ? 8.sp : 14,
-                    ),
+                    style: GTextStyle.bodyLight.copyWith(color: Colors.white70),
                   ),
                 ],
               ),
@@ -177,14 +170,13 @@ class BankDetailsPage extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.grey.shade100,
                 borderRadius: BorderRadius.circular(8.r),
-                border: Border.all(color: Colors.grey.shade200),
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Icon(
                     PhosphorIconsLight.info,
-                    size: isLandscape ? 10.sp : 20.sp,
+                    size: 20.spMin,
                     color: kPrimaryColor,
                   ),
                   SizedBox(width: 12.w),
@@ -192,9 +184,7 @@ class BankDetailsPage extends StatelessWidget {
                     child: Text(
                       'Keep your bank details secure and do not share them with unauthorized persons. Tap on any field to copy the information.',
                       style: GTextStyle.bodyLight.copyWith(
-                        fontSize: isLandscape ? 9.sp : 12.sp,
                         color: kPrimaryColor,
-                        height: 1.4.h,
                       ),
                     ),
                   ),
@@ -239,20 +229,16 @@ class BankDetailsPage extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                padding: EdgeInsets.all(isLandscape ? 6.w : 6.w),
+                padding: EdgeInsets.all(6.w),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.r),
                   color: kPrimaryColor.withOpacity(0.1),
                 ),
 
-                child: Icon(
-                  icon,
-                  color: kprimaryGreen,
-                  size: isLandscape ? 12.sp : 22.sp,
-                ),
+                child: Icon(icon, color: kprimaryGreen, size: 22.spMin),
               ),
 
-              SizedBox(width: isLandscape ? 10.w : 16.w),
+              SizedBox(width: 8.w),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -260,19 +246,15 @@ class BankDetailsPage extends StatelessWidget {
                     Text(
                       fieldName,
                       style: GTextStyle.bodyBold.copyWith(
-                        fontSize: isLandscape ? 8.sp : 13.sp,
-                        fontWeight: FontWeight.w500,
                         color: Colors.grey.shade600,
                       ),
                     ),
-                    SizedBox(height: 6.h),
+                    SizedBox(height: 2.h),
 
                     Text(
                       isSensitive ? _maskAccountNumber(value) : value,
-                      style: TextStyle(
-                        fontSize: isLandscape ? 7.sp : 12.h,
+                      style: GTextStyle.bodySmall.copyWith(
                         color: Colors.black87,
-                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ],
@@ -288,7 +270,7 @@ class BankDetailsPage extends StatelessWidget {
                   padding: EdgeInsets.only(left: 8.w),
                   child: Icon(
                     PhosphorIconsLight.copy,
-                    size: isLandscape ? 11.sp : 18.sp,
+                    size: 18.spMin,
                     color: Colors.grey.shade400,
                   ),
                 ),

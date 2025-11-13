@@ -7,6 +7,7 @@ import 'package:agent_porta/styles/style.dart';
 import 'package:agent_porta/widgets/logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:uicons/uicons.dart';
 
 class VerifyScreen extends StatefulWidget {
   const VerifyScreen({super.key});
@@ -100,9 +101,9 @@ class _VerifyScreenState extends State<VerifyScreen> {
                   ),
 
                   icon: Icon(
-                    Icons.arrow_back_ios,
+                    UIcons.solidRounded.angle_left,
+                    size: 18.spMin,
                     color: kPrimaryColor,
-                    size: 20.spMin,
                   ),
                 ),
                 backgroundColor: kBackgroundColor,

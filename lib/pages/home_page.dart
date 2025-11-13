@@ -69,10 +69,11 @@ class _HomePageState extends State<HomePage> {
                       SizedBox(width: 8.w),
                       Text(
                         'Porta',
-                        style: GTextStyle.bodyBold.copyWith(
-                          fontSize: isLandscape ? 11.sp : 19.sp,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: -0.3,
+                        style: GTextStyle.heading2Bold.copyWith(
+                          // fontSize: isLandscape ? 11.sp : 19.sp,
+                          // fontWeight: FontWeight.w700,
+                          // letterSpacing: -0.3,
+                          color: black,
                         ),
                       ),
                     ],
@@ -90,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       );
                     },
-                    icon: Icon(PhosphorIconsBold.user, size: 23.sp),
+                    icon: Icon(PhosphorIconsBold.user, size: 23.spMin),
                   ),
                 ],
               ),
@@ -109,20 +110,19 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Image(
                             image: AssetImage('assets/images/portalogoBg.png'),
-                            height: isLandscape ? 35.h : 25.h,
+                            height: 40.h,
                           ),
                           SizedBox(width: 10.w),
                           Text(
                             'Porta',
-                            style: GTextStyle.bodyBold.copyWith(
-                              fontSize: isLandscape ? 13.sp : 18.sp,
-                              fontWeight: FontWeight.w700,
+                            style: GTextStyle.heading1Bold.copyWith(
+                              // fontSize: isLandscape ? 13.sp : 18.sp,
                             ),
                           ),
                         ],
                       ),
 
-                      titleSpacing: isLandscape ? 40 : 30.w,
+                      titleSpacing: 40.spMin,
                       actionsPadding: EdgeInsets.symmetric(horizontal: 15.w),
                       actions: [
                         IconButton(
@@ -134,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             );
                           },
-                          icon: Icon(PhosphorIconsBold.user, size: 23),
+                          icon: Icon(PhosphorIconsBold.user, size: 23.spMin),
                         ),
                       ],
                     ),
@@ -213,30 +213,22 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    child: Text(
-                      "Activity",
-                      textAlign: TextAlign.start,
-                      style: GTextStyle.bodyBold.copyWith(
-                        fontWeight: FontWeight.w600,
-                        fontSize: isLandscape ? 8.sp : 16.0.sp,
-                      ),
+                  Text(
+                    "Activity",
+                    style: GTextStyle.heading3.copyWith(
+                      // fontSize: isLandscape ? 8.sp : 16.0.sp,
                     ),
                   ),
-                  Spacer(),
-                  Expanded(
-                    child: TextButton(
-                      onPressed: () {},
-                      style: ButtonStyle(
-                        padding: MaterialStateProperty.all(EdgeInsets.zero),
-                      ),
-                      child: Text(
-                        'view all',
-                        style: GTextStyle.bodyBold.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: kPrimaryColor,
-                          fontSize: isLandscape ? 8.sp : 16.0.sp,
-                        ),
+                  TextButton(
+                    onPressed: () {},
+                    style: ButtonStyle(
+                      padding: MaterialStateProperty.all(EdgeInsets.zero),
+                    ),
+                    child: Text(
+                      'view all',
+                      style: GTextStyle.heading3.copyWith(
+                        color: kPrimaryColor,
+                        // fontSize: isLandscape ? 8.sp : 16.0.sp,
                       ),
                     ),
                   ),
@@ -246,10 +238,7 @@ class _HomePageState extends State<HomePage> {
             SizedBox(height: 12.h),
 
             Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 18.w,
-                vertical: isLandscape ? 6.h : 8.h,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 8.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -358,43 +347,40 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget buildHistoryItem(String status) {
-    final isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    // final isLandscape =
+    //     MediaQuery.of(context).orientation == Orientation.landscape;
     return Padding(
-      padding: EdgeInsets.symmetric(
-        vertical: isLandscape ? 8 : 5.h,
-        horizontal: 20.w,
-      ),
+      padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 20.w),
       child: ListTile(
         title: Text(
           'Business name',
-          style: GTextStyle.bodyBold.copyWith(
-            fontSize: isLandscape ? 8.sp : 15.sp,
-            fontWeight: FontWeight.w600,
+          style: GTextStyle.bodyMedium.copyWith(
+            // fontSize: isLandscape ? 8.sp : 15.sp,
           ),
         ),
+
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Department name',
-              style: GTextStyle.bodyBold.copyWith(
-                fontSize: isLandscape ? 8.sp : 13.sp,
-                fontWeight: FontWeight.w300,
+              style: GTextStyle.bodySmall.copyWith(
+                // fontSize: isLandscape ? 8.sp : 13.sp,
               ),
             ),
+            SizedBox(height: 2.h),
             Text(
               'Location',
-              style: GTextStyle.bodyBold.copyWith(
-                fontSize: isLandscape ? 8.sp : 13.sp,
-                fontWeight: FontWeight.w300,
+              style: GTextStyle.bodySmall.copyWith(
+                // fontSize: isLandscape ? 8.sp : 13.sp,
               ),
             ),
+            SizedBox(height: 2.h),
+
             Text(
               'Phone number',
-              style: GTextStyle.bodyBold.copyWith(
-                fontSize: isLandscape ? 8.sp : 13.sp,
-                fontWeight: FontWeight.w300,
+              style: GTextStyle.bodySmall.copyWith(
+                // fontSize: isLandscape ? 8.sp : 13.sp,
               ),
             ),
           ],
@@ -423,8 +409,8 @@ class _HomePageState extends State<HomePage> {
       'Declined': Colors.red.shade500,
     };
 
-    final isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    // final isLandscape =
+    //     MediaQuery.of(context).orientation == Orientation.landscape;
     return FittedBox(
       fit: BoxFit.scaleDown,
       child: Column(
@@ -434,14 +420,14 @@ class _HomePageState extends State<HomePage> {
           Icon(
             icons[status] ?? Icons.help_outline,
             color: colors[status] ?? Colors.grey,
-            size: isLandscape ? 16.sp : 18.sp,
+            size: 22.spMin,
           ),
           SizedBox(height: 1.h),
           Text(
             status,
             style: GTextStyle.bodyLight.copyWith(
-              fontSize: isLandscape ? 9.sp : 10.sp,
-              fontWeight: FontWeight.w600,
+              // fontSize: isLandscape ? 9.sp : 10.sp,
+              // fontWeight: FontWeight.w600,
             ),
           ),
         ],
@@ -453,7 +439,7 @@ class _HomePageState extends State<HomePage> {
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: isLandscape ? 80 : 23.w),
+      padding: EdgeInsets.symmetric(horizontal: 23.w),
       child: Column(
         children: [
           ClipRRect(
@@ -464,7 +450,6 @@ class _HomePageState extends State<HomePage> {
                 autoPlay: true,
                 height: isLandscape ? 250.h : 160.h,
                 autoPlayCurve: Curves.easeInOut,
-                // autoPlayAnimationDuration: const Duration(milliseconds: 00),
                 autoPlayInterval: const Duration(seconds: 6),
                 onPageChanged: (index, reason) {
                   setState(() {
@@ -481,13 +466,13 @@ class _HomePageState extends State<HomePage> {
           ),
           if (_items.isNotEmpty)
             Padding(
-              padding: const EdgeInsets.only(top: 10),
+              padding: EdgeInsets.only(top: 10.h),
               child: AnimatedSmoothIndicator(
                 activeIndex: myCurrentIndex,
                 count: _items.length,
                 effect: WormEffect(
-                  dotHeight: isLandscape ? 4.h : 5.h,
-                  dotWidth: isLandscape ? 3.w : 6.w,
+                  dotHeight: 5.h,
+                  dotWidth: 6.w,
                   spacing: 3.w,
                   activeDotColor: kPrimaryColor,
                   dotColor: Colors.grey,
@@ -510,12 +495,12 @@ class _HomePageState extends State<HomePage> {
     Color? maincolor,
     required Color iconcolor,
   }) {
-    final isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    // final isLandscape =
+    //     MediaQuery.of(context).orientation == Orientation.landscape;
     return Expanded(
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 5.w),
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 7.h),
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 6.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.r),
           color: maincolor ?? Colors.grey.shade100,
@@ -524,19 +509,17 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 24, color: iconcolor),
+            Icon(icon, size: 24.spMin, color: iconcolor),
             Text(
               count ?? "",
-              style: GTextStyle.bodyBold.copyWith(
-                fontSize: isLandscape ? 12.sp : 5.sp,
-                fontWeight: FontWeight.w500,
+              style: GTextStyle.heading2Small.copyWith(
+                // fontSize: isLandscape ? 12.sp : 15.sp,
               ),
             ),
             Text(
               label ?? "",
-              style: GTextStyle.label.copyWith(
-                fontSize: isLandscape ? 8.sp : 10.sp,
-                fontWeight: FontWeight.w300,
+              style: GTextStyle.bodySmall.copyWith(
+                // fontSize: isLandscape ? 8.sp : 10.sp,
               ),
             ),
           ],
@@ -611,9 +594,11 @@ Widget _buildActionCard({
   return InkWell(
     onTap: onPressed,
     child: Container(
+      height: 180.h,
+      width: double.infinity,
       padding: EdgeInsets.symmetric(
-        horizontal: isLandscape ? 25.w : 16.w,
-        vertical: isLandscape ? 25.h : 16.h,
+        horizontal: 16.w,
+        // vertical: isLandscape ? 30.h : 16.h,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.r),
@@ -623,12 +608,14 @@ Widget _buildActionCard({
           BoxShadow(
             color: kPrimaryColor.withOpacity(0.1),
 
-            blurRadius: 10,
+            blurRadius: 10.r,
             offset: Offset(0, 3),
           ),
         ],
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             padding: EdgeInsets.all(isLandscape ? 8.w : 12.w),
@@ -647,9 +634,8 @@ Widget _buildActionCard({
           Text(
             title,
             textAlign: TextAlign.center,
-            style: GTextStyle.bodyBold.copyWith(
-              fontSize: isLandscape ? 12.sp : 16.sp,
-              fontWeight: FontWeight.w600,
+            style: GTextStyle.heading2Bold.copyWith(
+              // fontSize: isLandscape ? 12.sp : 16.sp,
             ),
           ),
 
@@ -658,11 +644,9 @@ Widget _buildActionCard({
             textAlign: TextAlign.center,
             subtitle,
             maxLines: 2,
-            style: GTextStyle.bodyBold.copyWith(
-              fontSize: isLandscape ? 8.sp : 12.sp,
+            style: GTextStyle.bodySmall.copyWith(
+              // fontSize: isLandscape ? 8.sp : 12.sp,
               color: Colors.grey[600],
-              fontWeight: FontWeight.w400,
-              height: 1.2,
             ),
           ),
           SizedBox(height: 5.h),

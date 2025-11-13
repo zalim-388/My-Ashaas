@@ -223,7 +223,7 @@ class _EducationProfessionalDetailsState
               buildDropdown(
                 context: context,
                 label: "Country *",
-                fontSize: 12.sp,
+                fontSize: 16.spMin,
                 hintText: "Search your country",
                 icon: Icons.public,
                 options: countryOptions,
@@ -242,7 +242,7 @@ class _EducationProfessionalDetailsState
                   context: context,
                   label: "City *",
                   hintText: "Search your City",
-                  fontSize: 12.sp,
+                  fontSize: 16.spMin,
                   icon: Icons.map_outlined,
                   options: cityOptions,
                   isSearchable: true,

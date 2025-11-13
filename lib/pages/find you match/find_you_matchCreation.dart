@@ -23,6 +23,8 @@ class FindYouMatchcreation extends StatefulWidget {
 class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
   final _pageController = PageController();
 
+  String? title;
+
   int _currentPage = 0;
 
   final _page1FormKey = GlobalKey<FormState>();
@@ -32,9 +34,19 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
   final _page5Formkey = GlobalKey<FormState>();
   final _page6Formkey = GlobalKey<FormState>();
 
+  // final List<String> _pageTitles = [
+  //   "Registration",
+  //   "Personal Details",
+  //   "Family Details",
+  //   "Education & Profession",
+  //   "Lifestyle & Interests",
+  //   "Partner Preferences",
+  // ];
+
   @override
   void initState() {
     super.initState();
+    // title = _pageTitles[0];
   }
 
   @override
@@ -52,19 +64,16 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
         backgroundColor: kBackgroundColor,
-        toolbarHeight: 50.h,
+        // toolbarHeight: 40.h,
         automaticallyImplyLeading: false,
-        scrolledUnderElevation: 0,
+
         elevation: 0,
         centerTitle: true,
-        title: Text(
-          'Find You Match',
-          style: GTextStyle.bodyBold.copyWith(
-            fontSize: isLandscape ? 11.sp : 18.sp,
-            fontWeight: FontWeight.w800,
-          ),
-        ),
-        titleSpacing: 30.w,
+        // title: Text(
+        //   title ?? "",
+        //   style: GTextStyle.heading1Medium.copyWith(color: kPrimaryColor),
+        // ),
+        // titleSpacing: 30.w,
         actionsPadding: EdgeInsets.symmetric(horizontal: 15.w),
         leading: IconButton(
           onPressed: () {
@@ -80,7 +89,11 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
               );
             }
           },
-          icon: Icon(UIcons.solidRounded.angle_left, size: 15),
+          icon: Icon(
+            UIcons.solidRounded.angle_left,
+            size: 18.spMin,
+            color: kPrimaryColor,
+          ),
         ),
         actions: [
           GestureDetector(
@@ -91,7 +104,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
               );
             },
             child: Container(
-              height: 30.h,
+              height: 33.h,
               width: isLandscape ? 20.w : 40.w,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -105,11 +118,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
               alignment: Alignment.center,
               child: Text(
                 "Skip",
-                style: GTextStyle.bodyBold.copyWith(
-                  fontSize: isLandscape ? 7.sp : 12.sp,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
+                style: GTextStyle.bodySmall.copyWith(color: Colors.white),
               ),
             ),
           ),
@@ -124,10 +133,11 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
           onPageChanged: (value) {
             setState(() {
               _currentPage = value;
+              // title = _pageTitles[value];
             });
           },
           children: [
-            registrationscreen(
+            Registrationscreen(
               formkey: _page1FormKey,
               pageController: _pageController,
             ),
@@ -170,7 +180,7 @@ Widget buildNextButton({
   return GestureDetector(
     onTap: loading ? null : onTap,
     child: Container(
-      width: isLandscape ? 40.w : 70.w,
+      width: isLandscape ? 35.w : 70.w,
       height: isLandscape ? 40.h : 35.h,
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -188,13 +198,9 @@ Widget buildNextButton({
           children: [
             Text(
               'Next',
-              style: GTextStyle.bodyBold.copyWith(
-                fontSize: isLandscape ? 9.sp : 15.sp,
-                color: Colors.white,
-                fontWeight: FontWeight.w800,
-              ),
+              style: GTextStyle.button.copyWith(color: Colors.white),
             ),
-            SizedBox(width: isLandscape ? 3.w : 5.w),
+            SizedBox(width: 4.w),
             if (loading)
               SizedBox(
                 height: isLandscape ? 20.h : 15.h,
@@ -208,7 +214,7 @@ Widget buildNextButton({
               Icon(
                 Icons.arrow_forward_ios_outlined,
                 color: Colors.white,
-                size: 15,
+                size: 16.spMin,
               ),
           ],
         ),

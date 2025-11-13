@@ -122,9 +122,9 @@ Widget buildToggleMultiChip({
         shrinkWrap: true,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
-          childAspectRatio: 2.4,
-          crossAxisSpacing: 8.0.w,
-          mainAxisSpacing: 8.0.h,
+          childAspectRatio: isLandscape ? 6.0 : 2.6,
+          crossAxisSpacing: 10.w,
+          mainAxisSpacing: 10.h,
         ),
         itemBuilder: (context, index) {
           final option = options[index];
@@ -135,58 +135,48 @@ Widget buildToggleMultiChip({
               ) ??
               false;
 
-          return FilterChip(
-            showCheckmark: false,
-            label: FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (option.icon != null) ...[
-                    Icon(
-                      option.icon,
-                      size: 16,
-                      color: isSelected ? Colors.white : kPrimaryColor,
-                    ),
-                    SizedBox(width: 4.w),
-                  ],
-                  Text(
-                    option.label,
-                    style: GTextStyle.bodyBold.copyWith(
-                      color:
-                          isSelected
-                              ? Colors.white
-                              : kPrimaryColor.withOpacity(0.8),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            selected: isSelected,
-
-            backgroundColor: Colors.grey.shade100,
-            selectedColor: kPrimaryColor,
-            checkmarkColor: Colors.white,
-            side: BorderSide.none,
-
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.r),
-            ),
-
-            labelPadding: EdgeInsets.symmetric(
-              horizontal: isLandscape ? 6.0.w : 8.0.w,
-              vertical: 4.0.h,
-            ),
-            onSelected: (bool? value) {
+          return GestureDetector(
+            onTap: () async {
               Set<String> newSelection = Set.from(selection ?? <String>{});
-              if (value!) {
-                newSelection.add(option.label);
-              } else {
+              if (isSelected) {
                 newSelection.remove(option.label);
+              } else {
+                newSelection.add(option.label);
               }
               onChanged(newSelection);
             },
+            child: Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: isSelected ? kPrimaryColor : Colors.transparent,
+                borderRadius: BorderRadius.circular(8.r),
+              ),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (option.icon != null) ...[
+                      Icon(
+                        option.icon,
+                        size: 18.spMin,
+                        color: isSelected ? Colors.white : kPrimaryColor,
+                      ),
+                      SizedBox(width: 6.w),
+                    ],
+                    Text(
+                      option.label,
+                      style: GTextStyle.bodyMedium.copyWith(
+                        color:
+                            isSelected
+                                ? Colors.white
+                                : kPrimaryColor.withOpacity(0.8),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           );
         },
       ),
@@ -230,7 +220,7 @@ Widget buildToggleSingChip({
                       alignment: Alignment.center,
                       padding: EdgeInsets.symmetric(
                         horizontal: 2.w,
-                        vertical: 5.h,
+                        vertical: 3.5.h,
                       ),
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
@@ -240,7 +230,7 @@ Widget buildToggleSingChip({
                             if (option.icon != null) ...[
                               Icon(
                                 option.icon,
-                                size: 16,
+                                size: 18.spMin,
                                 color:
                                     isSelected ? Colors.white : kPrimaryColor,
                               ),
