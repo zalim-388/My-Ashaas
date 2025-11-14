@@ -771,7 +771,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
 
       child: Container(
         height: 80.h,
-        width: isLandscape ? 65.w : 80.w,
+        width: isLandscape ? 65.w : 85.w,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.r),
           color: Colors.grey.shade200,
@@ -819,7 +819,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                         style: GTextStyle.bodyMedium.copyWith(
                           // fontSize: isPrimary ? 14 : 12,
                           color: isPrimary ? kPrimaryColor : Colors.grey,
-                          fontWeight: isPrimary ? FontWeight.w600 : null,
+                          fontWeight: isPrimary ? FontWeight.w500 : null,
                         ),
                       ),
                       // if (isPrimary) Text("Tap to add upload"),

@@ -86,8 +86,6 @@ class ProfileScreen extends StatelessWidget {
                             'John Doe',
                             style: GTextStyle.bodyMedium.copyWith(
                               color: Colors.white,
-                              // fontSize: isLandscape ? 11.sp : 14.sp,
-                              // fontWeight: FontWeight.bold,
                             ),
                           ),
                           SizedBox(height: 2.h),
@@ -95,7 +93,6 @@ class ProfileScreen extends StatelessWidget {
                             'Agent ID: 4578420',
                             style: GTextStyle.bodySmall.copyWith(
                               color: Colors.white70,
-                              // fontSize: isLandscape ? 9.sp : 13.sp,
                             ),
                           ),
                         ],
@@ -115,42 +112,57 @@ class ProfileScreen extends StatelessWidget {
                       width: isLandscape ? 100.w : 230.w,
                       margin: EdgeInsets.only(top: 20.h),
                       padding: EdgeInsets.symmetric(
-                        horizontal: isLandscape ? 10.w : 20.w,
+                        horizontal: isLandscape ? 8.w : 20.w,
                         vertical: 5.h,
                       ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(35.r),
                         color: Colors.white.withOpacity(0.10),
                       ),
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            'assets/images/wallet1.png',
-                            height: 40.h,
-                            color: white,
-                          ),
+                      child: IntrinsicHeight(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Image.asset(
+                              'assets/images/wallet1.png',
+                              height: 40.h,
+                              width: 40.w,
+                              color: white,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Icon(
+                                  Icons.wallet,
+                                  color: white,
+                                  size: 32.spMin,
+                                );
+                              },
+                            ),
 
-                          SizedBox(width: isLandscape ? 8.w : 20.w),
-                          Column(
-                            children: [
-                              Text(
-                                'Wallet Balance',
-                                style: GTextStyle.bodyLight.copyWith(
-                                  color: Colors.white,
-                                  // fontSize: isLandscape ? 10.w : 12.sp,
-                                ),
+                            SizedBox(width: isLandscape ? 8.w : 20.w),
+                            Flexible(
+                              fit: FlexFit.loose,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+
+                                children: [
+                                  Text(
+                                    'Wallet Balance',
+                                    style: GTextStyle.bodyLight.copyWith(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Text(
+                                    '100,000',
+                                    style: GTextStyle.bodySmallbold.copyWith(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                '100,000',
-                                style: GTextStyle.bodySmallbold.copyWith(
-                                  color: Colors.white,
-                                  // fontSize: isLandscape ? 9.sp : 14.sp,
-                                  // fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
+                            ),
+                            SizedBox(width: 4.w),
+                          ],
+                        ),
                       ),
                     ),
                   ),

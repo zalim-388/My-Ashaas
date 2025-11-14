@@ -309,14 +309,6 @@ class _LifestyleInterestsState extends State<LifestyleInterests> {
                 onChanged: _onLifestylePreferencesChanged,
               ),
 
-              // buildToggle(
-              //   label: "Smoking Habits",
-              //   selection: selectionSmokingHabits,
-              //   onChanged: onsmockingHabitsChanged,
-              //   options: SmokingHabitsOptions,
-              //   // title: "Yes",
-              //   // title1: "No",
-              // ),
               SizedBox(height: 48.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,

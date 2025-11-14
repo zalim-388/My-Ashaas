@@ -65,7 +65,6 @@ class GTextStyle {
   static get heading2Bold => TextStyle(
     fontSize: 18.0.spMin,
     fontWeight: FontWeight.w700,
-
     letterSpacing: 0,
   );
 
@@ -127,7 +126,7 @@ class GTextStyle {
   static get bodySmall => TextStyle(
     fontSize: 14.0.spMin,
     fontWeight: FontWeight.w300,
-    letterSpacing: 0.1,
+    letterSpacing: -0.1,
     height: 1.5.h,
   );
 
@@ -157,7 +156,7 @@ class GTextStyle {
     fontSize: 12.0.spMin,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.2,
-    height: 1.4.h,
+    // height: 1.4.h,
   );
 
   static get captionBold => TextStyle(

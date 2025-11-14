@@ -159,13 +159,12 @@ class _HomePageState extends State<HomePage> {
 
             SizedBox(height: 10.h),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 23.w),
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 16.h),
-
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: _buildActionCard(
@@ -183,14 +182,14 @@ class _HomePageState extends State<HomePage> {
                           },
                         ),
                       ),
-                      SizedBox(width: 16.w),
+                      SizedBox(width: 12.w),
                       Expanded(
                         child: _buildActionCard(
                           context: context,
                           imagepath: "assets/images/deal.png",
-                          title: "Find you Match",
+                          title: "Find your Match",
                           subtitle:
-                              "Life is an Adventure When you the find right \n Partner to explore with",
+                              "Life is an Adventure When you find the right Partner to explore with",
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -207,22 +206,27 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            // SizedBox(height: 20.h),
+            SizedBox(height: 20.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "Activity",
-                    style: GTextStyle.heading3.copyWith(
-                      // fontSize: isLandscape ? 8.sp : 16.0.sp,
+                  Expanded(
+                    child: Text(
+                      "Activity",
+                      style: GTextStyle.heading3.copyWith(
+                        // fontSize: isLandscape ? 8.sp : 16.0.sp,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   TextButton(
                     onPressed: () {},
-                    style: ButtonStyle(
-                      padding: MaterialStateProperty.all(EdgeInsets.zero),
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      minimumSize: Size(0, 0),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     ),
                     child: Text(
                       'view all',
@@ -500,7 +504,7 @@ class _HomePageState extends State<HomePage> {
     return Expanded(
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 5.w),
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 6.h),
+        padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 6.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.r),
           color: maincolor ?? Colors.grey.shade100,
@@ -597,12 +601,12 @@ Widget _buildActionCard({
       height: 180.h,
       width: double.infinity,
       padding: EdgeInsets.symmetric(
-        horizontal: 16.w,
-        // vertical: isLandscape ? 30.h : 16.h,
+        horizontal: 12.w,
+        vertical: isLandscape ? 30.h : 16.h,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.r),
-        // color: kBackgroundColor
+
         color: Colors.white,
         boxShadow: [
           BoxShadow(
@@ -616,6 +620,7 @@ Widget _buildActionCard({
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
+
         children: [
           Container(
             padding: EdgeInsets.all(isLandscape ? 8.w : 12.w),
@@ -625,31 +630,30 @@ Widget _buildActionCard({
             ),
             child: Image.asset(
               imagepath,
-              fit: BoxFit.cover,
-              height: isLandscape ? 35.h : 35.h,
-              width: isLandscape ? 35.h : 35.h,
+              fit: BoxFit.contain,
+              height: 35.h,
+              width: 35.h,
+              errorBuilder: (context, error, stackTrace) {
+                return Icon(Icons.business);
+              },
             ),
           ),
-          SizedBox(height: isLandscape ? 8.h : 12.h),
+          SizedBox(height: isLandscape ? 5.h : 12.h),
           Text(
             title,
             textAlign: TextAlign.center,
-            style: GTextStyle.heading2Bold.copyWith(
-              // fontSize: isLandscape ? 12.sp : 16.sp,
-            ),
+            style: GTextStyle.heading2Bold.copyWith(),
           ),
 
           SizedBox(height: 4.h),
-          Text(
-            textAlign: TextAlign.center,
-            subtitle,
-            maxLines: 2,
-            style: GTextStyle.bodySmall.copyWith(
-              // fontSize: isLandscape ? 8.sp : 12.sp,
-              color: Colors.grey[600],
+          Expanded(
+            child: Text(
+              textAlign: TextAlign.center,
+              subtitle,
+              style: GTextStyle.caption.copyWith(color: Colors.grey[600]),
             ),
           ),
-          SizedBox(height: 5.h),
+          // SizedBox(height: 5.h),
         ],
       ),
     ),

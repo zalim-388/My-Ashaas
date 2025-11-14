@@ -104,19 +104,19 @@ class AgentDetails extends StatelessWidget {
                             icon: UIcons.regularRounded.home,
                             heading: 'Address',
                             data:
-                                'Kattukulath house , kelamkulam , chettiyamKinar , malappuram , kerala , india  \nPOST : klari  \nPIN : 676501',
+                                '...................... , ....... , ..... , ... , kerala , india  \nPOST : ....  \nPIN : 999999',
                           ),
                           _buildMenuItem(
                             context: context,
                             icon: UIcons.regularRounded.id_badge,
                             heading: 'Pan card',
-                            data: 'HSDFB5325J',
+                            data: 'HS....',
                           ),
                           _buildMenuItem(
                             context: context,
                             icon: UIcons.regularRounded.portrait,
                             heading: 'Aadhar card',
-                            data: '123456789012',
+                            data: '1234565612',
                           ),
 
                           _buildMenuItem(

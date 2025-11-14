@@ -265,10 +265,12 @@ class CryptoWalletScreen extends StatelessWidget {
                                   size: 18.spMin,
                                 ),
                                 SizedBox(width: 10.w),
-                                Text(
-                                  'Request Money',
-                                  style: GTextStyle.bodyBold.copyWith(
-                                    color: Colors.white,
+                                Flexible(
+                                  child: Text(
+                                    'Request Money',
+                                    style: GTextStyle.bodyBold.copyWith(
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
                               ],

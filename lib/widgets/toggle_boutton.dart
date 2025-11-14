@@ -63,7 +63,7 @@ Widget buildToggle({
                             if (option.icon != null) ...[
                               Icon(
                                 option.icon,
-                                size: 16,
+                                size: 16.spMin,
                                 color:
                                     isSelected ? Colors.white : kPrimaryColor,
                               ),
@@ -122,7 +122,7 @@ Widget buildToggleMultiChip({
         shrinkWrap: true,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
-          childAspectRatio: isLandscape ? 6.0 : 2.6,
+          childAspectRatio: isLandscape ? 5.0 : 2.6,
           crossAxisSpacing: 10.w,
           mainAxisSpacing: 10.h,
         ),
@@ -148,7 +148,7 @@ Widget buildToggleMultiChip({
             child: Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: isSelected ? kPrimaryColor : Colors.transparent,
+                color: isSelected ? kPrimaryColor : Colors.grey.shade100,
                 borderRadius: BorderRadius.circular(8.r),
               ),
               child: FittedBox(
