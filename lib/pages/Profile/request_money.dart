@@ -1,10 +1,9 @@
 import 'dart:ui';
-
-import 'package:agent_porta/styles/constants.dart';
-import 'package:agent_porta/styles/style.dart';
-import 'package:agent_porta/widgets/Text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_ashaas/styles/constants.dart';
+import 'package:my_ashaas/styles/style.dart';
+import 'package:my_ashaas/widgets/Text_field.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class RequestMoneyDialog {
@@ -34,7 +33,7 @@ class RequestMoneyDialog {
               width: isLandscape ? 500 : double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16.r),
-                color: Colors.white,
+                color: kBackgroundColor,
               ),
               child: SingleChildScrollView(
                 child: Column(
@@ -45,10 +44,12 @@ class RequestMoneyDialog {
                       width: double.infinity,
                       padding: EdgeInsets.all(isLandscape ? 12.w : 20.w),
                       decoration: BoxDecoration(
+                       
                         gradient: LinearGradient(
                           colors: [
-                            kPrimaryColor,
-                            kPrimaryColor.withOpacity(.7),
+                             kBlackPrimary.withOpacity(.7),
+                           kBlackPrimary
+                           
                           ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
@@ -96,6 +97,7 @@ class RequestMoneyDialog {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           buildADDField(
+                            showBorderside: true,
                             label: "Enter Amount",
                             hintText: "Enter Amount",
                             Controller: amountController,
@@ -155,7 +157,7 @@ class RequestMoneyDialog {
                                   },
                                   style: OutlinedButton.styleFrom(
                                     side: BorderSide(
-                                      color: Colors.grey.shade300,
+                                      color: Colors.black87
                                     ),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30.r),
@@ -179,7 +181,7 @@ class RequestMoneyDialog {
                                     _sendRequest(context, amountController);
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: kPrimaryColor,
+                                    backgroundColor: kBottomNavBarSelected,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30.r),
                                     ),
@@ -226,14 +228,14 @@ class RequestMoneyDialog {
         child: Container(
           padding: EdgeInsets.symmetric(vertical: isLandscape ? 6.h : 8.h),
           decoration: BoxDecoration(
-            border: Border.all(color: kPrimaryColor.withOpacity(0.3)),
+            border: Border.all(color: kBlackPrimary),
             borderRadius: BorderRadius.circular(30.r),
             color: kPrimaryColor.withOpacity(0.05),
           ),
           child: Text(
             '₹$amount',
             textAlign: TextAlign.center,
-            style: GTextStyle.bodyLight.copyWith(color: kPrimaryColor),
+            style: GTextStyle.bodyLight.copyWith(color: kTextPrimary),
           ),
         ),
       ),
@@ -265,8 +267,12 @@ class RequestMoneyDialog {
     // Show success message
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Money request of ₹$amount sent to Porta successfully!'),
-        backgroundColor: kPrimaryColor,
+        content: Text('Money request of ₹$amount sent to Porta successfully!',
+        style: GTextStyle.body.copyWith(
+          color:Colors.white
+        ),
+        ),
+        backgroundColor: kBlackPrimary,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10.r)),

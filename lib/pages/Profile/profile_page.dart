@@ -1,10 +1,12 @@
-import 'package:agent_porta/pages/Profile/agent_details.dart';
-import 'package:agent_porta/pages/Profile/request_money.dart';
-import 'package:agent_porta/pages/Profile/wallet_page.dart';
-import 'package:agent_porta/styles/constants.dart';
-import 'package:agent_porta/styles/style.dart';
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_ashaas/pages/Profile/agent_details.dart';
+import 'package:my_ashaas/pages/Profile/request_money.dart';
+import 'package:my_ashaas/pages/Profile/wallet_page.dart';
+import 'package:my_ashaas/styles/constants.dart';
+import 'package:my_ashaas/styles/style.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:uicons/uicons.dart';
 
@@ -28,7 +30,7 @@ class ProfileScreen extends StatelessWidget {
           icon: Icon(
             UIcons.solidRounded.angle_left,
             size: 18.spMin,
-            color: kPrimaryColor,
+            color: kArrowBackColor,
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -43,15 +45,15 @@ class ProfileScreen extends StatelessWidget {
             SizedBox(height: 10.h),
             // Profile card
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 25.w),
+              margin: EdgeInsets.symmetric(horizontal: 23.w),
               padding: EdgeInsets.symmetric(vertical: 25.h, horizontal: 20.w),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [kPrimaryColor, kPrimaryColor.withOpacity(.6)],
+                  colors: [kBlackPrimary.withOpacity(.7), kBlackPrimary],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
-
+                //  color:   kContainerBgColor,
                 borderRadius: BorderRadius.circular(12.r),
               ),
               child: Column(
@@ -60,7 +62,7 @@ class ProfileScreen extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 22.r,
-                        backgroundColor: Colors.white,
+                        backgroundColor: kContainerBgColor,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(50.r),
                           child: Image.asset(
@@ -69,10 +71,10 @@ class ProfileScreen extends StatelessWidget {
                             errorBuilder: (context, error, stackTrace) {
                               return PhosphorIcon(
                                 PhosphorIconsLight.detective,
-                                duotoneSecondaryColor: kPrimaryColor,
+                                duotoneSecondaryColor: Colors.white,
                                 duotoneSecondaryOpacity: 0.4,
                                 size: 25.spMin,
-                                color: Colors.black,
+                                color: kIconColor,
                               );
                             },
                           ),
@@ -85,14 +87,14 @@ class ProfileScreen extends StatelessWidget {
                           Text(
                             'John Doe',
                             style: GTextStyle.bodyMedium.copyWith(
-                              color: Colors.white,
+                              color: white
                             ),
                           ),
                           SizedBox(height: 2.h),
                           Text(
                             'Agent ID: 4578420',
                             style: GTextStyle.bodySmall.copyWith(
-                              color: Colors.white70,
+                              color: white,
                             ),
                           ),
                         ],
@@ -117,7 +119,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(35.r),
-                        color: Colors.white.withOpacity(0.10),
+                        color: Colors.white24
                       ),
                       child: IntrinsicHeight(
                         child: Row(
@@ -127,7 +129,7 @@ class ProfileScreen extends StatelessWidget {
                               'assets/images/wallet1.png',
                               height: 40.h,
                               width: 40.w,
-                              color: white,
+                              color: Colors.white,
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, stackTrace) {
                                 return Icon(
@@ -180,13 +182,12 @@ class ProfileScreen extends StatelessWidget {
                   Text(
                     "Account Settings",
                     style: GTextStyle.bodyMedium.copyWith(
-                      color: Colors.grey.shade600,
+                      color: kTextPrimary
                     ),
                   ),
                   SizedBox(height: 8.h),
                   _buildMenuItem(
                     context: context,
-
                     icon: PhosphorIconsLight.userFocus,
                     showArrow: true,
                     title: 'Agent Details',
@@ -206,7 +207,7 @@ class ProfileScreen extends StatelessWidget {
                     showArrow: true,
                     imagePath: 'assets/images/save-money.png',
                     title: 'Request Money ',
-                    subtitle: 'Request money from Porta',
+                    subtitle: 'Request money from My Ashaa\'s -a',
                     onTap: () {
                       RequestMoneyDialog.show(context);
                     },
@@ -235,12 +236,11 @@ class ProfileScreen extends StatelessWidget {
                     subtitle: 'Kottakkal',
                     trailing: Text(
                       "Kottakkal",
-                      style: GTextStyle.bodyBold.copyWith(color: kPrimaryColor),
+                      style: GTextStyle.bodyBold.copyWith(color: kTextPrimary),
                     ),
                   ),
                   _buildMenuItem(
                     context: context,
-
                     imagePath: 'assets/images/logout.png',
                     title: 'Logout',
                     showArrow: true,
@@ -266,7 +266,7 @@ class ProfileScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return Dialog(
-          backgroundColor: kBackgroundColor,
+          backgroundColor: kBackgroundColor1,
           insetPadding: EdgeInsets.symmetric(
             horizontal: isLandScape ? 100.w : 40.w,
             vertical: 30.h,
@@ -346,7 +346,7 @@ Widget _buildMenuItem({
             horizontal: isLandScape ? 4.w : 14.w,
           ),
           decoration: BoxDecoration(
-            color: onTap != null ? Colors.white : Colors.transparent,
+            color: onTap != null ? kContainerBgColor : Colors.transparent,
             borderRadius: BorderRadius.circular(12.r),
           ),
           // alignment: Alignment.topLeft,
@@ -372,14 +372,14 @@ Widget _buildMenuItem({
                           color:
                               title == 'Logout'
                                   ? Colors.red.shade200
-                                  : kPrimaryColor,
+                                  : kIconColor,
                           errorBuilder:
                               (context, error, stackTrace) =>
                                   icon != null
                                       ? Icon(
                                         icon,
                                         size: 26.spMin,
-                                        color: kPrimaryColor,
+                                        color: kIconColor,
                                       )
                                       : const SizedBox.shrink(),
                         )
@@ -389,7 +389,7 @@ Widget _buildMenuItem({
                           color:
                               title == "Logout"
                                   ? Colors.red.shade200
-                                  : kPrimaryColor,
+                                  : kIconColor,
                         ),
               ),
 
@@ -410,7 +410,7 @@ Widget _buildMenuItem({
                       Text(
                         subtitle,
                         style: GTextStyle.bodySmall.copyWith(
-                          color: Colors.black87,
+                          color: kTextOnPrimary,
                         ),
                       ),
                   ],
@@ -420,7 +420,7 @@ Widget _buildMenuItem({
               if (showArrow && trailing == null)
                 Icon(
                   Icons.chevron_right,
-                  color: kPrimaryColor,
+                  color: Colors.grey.shade400,
                   size: isLandScape ? 10.sp : 20.sp,
                 ),
             ],
@@ -431,9 +431,3 @@ Widget _buildMenuItem({
   );
 }
 
-// Widget _buildDivider() {
-//   return Padding(
-//     padding: EdgeInsets.symmetric(horizontal: 20.w),
-//     child: Divider(height: 1.h, thickness: 1, color: Colors.grey.shade300),
-//   );
-// }

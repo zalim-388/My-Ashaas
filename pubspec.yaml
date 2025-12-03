@@ -1,4 +1,4 @@
-name: agent_porta
+name: my_ashaas
 description: "A new Flutter project."
 
 publish_to: 'none' 
@@ -57,9 +57,8 @@ flutter_icons:
   android: true
   ios: true
   image_path: "assets/images/ashaas.png"
-  adaptive_icon_foreground_scale_factor: 0.85
-  android_adaptive_icon_padding: true
-
+  adaptive_icon_background: "#000000"
+  adaptive_icon_foreground: "assets/images/ashaas.png"
 
 flutter:
 

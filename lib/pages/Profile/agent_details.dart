@@ -1,14 +1,36 @@
-import 'package:agent_porta/styles/constants.dart';
-import 'package:agent_porta/styles/style.dart';
+import 'dart:io';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_ashaas/styles/constants.dart';
+import 'package:my_ashaas/styles/style.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:uicons/uicons.dart';
 
-class AgentDetails extends StatelessWidget {
+class AgentDetails extends StatefulWidget {
   final String? image;
   const AgentDetails({super.key, this.image});
+
+  @override
+  State<AgentDetails> createState() => _AgentDetailsState();
+}
+
+class _AgentDetailsState extends State<AgentDetails> {
+  File? _profileimage;
+
+  Future<void> _pikeprofileimage() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: false,
+    );
+
+    if (result != null) {
+      setState(() {
+        _profileimage = File(result.files.single.path!);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +64,13 @@ class AgentDetails extends StatelessWidget {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [kPrimaryColor, kPrimaryColor.withOpacity(.65)],
-                ),
-              ),
+                 color: kBlackPrimary
+              //   gradient: LinearGradient(
+              //     colors: [kPrimaryColor.withOpacity(.7), kPrimaryColor],
+              //     begin: Alignment.topLeft,
+              //     end: Alignment.bottomRight,
+              //   ),
+               ),
             ),
           ),
 
@@ -67,8 +90,6 @@ class AgentDetails extends StatelessWidget {
                       Text(
                         'Your Name',
                         style: GTextStyle.heading1Bold.copyWith(
-                          // fontSize: isLandscape ? 12.sp : 20.sp,
-                          // fontWeight: FontWeight.w700,
                           color: Colors.black87,
                         ),
                       ),
@@ -89,6 +110,7 @@ class AgentDetails extends StatelessWidget {
                           ),
                         ),
                       ),
+                    
                       SizedBox(height: 25.h),
                       // Menu items
                       Column(
@@ -148,36 +170,37 @@ class AgentDetails extends StatelessWidget {
             right: 0,
 
             child: Center(
-              child: Container(
-                height: isLandscape ? 120 : 110.h,
-                width: isLandscape ? 120 : 110.h,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white, width: 4.w),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.15),
-                      blurRadius: 20.r,
-                      spreadRadius: 2.r,
-                      offset: Offset(0, 6),
-                    ),
-                  ],
-                ),
-                child: ClipOval(
-                  child: Image.asset(
-                    image!,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        color: Colors.grey[300],
-                        child: Icon(
-                          Icons.person,
-                          size: 30.spMin,
-                          color: Colors.grey,
-                        ),
-                      );
-                    },
+              child: GestureDetector(
+                onTap: _pikeprofileimage,
+                child: Container(
+                  height: isLandscape ? 120 : 110.h,
+                  width: isLandscape ? 120 : 110.h,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.grey[300],
+                    border: Border.all(color: Colors.white, width: 4.w),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.15),
+                        blurRadius: 20.r,
+                        spreadRadius: 2.r,
+                        offset: Offset(0, 6),
+                      ),
+                    ],
                   ),
+                  child:
+                      _profileimage != null
+                          ? ClipOval(
+                            child: Image.file(
+                              _profileimage!,
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                          : Icon(
+                            Icons.person,
+                            size: 30.spMin,
+                            color: Colors.grey,
+                          ),
                 ),
               ),
             ),
@@ -196,7 +219,7 @@ class AgentDetails extends StatelessWidget {
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Card(
-      color: Colors.grey.shade100,
+      color: kContainerBgColor,
       shadowColor: Colors.grey.shade100,
       elevation: 5,
       margin: EdgeInsets.symmetric(vertical: 6.h),
@@ -220,7 +243,7 @@ class AgentDetails extends StatelessWidget {
                   color: kPrimaryColor.withOpacity(0.1),
                 ),
 
-                child: Icon(icon, color: kprimaryGreen, size: 24.spMin),
+                child: Icon(icon, color: kIconColor, size: 24.spMin),
               ),
 
               SizedBox(width: 8.w),
@@ -230,9 +253,7 @@ class AgentDetails extends StatelessWidget {
                   children: [
                     Text(
                       heading,
-                      style: GTextStyle.bodyBold.copyWith(
-                        color: Colors.grey.shade600,
-                      ),
+                      style: GTextStyle.bodyBold.copyWith(color: kTextPrimary),
                     ),
                     SizedBox(height: 2.h),
                     if (data != null && data.isNotEmpty)
@@ -279,7 +300,7 @@ class AgentDetails extends StatelessWidget {
             style: GTextStyle.bodySmall.copyWith(color: Colors.white),
           ),
           duration: Duration(milliseconds: 2001),
-          backgroundColor: kprimaryGreen,
+          backgroundColor: kBlackPrimary,
           behavior: SnackBarBehavior.floating,
           margin: EdgeInsets.only(left: 140.w, right: 120.w, bottom: 50.h),
           shape: RoundedRectangleBorder(
@@ -292,3 +313,4 @@ class AgentDetails extends StatelessWidget {
     });
   }
 }
+

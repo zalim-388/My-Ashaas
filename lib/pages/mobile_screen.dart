@@ -1,11 +1,11 @@
-import 'package:agent_porta/widgets/logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:country_picker/country_picker.dart';
-import 'package:agent_porta/styles/constants.dart';
-import 'package:agent_porta/styles/style.dart';
-import 'package:agent_porta/pages/verify_screen.dart';
+import 'package:my_ashaas/pages/verify_screen.dart';
+import 'package:my_ashaas/styles/constants.dart';
+import 'package:my_ashaas/widgets/logo.dart';
+import '../styles/style.dart';
 
 class MobileScreen extends StatefulWidget {
   const MobileScreen({super.key});
@@ -172,7 +172,7 @@ class _MoblieScreenState extends State<MobileScreen> {
                             ),
                             contentPadding: EdgeInsets.symmetric(
                               horizontal: 12.w,
-                              vertical: 10.h,
+                              vertical: 11.h,
                               // isLandscape ? 9.h
                             ),
 

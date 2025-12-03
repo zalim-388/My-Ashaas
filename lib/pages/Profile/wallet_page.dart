@@ -1,10 +1,10 @@
-import 'package:agent_porta/pages/Profile/request_money.dart';
-import 'package:agent_porta/styles/constants.dart';
-import 'package:agent_porta/styles/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_ashaas/pages/Profile/request_money.dart';
+import 'package:my_ashaas/styles/style.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:uicons/uicons.dart';
+import 'package:my_ashaas/styles/constants.dart';
 
 // Transaction Model
 class Transaction {
@@ -99,7 +99,7 @@ class CryptoWalletScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: kBackgroundColor,
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(1),
@@ -107,7 +107,7 @@ class CryptoWalletScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: CustomScrollView(
-          physics: BouncingScrollPhysics(),
+          // physics: BouncingScrollPhysics(),
           slivers: [
             SliverToBoxAdapter(
               child: Column(
@@ -116,9 +116,13 @@ class CryptoWalletScreen extends StatelessWidget {
                   // Profile Picture
                   Container(
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [kPrimaryColor, kPrimaryColor.withOpacity(.8)],
-                      ),
+                      // gradient: LinearGradient(
+                      //   colors: [
+                      //     kContainerBgColor,
+                      //     kPrimaryColor.withOpacity(.1),
+                      //   ],
+                      // ),
+                      color: kBlackPrimary,
                     ),
                     child: Stack(
                       children: [
@@ -130,7 +134,7 @@ class CryptoWalletScreen extends StatelessWidget {
                             height: 150.h,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Colors.white.withOpacity(0.1),
+                              color: kPrimaryColor.withOpacity(0.10),
                             ),
                           ),
                         ),
@@ -142,7 +146,7 @@ class CryptoWalletScreen extends StatelessWidget {
                             height: 100.h,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Colors.white.withOpacity(0.08),
+                              color: kPrimaryColor.withOpacity(0.08),
                             ),
                           ),
                         ),
@@ -154,7 +158,7 @@ class CryptoWalletScreen extends StatelessWidget {
                             height: 160.h,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Colors.white.withOpacity(0.06),
+                              color: kPrimaryColor.withOpacity(0.09),
                             ),
                           ),
                         ),
@@ -189,7 +193,7 @@ class CryptoWalletScreen extends StatelessWidget {
                                     alignment: Alignment.centerRight,
                                     child: CircleAvatar(
                                       radius: 20.r,
-                                      backgroundColor: Colors.white12,
+                                      backgroundColor: Colors.white30,
                                       backgroundImage: AssetImage(
                                         'assets/images/man.png',
                                       ),
@@ -207,7 +211,7 @@ class CryptoWalletScreen extends StatelessWidget {
                                   Text(
                                     'Balance Amount',
                                     style: GTextStyle.heading2Medium.copyWith(
-                                      color: Colors.white54,
+                                      color: Colors.white,
                                     ),
                                   ),
                                   SizedBox(height: 8.w),
@@ -223,7 +227,7 @@ class CryptoWalletScreen extends StatelessWidget {
                                           text: '.00',
                                           style: GTextStyle.body.copyWith(
                                             fontWeight: FontWeight.w300,
-                                            color: Colors.grey[400],
+                                            color: Colors.white,
                                           ),
                                         ),
                                       ],
@@ -251,7 +255,7 @@ class CryptoWalletScreen extends StatelessWidget {
                               RequestMoneyDialog.show(context);
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: kPrimaryColor,
+                              backgroundColor: kBlackPrimary,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(25.r),
                               ),

@@ -1,9 +1,10 @@
-import 'package:agent_porta/pages/Forget%20password/forget_pasword.dart';
-import 'package:agent_porta/styles/style.dart';
-import 'package:agent_porta/widgets/logo.dart';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_ashaas/pages/Forget%20password/forget_pasword.dart';
+import 'package:my_ashaas/styles/style.dart';
+import 'package:my_ashaas/widgets/logo.dart';
 import 'package:uicons/uicons.dart';
 import '../../styles/constants.dart';
 import 'Enter_new_pass.dart';

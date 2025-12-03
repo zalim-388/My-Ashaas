@@ -1,12 +1,13 @@
-import 'package:agent_porta/pages/find%20you%20match/Education_&_Professional%20Details.dart';
-import 'package:agent_porta/pages/find%20you%20match/Lifestyle_&_Interests.dart';
-import 'package:agent_porta/pages/find%20you%20match/Partner_Preferences.dart';
-import 'package:agent_porta/pages/find%20you%20match/family_details.dart';
-import 'package:agent_porta/pages/find%20you%20match/personal_Details.dart';
-import 'package:agent_porta/pages/find%20you%20match/registrationscreen.dart';
-import 'package:agent_porta/styles/constants.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_ashaas/pages/find%20you%20match/Education_&_Professional%20Details.dart';
+import 'package:my_ashaas/pages/find%20you%20match/Lifestyle_&_Interests.dart';
+import 'package:my_ashaas/pages/find%20you%20match/Partner_Preferences.dart';
+import 'package:my_ashaas/pages/find%20you%20match/family_details.dart';
+import 'package:my_ashaas/pages/find%20you%20match/personal_Details.dart';
+import 'package:my_ashaas/pages/find%20you%20match/registrationscreen.dart';
+import 'package:my_ashaas/styles/constants.dart';
 import 'package:uicons/uicons.dart';
 import '../../styles/style.dart';
 import '../home_page.dart';

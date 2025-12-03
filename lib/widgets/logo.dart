@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:agent_porta/styles/constants.dart';
-import 'package:agent_porta/styles/style.dart';
+import 'package:my_ashaas/styles/constants.dart';
+import 'package:my_ashaas/styles/style.dart';
 
 Widget buildlogo() {
   return Container(

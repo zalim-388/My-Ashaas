@@ -1,9 +1,10 @@
+
 import 'dart:ui';
-import 'package:agent_porta/pages/home_page.dart';
-import 'package:agent_porta/styles/constants.dart';
-import 'package:agent_porta/styles/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_ashaas/styles/constants.dart';
+import '../styles/style.dart';
+import 'home_page.dart';
 import 'package:lottie/lottie.dart';
 
 class Congratulation extends StatefulWidget {

@@ -1,15 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:agent_porta/styles/constants.dart';
-import 'package:agent_porta/widgets/Text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:my_ashaas/styles/constants.dart';
+import 'package:my_ashaas/widgets/Text_field.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:uicons/uicons.dart';
-
 import '../styles/style.dart';
 import 'home_page.dart';
 
@@ -591,8 +590,12 @@ class _ContactFormScreenState extends State<businessCreation> {
                   child: Container(
                     height: 120.h,
                     decoration: BoxDecoration(
+                      border: Border.all(
+                        color: kTextFieldBorder,
+                        width: isLandscape ? 0.5.w : 1.w,
+                      ),
                       borderRadius: BorderRadius.circular(10.r),
-                      color: kContainerBgColor,
+                      color: kBackgroundColor,
                     ),
                     child:
                         _selectedFiles.isEmpty

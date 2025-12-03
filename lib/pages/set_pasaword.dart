@@ -1,14 +1,15 @@
 import 'dart:io';
-import 'package:agent_porta/pages/Congratulation.dart';
-import 'package:agent_porta/pages/verify_screen.dart';
-import 'package:agent_porta/widgets/Text_field.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_ashaas/pages/Congratulation.dart';
+import 'package:my_ashaas/pages/verify_screen.dart';
+import 'package:my_ashaas/widgets/Text_field.dart';
 import 'package:uicons/uicons.dart';
 import 'Forget password/forget_pasword.dart';
-import 'package:agent_porta/styles/constants.dart';
-import 'package:agent_porta/styles/style.dart';
+import 'package:my_ashaas/styles/constants.dart';
+import '../styles/style.dart';
+
 
 class Setpassword extends StatefulWidget {
   const Setpassword({super.key});

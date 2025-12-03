@@ -1,12 +1,13 @@
-import 'package:agent_porta/pages/Congratulation.dart';
-import 'package:agent_porta/pages/Forget%20password/Reset_password_verify.dart';
-import 'package:agent_porta/styles/constants.dart';
-import 'package:agent_porta/styles/style.dart';
-import 'package:agent_porta/widgets/Text_field.dart';
-import 'package:agent_porta/widgets/logo.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_ashaas/pages/Congratulation.dart';
+import 'package:my_ashaas/pages/Forget%20password/Reset_password_verify.dart';
+import 'package:my_ashaas/styles/constants.dart';
+import 'package:my_ashaas/styles/style.dart';
+import 'package:my_ashaas/widgets/Text_field.dart';
+import 'package:my_ashaas/widgets/logo.dart';
 import 'package:uicons/uicons.dart';
 
 class EnterNewPass extends StatefulWidget {

@@ -1,8 +1,9 @@
-import 'package:agent_porta/pages/mobile_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_ashaas/pages/mobile_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

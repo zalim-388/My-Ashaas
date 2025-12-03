@@ -1,10 +1,11 @@
-import 'package:agent_porta/pages/Profile/profile_page.dart';
-import 'package:agent_porta/pages/find%20you%20match/find_you_matchCreation.dart';
-import 'package:agent_porta/pages/businessCreation.dart';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:my_ashaas/pages/Profile/profile_page.dart';
+import 'package:my_ashaas/pages/businessCreation.dart';
+import 'package:my_ashaas/pages/find%20you%20match/find_you_matchCreation.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../styles/constants.dart';
@@ -69,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       SizedBox(width: 4.w),
                       Text(
-                        'My Ashaa\'s',
+                        'My Ashaa\'s - a',
                         style: GTextStyle.heading2Bold.copyWith(color: black),
                       ),
                     ],
@@ -374,7 +375,7 @@ class _HomePageState extends State<HomePage> {
         ),
         dense: false,
         contentPadding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
-        tileColor: kContainerBgColor,
+        tileColor: kBackgroundColor1,
       ),
     );
   }
@@ -585,7 +586,7 @@ Widget _buildActionCard({
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.r),
 
-        color: kContainerBgColor,
+        color: kBackgroundColor1,
         boxShadow: [
           BoxShadow(
             color: kPrimaryColor.withOpacity(0.1),
@@ -601,7 +602,7 @@ Widget _buildActionCard({
 
         children: [
           Container(
-            padding: EdgeInsets.all(isLandscape ? 8.w : 12.w),
+            padding: EdgeInsets.all(isLandscape ? 7.w : 10.w),
             decoration: BoxDecoration(
               color: kPrimaryColor.withOpacity(0.2),
               borderRadius: BorderRadius.circular(12.r),

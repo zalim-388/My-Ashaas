@@ -1,9 +1,10 @@
-import 'package:agent_porta/styles/constants.dart';
-import 'package:agent_porta/styles/style.dart';
-import 'package:agent_porta/widgets/Text_field.dart';
+
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_ashaas/styles/constants.dart';
+import 'package:my_ashaas/styles/style.dart';
+import 'package:my_ashaas/widgets/Text_field.dart';
 
 Widget buildDropdown({
   required String label,
@@ -46,16 +47,9 @@ Widget buildDropdown({
       filled: true,
 
       hintText: selectedValue ?? hintText,
-      hintStyle: GTextStyle.bodyLight.copyWith(
-        color: Colors.black45,
-        // fontSize: isLandscape ? 8.sp : fontSize ?? 14.sp,
-      ),
+      hintStyle: GTextStyle.bodyLight.copyWith(color: Colors.black45),
 
-      errorStyle: GTextStyle.bodyLight.copyWith(
-        color: kErrorcolor,
-        // fontWeight: FontWeight.w300,
-        // fontSize: isLandscape ? 7.sp : 13.sp,
-      ),
+      errorStyle: GTextStyle.bodyLight.copyWith(color: kErrorcolor),
 
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8.r),
@@ -186,6 +180,7 @@ Widget buildDropdown({
             itemBuilder: (context, item, isDisabled, isSelected) {
               return Container(
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
+                decoration: BoxDecoration(color: kBackgroundColor),
                 child: Text(
                   item,
                   style: GTextStyle.bodyMedium.copyWith(color: kTextPrimary),

@@ -1,13 +1,12 @@
 import 'dart:async';
-
-import 'package:agent_porta/pages/mobile_screen.dart';
-import 'package:agent_porta/pages/set_pasaword.dart';
-import 'package:agent_porta/styles/constants.dart';
-import 'package:agent_porta/styles/style.dart';
-import 'package:agent_porta/widgets/logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_ashaas/pages/mobile_screen.dart';
+import 'package:my_ashaas/pages/set_pasaword.dart';
+import 'package:my_ashaas/widgets/logo.dart';
 import 'package:uicons/uicons.dart';
+import 'package:my_ashaas/styles/constants.dart';
+import '../styles/style.dart';
 
 class VerifyScreen extends StatefulWidget {
   const VerifyScreen({super.key});

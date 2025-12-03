@@ -1,8 +1,8 @@
-import 'package:agent_porta/styles/constants.dart';
-import 'package:agent_porta/styles/style.dart';
-import 'package:agent_porta/widgets/Text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_ashaas/styles/constants.dart';
+import 'package:my_ashaas/styles/style.dart';
+import 'package:my_ashaas/widgets/Text_field.dart';
 
 class Toggleoption {
   final String label;
@@ -20,6 +20,8 @@ Widget buildToggle({
   required ValueChanged<String?> onChanged,
   required BuildContext context,
 }) {
+  final isLandscape =
+      MediaQuery.of(context).orientation == Orientation.landscape;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
@@ -32,8 +34,12 @@ Widget buildToggle({
 
       Container(
         decoration: BoxDecoration(
-          color: kBackgroundColor1,
+          color: kBackgroundColor,
           borderRadius: BorderRadius.circular(8.r),
+          border: Border.all(
+            color: kTextFieldBorder,
+            width: isLandscape ? 0.5.w : 1.w,
+          ),
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(8.r),
@@ -147,8 +153,12 @@ Widget buildToggleMultiChip({
             child: Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color:    isSelected ? kBlackPrimary : kBackgroundColor1,
+                color: isSelected ? kBlackPrimary : kBackgroundColor,
                 borderRadius: BorderRadius.circular(8.r),
+                border: Border.all(
+                  color: kTextFieldBorder,
+                  width: isLandscape ? 0.5.w : 1.w,
+                ),
               ),
               child: FittedBox(
                 fit: BoxFit.scaleDown,
@@ -159,15 +169,14 @@ Widget buildToggleMultiChip({
                       Icon(
                         option.icon,
                         size: 18.spMin,
-                        color:    isSelected ? Colors.white : kIconColor,
+                        color: isSelected ? Colors.white : kIconColor,
                       ),
                       SizedBox(width: 6.w),
                     ],
                     Text(
                       option.label,
                       style: GTextStyle.bodyMedium.copyWith(
-                        color:
-                              isSelected ? Colors.white : kTextPrimary,
+                        color: isSelected ? Colors.white : kTextPrimary,
                       ),
                     ),
                   ],
@@ -190,8 +199,8 @@ Widget buildToggleSingChip({
   required ValueChanged<String?> onChanged,
   required BuildContext context,
 }) {
-  // final isLandscape =
-  //     MediaQuery.of(context).orientation == Orientation.landscape;
+  final isLandscape =
+      MediaQuery.of(context).orientation == Orientation.landscape;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
@@ -228,16 +237,14 @@ Widget buildToggleSingChip({
                               Icon(
                                 option.icon,
                                 size: 18.spMin,
-                                color:
-                                       isSelected ? Colors.white : kIconColor,
+                                color: isSelected ? Colors.white : kIconColor,
                               ),
                               SizedBox(width: 4.w),
                             ],
                             Text(
                               option.label,
                               style: GTextStyle.bodyBold.copyWith(
-                                color:
-                                       isSelected ? Colors.white : kTextPrimary,
+                                color: isSelected ? Colors.white : kTextPrimary,
                               ),
                             ),
                           ],
@@ -246,10 +253,13 @@ Widget buildToggleSingChip({
                     ),
 
                     selected: isSelected,
-                    backgroundColor: kBackgroundColor1,
+                    backgroundColor: kBackgroundColor,
                     selectedColor: kBottomNavBarSelected,
                     checkmarkColor: Colors.white,
-                    side: BorderSide.none,
+                    side: BorderSide(
+                      color: kTextFieldBorder,
+                      width: isLandscape ? 0.5.w : 1.w,
+                    ),
 
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.r),
