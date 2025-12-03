@@ -83,7 +83,7 @@ class _MoblieScreenState extends State<MobileScreen> {
 
                   child: Text(
                     "Moblie Number",
-                    style: GTextStyle.label.copyWith(color: kPrimaryColor),
+                    style: GTextStyle.label.copyWith(color: kBlackPrimary),
                   ),
                 ),
                 SizedBox(height: 6.h),
@@ -92,13 +92,13 @@ class _MoblieScreenState extends State<MobileScreen> {
                     GestureDetector(
                       onTap: _openCountryPicker,
                       child: Container(
-                        height: 40.h,
+                        height: 45.h,
                         padding: EdgeInsets.zero,
                         decoration: BoxDecoration(
-                          color: Colors.grey.shade100,
+                          color: kBackgroundColor,
                           borderRadius: BorderRadius.circular(8.r),
                           border: Border.all(
-                            color: kPrimaryColor,
+                            color: kBlackPrimary,
                             width: isLandscape ? 0.5.w : 1.0.w,
                           ),
                         ),
@@ -142,13 +142,13 @@ class _MoblieScreenState extends State<MobileScreen> {
 
                     Expanded(
                       child: Container(
-                        height: 40.h,
+                        height: 45.h,
                         decoration: ShapeDecoration(
-                          color: Colors.grey.shade100,
+                          color: kBackgroundColor,
                           shape: RoundedRectangleBorder(
                             side: BorderSide(
                               width: isLandscape ? 0.5.w : 1.0.w,
-                              color: kPrimaryColor,
+                              color: kBlackPrimary,
                             ),
                             borderRadius: BorderRadius.circular(8.r),
                           ),
@@ -159,13 +159,12 @@ class _MoblieScreenState extends State<MobileScreen> {
                             FilteringTextInputFormatter.digitsOnly,
                           ],
                           keyboardType: TextInputType.number,
-                          cursorColor: kPrimaryColor,
+                          cursorColor: kBlackPrimary,
 
                           decoration: InputDecoration(
                             hintText: "Enter Your Moblie Number",
                             hintStyle: GTextStyle.bodyLight.copyWith(
-                              color: Colors.black45,
-                              // fontSize: isLandscape ? 8.sp : 15.sp,
+                              color: kBlackPrimary,
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.r),
@@ -173,20 +172,18 @@ class _MoblieScreenState extends State<MobileScreen> {
                             ),
                             contentPadding: EdgeInsets.symmetric(
                               horizontal: 12.w,
-                              vertical: 9.0.h,
+                              vertical: 10.h,
                               // isLandscape ? 9.h
                             ),
 
                             isCollapsed: true,
                             filled: true,
-                            fillColor: Colors.grey.shade100,
+                            fillColor: kBackgroundColor,
                           ),
-
                           cursorHeight: 25.0.spMin,
-
                           //  isLandscape ? 25.h : 25.h,
                           style: GTextStyle.bodyBold.copyWith(
-                            color: kPrimaryColor,
+                            color: kBlackPrimary,
                           ),
                         ),
 
@@ -211,8 +208,8 @@ class _MoblieScreenState extends State<MobileScreen> {
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          kPrimaryColor.withOpacity(0.610),
-                          kPrimaryColor,
+                          kBlackPrimary.withOpacity(0.610),
+                          kBlackPrimary,
                         ],
                         begin: Alignment.bottomLeft,
                         end: Alignment.bottomCenter,
@@ -222,11 +219,7 @@ class _MoblieScreenState extends State<MobileScreen> {
                     alignment: Alignment.center,
                     child: Text(
                       'Continue',
-                      style: GTextStyle.button.copyWith(
-                        color: Colors.white,
-
-                        // fontSize: isLandscape ? 11.sp : 18.sp,
-                      ),
+                      style: GTextStyle.button.copyWith(color: Colors.white),
                     ),
                   ),
                 ),

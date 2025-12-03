@@ -32,7 +32,7 @@ Widget buildToggle({
 
       Container(
         decoration: BoxDecoration(
-          color: Colors.grey.shade100,
+          color: kBackgroundColor1,
           borderRadius: BorderRadius.circular(8.r),
         ),
         child: ClipRRect(
@@ -55,7 +55,9 @@ Widget buildToggle({
                         ),
                         decoration: BoxDecoration(
                           color:
-                              isSelected ? kPrimaryColor : Colors.transparent,
+                              isSelected
+                                  ? kBottomNavBarSelected
+                                  : Colors.transparent,
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -64,8 +66,7 @@ Widget buildToggle({
                               Icon(
                                 option.icon,
                                 size: 16.spMin,
-                                color:
-                                    isSelected ? Colors.white : kPrimaryColor,
+                                color: isSelected ? Colors.white : kIconColor,
                               ),
                               SizedBox(width: 4.w),
                             ],
@@ -75,9 +76,7 @@ Widget buildToggle({
                                 textAlign: TextAlign.center,
                                 style: GTextStyle.bodyBold.copyWith(
                                   color:
-                                      isSelected
-                                          ? Colors.white
-                                          : kPrimaryColor.withOpacity(0.8),
+                                      isSelected ? Colors.white : kTextPrimary,
                                 ),
                               ),
                             ),
@@ -148,7 +147,7 @@ Widget buildToggleMultiChip({
             child: Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: isSelected ? kPrimaryColor : Colors.grey.shade100,
+                color:    isSelected ? kBlackPrimary : kBackgroundColor1,
                 borderRadius: BorderRadius.circular(8.r),
               ),
               child: FittedBox(
@@ -160,7 +159,7 @@ Widget buildToggleMultiChip({
                       Icon(
                         option.icon,
                         size: 18.spMin,
-                        color: isSelected ? Colors.white : kPrimaryColor,
+                        color:    isSelected ? Colors.white : kIconColor,
                       ),
                       SizedBox(width: 6.w),
                     ],
@@ -168,9 +167,7 @@ Widget buildToggleMultiChip({
                       option.label,
                       style: GTextStyle.bodyMedium.copyWith(
                         color:
-                            isSelected
-                                ? Colors.white
-                                : kPrimaryColor.withOpacity(0.8),
+                              isSelected ? Colors.white : kTextPrimary,
                       ),
                     ),
                   ],
@@ -232,7 +229,7 @@ Widget buildToggleSingChip({
                                 option.icon,
                                 size: 18.spMin,
                                 color:
-                                    isSelected ? Colors.white : kPrimaryColor,
+                                       isSelected ? Colors.white : kIconColor,
                               ),
                               SizedBox(width: 4.w),
                             ],
@@ -240,9 +237,7 @@ Widget buildToggleSingChip({
                               option.label,
                               style: GTextStyle.bodyBold.copyWith(
                                 color:
-                                    isSelected
-                                        ? Colors.white
-                                        : kPrimaryColor.withOpacity(0.8),
+                                       isSelected ? Colors.white : kTextPrimary,
                               ),
                             ),
                           ],
@@ -251,8 +246,8 @@ Widget buildToggleSingChip({
                     ),
 
                     selected: isSelected,
-                    backgroundColor: Colors.grey.shade100,
-                    selectedColor: kPrimaryColor,
+                    backgroundColor: kBackgroundColor1,
+                    selectedColor: kBottomNavBarSelected,
                     checkmarkColor: Colors.white,
                     side: BorderSide.none,
 

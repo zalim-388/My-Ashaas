@@ -317,10 +317,11 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
             children: [
               Text(
                 "Partner Preferences",
-                style: GTextStyle.heading1.copyWith(color: kPrimaryColor),
+                style: GTextStyle.heading1.copyWith(color: kTextPrimary),
               ),
               SizedBox(height: 20.h),
               buildDropdown(
+                showBorderside: true,
                 label: "Preferred Age Range *",
                 hintText: "Select preferred age range",
                 onChanged: _onAgeRangeChanged,
@@ -336,6 +337,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
               ),
 
               buildDropdown(
+                showBorderside: true,
                 label: "Preferred Height Range *",
                 hintText: "Select Preferred Height Range",
                 onChanged: _onHeightRangeChanged,
@@ -351,6 +353,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
               ),
 
               buildDropdown(
+                showBorderside: true,
                 label: "Education Preference *",
                 hintText: "Select Education Preference",
                 onChanged: _onEduPrefChanged,
@@ -371,6 +374,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
               ),
 
               buildDropdown(
+                showBorderside: true,
                 context: context,
                 label: "Country *",
                 fontSize: 16.spMin,
@@ -390,6 +394,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
 
               if (_selectCountry != null && stateOptions.isNotEmpty)
                 buildDropdown(
+                  showBorderside: true,
                   context: context,
                   label: "State *",
                   hintText: "Search your state",
@@ -409,6 +414,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
 
               if (_selectState != null && cityOptions.isNotEmpty)
                 buildDropdown(
+                  showBorderside: true,
                   context: context,
                   label: "City *",
                   hintText: "Search your city",
@@ -427,6 +433,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                 ),
 
               buildDropdown(
+                showBorderside: true,
                 label: "Profession Preference *",
                 hintText: "Select Profession Preference",
                 onChanged: _onProfessionChanged,
@@ -461,6 +468,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
               ),
 
               buildADDField(
+                showBorderside: true,
                 context: context,
                 label: "Short Bio / About Me ",
                 hintText: "Write a little bit about yourself....",
@@ -478,6 +486,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                 },
               ),
               buildADDField(
+                showBorderside: true,
                 context: context,
                 label: "Partner Expectation",
                 hintText: "Describe what you're Looking for in a partner ....",
@@ -700,13 +709,13 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                 width: 40.w,
                 height: 5.h,
                 decoration: BoxDecoration(
-                  color: Colors.grey[300],
+                  color: kBackgroundColor,
                   borderRadius: BorderRadius.circular(2.r),
                 ),
               ),
 
               ListTile(
-                leading: Icon(Icons.camera_alt, color: kPrimaryColor),
+                leading: Icon(Icons.camera_alt, color: kIconColor),
                 title: Text('Take Photo'),
                 onTap: () async {
                   Navigator.of(context).pop();
@@ -719,7 +728,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.photo_library, color: kPrimaryColor),
+                leading: Icon(Icons.photo_library, color: kIconColor),
                 title: Text('Choose from Gallery'),
                 onTap: () async {
                   Navigator.of(context).pop();
@@ -737,7 +746,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
 
               if (canRemove)
                 ListTile(
-                  leading: Icon(PhosphorIconsFill.trash, color: kPrimaryColor),
+                  leading: Icon(PhosphorIconsFill.trash, color: kIconColor),
                   title: Text("Remove Image"),
                   onTap: () {
                     Navigator.of(context).pop();
@@ -774,7 +783,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
         width: isLandscape ? 65.w : 85.w,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.r),
-          color: Colors.grey.shade200,
+          color: kBackgroundColor1,
         ),
         child:
             file != null
@@ -798,7 +807,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: [Colors.grey.shade50, Colors.grey.shade100],
+                      colors: [kContainerBgColor, kContainerBgColor],
                     ),
                   ),
                   child: Column(
@@ -810,15 +819,14 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                             ? Icons.camera_alt
                             : Icons.add_a_photo_rounded,
                         size: 20.spMin,
-                        color: isPrimary ? kPrimaryColor : Colors.grey,
+                        color: isPrimary ? kIconColor : Colors.grey,
                       ),
                       SizedBox(height: 8.h),
 
                       Text(
                         isPrimary ? "mandatory" : "Optional",
                         style: GTextStyle.bodyMedium.copyWith(
-                          // fontSize: isPrimary ? 14 : 12,
-                          color: isPrimary ? kPrimaryColor : Colors.grey,
+                          color: isPrimary ? kIconColor : Colors.grey,
                           fontWeight: isPrimary ? FontWeight.w500 : null,
                         ),
                       ),
@@ -845,7 +853,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
 
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.r),
-          color: Colors.grey.shade200,
+          color: kBackgroundColor1,
         ),
         child:
             file != null
@@ -871,7 +879,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: [Colors.grey.shade50, Colors.grey.shade100],
+                      colors: [kContainerBgColor, kContainerBgColor],
                     ),
                   ),
                   child: Column(
@@ -950,7 +958,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
           file == null
               ? DottedBorder(
                 strokeCap: StrokeCap.round,
-                color: kPrimaryColor,
+                color: kBlackPrimary,
                 strokeWidth: 2,
                 dashPattern: [8, 6],
                 borderType: BorderType.RRect,
@@ -959,7 +967,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                   height: 150.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: Colors.grey[100]!,
+                    color: kContainerBgColor,
                     borderRadius: BorderRadius.circular(8.r),
                   ),
 
@@ -970,7 +978,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                       Icon(
                         Icons.upload_file,
                         size: 30.spMin,
-                        color: kPrimaryColor,
+                        color: kIconColor,
                       ),
                       SizedBox(height: 10.h),
                       Text("upload horoscope ", style: GTextStyle.bodyMedium),
@@ -989,7 +997,7 @@ class _PartnerPreferencesState extends State<PartnerPreferences> {
                 height: 150.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Colors.grey[100]!,
+                  color: kContainerBgColor,
                   borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: Column(

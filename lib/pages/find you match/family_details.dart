@@ -258,10 +258,12 @@ class _FamilyDetailsState extends State<FamilyDetails> {
             children: [
               Text(
                 "Family details",
-                style: GTextStyle.heading1Bold.copyWith(color: kPrimaryColor),
+                style: GTextStyle.heading1Bold.copyWith(color: kTextPrimary),
               ),
 
               buildADDField(
+                showBorderside: true,
+
                 context: context,
                 label: "Father Name *",
                 hintText: "Enter Father Name",
@@ -289,6 +291,8 @@ class _FamilyDetailsState extends State<FamilyDetails> {
               ),
               if (_selectionFatherStatus == "Alive") ...[
                 buildDropdown(
+                  showBorderside: true,
+
                   label: "Father Occupation",
                   hintText: "selcet an Occupation",
                   options: occuptionfatherOptions,
@@ -305,6 +309,8 @@ class _FamilyDetailsState extends State<FamilyDetails> {
               ],
               if (_selectFatherOccupation == "Others")
                 buildADDField(
+                  showBorderside: true,
+
                   context: context,
                   label: "Please Specfiy",
                   hintText: "Enter Occupation",
@@ -320,6 +326,8 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                 )
               else if (_selectionFatherStatus == "Late") ...[
                 buildADDField(
+                  showBorderside: true,
+
                   context: context,
                   label: "Which year",
                   hintText: "Enter year ",
@@ -337,6 +345,8 @@ class _FamilyDetailsState extends State<FamilyDetails> {
               ],
 
               buildADDField(
+                showBorderside: true,
+
                 context: context,
                 label: "Mother Name",
                 hintText: "Enter Mother Name",
@@ -365,6 +375,8 @@ class _FamilyDetailsState extends State<FamilyDetails> {
 
               if (_selectionMotherStatus == "Alive") ...[
                 buildDropdown(
+                  showBorderside: true,
+
                   label: "Mother Occupation",
                   hintText: "select an Occupation",
                   context: context,
@@ -382,6 +394,8 @@ class _FamilyDetailsState extends State<FamilyDetails> {
               ],
               if (_selectMotherOccupation == "Others")
                 buildADDField(
+                  showBorderside: true,
+
                   context: context,
                   label: "Please Specfiy",
                   hintText: "Enter Occupation",
@@ -397,6 +411,8 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                 )
               else if (_selectionMotherStatus == "Late") ...[
                 buildADDField(
+                  showBorderside: true,
+
                   context: context,
                   label: "which year",
                   hintText: "Enter year",
@@ -414,6 +430,8 @@ class _FamilyDetailsState extends State<FamilyDetails> {
               ],
 
               buildDropdown(
+                showBorderside: true,
+
                 label: "Family type *",
                 hintText: "select family type",
                 onChanged: _onfamilytypeChanged,
@@ -429,6 +447,8 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                 },
               ),
               buildDropdown(
+                showBorderside: true,
+
                 label: 'Family Status*',
                 hintText: 'select  Family Status',
                 icon: Icons.family_restroom,
@@ -449,6 +469,8 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                 children: [
                   Expanded(
                     child: buildADDField(
+                      showBorderside: true,
+
                       context: context,
                       label: "Number of brothers",
                       fontSize: 16.spMin,
@@ -462,6 +484,8 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                   SizedBox(width: 5.w),
                   Expanded(
                     child: buildADDField(
+                      showBorderside: true,
+
                       context: context,
                       label: "Numbers of Sisters",
                       fontSize: 16.spMin,
@@ -477,6 +501,8 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                   if (totalBro > 0 || totalSis > 0)
                     Expanded(
                       child: buildADDField(
+                        showBorderside: true,
+
                         context: context,
                         label: "TotalMarried Count",
                         fontSize: 12.sp,
@@ -498,6 +524,8 @@ class _FamilyDetailsState extends State<FamilyDetails> {
               ),
 
               buildADDField(
+                showBorderside: true,
+
                 context: context,
                 label: "Native Place / Hometown",
                 hintText: "Enter your home",
@@ -517,6 +545,8 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                 icon: PhosphorIconsFill.house,
               ),
               buildDropdown(
+                showBorderside: true,
+
                 context: context,
                 label: "Country *",
                 hintText: "Search your country",
@@ -535,6 +565,8 @@ class _FamilyDetailsState extends State<FamilyDetails> {
 
               if (_selectCountry != null && stateOptions.isNotEmpty)
                 buildDropdown(
+                  showBorderside: true,
+
                   context: context,
                   label: "State *",
                   hintText: "Search your state",
@@ -553,6 +585,8 @@ class _FamilyDetailsState extends State<FamilyDetails> {
 
               if (_selectState != null && cityOptions.isNotEmpty)
                 buildDropdown(
+                  showBorderside: true,
+
                   context: context,
                   label: "City *",
                   hintText: "Search your city",

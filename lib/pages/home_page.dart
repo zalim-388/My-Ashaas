@@ -54,6 +54,7 @@ class _HomePageState extends State<HomePage> {
           isLandscape
               ? null
               : AppBar(
+                scrolledUnderElevation: 0,
                 backgroundColor: Colors.white.withOpacity(0.1),
                 automaticallyImplyLeading: false,
                 centerTitle: false,
@@ -63,18 +64,13 @@ class _HomePageState extends State<HomePage> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Image(
-                        image: AssetImage('assets/images/portalogoBg.png'),
-                        height: isLandscape ? 32.h : 26.h,
+                        image: AssetImage("assets/images/ashaas.png"),
+                        height: 40.h,
                       ),
-                      SizedBox(width: 8.w),
+                      SizedBox(width: 4.w),
                       Text(
-                        'Porta',
-                        style: GTextStyle.heading2Bold.copyWith(
-                          // fontSize: isLandscape ? 11.sp : 19.sp,
-                          // fontWeight: FontWeight.w700,
-                          // letterSpacing: -0.3,
-                          color: black,
-                        ),
+                        'My Ashaa\'s',
+                        style: GTextStyle.heading2Bold.copyWith(color: black),
                       ),
                     ],
                   ),
@@ -109,15 +105,13 @@ class _HomePageState extends State<HomePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Image(
-                            image: AssetImage('assets/images/portalogoBg.png'),
+                            image: AssetImage("assets/images/ashaas.png"),
                             height: 40.h,
                           ),
                           SizedBox(width: 10.w),
                           Text(
-                            'Porta',
-                            style: GTextStyle.heading1Bold.copyWith(
-                              // fontSize: isLandscape ? 13.sp : 18.sp,
-                            ),
+                            'My Ashaa\'s',
+                            style: GTextStyle.heading1Bold.copyWith(),
                           ),
                         ],
                       ),
@@ -215,9 +209,7 @@ class _HomePageState extends State<HomePage> {
                   Expanded(
                     child: Text(
                       "Activity",
-                      style: GTextStyle.heading3.copyWith(
-                        // fontSize: isLandscape ? 8.sp : 16.0.sp,
-                      ),
+                      style: GTextStyle.heading3.copyWith(),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -230,10 +222,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: Text(
                       'view all',
-                      style: GTextStyle.heading3.copyWith(
-                        color: kPrimaryColor,
-                        // fontSize: isLandscape ? 8.sp : 16.0.sp,
-                      ),
+                      style: GTextStyle.heading3.copyWith(color: kBlackPrimary),
                     ),
                   ),
                 ],
@@ -251,6 +240,7 @@ class _HomePageState extends State<HomePage> {
                     count: '06',
                     label: 'Approved',
                     iconcolor: Colors.green.shade500,
+                    maincolor: Colors.green.shade50,
                   ),
 
                   buildStatusColumn(
@@ -258,6 +248,7 @@ class _HomePageState extends State<HomePage> {
                     count: '02',
                     label: 'Pending',
                     iconcolor: Colors.orange.shade500,
+                    maincolor: Colors.orange.shade50,
                   ),
 
                   buildStatusColumn(
@@ -265,6 +256,14 @@ class _HomePageState extends State<HomePage> {
                     count: '01',
                     label: 'Declined',
                     iconcolor: Colors.red.shade500,
+                    maincolor: Colors.red.shade50,
+                  ),
+                  buildStatusColumn(
+                    icon: Ionicons.layers_outline,
+                    count: '09',
+                    label: 'Total',
+                    iconcolor: Colors.blue.shade500,
+                    maincolor: Colors.blue.shade50,
                   ),
                 ],
               ),
@@ -356,37 +355,17 @@ class _HomePageState extends State<HomePage> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 20.w),
       child: ListTile(
-        title: Text(
-          'Business name',
-          style: GTextStyle.bodyMedium.copyWith(
-            // fontSize: isLandscape ? 8.sp : 15.sp,
-          ),
-        ),
+        title: Text('Business name', style: GTextStyle.bodyMedium.copyWith()),
 
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Department name',
-              style: GTextStyle.bodySmall.copyWith(
-                // fontSize: isLandscape ? 8.sp : 13.sp,
-              ),
-            ),
+            Text('Department name', style: GTextStyle.bodySmall.copyWith()),
             SizedBox(height: 2.h),
-            Text(
-              'Location',
-              style: GTextStyle.bodySmall.copyWith(
-                // fontSize: isLandscape ? 8.sp : 13.sp,
-              ),
-            ),
+            Text('Location', style: GTextStyle.bodySmall.copyWith()),
             SizedBox(height: 2.h),
 
-            Text(
-              'Phone number',
-              style: GTextStyle.bodySmall.copyWith(
-                // fontSize: isLandscape ? 8.sp : 13.sp,
-              ),
-            ),
+            Text('Phone number', style: GTextStyle.bodySmall.copyWith()),
           ],
         ),
         trailing: getStatusIcon(status),
@@ -395,7 +374,7 @@ class _HomePageState extends State<HomePage> {
         ),
         dense: false,
         contentPadding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
-        tileColor: Colors.grey.shade100,
+        tileColor: kContainerBgColor,
       ),
     );
   }
@@ -427,18 +406,13 @@ class _HomePageState extends State<HomePage> {
             size: 22.spMin,
           ),
           SizedBox(height: 1.h),
-          Text(
-            status,
-            style: GTextStyle.bodyLight.copyWith(
-              // fontSize: isLandscape ? 9.sp : 10.sp,
-              // fontWeight: FontWeight.w600,
-            ),
-          ),
+          Text(status, style: GTextStyle.bodyLight.copyWith()),
         ],
       ),
     );
   }
 
+  //MARK:- slider ads
   Widget sliderAds() {
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
@@ -478,7 +452,7 @@ class _HomePageState extends State<HomePage> {
                   dotHeight: 5.h,
                   dotWidth: 6.w,
                   spacing: 3.w,
-                  activeDotColor: kPrimaryColor,
+                  activeDotColor: kBlackPrimary,
                   dotColor: Colors.grey,
                 ),
                 onDotClicked: (index) {
@@ -491,6 +465,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  //MARK:- build status column
   Widget buildStatusColumn({
     IconData? icon,
     String? count,
@@ -504,7 +479,7 @@ class _HomePageState extends State<HomePage> {
     return Expanded(
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 5.w),
-        padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 6.h),
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.r),
           color: maincolor ?? Colors.grey.shade100,
@@ -514,17 +489,18 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(icon, size: 24.spMin, color: iconcolor),
+            SizedBox(height: 4.h),
             Text(
               count ?? "",
-              style: GTextStyle.heading2Small.copyWith(
-                // fontSize: isLandscape ? 12.sp : 15.sp,
-              ),
+              style: GTextStyle.heading2Small.copyWith(),
+              maxLines: 1,
             ),
+            SizedBox(height: 2.h),
             Text(
               label ?? "",
-              style: GTextStyle.bodySmall.copyWith(
-                // fontSize: isLandscape ? 8.sp : 10.sp,
-              ),
+              style: GTextStyle.bodySmall.copyWith(),
+              maxLines: 1,
+              textAlign: TextAlign.center,
             ),
           ],
         ),
@@ -533,6 +509,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+//MARK:- rounded images
 class RoundedImages extends StatelessWidget {
   const RoundedImages({super.key, required this.imageUrl});
   final String imageUrl;
@@ -586,6 +563,7 @@ Widget _buildErrorcImage() {
   );
 }
 
+//MARK:- action card
 Widget _buildActionCard({
   required String imagepath,
   required String title,
@@ -607,7 +585,7 @@ Widget _buildActionCard({
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.r),
 
-        color: Colors.white,
+        color: kContainerBgColor,
         boxShadow: [
           BoxShadow(
             color: kPrimaryColor.withOpacity(0.1),
@@ -625,7 +603,7 @@ Widget _buildActionCard({
           Container(
             padding: EdgeInsets.all(isLandscape ? 8.w : 12.w),
             decoration: BoxDecoration(
-              color: kPrimaryColor.withOpacity(0.1),
+              color: kPrimaryColor.withOpacity(0.2),
               borderRadius: BorderRadius.circular(12.r),
             ),
             child: Image.asset(

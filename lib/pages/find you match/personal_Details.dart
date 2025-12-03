@@ -211,7 +211,7 @@ class _personalDetailsState extends State<personalDetails> {
             children: [
               Text(
                 "personal details",
-                style: GTextStyle.heading1Bold.copyWith(color: kPrimaryColor),
+                style: GTextStyle.heading1Bold.copyWith(color: kTextPrimary),
               ),
               SizedBox(height: 20.h),
 
@@ -219,6 +219,8 @@ class _personalDetailsState extends State<personalDetails> {
                 children: [
                   Expanded(
                     child: buildADDField(
+                      showBorderside: true,
+
                       context: context,
                       label: 'Height (in cm/ft) *',
                       icon: PhosphorIconsFill.ruler,
@@ -237,6 +239,8 @@ class _personalDetailsState extends State<personalDetails> {
                   SizedBox(width: 16.w),
                   Expanded(
                     child: buildADDField(
+                      showBorderside: true,
+
                       context: context,
                       label: 'weight (in Kg) *',
                       icon: PhosphorIconsFill.barbell,
@@ -255,6 +259,8 @@ class _personalDetailsState extends State<personalDetails> {
               ),
 
               buildDropdown(
+                showBorderside: true,
+
                 label: "Marital Status *",
                 hintText: "Select Marital Status",
                 icon: PhosphorIconsFill.heart,
@@ -264,6 +270,8 @@ class _personalDetailsState extends State<personalDetails> {
                 onChanged: _onMaritalStatusChanged,
               ),
               buildDropdown(
+                showBorderside: true,
+
                 label: "Mother Tongue *",
                 hintText: "Select Mother Tongue",
                 icon: PhosphorIconsFill.globeStand,
@@ -278,6 +286,8 @@ class _personalDetailsState extends State<personalDetails> {
               ),
 
               buildDropdown(
+                showBorderside: true,
+
                 label: 'Religion *',
                 hintText: 'select Religion',
                 icon: PhosphorIconsFill.handsPraying,
@@ -295,6 +305,8 @@ class _personalDetailsState extends State<personalDetails> {
               ),
               if (selectedReligion != null && castoptions.isNotEmpty)
                 buildDropdown(
+                  showBorderside: true,
+
                   label: 'Cast ',
                   hintText: 'select Cast',
                   icon: PhosphorIconsFill.users,
@@ -311,6 +323,8 @@ class _personalDetailsState extends State<personalDetails> {
                 ),
               if (selectedCast != null && subCastoptions.isNotEmpty)
                 buildDropdown(
+                  showBorderside: true,
+
                   label: 'Sub Cast ',
                   hintText: 'select Sub Cast',
                   icon: PhosphorIconsFill.treeStructure,
@@ -327,7 +341,7 @@ class _personalDetailsState extends State<personalDetails> {
                 ),
 
               buildToggle(
-                 context: context,
+                context: context,
                 label: "Horoscope required? *",
                 selection: selectionHoroscope,
                 onChanged: _onHoroscopeChanged,
@@ -342,6 +356,7 @@ class _personalDetailsState extends State<personalDetails> {
                 children: [
                   Expanded(
                     child: buildDropdown(
+                      showBorderside: true,
                       label: 'Star',
                       hintText: 'select star',
                       icon: PhosphorIconsFill.star,
@@ -363,12 +378,13 @@ class _personalDetailsState extends State<personalDetails> {
 
                   Expanded(
                     child: buildDropdown(
+                   showBorderside: true,
                       label: 'Raasi',
                       hintText: 'select Raasi',
                       icon: PhosphorIconsFill.sparkle,
                       selectedValue: selectBloodGroup,
                       onChanged: _onRaasiChanged,
-                       controller: _raasiController,
+                      controller: _raasiController,
                       context: context,
                       options: bloodGroupOptions,
                       isSearchable: true,
@@ -384,6 +400,7 @@ class _personalDetailsState extends State<personalDetails> {
               ),
 
               buildDropdown(
+                   showBorderside: true,
                 label: 'Blood Group *',
                 hintText: 'select Blood Group',
                 icon: PhosphorIconsFill.drop,
@@ -400,7 +417,8 @@ class _personalDetailsState extends State<personalDetails> {
               ),
 
               buildToggle(
-                 context: context,
+                
+                context: context,
                 label: "Physical Status *",
                 selection: selectionPhysicalselection,
                 onChanged: _onPhysicalStatusChanged,
@@ -413,6 +431,7 @@ class _personalDetailsState extends State<personalDetails> {
               ),
               if (selectionPhysicalselection == "Differently Abled")
                 buildADDField(
+                   showBorderside: true,
                   context: context,
                   label: "please Specify",
                   hintText: "Hearing impariment",

@@ -132,11 +132,12 @@ class _EducationProfessionalDetailsState
             children: [
               Text(
                 "Education & Professional Details",
-                style: GTextStyle.heading1Bold.copyWith(color: kPrimaryColor),
+                style: GTextStyle.heading1Bold.copyWith(color: kTextPrimary),
               ),
               SizedBox(height: 20.h),
 
               buildDropdown(
+                showBorderside: true,
                 label: "Education Qualification ",
                 hintText: "Select Education Qualification ",
                 icon: Icons.school,
@@ -153,6 +154,7 @@ class _EducationProfessionalDetailsState
               ),
 
               buildDropdown(
+                showBorderside: true,
                 label: "Education Field ",
                 hintText: "Select Education Field ",
                 icon: Icons.school,
@@ -169,6 +171,7 @@ class _EducationProfessionalDetailsState
               ),
 
               buildADDField(
+                showBorderside: true,
                 context: context,
                 label: "Occupation / Job Title",
                 hintText: "Enter Job Title",
@@ -184,6 +187,7 @@ class _EducationProfessionalDetailsState
               ),
 
               buildADDField(
+                showBorderside: true,
                 context: context,
                 label: "Company / Organization Name ",
                 hintText: "Enter Company Name",
@@ -199,6 +203,7 @@ class _EducationProfessionalDetailsState
               ),
 
               buildDropdown(
+                showBorderside: true,
                 label: "Annual Income / Salary Range",
                 hintText: "Select your salary range ",
                 icon: Icons.money,
@@ -221,6 +226,7 @@ class _EducationProfessionalDetailsState
               ),
 
               buildDropdown(
+                showBorderside: true,
                 context: context,
                 label: "Country *",
                 fontSize: 16.spMin,
@@ -239,6 +245,7 @@ class _EducationProfessionalDetailsState
 
               if (_selectCountry != null && cityOptions.isNotEmpty)
                 buildDropdown(
+                  showBorderside: true,
                   context: context,
                   label: "City *",
                   hintText: "Search your City",

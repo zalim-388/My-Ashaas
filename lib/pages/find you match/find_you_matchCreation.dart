@@ -92,7 +92,7 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
           icon: Icon(
             UIcons.solidRounded.angle_left,
             size: 18.spMin,
-            color: kPrimaryColor,
+            color: kArrowBackColor,
           ),
         ),
         actions: [
@@ -108,12 +108,17 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
               width: isLandscape ? 20.w : 40.w,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [kPrimaryColor.withOpacity(0.610), kPrimaryColor],
-                  begin: Alignment.bottomLeft,
-                  end: Alignment.bottomRight,
+                  colors: [
+                    kBottomNavBarSelected.withOpacity(0.65),
+                    kBottomNavBarSelected,
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  stops: [0.0, 0.9],
+                  tileMode: TileMode.decal,
                 ),
-                borderRadius: BorderRadius.circular(20.r),
-                color: kPrimaryColor,
+                borderRadius: BorderRadius.circular(30.r),
+                // color: kPrimaryColor,
               ),
               alignment: Alignment.center,
               child: Text(
@@ -184,9 +189,14 @@ Widget buildNextButton({
       height: isLandscape ? 40.h : 35.h,
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [kPrimaryColor.withOpacity(0.610), kPrimaryColor],
-          begin: Alignment.bottomLeft,
+          colors: [
+            kBottomNavBarSelected.withOpacity(0.65),
+            kBottomNavBarSelected,
+          ],
+          begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
+          stops: [0.0, 0.9],
+          tileMode: TileMode.decal,
         ),
         borderRadius: BorderRadius.circular(30.r),
       ),

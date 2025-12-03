@@ -111,11 +111,12 @@ class _RegistrationscreenState extends State<Registrationscreen> {
             children: [
               Text(
                 "Registration Details",
-                style: GTextStyle.heading1.copyWith(color: kPrimaryColor),
+                style: GTextStyle.heading1.copyWith(color: kTextPrimary),
               ),
               SizedBox(height: 25.h),
 
               buildADDField(
+                showBorderside: true,
                 context: context,
                 label: 'Full Name *',
                 icon: PhosphorIconsFill.userCircle,
@@ -140,6 +141,7 @@ class _RegistrationscreenState extends State<Registrationscreen> {
                 children: [
                   Expanded(
                     child: buildADDField(
+                      showBorderside: true,
                       context: context,
                       label: 'Date of Birth *',
                       icon: PhosphorIconsFill.calendar,
@@ -160,6 +162,7 @@ class _RegistrationscreenState extends State<Registrationscreen> {
                   SizedBox(width: 16.w),
                   Expanded(
                     child: buildADDField(
+                      showBorderside: true,
                       context: context,
                       label: 'Age *',
                       icon: PhosphorIconsFill.user,
@@ -177,6 +180,7 @@ class _RegistrationscreenState extends State<Registrationscreen> {
                 ],
               ),
               buildADDField(
+                showBorderside: true,
                 context: context,
                 label: 'Email Id',
                 icon: PhosphorIconsFill.envelope,
@@ -197,6 +201,7 @@ class _RegistrationscreenState extends State<Registrationscreen> {
               ),
 
               buildDropdown(
+                   showBorderside: true,
                 label: "Profile Created by *",
                 onChanged: (newvalue) {
                   setState(() {

@@ -103,11 +103,12 @@ class _VerifyScreenState extends State<VerifyScreen> {
                   icon: Icon(
                     UIcons.solidRounded.angle_left,
                     size: 18.spMin,
-                    color: kPrimaryColor,
+                    color: kArrowBackColor,
                   ),
                 ),
                 backgroundColor: kBackgroundColor,
-
+                scrolledUnderElevation: 0,
+                elevation: 0,
                 centerTitle: false,
               ),
       body:
@@ -116,6 +117,10 @@ class _VerifyScreenState extends State<VerifyScreen> {
                 headerSliverBuilder: (context, innerBoxIsScrolled) {
                   return <Widget>[
                     SliverAppBar(
+                      backgroundColor: kBackgroundColor,
+                      pinned: true,
+                      elevation: 0,
+                      expandedHeight: 0.h,
                       leading: IconButton(
                         onPressed: () {
                           Navigator.pushReplacement(
@@ -132,12 +137,12 @@ class _VerifyScreenState extends State<VerifyScreen> {
                         ),
                         icon: Icon(
                           Icons.arrow_back_ios,
-                          color: kPrimaryColor,
+                          color: kArrowBackColor
+                          ,
                           size: 20.spMin,
                         ),
                       ),
-                      backgroundColor: kBackgroundColor,
-                      elevation: 1,
+                      scrolledUnderElevation: 0,
                       centerTitle: false,
                       toolbarHeight: 56.h,
                     ),
@@ -162,9 +167,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
 
             Text(
               "Verify Your Code",
-              style: GTextStyle.heading2Bold.copyWith(color: kPrimaryColor),
-              // fontWeight: FontWeight.bold,
-              // fontSize: isLandscape ? 12.sp : 20.sp,
+              style: GTextStyle.heading2Bold.copyWith(color: Color(0xFF2C2C2C)),
             ),
 
             RichText(
@@ -202,7 +205,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                         color:
                             (_isFcous ||
                                     _verifycontroller[index].text.isNotEmpty)
-                                ? kPrimaryColor
+                                ? kTextFieldBorder
                                 : Colors.grey,
                         width: isLandscape ? 0.9 : 1.w,
                       ),
@@ -217,10 +220,10 @@ class _VerifyScreenState extends State<VerifyScreen> {
                         counterText: '',
                       ),
                       style: GTextStyle.bodyBold.copyWith(
-                        color: kPrimaryColor,
+                        color: kTextPrimary,
                         // fontSize: isLandscape ? 11.sp : 18.sp,
                       ),
-                      cursorColor: kPrimaryColor,
+                      cursorColor: kTextFieldBorder,
                       cursorHeight: isLandscape ? 30.h : 25.h,
                       maxLength: 1,
                       textAlign: TextAlign.center,
@@ -257,7 +260,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                   height: 45.h,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [kPrimaryColor.withOpacity(0.610), kPrimaryColor],
+                      colors: [kBlackPrimary.withOpacity(0.610), kBlackPrimary],
                       begin: Alignment.bottomLeft,
                       end: Alignment.bottomCenter,
                     ),
@@ -291,7 +294,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                         isResendDisable ? "Resend in $_conutdowm" : 'Resend',
                         style: GTextStyle.bodySmallbold.copyWith(
                           // fontSize: isLandscape ? 8.sp : 14.sp,
-                          color: isResendDisable ? grey : kPrimaryColor,
+                          color: isResendDisable ? grey : kTextPrimary,
                           // fontWeight: FontWeight.w800,
                         ),
                       ),

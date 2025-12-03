@@ -26,12 +26,12 @@ Widget buildFieldLabel({
             overflow: TextOverflow.ellipsis,
 
             style: GTextStyle.label.copyWith(
-              color: kPrimaryColor,
+              color: kTextPrimary,
               fontSize: fontSize ?? 17.spMin,
             ),
           ),
         ),
-        Icon(icon, size: 20.spMin, color: kPrimaryColor),
+        Icon(icon, size: 20.spMin, color: kIconColor),
       ],
     ),
   );
@@ -62,7 +62,10 @@ Widget buildADDField({
       MediaQuery.of(context).orientation == Orientation.landscape;
   final borderside =
       showBorderside
-          ? BorderSide(color: kPrimaryColor, width: isLandscape ? 0.5.w : 1.w)
+          ? BorderSide(
+            color: kTextFieldBorder,
+            width: isLandscape ? 0.5.w : 1.w,
+          )
           : BorderSide.none;
 
   return Column(
@@ -78,31 +81,21 @@ Widget buildADDField({
 
       TextFormField(
         onChanged: onChanged,
-        cursorErrorColor: kPrimaryColor,
-        cursorColor: kPrimaryColor,
+        cursorErrorColor: kTextFieldBorder,
+        cursorColor: kTextFieldBorder,
         controller: Controller,
         textCapitalization: textCapitalization,
         decoration: InputDecoration(
           prefixText: perfixText,
-          prefixStyle: GTextStyle.bodyBold.copyWith(
-            color: kPrimaryColor,
-            // fontSize: 18.sp,
-          ),
+          prefixStyle: GTextStyle.bodyBold.copyWith(color: kTextPrimary),
           helperText: helperText,
-          helperStyle: GTextStyle.bodyLight.copyWith(
-            color: kPrimaryColor,
-            // fontSize: isLandscape ? 8.sp : fontSize ?? 14.sp,
-          ),
+          helperStyle: GTextStyle.bodyLight.copyWith(color: kTextPrimary),
 
           hintText: Controller.text.isEmpty ? hintText : null,
-          hintStyle: GTextStyle.bodyLight.copyWith(
-            color: Colors.black45,
-            // fontSize: isLandscape ? 8.sp : fontSize ?? 14.sp,
-          ),
+          hintStyle: GTextStyle.bodyLight.copyWith(color: Colors.black45),
           errorStyle: GTextStyle.bodyLight.copyWith(
             color: kErrorcolor,
             fontWeight: FontWeight.w300,
-            // fontSize: isLandscape ? 7.sp : 13.sp,
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.r),
@@ -122,11 +115,12 @@ Widget buildADDField({
           ),
 
           filled: true,
-          fillColor: Colors.grey.shade100,
+          fillColor: kBackgroundColor,
+          // Color(0xFFFFFEF5),
           isDense: true,
           contentPadding: EdgeInsets.symmetric(
             horizontal: isLandscape ? 8.w : 12.w,
-            vertical: 10.h,
+            vertical: 12.h,
           ),
         ),
         maxLength: maxlength,
@@ -135,10 +129,7 @@ Widget buildADDField({
         autovalidateMode: AutovalidateMode.onUserInteraction,
         readOnly: readOnly,
         onTap: onTap,
-        style: GTextStyle.bodyBold.copyWith(
-          color: kPrimaryColor,
-          // fontSize: isLandscape ? 8.sp : 15.sp,
-        ),
+        style: GTextStyle.bodyBold.copyWith(color: kTextPrimary),
         validator: validator,
         keyboardType: keybordType,
       ),

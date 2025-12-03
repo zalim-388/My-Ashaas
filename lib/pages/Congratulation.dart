@@ -125,7 +125,6 @@ class _CongratulationState extends State<Congratulation>
                           child: Text(
                             'Continue',
                             style: GTextStyle.button.copyWith(
-                              // fontSize: isLandscape ? 18 : 18.sp,
                               color: Colors.white,
                             ),
                           ),

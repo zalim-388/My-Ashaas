@@ -68,7 +68,7 @@ class _EnterNewPassState extends State<EnterNewPass> {
                 icon: Icon(
                   UIcons.solidRounded.angle_left,
                   size: 18.spMin,
-                  color: kPrimaryColor,
+                  color: kArrowBackColor,
                 ),
 
                 onPressed: () {
@@ -85,22 +85,14 @@ class _EnterNewPassState extends State<EnterNewPass> {
               Center(
                 child: Text(
                   'Create New\n  Password',
-                  style: GTextStyle.display.copyWith(
-                    // fontSize: isLandscape ? 50 : 30.sp,
-                    // fontWeight: FontWeight.bold,
-                    color: kPrimaryColor,
-                  ),
+                  style: GTextStyle.display.copyWith(color: kTextPrimary),
                 ),
               ),
               SizedBox(height: 10.h),
               Center(
                 child: Text(
                   'Your new password must be different\nfrom previously used passwords',
-                  style: GTextStyle.bodyMedium.copyWith(
-                    // fontSize: isLandscape ? 10.sp : 15.sp,
-                    color: Colors.black54,
-                    // fontWeight: FontWeight.w400,
-                  ),
+                  style: GTextStyle.bodyMedium.copyWith(color: Colors.black54),
                   textAlign: TextAlign.center,
                 ),
               ),

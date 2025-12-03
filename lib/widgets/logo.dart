@@ -7,7 +7,7 @@ Widget buildlogo() {
   return Container(
     alignment: Alignment.center,
     child: Image.asset(
-      'assets/images/portalogoBg.png',
+      'assets/images/ashaas.png',
       fit: BoxFit.contain,
       height: 180.h,
       width: 180.w,
@@ -27,9 +27,14 @@ Widget buildButton({
       height: height ?? 45.h,
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [kPrimaryColor.withOpacity(0.610), kPrimaryColor],
-          begin: Alignment.bottomLeft,
+          colors: [
+            kBottomNavBarSelected.withOpacity(0.65),
+            kBottomNavBarSelected,
+          ],
+          begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
+          stops: [0.0, 0.9],
+          tileMode: TileMode.decal,
         ),
         borderRadius: BorderRadius.circular(30.r),
       ),

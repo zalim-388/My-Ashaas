@@ -83,7 +83,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           icon: Icon(
             UIcons.solidRounded.angle_left,
             size: 18.spMin,
-            color: kPrimaryColor,
+            color: kArrowBackColor,
           ),
         ),
         backgroundColor: kBackgroundColor,
@@ -103,7 +103,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   SizedBox(height: 5.h),
                   Text(
                     'Forgot\nPassword?',
-                    style: GTextStyle.display.copyWith(color: kPrimaryColor),
+                    style: GTextStyle.display.copyWith(color: kTextPrimary),
                   ),
                   SizedBox(height: 4.h),
                   Text(
@@ -155,10 +155,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                             children: [
                               TextSpan(
                                 text: "Remember your password? ",
-                                style: GTextStyle.bodyLight.copyWith(
-                                  // fontSize: isLandscape ? 7.sp : 14.sp,
-                                  // fontWeight: FontWeight.w400,
-                                ),
+                                style: GTextStyle.bodyLight.copyWith(),
                               ),
                               TextSpan(
                                 text: 'Login',
@@ -174,7 +171,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                         );
                                       },
                                 style: GTextStyle.bodyBold.copyWith(
-                                  color: kPrimaryColor,
+                                  color: kTextOnPrimary
                                 ),
                               ),
                             ],

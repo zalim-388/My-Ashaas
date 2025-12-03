@@ -60,10 +60,10 @@ class _ResetPasswordVerifyState extends State<ResetPasswordVerify> {
                 icon: Icon(
                   UIcons.solidRounded.angle_left,
                   size: 18.spMin,
-                  color: kPrimaryColor,
+                  color: kArrowBackColor,
                 ),
               ),
-              SizedBox(height: isLandscape ? 30.h : 110.h),
+              SizedBox(height: isLandscape ? 30.h : 100.h),
               buildlogo(),
               SizedBox(height: 30.h),
               Center(
@@ -72,15 +72,9 @@ class _ResetPasswordVerifyState extends State<ResetPasswordVerify> {
                     Text(
                       'Check your SMS ',
                       style: GTextStyle.display.copyWith(
-                        color: kPrimaryColor,
+                        color: kTextPrimary,
                         fontSize: 28.spMin,
                       ),
-                      // style: GoogleFonts.poppins(
-                      //   color: kPrimaryColor,
-                      //   fontWeight: FontWeight.bold,
-                      //   fontSize: isLandscape ? 40 : 28.sp,
-                      //   letterSpacing: 0.5,
-                      // ),
                     ),
                     SizedBox(height: 5.h),
                     Text(
@@ -120,7 +114,7 @@ class _ResetPasswordVerifyState extends State<ResetPasswordVerify> {
                                             _verifycontroller[index]
                                                 .text
                                                 .isNotEmpty)
-                                        ? kPrimaryColor
+                                        ? kTextFieldBorder
                                         : Colors.grey,
                                 width: isLandscape ? 0.9 : 1.w,
                               ),
@@ -135,10 +129,10 @@ class _ResetPasswordVerifyState extends State<ResetPasswordVerify> {
                                 counterText: '',
                               ),
                               style: GTextStyle.bodyBold.copyWith(
-                                color: kPrimaryColor,
+                                color: kTextPrimary,
                                 fontSize: isLandscape ? 11.sp : 18.sp,
                               ),
-                              cursorColor: kPrimaryColor,
+                              cursorColor: kTextFieldBorder,
                               cursorHeight: isLandscape ? 30.h : 25,
                               maxLength: 1,
                               textAlign: TextAlign.center,
@@ -202,7 +196,7 @@ class _ResetPasswordVerifyState extends State<ResetPasswordVerify> {
                                       // );
                                     },
                               style: GTextStyle.bodySmallbold.copyWith(
-                                color: kPrimaryColor,
+                                color: kTextOnPrimary
                               ),
                             ),
                           ],

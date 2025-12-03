@@ -45,15 +45,20 @@ dependencies:
   device_info_plus: ^12.2.0
   flutter_typeahead: ^5.2.0
   country_code_picker: ^3.4.1
-
+  flutter_launcher_icons: ^0.13.1
   
  
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^5.0.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/ashaas.png"
+  adaptive_icon_foreground_scale_factor: 0.85
+  android_adaptive_icon_padding: true
 
 
 flutter:
@@ -63,6 +68,7 @@ flutter:
   assets:
     - assets/images/
     - assets/json/
+   
 
 
 

@@ -196,11 +196,12 @@ class _LifestyleInterestsState extends State<LifestyleInterests> {
               Text(
                 "Lifestyle & Interests",
 
-                style: GTextStyle.heading1Bold.copyWith(color: kPrimaryColor),
+                style: GTextStyle.heading1Bold.copyWith(color: kTextPrimary),
               ),
               SizedBox(height: 20.h),
 
               buildDropdown(
+                showBorderside: true,
                 label: "Eating Habits *",
                 hintText: "Select Eating Habits",
                 icon: PhosphorIconsFill.forkKnife,
@@ -221,6 +222,7 @@ class _LifestyleInterestsState extends State<LifestyleInterests> {
                   children: [
                     Expanded(
                       child: buildToggleSingChip(
+                        
                         context: context,
                         label: "Drinking Habits",
                         options: drinkingHabitsOptions,
@@ -271,6 +273,7 @@ class _LifestyleInterestsState extends State<LifestyleInterests> {
                 children: [
                   Expanded(
                     child: buildDropdown(
+                      showBorderside: true,
                       label: "Religion",
                       selectedValue: selectedReligion,
                       hintText: "select Religion",
@@ -287,6 +290,7 @@ class _LifestyleInterestsState extends State<LifestyleInterests> {
 
                     Expanded(
                       child: buildDropdown(
+                        showBorderside: true,
                         label: "Cast",
                         selectedValue: selectedCast,
                         options: castoptions,

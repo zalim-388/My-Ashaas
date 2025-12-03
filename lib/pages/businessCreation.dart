@@ -50,9 +50,9 @@ class _ContactFormScreenState extends State<businessCreation> {
         SnackBar(
           content: Text(
             'You can only select up to $_maxFiles files',
-            style: TextStyle(fontSize: 12, fontFamily: 'qs'),
+            style: GTextStyle.bodySmall.copyWith(color: Colors.white),
           ),
-          backgroundColor: kPrimaryColor,
+          backgroundColor: kBlackPrimary,
         ),
       );
       return;
@@ -60,12 +60,13 @@ class _ContactFormScreenState extends State<businessCreation> {
 
     showModalBottomSheet(
       context: context,
+      backgroundColor: kBackgroundColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
       ),
       builder: (BuildContext context) {
         return Container(
-          padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+          padding: EdgeInsets.fromLTRB(20.w, 20.h, 20.w, 0),
           height: 200.r,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -73,13 +74,9 @@ class _ContactFormScreenState extends State<businessCreation> {
               Text(
                 'Select Pictures',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                  fontFamily: 'qs',
-                ),
+                style: GTextStyle.body,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 20.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -94,23 +91,16 @@ class _ContactFormScreenState extends State<businessCreation> {
                     child: Column(
                       children: [
                         CircleAvatar(
-                          radius: 30,
+                          radius: 30.r,
                           backgroundColor: kPrimaryColor.withOpacity(.1),
                           child: Icon(
                             Ionicons.camera,
-                            size: 25,
-                            color: kPrimaryColor,
+                            size: 25.spMin,
+                            color: kBlackPrimary,
                           ),
                         ),
-                        SizedBox(height: 8),
-                        Text(
-                          'Camera',
-                          style: TextStyle(
-                            fontFamily: 'qs',
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+                        SizedBox(height: 8.h),
+                        Text('Camera', style: GTextStyle.bodySmall.copyWith()),
                       ],
                     ),
                   ),
@@ -125,23 +115,16 @@ class _ContactFormScreenState extends State<businessCreation> {
                     child: Column(
                       children: [
                         CircleAvatar(
-                          radius: 30,
+                          radius: 30.r,
                           backgroundColor: kPrimaryColor.withOpacity(.1),
                           child: Icon(
                             Ionicons.images,
-                            size: 25,
-                            color: kPrimaryColor,
+                            size: 25.spMin,
+                            color: kBlackPrimary,
                           ),
                         ),
-                        SizedBox(height: 8),
-                        Text(
-                          'Gallery',
-                          style: TextStyle(
-                            fontFamily: 'qs',
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+                        SizedBox(height: 8.h),
+                        Text('Gallery', style: GTextStyle.bodySmall.copyWith()),
                       ],
                     ),
                   ),
@@ -158,8 +141,11 @@ class _ContactFormScreenState extends State<businessCreation> {
     if (_selectedFiles.length >= _maxFiles) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Maximum $_maxFiles files allowed'),
-          backgroundColor: kPrimaryColor,
+          content: Text(
+            'Maximum $_maxFiles files allowed',
+            style: GTextStyle.bodySmall.copyWith(color: Colors.white),
+          ),
+          backgroundColor: kBlackPrimary,
         ),
       );
       return;
@@ -183,8 +169,11 @@ class _ContactFormScreenState extends State<businessCreation> {
     if (remainingSlots <= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Maximum $_maxFiles files allowed'),
-          backgroundColor: kPrimaryColor,
+          content: Text(
+            'Maximum $_maxFiles files allowed',
+            style: GTextStyle.bodySmall.copyWith(color: Colors.white),
+          ),
+          backgroundColor: kBlackPrimary,
         ),
       );
       return;
@@ -212,9 +201,9 @@ class _ContactFormScreenState extends State<businessCreation> {
           SnackBar(
             content: Text(
               'You can only select up to $_maxFiles files. ${pickedFiles.length - remainingSlots} files were ignored.',
-              style: TextStyle(fontSize: 12, fontFamily: 'qs'),
+              style: GTextStyle.bodySmall.copyWith(color: Colors.white),
             ),
-            backgroundColor: kPrimaryColor,
+            backgroundColor: kBlackPrimary,
           ),
         );
       }
@@ -347,12 +336,7 @@ class _ContactFormScreenState extends State<businessCreation> {
         scrolledUnderElevation: 0,
         elevation: 0,
         centerTitle: true,
-        title: Text(
-          'Add Business',
-          style: GTextStyle.heading2Bold.copyWith(
-            // fontSize: isLandscape ? 11.sp : 18.sp,
-          ),
-        ),
+        title: Text('Add Business', style: GTextStyle.heading2Bold.copyWith()),
         titleSpacing: 30.w,
         actionsPadding: EdgeInsets.symmetric(horizontal: 15.w),
         leading: IconButton(
@@ -365,7 +349,7 @@ class _ContactFormScreenState extends State<businessCreation> {
           icon: Icon(
             UIcons.solidRounded.angle_left,
             size: 18.spMin,
-            color: kPrimaryColor,
+            color: kArrowBackColor,
           ),
         ),
       ),
@@ -378,6 +362,7 @@ class _ContactFormScreenState extends State<businessCreation> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 buildADDField(
+                  showBorderside: true,
                   context: context,
                   label: 'Business Name',
                   icon: PhosphorIconsFill.buildings,
@@ -392,6 +377,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                 ),
 
                 buildADDField(
+                  showBorderside: true,
                   context: context,
                   label: 'Owner Name',
                   icon: PhosphorIconsFill.userCircle,
@@ -406,6 +392,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                 ),
 
                 buildADDField(
+                  showBorderside: true,
                   context: context,
                   label: 'Department',
                   icon: PhosphorIconsFill.suitcase,
@@ -419,6 +406,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                   },
                 ),
                 buildADDField(
+                  showBorderside: true,
                   context: context,
                   label: 'Email Id',
                   icon: PhosphorIconsFill.envelope,
@@ -439,6 +427,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                 ),
 
                 buildADDField(
+                  showBorderside: true,
                   context: context,
                   label: 'Mobile Number',
                   icon: UIcons.regularRounded.mobile_notch,
@@ -458,6 +447,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                 ),
 
                 buildADDField(
+                  showBorderside: true,
                   context: context,
                   label: 'Location',
                   icon: PhosphorIconsFill.mapPinArea,
@@ -472,6 +462,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                 ),
 
                 buildADDField(
+                  showBorderside: true,
                   context: context,
                   label: 'District',
                   icon: PhosphorIconsFill.mapPin,
@@ -487,6 +478,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                 ),
 
                 buildADDField(
+                  showBorderside: true,
                   context: context,
                   label: 'State',
                   icon: PhosphorIconsFill.globeStand,
@@ -501,6 +493,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                 ),
 
                 buildADDField(
+                  showBorderside: true,
                   context: context,
                   label: 'Country',
                   icon: PhosphorIconsFill.globeHemisphereEast,
@@ -515,6 +508,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                 ),
 
                 buildADDField(
+                  showBorderside: true,
                   context: context,
                   label: 'GST Number',
                   icon: PhosphorIconsFill.pencilSimpleLine,
@@ -534,6 +528,8 @@ class _ContactFormScreenState extends State<businessCreation> {
                 ),
 
                 buildADDField(
+                  showBorderside: true,
+
                   context: context,
                   label: 'Aadhaar Number',
                   icon: PhosphorIconsFill.creditCard,
@@ -551,6 +547,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                 ),
 
                 buildADDField(
+                  showBorderside: true,
                   context: context,
                   label: 'Nominee Name',
                   icon: PhosphorIconsFill.userCircle,
@@ -566,6 +563,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                 ),
 
                 buildADDField(
+                  showBorderside: true,
                   context: context,
                   label: 'Nominee Number',
                   icon: PhosphorIconsRegular.numpad,
@@ -594,7 +592,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                     height: 120.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.r),
-                      color: Colors.grey.shade100,
+                      color: kContainerBgColor,
                     ),
                     child:
                         _selectedFiles.isEmpty
@@ -605,22 +603,20 @@ class _ContactFormScreenState extends State<businessCreation> {
                                   Icon(
                                     Ionicons.image,
                                     size: 40.spMin,
-                                    color: Colors.black38,
+                                    color: Colors.black54,
                                   ),
                                   SizedBox(height: 8.h),
                                   Text(
                                     'Tap to capture or upload pictures',
                                     style: GTextStyle.bodyMedium.copyWith(
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.grey,
-                                      // fontSize: isLandscape ? 8.sp : 12.sp,
+                                      color: kTextPrimary,
                                     ),
                                   ),
                                   Text(
                                     'Min: $_minFiles, Max: $_maxFiles files',
                                     style: GTextStyle.bodyMedium.copyWith(
-                                      // fontSize: isLandscape ? 8.sp : 11.sp,
-                                      color: Colors.grey,
+                                      color: kTextPrimary,
                                     ),
                                   ),
                                 ],
@@ -663,7 +659,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                                                       5.w,
                                                     ),
                                                     decoration: BoxDecoration(
-                                                      color: kPrimaryColor,
+                                                      color: Colors.redAccent,
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                             10.r,
@@ -693,8 +689,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                     child: Text(
                       '${_selectedFiles.length} file(s) selected',
                       style: GTextStyle.bodyMedium.copyWith(
-                        // fontSize: isLandscape ? 8.sp : 12.sp,
-                        color: Colors.grey[600],
+                        color: kTextPrimary,
                       ),
                     ),
                   ),
@@ -711,8 +706,8 @@ class _ContactFormScreenState extends State<businessCreation> {
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          kPrimaryColor.withOpacity(0.65),
-                          kPrimaryColor,
+                          kBottomNavBarSelected.withOpacity(0.65),
+                          kBottomNavBarSelected,
                         ],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,

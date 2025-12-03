@@ -75,13 +75,14 @@ class _LoginPageState extends State<Setpassword> {
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       backgroundColor: kBackgroundColor,
-
+      //MARK:- AppBar
       appBar:
           isLandscape
               ? null
               : AppBar(
                 backgroundColor: kBackgroundColor,
-
+                scrolledUnderElevation: 0,
+                elevation: 0,
                 leading: IconButton(
                   onPressed: () {
                     Navigator.pushReplacement(
@@ -97,15 +98,12 @@ class _LoginPageState extends State<Setpassword> {
                   icon: Icon(
                     UIcons.solidRounded.angle_left,
                     size: 18.spMin,
-                    color: kPrimaryColor,
+                    color: kArrowBackColor,
                   ),
                 ),
                 title: Text(
                   "Set Password",
-                  style: GTextStyle.heading2Medium.copyWith(
-                    // fontSize: 18.sp,
-                    // fontWeight: FontWeight.w800,
-                  ),
+                  style: GTextStyle.heading2Medium.copyWith(),
                 ),
                 titleSpacing: 10.w,
                 centerTitle: false,
@@ -170,13 +168,23 @@ class _LoginPageState extends State<Setpassword> {
                 child: Stack(
                   alignment: AlignmentGeometry.center,
                   children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.grey[300],
-                      radius: isLandscape ? 55.r : 45.r,
-                      backgroundImage:
-                          _profileimage != null
-                              ? FileImage(_profileimage!)
-                              : null,
+                    Container(
+                      height: isLandscape ? 110.h : 90.h,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: kTextFieldBorder,
+                          width: isLandscape ? 3.w : 2.w,
+                        ),
+                      ),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.grey[300],
+                        radius: isLandscape ? 55.r : 45.r,
+                        backgroundImage:
+                            _profileimage != null
+                                ? FileImage(_profileimage!)
+                                : null,
+                      ),
                     ),
                     if (_profileimage == null)
                       Icon(Icons.camera_alt, size: 40, color: grey),
@@ -260,7 +268,10 @@ class _LoginPageState extends State<Setpassword> {
                   height: 45.h,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [kPrimaryColor.withOpacity(0.610), kPrimaryColor],
+                      colors: [
+                        kBottomNavBarSelected.withOpacity(0.610),
+                        kBottomNavBarSelected,
+                      ],
                       begin: Alignment.bottomLeft,
                       end: Alignment.bottomCenter,
                     ),
@@ -295,11 +306,7 @@ class _LoginPageState extends State<Setpassword> {
                 ),
                 child: Text(
                   'Forgot Password ?',
-                  style: GTextStyle.bodyBold.copyWith(
-                    color: kPrimaryColor,
-                    // fontWeight: FontWeight.w600,
-                    // fontSize: 18.sp,
-                  ),
+                  style: GTextStyle.bodyBold.copyWith(color: kTextOnPrimary),
                 ),
               ),
               SizedBox(height: 20.h),
