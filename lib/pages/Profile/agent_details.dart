@@ -3,6 +3,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:my_ashaas/pages/image_perview.dart';
 import 'package:my_ashaas/styles/constants.dart';
 import 'package:my_ashaas/styles/style.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -19,16 +22,133 @@ class AgentDetails extends StatefulWidget {
 class _AgentDetailsState extends State<AgentDetails> {
   File? _profileimage;
 
+  bool isLoading = false;
+  final ImagePicker _picker = ImagePicker();
+
   Future<void> _pikeprofileimage() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.image,
-      allowMultiple: false,
+    final String? source = await showModalBottomSheet(
+      backgroundColor: kBackgroundColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0.r)),
+      ),
+      context: context,
+      builder: (BuildContext sheetContext) {
+        return Container(
+          padding: EdgeInsets.fromLTRB(20.w, 20.h, 20.w, 0),
+          height: 200.h,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pop(sheetContext);
+                    },
+                    icon: Icon(PhosphorIconsLight.x),
+                  ),
+                  //  SizedBox(width: 90.w),
+                  Text(
+                    'Profile photo',
+                    textAlign: TextAlign.center,
+                    style: GTextStyle.body,
+                  ),
+                ],
+              ),
+              SizedBox(height: 20.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // Camera option
+                  InkWell(
+                    overlayColor: MaterialStateProperty.all(Colors.transparent),
+                    hoverColor: Colors.transparent,
+                    onTap: () {
+                      Navigator.pop(sheetContext, 'camera');
+                    },
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          radius: 30.r,
+                          backgroundColor: kPrimaryColor.withOpacity(.1),
+                          child: Icon(
+                            Ionicons.camera,
+                            size: 25.spMin,
+                            color: kBlackPrimary,
+                          ),
+                        ),
+                        SizedBox(height: 8.h),
+                        Text('Camera', style: GTextStyle.bodySmall.copyWith()),
+                      ],
+                    ),
+                  ),
+                  // Gallery option
+                  InkWell(
+                    overlayColor: MaterialStateProperty.all(Colors.transparent),
+                    hoverColor: Colors.transparent,
+                    onTap: () {
+                      Navigator.pop(sheetContext, 'gallery');
+                    },
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          radius: 30.r,
+                          backgroundColor: kPrimaryColor.withOpacity(.1),
+                          child: Icon(
+                            Ionicons.images,
+                            size: 25.spMin,
+                            color: kBlackPrimary,
+                          ),
+                        ),
+                        SizedBox(height: 8.h),
+                        Text('Gallery', style: GTextStyle.bodySmall.copyWith()),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
     );
 
-    if (result != null) {
-      setState(() {
-        _profileimage = File(result.files.single.path!);
-      });
+    if (source == null || !mounted) return;
+
+    await Future.delayed(Duration(milliseconds: 100));
+
+    try {
+      String? imagePath;
+      if (source == 'camera') {
+        final XFile? pickedFile = await _picker.pickImage(
+          source: ImageSource.camera,
+          preferredCameraDevice: CameraDevice.rear,
+          imageQuality: 85,
+        );
+        imagePath = pickedFile?.path;
+      } else if (source == 'gallery') {
+        FilePickerResult? result = await FilePicker.platform.pickFiles(
+          type: FileType.image,
+          allowMultiple: false,
+        );
+        imagePath = result?.files.single.path;
+      }
+      if (imagePath == null || !mounted) return;
+      final File? editedImage = await Navigator.push<File>(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ImagePerview(imagePath: imagePath!),
+        ),
+      );
+
+      if (editedImage != null && mounted) {
+        setState(() {
+          _profileimage = editedImage;
+        });
+      }
+    } catch (e) {
+      debugPrint("Error Picking img$e");
     }
   }
 
@@ -64,13 +184,13 @@ class _AgentDetailsState extends State<AgentDetails> {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                 color: kBlackPrimary
-              //   gradient: LinearGradient(
-              //     colors: [kPrimaryColor.withOpacity(.7), kPrimaryColor],
-              //     begin: Alignment.topLeft,
-              //     end: Alignment.bottomRight,
-              //   ),
-               ),
+                color: kBlackPrimary,
+                //   gradient: LinearGradient(
+                //     colors: [kPrimaryColor.withOpacity(.7), kPrimaryColor],
+                //     begin: Alignment.topLeft,
+                //     end: Alignment.bottomRight,
+                //   ),
+              ),
             ),
           ),
 
@@ -110,7 +230,7 @@ class _AgentDetailsState extends State<AgentDetails> {
                           ),
                         ),
                       ),
-                    
+
                       SizedBox(height: 25.h),
                       // Menu items
                       Column(
@@ -119,7 +239,7 @@ class _AgentDetailsState extends State<AgentDetails> {
                             context: context,
                             icon: UIcons.regularRounded.mobile_button,
                             heading: 'Mobile number',
-                            data: '9544957003',
+                            data: '0123456789',
                           ),
                           _buildMenuItem(
                             context: context,
@@ -138,20 +258,20 @@ class _AgentDetailsState extends State<AgentDetails> {
                             context: context,
                             icon: UIcons.regularRounded.portrait,
                             heading: 'Aadhar card',
-                            data: '1234565612',
+                            data: '0123456789',
                           ),
 
                           _buildMenuItem(
                             context: context,
                             icon: UIcons.regularRounded.phone_call,
                             heading: 'Alternate Mobile',
-                            data: '9865421752',
+                            data: '0123456789',
                           ),
                           _buildMenuItem(
                             context: context,
                             icon: UIcons.regularRounded.users,
                             heading: 'Nominee',
-                            data: '9865421752',
+                            data: '0123456789',
                           ),
 
                           SizedBox(height: 50.h),
@@ -313,4 +433,3 @@ class _AgentDetailsState extends State<AgentDetails> {
     });
   }
 }
-

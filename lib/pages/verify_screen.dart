@@ -117,9 +117,9 @@ class _VerifyScreenState extends State<VerifyScreen> {
                   return <Widget>[
                     SliverAppBar(
                       backgroundColor: kBackgroundColor,
-                      pinned: true,
+                      scrolledUnderElevation: 0,
                       elevation: 0,
-                      expandedHeight: 0.h,
+
                       leading: IconButton(
                         onPressed: () {
                           Navigator.pushReplacement(
@@ -136,12 +136,11 @@ class _VerifyScreenState extends State<VerifyScreen> {
                         ),
                         icon: Icon(
                           Icons.arrow_back_ios,
-                          color: kArrowBackColor
-                          ,
+                          color: kArrowBackColor,
                           size: 20.spMin,
                         ),
                       ),
-                      scrolledUnderElevation: 0,
+
                       centerTitle: false,
                       toolbarHeight: 56.h,
                     ),
@@ -196,9 +195,9 @@ class _VerifyScreenState extends State<VerifyScreen> {
                   return Container(
                     height: isLandscape ? 50.h : 40.h,
                     width: isLandscape ? 20.w : 40.w,
+                    alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: Colors.grey.shade100,
-
                       borderRadius: BorderRadius.circular(8.r),
                       border: Border.all(
                         color:
@@ -215,13 +214,12 @@ class _VerifyScreenState extends State<VerifyScreen> {
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        contentPadding: EdgeInsets.zero,
+                        contentPadding: EdgeInsets.symmetric(
+                          vertical: isLandscape ? 8.h : 8.h,
+                        ),
                         counterText: '',
                       ),
-                      style: GTextStyle.bodyBold.copyWith(
-                        color: kTextPrimary,
-                        // fontSize: isLandscape ? 11.sp : 18.sp,
-                      ),
+                      style: GTextStyle.bodyBold.copyWith(color: kTextPrimary),
                       cursorColor: kTextFieldBorder,
                       cursorHeight: isLandscape ? 30.h : 25.h,
                       maxLength: 1,

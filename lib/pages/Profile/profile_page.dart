@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_ashaas/pages/Profile/agent_details.dart';
@@ -86,16 +84,12 @@ class ProfileScreen extends StatelessWidget {
                         children: [
                           Text(
                             'John Doe',
-                            style: GTextStyle.bodyMedium.copyWith(
-                              color: white
-                            ),
+                            style: GTextStyle.bodyMedium.copyWith(color: white),
                           ),
                           SizedBox(height: 2.h),
                           Text(
                             'Agent ID: 4578420',
-                            style: GTextStyle.bodySmall.copyWith(
-                              color: white,
-                            ),
+                            style: GTextStyle.bodySmall.copyWith(color: white),
                           ),
                         ],
                       ),
@@ -119,7 +113,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(35.r),
-                        color: Colors.white24
+                        color: Colors.white24,
                       ),
                       child: IntrinsicHeight(
                         child: Row(
@@ -181,9 +175,7 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   Text(
                     "Account Settings",
-                    style: GTextStyle.bodyMedium.copyWith(
-                      color: kTextPrimary
-                    ),
+                    style: GTextStyle.bodyMedium.copyWith(color: kTextPrimary),
                   ),
                   SizedBox(height: 8.h),
                   _buildMenuItem(
@@ -430,4 +422,3 @@ Widget _buildMenuItem({
     ),
   );
 }
-

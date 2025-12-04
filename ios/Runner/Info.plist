@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 	<dict>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>We need access to your photo library to select images</string>
+		<key>NSCameraUsageDescription</key>
+		<string>We need access to your camera to take photos</string>
 		<key>NSCameraUsageDescription</key>
 		<string>This app needs camera access to take your profile photo.</string>
 		<key>NSPhotoLibraryUsageDescription</key>
@@ -9,7 +13,7 @@
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>
-		<string>My Ashaa's - a</string>
+		<string>My Ashaa's - A</string>
 		<key>CFBundleExecutable</key>
 		<string>$(EXECUTABLE_NAME)</string>
 		<key>CFBundleIdentifier</key>

@@ -2,14 +2,19 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:my_ashaas/pages/Congratulation.dart';
+import 'package:my_ashaas/pages/image_perview.dart';
 import 'package:my_ashaas/pages/verify_screen.dart';
 import 'package:my_ashaas/widgets/Text_field.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:uicons/uicons.dart';
 import 'Forget password/forget_pasword.dart';
+
 import 'package:my_ashaas/styles/constants.dart';
 import '../styles/style.dart';
-
 
 class Setpassword extends StatefulWidget {
   const Setpassword({super.key});
@@ -20,7 +25,6 @@ class Setpassword extends StatefulWidget {
 
 class _LoginPageState extends State<Setpassword> {
   int? selectedTile;
-  // bool _isPasswordVisible = false;
   File? _profileimage;
 
   final FocusNode _usernameFocusNode = FocusNode();
@@ -30,17 +34,131 @@ class _LoginPageState extends State<Setpassword> {
   final TextEditingController passwordController = TextEditingController();
 
   bool isLoading = false;
-
+  final ImagePicker _picker = ImagePicker();
   Future<void> _pikeprofileimage() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.image,
-      allowMultiple: false,
+    final String? source = await showModalBottomSheet(
+      backgroundColor: kBackgroundColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0.r)),
+      ),
+      context: context,
+      builder: (BuildContext sheetContext) {
+        return Container(
+          padding: EdgeInsets.fromLTRB(20.w, 20.h, 20.w, 0),
+          height: 200.h,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pop(sheetContext);
+                    },
+                    icon: Icon(PhosphorIconsLight.x),
+                  ),
+                  //  SizedBox(width: 90.w),
+                  Text(
+                    'Profile photo',
+                    textAlign: TextAlign.center,
+                    style: GTextStyle.body,
+                  ),
+                ],
+              ),
+              SizedBox(height: 20.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // Camera option
+                  InkWell(
+                    overlayColor: MaterialStateProperty.all(Colors.transparent),
+                    hoverColor: Colors.transparent,
+                    onTap: () {
+                      Navigator.pop(sheetContext, 'camera');
+                    },
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          radius: 30.r,
+                          backgroundColor: kPrimaryColor.withOpacity(.1),
+                          child: Icon(
+                            Ionicons.camera,
+                            size: 25.spMin,
+                            color: kBlackPrimary,
+                          ),
+                        ),
+                        SizedBox(height: 8.h),
+                        Text('Camera', style: GTextStyle.bodySmall.copyWith()),
+                      ],
+                    ),
+                  ),
+                  // Gallery option
+                  InkWell(
+                    overlayColor: MaterialStateProperty.all(Colors.transparent),
+                    hoverColor: Colors.transparent,
+                    onTap: () {
+                      Navigator.pop(sheetContext, 'gallery');
+                    },
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          radius: 30.r,
+                          backgroundColor: kPrimaryColor.withOpacity(.1),
+                          child: Icon(
+                            Ionicons.images,
+                            size: 25.spMin,
+                            color: kBlackPrimary,
+                          ),
+                        ),
+                        SizedBox(height: 8.h),
+                        Text('Gallery', style: GTextStyle.bodySmall.copyWith()),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
     );
 
-    if (result != null) {
-      setState(() {
-        _profileimage = File(result.files.single.path!);
-      });
+    if (source == null || !mounted) return;
+
+    await Future.delayed(Duration(milliseconds: 100));
+
+    try {
+      String? imagePath;
+      if (source == 'camera') {
+        final XFile? pickedFile = await _picker.pickImage(
+          source: ImageSource.camera,
+          preferredCameraDevice: CameraDevice.rear,
+          imageQuality: 85,
+        );
+        imagePath = pickedFile?.path;
+      } else if (source == 'gallery') {
+        FilePickerResult? result = await FilePicker.platform.pickFiles(
+          type: FileType.image,
+          allowMultiple: false,
+        );
+        imagePath = result?.files.single.path;
+      }
+      if (imagePath == null || !mounted) return;
+      final File? editedImage = await Navigator.push<File>(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ImagePerview(imagePath: imagePath!),
+        ),
+      );
+
+      if (editedImage != null && mounted) {
+        setState(() {
+          _profileimage = editedImage;
+        });
+      }
+    } catch (e) {
+      debugPrint("Error Picking img$e");
     }
   }
 
@@ -65,7 +183,7 @@ class _LoginPageState extends State<Setpassword> {
   void dispose() {
     _usernameFocusNode.dispose();
     _passwordFocusNode.dispose();
-    _usernameFocusNode.dispose();
+    usenameController.dispose();
     passwordController.dispose();
     super.dispose();
   }
@@ -91,7 +209,6 @@ class _LoginPageState extends State<Setpassword> {
                       MaterialPageRoute(builder: (context) => VerifyScreen()),
                     );
                   },
-
                   padding: EdgeInsets.symmetric(
                     horizontal: 15.w,
                     vertical: 10.h,
@@ -125,7 +242,6 @@ class _LoginPageState extends State<Setpassword> {
                             ),
                           );
                         },
-
                         padding: EdgeInsets.symmetric(
                           horizontal: 10.w,
                           vertical: 10.h,
@@ -138,10 +254,7 @@ class _LoginPageState extends State<Setpassword> {
                       ),
                       title: Text(
                         "Set Password",
-                        style: GTextStyle.heading2Bold.copyWith(
-                          //fontSize: isLandscape ? 15.sp : 18.sp,
-                          // fontWeight: FontWeight.w800,
-                        ),
+                        style: GTextStyle.heading2Bold.copyWith(),
                       ),
                       titleSpacing: 10.w,
                       centerTitle: false,
@@ -163,11 +276,11 @@ class _LoginPageState extends State<Setpassword> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height: isLandscape ? 30.h : 130.h),
-
+              //MARK:- Profile ........
               GestureDetector(
                 onTap: _pikeprofileimage,
                 child: Stack(
-                  alignment: AlignmentGeometry.center,
+                  alignment: Alignment.center,
                   children: [
                     Container(
                       height: isLandscape ? 110.h : 90.h,
@@ -185,11 +298,12 @@ class _LoginPageState extends State<Setpassword> {
                             _profileimage != null
                                 ? FileImage(_profileimage!)
                                 : null,
+                        child:
+                            _profileimage == null
+                                ? Icon(Icons.camera_alt, size: 40, color: grey)
+                                : null,
                       ),
                     ),
-                    if (_profileimage == null)
-                      Icon(Icons.camera_alt, size: 40, color: grey),
-
                     if (_profileimage == null)
                       Positioned(
                         bottom: isLandscape ? 5 : 0,
@@ -252,7 +366,6 @@ class _LoginPageState extends State<Setpassword> {
                       pageBuilder: (BuildContext context, _, _) {
                         return const Congratulation();
                       },
-
                       transitionsBuilder: (
                         context,
                         animation,
@@ -281,10 +394,7 @@ class _LoginPageState extends State<Setpassword> {
                   alignment: Alignment.center,
                   child: Text(
                     'Next',
-                    style: GTextStyle.button.copyWith(
-                      // fontSize: isLandscape ? 11.sp : 18.sp,
-                      color: Colors.white,
-                    ),
+                    style: GTextStyle.button.copyWith(color: Colors.white),
                   ),
                 ),
               ),

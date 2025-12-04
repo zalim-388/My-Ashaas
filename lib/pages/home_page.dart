@@ -1,4 +1,3 @@
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -70,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       SizedBox(width: 4.w),
                       Text(
-                        'My Ashaa\'s - a',
+                        'My Ashaa\'s - A',
                         style: GTextStyle.heading2Bold.copyWith(color: black),
                       ),
                     ],
