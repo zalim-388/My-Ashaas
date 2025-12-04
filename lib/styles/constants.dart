@@ -13,7 +13,7 @@ const klightGreen = Color(0xFFE8F3EF);
 
 const Color kErrorcolor = Color.fromARGB(255, 191, 13, 37);
 const kPrimaryLight = Color(0xFFFFF9C4);
-const kBorderColor = Color(0xFFBDBDBD);
+
 const kBlackPrimary = Color(0xFF1A1A1A);
 
 // Text Colors
