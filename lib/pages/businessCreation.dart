@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:my_ashaas/styles/constants.dart';
 import 'package:my_ashaas/widgets/Text_field.dart';
+import 'package:my_ashaas/widgets/dropdown.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:uicons/uicons.dart';
 import '../styles/style.dart';
@@ -22,6 +23,9 @@ class businessCreation extends StatefulWidget {
 class _ContactFormScreenState extends State<businessCreation> {
   final _formKey = GlobalKey<FormState>();
 
+  String? selectCategroy;
+  String? selectSubCategroy;
+
   final _nameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _departmentController = TextEditingController();
@@ -29,6 +33,7 @@ class _ContactFormScreenState extends State<businessCreation> {
   final _contactNumberController = TextEditingController();
   final _locationController = TextEditingController();
   final _districtController = TextEditingController();
+  final _categoryController = TextEditingController();
   final _stateController = TextEditingController();
   final _countryController = TextEditingController();
   final _gstNumberController = TextEditingController();
@@ -43,6 +48,7 @@ class _ContactFormScreenState extends State<businessCreation> {
 
   final ImagePicker _picker = ImagePicker();
 
+  //MARK:- select imge
   Future<void> _pickFiles() async {
     if (_selectedFiles.length >= _maxFiles) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -237,7 +243,95 @@ class _ContactFormScreenState extends State<businessCreation> {
     _aadhaarNumberController.dispose();
     _nomineeController.dispose();
     _nomineeNumberController.dispose();
+    _categoryController.dispose();
     super.dispose();
+  }
+
+  final List<String>? categroyOptions = [
+    "echnical & Skilled Trades",
+    "Creative & Media",
+    "Beauty & Personal Care",
+    "Service & Maintenance",
+    "Event & Wedding Services",
+    "Home & Lifestyle Services",
+  ];
+
+  List<String> subcategroyOptions = [];
+
+  List<String> getCategroryOptions(String? categroy) {
+    if (categroy == "echnical & Skilled Trades") {
+      return [
+        " Electrician"
+            "Mechanic"
+            "Plumber"
+            "Carpenter"
+            "Welder"
+            'Technician',
+      ];
+    }
+    if (categroy == "Creative & Media") {
+      return [
+        " Photographer"
+            "Videographer"
+            "Editor"
+            "Graphic Designer"
+            "Content Creator",
+      ];
+    }
+    if (categroy == "Beauty & Personal Care") {
+      return [
+        "Beautician"
+            "Hair Stylist"
+            "Makeup Artist"
+            "Spa Therapist"
+            "Nail Artist",
+      ];
+    }
+    if (categroy == "Service & Maintenance") {
+      return [
+        "    AC Mechanic"
+            "Auto Electrician"
+            "Bike Mechanic"
+            'Car Mechanic'
+            'House Cleaning'
+            'Pest Control',
+      ];
+    }
+    if (categroy == "Event & Wedding Services") {
+      return [
+        " Wedding Photographer"
+            "Event Planner"
+            "Decorator"
+            "Catering Services"
+            "DJ / Sound System",
+      ];
+    }
+
+    if (categroy == "Home & Lifestyle Services") {
+      return [
+        "   Cook"
+            "Tailor"
+            "Babysitter"
+            "Driver"
+            "Laundry / Ironing",
+      ];
+    }
+    return [];
+  }
+
+  void onCategroyChanged(String? value) {
+    setState(() {
+      selectCategroy = value;
+
+      selectSubCategroy = null;
+      subcategroyOptions = getCategroryOptions(value);
+    });
+  }
+
+  void onSubCategroyChanged(String? value) {
+    setState(() {
+      selectSubCategroy = null;
+    });
   }
 
   Future<void> _submitForm() async {
@@ -294,13 +388,13 @@ class _ContactFormScreenState extends State<businessCreation> {
           try {
             json.decode(response.body);
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('✅ Business created successfully')),
+              SnackBar(content: Text(' Business created successfully')),
             );
             Navigator.pop(context);
           } catch (jsonError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text('✅ Success, but response format was unexpected'),
+                content: Text(' Success, but response format was unexpected'),
               ),
             );
             Navigator.pop(context);
@@ -360,6 +454,40 @@ class _ContactFormScreenState extends State<businessCreation> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                buildDropdown(
+                  isSearchable: true,
+                  showBorderside: true,
+                  label: "Select Categor",
+                  hintText: "Select Category",
+                  icon: PhosphorIconsFill.forkKnife,
+                  onChanged: onCategroyChanged,
+                  context: context,
+                  selectedValue: selectCategroy,
+                  controller: _categoryController,
+                  options: categroyOptions,
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Please selcet  category';
+                    }
+                    return null;
+                  },
+                ),
+
+                if (subcategroyOptions.isNotEmpty) ...[
+                  Expanded(
+                    child: buildDropdown(
+                      showBorderside: true,
+                      label: "Sub Categroy",
+                      selectedValue: selectSubCategroy,
+                      options: subcategroyOptions,
+                      icon: PhosphorIconsFill.users,
+                      hintText: "select Sub Categroy",
+                      onChanged: onSubCategroyChanged,
+                      context: context,
+                      isSearchable: true,
+                    ),
+                  ),
+                ],
                 buildADDField(
                   showBorderside: true,
                   context: context,

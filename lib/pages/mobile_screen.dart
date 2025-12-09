@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:country_picker/country_picker.dart';
+import 'package:my_ashaas/pages/set_pasaword.dart';
 import 'package:my_ashaas/pages/verify_screen.dart';
 import 'package:my_ashaas/styles/constants.dart';
 import 'package:my_ashaas/widgets/logo.dart';
@@ -18,6 +19,7 @@ class _MoblieScreenState extends State<MobileScreen> {
   String? _selectedCountryCode = "+91";
   String? _selectedCountryFlag = '🇮🇳';
 
+//MARK:-   country select  Fuction 
   void _openCountryPicker() {
     showCountryPicker(
       context: context,
@@ -28,11 +30,9 @@ class _MoblieScreenState extends State<MobileScreen> {
           _selectedCountryFlag = country.flagEmoji;
         });
       },
-
       showWorldWide: true,
       showSearch: true,
       searchAutofocus: true,
-
       countryListTheme: CountryListThemeData(
         backgroundColor: Colors.white,
         bottomSheetHeight: 600.h,
@@ -82,124 +82,173 @@ class _MoblieScreenState extends State<MobileScreen> {
                   alignment: Alignment.centerLeft,
 
                   child: Text(
-                    "Moblie Number",
+                    " Email",
                     style: GTextStyle.label.copyWith(color: kBlackPrimary),
                   ),
                 ),
                 SizedBox(height: 6.h),
-                Row(
-                  children: [
-                    GestureDetector(
-                      onTap: _openCountryPicker,
-                      child: Container(
-                        height: 45.h,
-                        padding: EdgeInsets.zero,
-                        decoration: BoxDecoration(
-                          color: kBackgroundColor,
-                          borderRadius: BorderRadius.circular(8.r),
-                          border: Border.all(
-                            color: kBlackPrimary,
-                            width: isLandscape ? 0.5.w : 1.0.w,
-                          ),
-                        ),
-                        child: ConstrainedBox(
-                          constraints: BoxConstraints(maxWidth: 90.w),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 6.w),
-                            child: FittedBox(
-                              fit: BoxFit.scaleDown,
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  if (_selectedCountryFlag != null &&
-                                      _selectedCountryFlag!.isNotEmpty) ...[
-                                    Text(
-                                      _selectedCountryFlag!,
-                                      style: TextStyle(fontSize: 16.spMin),
-                                    ),
-                                    SizedBox(width: 2.w), // change4
-                                  ],
-                                  Text(
-                                    (_selectedCountryCode != null)
-                                        ? (_selectedCountryCode!.startsWith('+')
-                                            ? _selectedCountryCode!
-                                            : '+$_selectedCountryCode')
-                                        : '+91',
-                                    textAlign: TextAlign.center,
-                                    style: GTextStyle.bodyLight,
-                                  ),
-                                  SizedBox(width: 2.w), // change5
-                                  Icon(Icons.arrow_drop_down),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
+//MARK:- email 
+                Container(
+                  height: 45.h,
+                  decoration: ShapeDecoration(
+                    color: kBackgroundColor,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        width: isLandscape ? 0.5.w : 1.0.w,
+                        color: kBlackPrimary,
                       ),
+                      borderRadius: BorderRadius.circular(8.r),
                     ),
+                  ),
+                  child: TextFormField(
+                    // inputFormatters: [
+                    //   LengthLimitingTextInputFormatter(10),
+                    //   FilteringTextInputFormatter.digitsOnly,
+                    // ],
+                    keyboardType: TextInputType.emailAddress,
+                    cursorColor: kBlackPrimary,
 
-                    SizedBox(width: 6.w),
-
-                    Expanded(
-                      child: Container(
-                        height: 45.h,
-                        decoration: ShapeDecoration(
-                          color: kBackgroundColor,
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                              width: isLandscape ? 0.5.w : 1.0.w,
-                              color: kBlackPrimary,
-                            ),
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                        ),
-                        child: TextFormField(
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(10),
-                            FilteringTextInputFormatter.digitsOnly,
-                          ],
-                          keyboardType: TextInputType.number,
-                          cursorColor: kBlackPrimary,
-
-                          decoration: InputDecoration(
-                            hintText: "Enter Your Moblie Number",
-                            hintStyle: GTextStyle.bodyLight.copyWith(
-                              color: kBlackPrimary,
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.r),
-                              borderSide: BorderSide.none,
-                            ),
-                            contentPadding: EdgeInsets.symmetric(
-                              horizontal: 12.w,
-                              vertical: 11.h,
-                              // isLandscape ? 9.h
-                            ),
-
-                            isCollapsed: true,
-                            filled: true,
-                            fillColor: kBackgroundColor,
-                          ),
-                          cursorHeight: 25.0.spMin,
-                          //  isLandscape ? 25.h : 25.h,
-                          style: GTextStyle.bodyBold.copyWith(
-                            color: kBlackPrimary,
-                          ),
-                        ),
-
-                        // fontSize: isLandscape ? 14.sp : 15.sp,
+                    decoration: InputDecoration(
+                      hintText: "Enter Your Email",
+                      hintStyle: GTextStyle.bodyLight.copyWith(
+                        color: kBlackPrimary,
                       ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.r),
+                        borderSide: BorderSide.none,
+                      ),
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: 12.w,
+                        vertical: 11.h,
+                        // isLandscape ? 9.h
+                      ),
+
+                      isCollapsed: true,
+                      filled: true,
+                      fillColor: kBackgroundColor,
                     ),
-                  ],
+                    cursorHeight: 25.0.spMin,
+                    //  isLandscape ? 25.h : 25.h,
+                    style: GTextStyle.bodyBold.copyWith(color: kBlackPrimary),
+                  ),
                 ),
 
-                SizedBox(height: 45.h),
+                //MARK:- text field mobile number
+
+                // Row(
+                //   children: [
+                //     GestureDetector(
+                //       onTap: _openCountryPicker,
+                //       child: Container(
+                //         height: 45.h,
+                //         padding: EdgeInsets.zero,
+                //         decoration: BoxDecoration(
+                //           color: kBackgroundColor,
+                //           borderRadius: BorderRadius.circular(8.r),
+                //           border: Border.all(
+                //             color: kBlackPrimary,
+                //             width: isLandscape ? 0.5.w : 1.0.w,
+                //           ),
+                //         ),
+                //         child: ConstrainedBox(
+                //           constraints: BoxConstraints(maxWidth: 90.w),
+                //           child: Padding(
+                //             padding: EdgeInsets.symmetric(horizontal: 6.w),
+                //             child: FittedBox(
+                //               fit: BoxFit.scaleDown,
+                //               child: Row(
+                //                 mainAxisSize: MainAxisSize.min,
+                //                 children: [
+                //                   if (_selectedCountryFlag != null &&
+                //                       _selectedCountryFlag!.isNotEmpty) ...[
+                //                     Text(
+                //                       _selectedCountryFlag!,
+                //                       style: TextStyle(fontSize: 16.spMin),
+                //                     ),
+                //                     SizedBox(width: 2.w), // change4
+                //                   ],
+                //                   Text(
+                //                     (_selectedCountryCode != null)
+                //                         ? (_selectedCountryCode!.startsWith('+')
+                //                             ? _selectedCountryCode!
+                //                             : '+$_selectedCountryCode')
+                //                         : '+91',
+                //                     textAlign: TextAlign.center,
+                //                     style: GTextStyle.bodyLight,
+                //                   ),
+                //                   SizedBox(width: 2.w), // change5
+                //                   Icon(Icons.arrow_drop_down),
+                //                 ],
+                //               ),
+                //             ),
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+
+                //     SizedBox(width: 6.w),
+
+                //     Expanded(
+                //       child: Container(
+                //         height: 45.h,
+                //         decoration: ShapeDecoration(
+                //           color: kBackgroundColor,
+                //           shape: RoundedRectangleBorder(
+                //             side: BorderSide(
+                //               width: isLandscape ? 0.5.w : 1.0.w,
+                //               color: kBlackPrimary,
+                //             ),
+                //             borderRadius: BorderRadius.circular(8.r),
+                //           ),
+                //         ),
+                //         child: TextFormField(
+                //           inputFormatters: [
+                //             LengthLimitingTextInputFormatter(10),
+                //             FilteringTextInputFormatter.digitsOnly,
+                //           ],
+                //           keyboardType: TextInputType.number,
+                //           cursorColor: kBlackPrimary,
+
+                //           decoration: InputDecoration(
+                //             hintText: "Enter Your Moblie Number",
+                //             hintStyle: GTextStyle.bodyLight.copyWith(
+                //               color: kBlackPrimary,
+                //             ),
+                //             border: OutlineInputBorder(
+                //               borderRadius: BorderRadius.circular(8.r),
+                //               borderSide: BorderSide.none,
+                //             ),
+                //             contentPadding: EdgeInsets.symmetric(
+                //               horizontal: 12.w,
+                //               vertical: 11.h,
+                //               // isLandscape ? 9.h
+                //             ),
+
+                //             isCollapsed: true,
+                //             filled: true,
+                //             fillColor: kBackgroundColor,
+                //           ),
+                //           cursorHeight: 25.0.spMin,
+                //           //  isLandscape ? 25.h : 25.h,
+                //           style: GTextStyle.bodyBold.copyWith(
+                //             color: kBlackPrimary,
+                //           ),
+                //         ),
+
+                //         // fontSize: isLandscape ? 14.sp : 15.sp,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+
+                //MARK:- buttons
+                SizedBox(height: 40.h),
 
                 GestureDetector(
                   onTap: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => VerifyScreen()),
+                      MaterialPageRoute(builder: (context) => Setpassword()),
                     );
                   },
                   child: Container(

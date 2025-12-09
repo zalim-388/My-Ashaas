@@ -202,6 +202,7 @@ class _LifestyleInterestsState extends State<LifestyleInterests> {
               SizedBox(height: 20.h),
 
               buildDropdown(
+                
                 showBorderside: true,
                 label: "Eating Habits *",
                 hintText: "Select Eating Habits",
