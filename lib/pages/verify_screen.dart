@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_ashaas/pages/Congratulation.dart';
 import 'package:my_ashaas/pages/mobile_screen.dart';
-import 'package:my_ashaas/pages/set_pasaword.dart';
 import 'package:my_ashaas/widgets/logo.dart';
 import 'package:uicons/uicons.dart';
 import 'package:my_ashaas/styles/constants.dart';
@@ -38,6 +38,17 @@ class _VerifyScreenState extends State<VerifyScreen> {
         setState(() {});
       });
     }
+  }
+
+  //MARK:- mskEmail
+  String mskEmail(String email) {
+    final parts = email.split("@");
+    if (parts.length != 2) return email;
+    final name = parts[0];
+    final domain = parts[1];
+
+    final visible = name.length > 3 ? name.substring(0, 3) : name[0];
+    return "$visible****@$domain";
   }
 
   @override
@@ -175,9 +186,9 @@ class _VerifyScreenState extends State<VerifyScreen> {
                   color: black,
                   // fontSize: isLandscape ? 8.sp : 12.sp,
                 ),
-                children: const [
-                  TextSpan(text: 'Enter the 6 -digit code sent to\n'),
-                  TextSpan(text: '+91 5485627345'),
+                children: [
+                  const TextSpan(text: 'Enter the 6 -digit code sent to\n'),
+                  TextSpan(text: mskEmail("ashass123@gmail.com")),
                 ],
               ),
             ),
@@ -249,7 +260,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                 onTap: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => Setpassword()),
+                    MaterialPageRoute(builder: (context) => Congratulation()),
                   );
                 },
                 child: Container(

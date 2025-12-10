@@ -248,7 +248,7 @@ class _MoblieScreenState extends State<MobileScreen> {
                   onTap: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => Setpassword()),
+                      MaterialPageRoute(builder: (context) => VerifyScreen()),
                     );
                   },
                   child: Container(
