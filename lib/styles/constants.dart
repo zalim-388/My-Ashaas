@@ -27,6 +27,7 @@ const kTextSecondary = Color(0xFF757575); // Grey text
 const kTextOnPrimary = Color(0xFFFFFFFF);
 //textfield border color
 const kTextFieldBorder = Color(0xFF3E775F);
+const ksendiconColor =  Color(0xFFECE5DD);
 
 // arrow back color
 const kArrowBackColor = Color(0xFF2E5A47);

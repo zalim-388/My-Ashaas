@@ -1,13 +1,12 @@
 import 'dart:io';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:my_ashaas/pages/Congratulation.dart';
-import 'package:my_ashaas/pages/image_perview.dart';
 import 'package:my_ashaas/pages/verify_screen.dart';
+import 'package:my_ashaas/widgets/ImagePiker.dart';
 import 'package:my_ashaas/widgets/Text_field.dart';
+import 'package:my_ashaas/widgets/buttons.dart';
 import 'package:uicons/uicons.dart';
 import 'Forget password/forget_pasword.dart';
 
@@ -33,125 +32,6 @@ class _LoginPageState extends State<Setpassword> {
 
   bool isLoading = false;
   final ImagePicker _picker = ImagePicker();
-  Future<void> _pikeprofileimage() async {
-    final String? source = await showModalBottomSheet(
-      backgroundColor: kBackgroundColor,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(25.r)),
-      ),
-      context: context,
-      builder: (BuildContext sheetContext) {
-        return SizedBox(
-          height: 150.h,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: 12.h,),
-              Text(
-                'Profile photo',
-                textAlign: TextAlign.center,
-                style: GTextStyle.heading3,
-              ),
-              SizedBox(height: 20.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  // Camera option
-                  InkWell(
-                    overlayColor: MaterialStateProperty.all(Colors.transparent),
-                    hoverColor: Colors.transparent,
-                    onTap: () {
-                      Navigator.pop(sheetContext, 'camera');
-                    },
-                    child: Column(
-                      children: [
-                        CircleAvatar(
-                          radius: 30.r,
-                          backgroundColor: kPrimaryColor.withOpacity(.1),
-                          child: Icon(
-                            Ionicons.camera,
-                            size: 25.spMin,
-                            color: kIconColor,
-                          ),
-                        ),
-                        SizedBox(height: 8.h),
-                        Text('Camera', style: GTextStyle.bodySmall.copyWith()),
-                      ],
-                    ),
-                  ),
-                  // Gallery option
-                  InkWell(
-                    overlayColor: MaterialStateProperty.all(Colors.transparent),
-                    hoverColor: Colors.transparent,
-                    onTap: () {
-                      Navigator.pop(sheetContext, 'gallery');
-                    },
-                    child: Column(
-                      children: [
-                        CircleAvatar(
-                          radius: 30.r,
-                          backgroundColor: kBlackPrimary.withOpacity(0.1),
-                          child: Icon(
-                            Ionicons.images,
-                            size: 25.spMin,
-                            color: kIconColor,
-                          ),
-                        ),
-                        SizedBox(height: 8.h),
-                        Text(
-                          'Gallery',
-                          style: GTextStyle.bodySmall.copyWith(
-                            color: kTextPrimary,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      },
-    );
-
-    if (source == null || !mounted) return;
-
-    await Future.delayed(Duration(milliseconds: 100));
-
-    try {
-      String? imagePath;
-      if (source == 'camera') {
-        final XFile? pickedFile = await _picker.pickImage(
-          source: ImageSource.camera,
-          preferredCameraDevice: CameraDevice.rear,
-          imageQuality: 85,
-        );
-        imagePath = pickedFile?.path;
-      } else if (source == 'gallery') {
-        FilePickerResult? result = await FilePicker.platform.pickFiles(
-          type: FileType.image,
-          allowMultiple: false,
-        );
-        imagePath = result?.files.single.path;
-      }
-      if (imagePath == null || !mounted) return;
-      final File? editedImage = await Navigator.push<File>(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ImagePerview(imagePath: imagePath!),
-        ),
-      );
-
-      if (editedImage != null && mounted) {
-        setState(() {
-          _profileimage = editedImage;
-        });
-      }
-    } catch (e) {
-      debugPrint("Error Picking img$e");
-    }
-  }
 
   @override
   void initState() {
@@ -269,7 +149,19 @@ class _LoginPageState extends State<Setpassword> {
               SizedBox(height: isLandscape ? 30.h : 130.h),
               //MARK:- Profile ........
               GestureDetector(
-                onTap: _pikeprofileimage,
+                onTap: () async {
+                  final result = await pikeprofileimage(
+                    context: context,
+                    mounted: mounted,
+                    picker: _picker,
+                  );
+
+                  if (result != null && mounted) {
+                    setState(() {
+                      _profileimage = result;
+                    });
+                  }
+                },
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
@@ -279,7 +171,7 @@ class _LoginPageState extends State<Setpassword> {
                         shape: BoxShape.circle,
                         border: Border.all(
                           color: kTextFieldBorder,
-                          width: isLandscape ? 3.w : 2.w,
+                          width: isLandscape ? 0.5.w : 2.w,
                         ),
                       ),
                       child: CircleAvatar(
@@ -347,7 +239,10 @@ class _LoginPageState extends State<Setpassword> {
                 },
               ),
               SizedBox(height: 40.h),
-              GestureDetector(
+
+              buildButtions(
+                context: context,
+                label: 'Next',
                 onTap: () {
                   Navigator.push(
                     context,
@@ -368,27 +263,8 @@ class _LoginPageState extends State<Setpassword> {
                     ),
                   );
                 },
-                child: Container(
-                  width: double.infinity,
-                  height: 45.h,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        kBottomNavBarSelected.withOpacity(0.610),
-                        kBottomNavBarSelected,
-                      ],
-                      begin: Alignment.bottomLeft,
-                      end: Alignment.bottomCenter,
-                    ),
-                    borderRadius: BorderRadius.circular(30.r),
-                  ),
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Next',
-                    style: GTextStyle.button.copyWith(color: Colors.white),
-                  ),
-                ),
               ),
+
               SizedBox(height: 15.h),
               TextButton(
                 onPressed: () {
@@ -408,7 +284,7 @@ class _LoginPageState extends State<Setpassword> {
                 ),
                 child: Text(
                   'Forgot Password ?',
-                  style: GTextStyle.bodyBold.copyWith(color: kTextOnPrimary),
+                  style: GTextStyle.bodyBold.copyWith(color: kTextblod),
                 ),
               ),
               SizedBox(height: 20.h),

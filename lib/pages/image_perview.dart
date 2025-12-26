@@ -1,11 +1,14 @@
 import 'dart:io';
-
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:my_ashaas/styles/constants.dart';
 import 'package:my_ashaas/styles/style.dart';
+import 'package:my_ashaas/widgets/Appbar.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:image/image.dart' as img;
 
 class ImagePerview extends StatefulWidget {
   final String imagePath;
@@ -17,8 +20,8 @@ class ImagePerview extends StatefulWidget {
 
 class _ImagePerviewState extends State<ImagePerview> {
   late File imageFile;
-  bool processing = false;
-  int rotationDegrees = 0;
+
+  final bool _uploading = false;
 
   @override
   void initState() {
@@ -26,13 +29,15 @@ class _ImagePerviewState extends State<ImagePerview> {
     imageFile = File(widget.imagePath);
   }
 
-  Future<void> cropimage() async {
-    if (processing || !mounted) {
+  void _uploadimageFile(File newFile) {
+    if (mounted) {
       setState(() {
-        processing = true;
+        imageFile = newFile;
       });
     }
+  }
 
+  Future<void> cropimage() async {
     try {
       final CroppedFile? cropped = await ImageCropper().cropImage(
         sourcePath: imageFile.path,
@@ -40,60 +45,34 @@ class _ImagePerviewState extends State<ImagePerview> {
         compressFormat: ImageCompressFormat.jpg,
         uiSettings: [
           AndroidUiSettings(
-            toolbarTitle: "Edit image",
-            toolbarWidgetColor: white,
-            navBarLight: true,
-            statusBarColor: white,
+            toolbarTitle: "Crop",
             toolbarColor: kBlackPrimary,
-            activeControlsWidgetColor: kBlackPrimary,
-            backgroundColor: kBlackPrimary,
-            dimmedLayerColor: kBlackPrimary,
-            cropStyle: CropStyle.circle,
-            hideBottomControls: false,
-            lockAspectRatio: false,
-            showCropGrid: true,
-            cropGridColor: Colors.white54,
-            cropFrameColor: kPrimaryColor,
-            cropFrameStrokeWidth: 2,
-            cropGridStrokeWidth: 1,
+            toolbarWidgetColor: white,
             initAspectRatio: CropAspectRatioPreset.square,
-            aspectRatioPresets: [
-              CropAspectRatioPreset.original,
-              CropAspectRatioPreset.square,
-              CropAspectRatioPreset.ratio4x3,
-            ],
+            lockAspectRatio: false,
+            hideBottomControls: true,
+            aspectRatioPresets: [CropAspectRatioPreset.square],
           ),
+
           IOSUiSettings(
+            title: "Crop",
             aspectRatioLockEnabled: false,
-            resetAspectRatioEnabled: true,
-            rotateButtonsHidden: false,
-            hidesNavigationBar: false,
-            minimumAspectRatio: 1.0,
-            aspectRatioPresets: [
-              CropAspectRatioPreset.original,
-              CropAspectRatioPreset.square,
-              CropAspectRatioPreset.ratio4x3,
-            ],
+            resetButtonHidden: false,
+            aspectRatioPickerButtonHidden: true,
+            aspectRatioPresets: [CropAspectRatioPreset.square],
           ),
         ],
       );
       if (!mounted) return;
+
       if (cropped != null) {
         setState(() {
-          imageFile = File(cropped.path);
-          processing = false;
-        });
-      } else {
-        setState(() {
-          processing = false;
+          _uploadimageFile(File(cropped.path));
         });
       }
     } catch (e) {
       debugPrint("Error cropping image $e");
       if (mounted) {
-        setState(() {
-          processing = false;
-        });
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -105,196 +84,160 @@ class _ImagePerviewState extends State<ImagePerview> {
     }
   }
 
+  Future<void> _rotationImg() async {
+    try {
+      final Uint8List bytes = await imageFile.readAsBytes();
+      final img.Image? capturedImage = img.decodeImage(bytes);
+
+      if (capturedImage != null) {
+        final img.Image rotatedImage = img.copyRotate(capturedImage, angle: 90);
+        final List<int> newBytes = img.encodeJpg(rotatedImage, quality: 100);
+
+        final String tempth =
+            '${imageFile.parent.path}/rotated_${DateTime.now().millisecondsSinceEpoch}.jpg';
+
+        final File rotatedFile = await File(tempth).writeAsBytes(newBytes);
+
+        PaintingBinding.instance.imageCache.clear();
+        PaintingBinding.instance.imageCache.clearLiveImages();
+        _uploadimageFile(rotatedFile);
+      }
+    } catch (e) {
+      print("Error: $e");
+    }
+  }
+
+  void _saveimg() {
+    Navigator.pop(context, imageFile);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        if (processing) return false;
-        return true;
-      },
-      child: Scaffold(
-        backgroundColor: kBackgroundColor,
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+    //MARK:- body
+    return Scaffold(
+      backgroundColor: kBlackPrimary,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(50.h),
+        child: buildAppbar(
+          appbarColor: kBlackPrimary,
+          leadingColor: white,
+          onPressedLeading: () {},
+          titleText: "Perview",
+          titleColor: white,
+          action: [
+            InkWell(
+              onTap: _uploading ? null : _saveimg,
+              child:
+                  _uploading
+                      ? SizedBox(
+                        height: 20.h,
+                        width: 20.w,
+                        child: SvgPicture.asset(
+                          "assets/loading/bouncing-ball.svg",
+                          color: ksendiconColor,
+                        ),
+                      )
+                      : Container(
+                        padding: EdgeInsets.all(isLandscape ? 4.w : 8.w),
+                        decoration: BoxDecoration(
+                          color: ksendiconColor,
+                          shape: BoxShape.circle,
 
-        appBar: AppBar(
-          backgroundColor: kBlackPrimary,
-          scrolledUnderElevation: 0,
-          elevation: 0,
-          leading: IconButton(
-            onPressed:
-                processing
-                    ? null
-                    : () {
-                      Navigator.pop(context);
-                    },
-            icon: Icon(PhosphorIconsLight.x, color: white, size: 22.spMin),
-          ),
-          title: Text(
-            "Perview",
-            style: GTextStyle.heading2Medium.copyWith(color: white),
-          ),
-          actions: [
-            IconButton(
-              onPressed: processing ? null : cropimage,
-
-              icon: Icon(
-                PhosphorIconsLight.pencil,
-                color: white,
-                size: 22.spMin,
-              ),
-            ),
-          ],
-        ),
-        body: Column(
-          children: [
-            Expanded(
-              child: Container(
-                width: double.infinity,
-                color: kBlackPrimary,
-                child: Center(
-                  child:
-                      processing
-                          ? Column(
-                            children: [
-                              CircularProgressIndicator(color: kPrimaryColor),
-                              SizedBox(height: 16.h),
-                              Text(
-                                "Procesing",
-                                style: GTextStyle.body.copyWith(
-                                  color: Colors.grey.shade600,
-                                ),
-                              ),
-                            ],
-                          )
-                          : InteractiveViewer(
-                            panEnabled: true,
-                            boundaryMargin: EdgeInsets.all(20.w),
-                            minScale: 0.5,
-                            maxScale: 4.0,
-                            child: Image.file(
-                              imageFile,
-                              fit: BoxFit.contain,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.broken_image,
-                                      size: 64.spMin,
-                                      color: Colors.grey,
-                                    ),
-                                    SizedBox(height: 16.h),
-                                    Text(
-                                      "Unable to load image",
-                                      style: GTextStyle.body.copyWith(
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              },
+                          boxShadow: [
+                            BoxShadow(
+                              color: grey.withOpacity(0.5),
+                              blurRadius: 8.r,
+                              offset: Offset(0, 4.h),
                             ),
-                          ),
-                ),
-              ),
-            ),
-
-            Container(
-              color: kBlackPrimary,
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
-              child: SafeArea(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: GestureDetector(
-                        onTap:
-                            processing
-                                ? null
-                                : () {
-                                  Navigator.pop(context);
-                                },
-                        child: Container(
-                          height: 45.h,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25.r),
-                            border: Border.all(color: Colors.grey, width: 1.w),
-                          ),
-                          alignment: Alignment.center,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                PhosphorIconsLight.x,
-                                color: Colors.grey,
-                                size: 20.spMin,
-                              ),
-                              SizedBox(width: 8.w),
-                              Text(
-                                "Cancel",
-                                style: GTextStyle.button.copyWith(
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ],
-                          ),
+                          ],
+                        ),
+                        alignment: Alignment.center,
+                        child: Icon(
+                          PhosphorIconsRegular.paperPlaneTilt,
+                          size: 22.spMin,
+                          color: kIconColor,
                         ),
                       ),
-                    ),
-                    SizedBox(width: 16.w),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap:
-                            processing
-                                ? null
-                                : () {
-                                  Navigator.pop(context, imageFile);
-                                },
-                        child: Container(
-                          height: 45.h,
-                          decoration: BoxDecoration(
-                            gradient:
-                                processing
-                                    ? null
-                                    : LinearGradient(
-                                      colors: [
-                                        kBottomNavBarSelected.withOpacity(0.65),
-                                        kBottomNavBarSelected,
-                                      ],
-                                      begin: Alignment.bottomLeft,
-                                      end: Alignment.bottomCenter,
-                                    ),
-                            border: Border.all(color: Colors.grey, width: 1.w),
-                            color: processing ? Colors.grey : null,
-                            borderRadius: BorderRadius.circular(25.r),
-                          ),
-                          alignment: Alignment.center,
-
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                PhosphorIconsLight.check,
-                                color: Colors.grey,
-                                size: 20.spMin,
-                              ),
-                              SizedBox(width: 8.w),
-                              Text(
-                                "Done",
-                                style: GTextStyle.button.copyWith(
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
             ),
           ],
         ),
       ),
+      body: Column(
+        children: [
+          Expanded(
+            child: Center(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 6.w),
+                width: double.infinity,
+                height: 150.h,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+                constraints: BoxConstraints(
+                  minHeight: MediaQuery.of(context).size.height * 0.4,
+                ),
+                child: InteractiveViewer(
+                  panEnabled: true,
+                  boundaryMargin: EdgeInsets.all(20.w),
+                  minScale: 0.5,
+                  maxScale: 4.0,
+                  child: Image.file(
+                    imageFile,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.broken_image,
+                            size: 64.spMin,
+                            color: Colors.grey,
+                          ),
+                          SizedBox(height: 16.h),
+                          Text(
+                            "Unable to load image",
+                            style: GTextStyle.body.copyWith(color: Colors.grey),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          Container(
+            color: kBlackPrimary,
+            padding: EdgeInsets.symmetric(vertical: 20.h),
+            child: SafeArea(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  _buildTool(PhosphorIconsLight.crop, "Crop", cropimage),
+                  _buildTool(Icons.rotate_right, "Rotate", _rotationImg),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
+}
+
+Widget _buildTool(IconData icon, String label, VoidCallback onTap) {
+  return InkWell(
+    onTap: onTap,
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, color: white, size: 28.spMin),
+        SizedBox(height: 5.h),
+        Text(label, style: GTextStyle.captionMedium.copyWith(color: white)),
+      ],
+    ),
+  );
 }

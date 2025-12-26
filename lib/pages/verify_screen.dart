@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_ashaas/pages/Referral_page.dart';
 import 'package:my_ashaas/pages/mobile_screen.dart';
+import 'package:my_ashaas/widgets/buttons.dart';
 import 'package:my_ashaas/widgets/logo.dart';
 import 'package:uicons/uicons.dart';
 import 'package:my_ashaas/styles/constants.dart';
@@ -176,7 +177,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
 
             Text(
               "Verify Your Code",
-              style: GTextStyle.heading2Bold.copyWith(color:kTextblod),
+              style: GTextStyle.heading2Bold.copyWith(color: kTextblod),
             ),
 
             RichText(
@@ -255,19 +256,20 @@ class _VerifyScreenState extends State<VerifyScreen> {
 
             SizedBox(height: 40.h),
 
-               Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
-                 child: buildButton(
-                    title:'verify',
-                    onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => ReferralPage()),
-                    );
-                  },
-                  ),
-               ),
-           
+              child: buildButtions(
+                context: context,
+                label: 'verify',
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => ReferralPage()),
+                  );
+                },
+              ),
+            ),
+
             SizedBox(height: 15.h),
 
             RichText(

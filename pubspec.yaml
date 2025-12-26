@@ -46,6 +46,8 @@ dependencies:
   country_code_picker: ^3.4.1
   flutter_launcher_icons: ^0.13.1
   image_cropper: ^8.0.2
+  flutter_svg: ^2.2.3
+  
   
  
 dev_dependencies:

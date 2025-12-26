@@ -7,20 +7,21 @@ import 'package:image_picker/image_picker.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:my_ashaas/styles/constants.dart';
 import 'package:my_ashaas/widgets/Text_field.dart';
+import 'package:my_ashaas/widgets/buttons.dart';
 import 'package:my_ashaas/widgets/dropdown.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:uicons/uicons.dart';
 import '../styles/style.dart';
 import 'home_page.dart';
 
-class businessCreation extends StatefulWidget {
-  const businessCreation({super.key});
+class Businesscreation extends StatefulWidget {
+  const Businesscreation({super.key});
 
   @override
-  State<businessCreation> createState() => _ContactFormScreenState();
+  State<Businesscreation> createState() => _ContactFormScreenState();
 }
 
-class _ContactFormScreenState extends State<businessCreation> {
+class _ContactFormScreenState extends State<Businesscreation> {
   final _formKey = GlobalKey<FormState>();
 
   String? selectCategroy;
@@ -827,43 +828,27 @@ class _ContactFormScreenState extends State<businessCreation> {
 
                 SizedBox(height: 20.h),
 
-                GestureDetector(
-                  onTap: _isLoading ? null : _submitForm,
-
-                  child: Container(
-                    height: 45.h,
-                    width: double.infinity,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          kBottomNavBarSelected.withOpacity(0.65),
-                          kBottomNavBarSelected,
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        stops: [0.0, 0.9],
-                        tileMode: TileMode.decal,
-                      ),
-                      borderRadius: BorderRadius.circular(30.r),
-                    ),
-                    child:
-                        _isLoading
-                            ? SizedBox(
-                              height: 20.h,
-                              width: 20.w,
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
-                                strokeWidth: 2.w,
-                              ),
-                            )
-                            : Text(
-                              'SUBMIT',
-                              style: GTextStyle.button.copyWith(
-                                color: Colors.white,
-                              ),
+                buildButtions(
+                  context: context,
+                  child:
+                      _isLoading
+                          ? SizedBox(
+                            height: 20.h,
+                            width: 20.w,
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                              strokeWidth: 2.w,
                             ),
-                  ),
+                          )
+                          : Text(
+                            'SUBMIT',
+                            style: GTextStyle.button.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                  onTap: () {
+                    _isLoading ? null : _submitForm();
+                  },
                 ),
 
                 SizedBox(height: isLandscape ? 20.h : 10.h),

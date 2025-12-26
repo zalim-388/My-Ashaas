@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,18 +6,18 @@ import 'package:my_ashaas/pages/Forget%20password/Reset_password_verify.dart';
 import 'package:my_ashaas/styles/constants.dart';
 import 'package:my_ashaas/styles/style.dart';
 import 'package:my_ashaas/widgets/Text_field.dart';
-import 'package:my_ashaas/widgets/logo.dart';
+import 'package:my_ashaas/widgets/buttons.dart';
 import 'package:uicons/uicons.dart';
 
 class EnterNewPass extends StatefulWidget {
   final String otp;
-  const EnterNewPass({Key? key, required this.otp}) : super(key: key);
+  const EnterNewPass({super.key, required this.otp});
 
   @override
-  _EnterNewPassState createState() => _EnterNewPassState();
+  EnterNewPassState createState() => EnterNewPassState();
 }
 
-class _EnterNewPassState extends State<EnterNewPass> {
+class EnterNewPassState extends State<EnterNewPass> {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _passwordController = TextEditingController();
@@ -86,7 +85,7 @@ class _EnterNewPassState extends State<EnterNewPass> {
               Center(
                 child: Text(
                   'Create New\n  Password',
-                  style: GTextStyle.display.copyWith(color: kTextPrimary),
+                  style: GTextStyle.display.copyWith(color: kTextblod),
                 ),
               ),
               SizedBox(height: 10.h),
@@ -139,8 +138,9 @@ class _EnterNewPassState extends State<EnterNewPass> {
 
                     SizedBox(height: 45.h),
 
-                    buildButton(
-                      title: "Save & Continue",
+                    buildButtions(
+                      context: context,
+                      label: "Save & Continue",
                       onTap: () {
                         Navigator.pushReplacement(
                           context,

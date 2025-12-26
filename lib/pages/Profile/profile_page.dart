@@ -5,8 +5,9 @@ import 'package:my_ashaas/pages/Profile/request_money.dart';
 import 'package:my_ashaas/pages/Profile/wallet_page.dart';
 import 'package:my_ashaas/styles/constants.dart';
 import 'package:my_ashaas/styles/style.dart';
+import 'package:my_ashaas/widgets/Appbar.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:uicons/uicons.dart';
+
 
 import 'bank_details_page.dart';
 
@@ -19,22 +20,17 @@ class ProfileScreen extends StatelessWidget {
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      appBar: AppBar(
-        backgroundColor: kBackgroundColor,
-
-        centerTitle: false,
-        title: Text('Profile', style: GTextStyle.heading1Medium),
-        leading: IconButton(
-          icon: Icon(
-            UIcons.solidRounded.angle_left,
-            size: 18.spMin,
-            color: kArrowBackColor,
-          ),
-          onPressed: () {
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(56.h),
+        child: buildAppbar(
+          appbarColor: kBackgroundColor,
+          onPressedLeading: () {
             Navigator.pop(context);
           },
+          titleText: "Profile",
         ),
       ),
+
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -47,7 +43,7 @@ class ProfileScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 25.h, horizontal: 20.w),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [kBlackPrimary.withOpacity(.7), kBlackPrimary],
+                  colors: [kprimaryGreen.withOpacity(.7), kprimaryGreen],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -168,6 +164,7 @@ class ProfileScreen extends StatelessWidget {
 
             SizedBox(height: 20.h),
 
+            //MARK:-   Account Settings
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: Column(
@@ -175,7 +172,7 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   Text(
                     "Account Settings",
-                    style: GTextStyle.bodyMedium.copyWith(color: kTextPrimary),
+                    style: GTextStyle.bodyMedium.copyWith(color: kBlackPrimary),
                   ),
                   SizedBox(height: 8.h),
                   _buildMenuItem(
@@ -395,14 +392,14 @@ Widget _buildMenuItem({
                     Text(
                       title,
                       style: GTextStyle.bodyBold.copyWith(
-                        color: Colors.grey.shade600,
+                        color: kTextSecondary,
                       ),
                     ),
                     if (subtitle != null && subtitle.isNotEmpty)
                       Text(
                         subtitle,
                         style: GTextStyle.bodySmall.copyWith(
-                          color: kTextOnPrimary,
+                          color: kTextPrimary,
                         ),
                       ),
                   ],

@@ -128,7 +128,11 @@ class _HomePageState extends State<HomePage> {
                               ),
                             );
                           },
-                          icon: Icon(PhosphorIconsBold.user, size: 23.spMin),
+                          icon: Icon(
+                            PhosphorIconsBold.user,
+                            size: 23.spMin,
+                            color: kIconColor,
+                          ),
                         ),
                       ],
                     ),
@@ -163,14 +167,14 @@ class _HomePageState extends State<HomePage> {
                       Expanded(
                         child: _buildActionCard(
                           context: context,
-                          imagepath: "assets/images/deal.png",
+                          icon: PhosphorIconsLight.briefcase,
                           title: "Add Business",
                           subtitle: "Add more business to get more leads",
                           onPressed: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => businessCreation(),
+                                builder: (context) => Businesscreation(),
                               ),
                             );
                           },
@@ -180,7 +184,7 @@ class _HomePageState extends State<HomePage> {
                       Expanded(
                         child: _buildActionCard(
                           context: context,
-                          imagepath: "assets/images/deal.png",
+                          icon: PhosphorIconsLight.handshake,
                           title: "Find your Match",
                           subtitle:
                               "Life is an Adventure When you find the right Partner to explore with",
@@ -289,7 +293,7 @@ class _HomePageState extends State<HomePage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => businessCreation(),
+                                builder: (context) => Businesscreation(),
                               ),
                             );
                           },
@@ -374,7 +378,7 @@ class _HomePageState extends State<HomePage> {
         ),
         dense: false,
         contentPadding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
-        tileColor: kBackgroundColor1,
+        tileColor: kContainerBgColor,
       ),
     );
   }
@@ -452,7 +456,7 @@ class _HomePageState extends State<HomePage> {
                   dotHeight: 5.h,
                   dotWidth: 6.w,
                   spacing: 3.w,
-                  activeDotColor: kBlackPrimary,
+                  activeDotColor: kTextblod,
                   dotColor: Colors.grey,
                 ),
                 onDotClicked: (index) {
@@ -482,7 +486,7 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.r),
-          color: maincolor ?? Colors.grey.shade100,
+          color: maincolor ??kContainerBgColor,
           border: Border.all(color: iconcolor.withOpacity(0.2), width: 1.w),
         ),
         child: Column(
@@ -565,11 +569,11 @@ Widget _buildErrorcImage() {
 
 //MARK:- action card
 Widget _buildActionCard({
-  required String imagepath,
   required String title,
   required String subtitle,
   required VoidCallback onPressed,
   required BuildContext context,
+  required IconData icon,
 }) {
   final isLandscape =
       MediaQuery.of(context).orientation == Orientation.landscape;
@@ -585,7 +589,7 @@ Widget _buildActionCard({
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.r),
 
-        color: kBackgroundColor1,
+        color: kContainerBgColor,
         boxShadow: [
           BoxShadow(
             color: kPrimaryColor.withOpacity(0.1),
@@ -601,26 +605,18 @@ Widget _buildActionCard({
 
         children: [
           Container(
-            padding: EdgeInsets.all(isLandscape ? 7.w : 10.w),
+            padding: EdgeInsets.all(isLandscape ? 7.w : 12.w),
             decoration: BoxDecoration(
               color: kPrimaryColor.withOpacity(0.2),
               borderRadius: BorderRadius.circular(12.r),
             ),
-            child: Image.asset(
-              imagepath,
-              fit: BoxFit.contain,
-              height: 35.h,
-              width: 35.h,
-              errorBuilder: (context, error, stackTrace) {
-                return Icon(Icons.business);
-              },
-            ),
+            child: Icon(icon, color: kTextPrimary, size: 22.spMin),
           ),
           SizedBox(height: isLandscape ? 5.h : 12.h),
           Text(
             title,
             textAlign: TextAlign.center,
-            style: GTextStyle.heading2Bold.copyWith(),
+            style: GTextStyle.heading2Bold.copyWith(color: kTextPrimary),
           ),
 
           SizedBox(height: 4.h),
@@ -628,7 +624,7 @@ Widget _buildActionCard({
             child: Text(
               textAlign: TextAlign.center,
               subtitle,
-              style: GTextStyle.caption.copyWith(color: Colors.grey[600]),
+              style: GTextStyle.caption.copyWith(color:kTextSecondary),
             ),
           ),
           // SizedBox(height: 5.h),
@@ -637,3 +633,13 @@ Widget _buildActionCard({
     ),
   );
 }
+
+// Image.asset(
+//               imagepath,
+//               fit: BoxFit.contain,
+//               height: 35.h,
+//               width: 35.h,
+//               errorBuilder: (context, error, stackTrace) {
+//                 return Icon(Icons.business);
+//               },
+//             ),

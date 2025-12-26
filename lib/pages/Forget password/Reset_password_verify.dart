@@ -1,9 +1,9 @@
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_ashaas/pages/Forget%20password/forget_pasword.dart';
 import 'package:my_ashaas/styles/style.dart';
+import 'package:my_ashaas/widgets/buttons.dart';
 import 'package:my_ashaas/widgets/logo.dart';
 import 'package:uicons/uicons.dart';
 import '../../styles/constants.dart';
@@ -73,7 +73,7 @@ class _ResetPasswordVerifyState extends State<ResetPasswordVerify> {
                     Text(
                       'Check your SMS ',
                       style: GTextStyle.display.copyWith(
-                        color: kTextPrimary,
+                        color: kTextblod,
                         fontSize: 28.spMin,
                       ),
                     ),
@@ -157,8 +157,9 @@ class _ResetPasswordVerifyState extends State<ResetPasswordVerify> {
 
                     SizedBox(height: 45.h),
 
-                    buildButton(
-                      title: 'Continue',
+                    buildButtions(
+                      context: context,
+                      label: 'Continue',
                       onTap: () {
                         Navigator.pushReplacement(
                           context,
@@ -177,7 +178,7 @@ class _ResetPasswordVerifyState extends State<ResetPasswordVerify> {
                             TextSpan(
                               text: "If you didn't receive a code! ",
                               style: GTextStyle.bodyLight.copyWith(
-                                color: Colors.black38,
+                                color: kTextSecondary
                               ),
                             ),
                             TextSpan(
@@ -197,7 +198,7 @@ class _ResetPasswordVerifyState extends State<ResetPasswordVerify> {
                                       // );
                                     },
                               style: GTextStyle.bodySmallbold.copyWith(
-                                color: kTextOnPrimary
+                                color: kTextblod,
                               ),
                             ),
                           ],

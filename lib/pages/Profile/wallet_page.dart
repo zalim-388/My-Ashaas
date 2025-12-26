@@ -102,8 +102,8 @@ class CryptoWalletScreen extends StatelessWidget {
       backgroundColor: kBackgroundColor,
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(1),
-        child: AppBar(backgroundColor: Colors.black),
+        preferredSize: Size.fromHeight(0),
+        child: AppBar(backgroundColor: kprimaryGreen),
       ),
       body: SafeArea(
         child: CustomScrollView(
@@ -118,11 +118,11 @@ class CryptoWalletScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       // gradient: LinearGradient(
                       //   colors: [
-                      //     kContainerBgColor,
+                      //     kprimaryGreen,
                       //     kPrimaryColor.withOpacity(.1),
                       //   ],
                       // ),
-                      color: kBlackPrimary,
+                    color: kprimaryGreen,
                     ),
                     child: Stack(
                       children: [
@@ -134,7 +134,7 @@ class CryptoWalletScreen extends StatelessWidget {
                             height: 150.h,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: kPrimaryColor.withOpacity(0.10),
+                              color: white.withOpacity(0.10),
                             ),
                           ),
                         ),
@@ -146,7 +146,7 @@ class CryptoWalletScreen extends StatelessWidget {
                             height: 100.h,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: kPrimaryColor.withOpacity(0.08),
+                              color: white.withOpacity(0.08),
                             ),
                           ),
                         ),
@@ -158,7 +158,7 @@ class CryptoWalletScreen extends StatelessWidget {
                             height: 160.h,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: kPrimaryColor.withOpacity(0.09),
+                              color: white.withOpacity(0.09),
                             ),
                           ),
                         ),
@@ -193,7 +193,7 @@ class CryptoWalletScreen extends StatelessWidget {
                                     alignment: Alignment.centerRight,
                                     child: CircleAvatar(
                                       radius: 20.r,
-                                      backgroundColor: Colors.white30,
+                                      backgroundColor: white,
                                       backgroundImage: AssetImage(
                                         'assets/images/man.png',
                                       ),
@@ -255,7 +255,7 @@ class CryptoWalletScreen extends StatelessWidget {
                               RequestMoneyDialog.show(context);
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: kBlackPrimary,
+                              backgroundColor: kprimaryGreen,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(25.r),
                               ),

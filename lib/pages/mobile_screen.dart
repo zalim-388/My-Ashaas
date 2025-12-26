@@ -5,6 +5,7 @@ import 'package:country_picker/country_picker.dart';
 import 'package:my_ashaas/pages/verify_screen.dart';
 import 'package:my_ashaas/styles/constants.dart';
 import 'package:my_ashaas/widgets/Text_field.dart';
+import 'package:my_ashaas/widgets/buttons.dart';
 import 'package:my_ashaas/widgets/logo.dart';
 import '../styles/style.dart';
 
@@ -237,8 +238,9 @@ class _MoblieScreenState extends State<MobileScreen> {
                 //MARK:- buttons
                 SizedBox(height: 40.h),
 
-                buildButton(
-                  title: 'Continue',
+                buildButtions(
+                context: context,
+                  label: 'Continue',
                   onTap: () {
                     Navigator.pushReplacement(
                       context,

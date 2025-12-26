@@ -6,7 +6,7 @@ import 'package:my_ashaas/styles/style.dart';
 
 Widget buildButtions({
   required BuildContext context,
-  required String label,
+   String? label,
   Color? gradientColor1,
   Color? gradientColor2,
   Color? textColor,
@@ -21,6 +21,7 @@ Widget buildButtions({
   IconData? icon,
   Color? iconColor,
   double? fontSize,
+  Widget? child,
 }) {
   final boderSide =
       showborder
@@ -46,29 +47,28 @@ Widget buildButtions({
 
         gradient:
             !usesolidColor
-                ? LinearGradient(
-                  colors: [
-                    gradientColor1 ?? kBottomNavBarSelected,
-                    gradientColor2 ?? kprimaryGreen,
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  stops: [0.0, 0.9],
-                  tileMode: TileMode.decal,
-                )
-                : null,
+                ?  LinearGradient(
+          colors: [
+            kBottomNavBarSelected.withOpacity(0.65),
+            kBottomNavBarSelected,
+          ],
+          begin: Alignment.bottomLeft,
+          end: Alignment.bottomCenter,
+        ):null,
         borderRadius: radius ?? BorderRadius.circular(30.r),
       ),
 
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          if (child != null) ...[SizedBox(width: 8.w)],
+
           if (icon != null) ...[
             Icon(icon, color: iconColor ?? Colors.white),
             SizedBox(width: 8.w),
           ],
           Text(
-            label,
+            label??"Continue",
             style: GTextStyle.button.copyWith(
               color: textColor ?? Colors.white,
               fontSize: fontSize ?? 16.spMin,
@@ -80,3 +80,14 @@ Widget buildButtions({
     ),
   );
 }
+// LinearGradient(
+//                   colors: [
+//                     gradientColor1 ?? kBottomNavBarSelected,
+//                     gradientColor2 ?? kprimaryGreen,
+//                   ],
+//                   begin: Alignment.topCenter,
+//                   end: Alignment.bottomCenter,
+//                   stops: [0.0, 0.9],
+//                   tileMode: TileMode.decal,
+//                 )
+//                 : null,

@@ -47,8 +47,8 @@ class RequestMoneyDialog {
                        
                         gradient: LinearGradient(
                           colors: [
-                             kBlackPrimary.withOpacity(.7),
-                           kBlackPrimary
+                             kprimaryGreen.withOpacity(.7),
+                           kprimaryGreen
                            
                           ],
                           begin: Alignment.topLeft,
@@ -157,7 +157,7 @@ class RequestMoneyDialog {
                                   },
                                   style: OutlinedButton.styleFrom(
                                     side: BorderSide(
-                                      color: Colors.black87
+                                      color: kTextFieldBorder
                                     ),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30.r),
@@ -169,7 +169,7 @@ class RequestMoneyDialog {
                                   child: Text(
                                     'Cancel',
                                     style: GTextStyle.bodyLight.copyWith(
-                                      color: Colors.grey,
+                                      color: kTextSecondary
                                     ),
                                   ),
                                 ),
@@ -228,7 +228,7 @@ class RequestMoneyDialog {
         child: Container(
           padding: EdgeInsets.symmetric(vertical: isLandscape ? 6.h : 8.h),
           decoration: BoxDecoration(
-            border: Border.all(color: kBlackPrimary),
+            border: Border.all(color: kTextFieldBorder),
             borderRadius: BorderRadius.circular(30.r),
             color: kPrimaryColor.withOpacity(0.05),
           ),

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_ashaas/pages/Congratulation.dart';
 import 'package:my_ashaas/pages/set_pasaword.dart';
 import 'package:my_ashaas/styles/constants.dart';
 import 'package:my_ashaas/styles/style.dart';
 import 'package:my_ashaas/widgets/Appbar.dart';
 import 'package:my_ashaas/widgets/Text_field.dart';
-import 'package:my_ashaas/widgets/logo.dart';
+import 'package:my_ashaas/widgets/buttons.dart';
+
 
 class ReferralPage extends StatefulWidget {
   const ReferralPage({super.key});
@@ -73,8 +73,10 @@ class _ReferralPageState extends State<ReferralPage> {
             ),
             SizedBox(height: 40.h),
         
-            buildButton(
-              title: 'Continue',
+        //MARK:- button
+            buildButtions(
+                context: context,
+              label: 'Continue',
               onTap: () {
                 Navigator.pushReplacement(
                   context,

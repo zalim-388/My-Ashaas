@@ -1,13 +1,14 @@
 import 'dart:io';
-import 'package:file_picker/file_picker.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:my_ashaas/pages/image_perview.dart';
+
 import 'package:my_ashaas/styles/constants.dart';
 import 'package:my_ashaas/styles/style.dart';
+import 'package:my_ashaas/widgets/Appbar.dart';
+import 'package:my_ashaas/widgets/ImagePiker.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:uicons/uicons.dart';
 
@@ -25,153 +26,23 @@ class _AgentDetailsState extends State<AgentDetails> {
   bool isLoading = false;
   final ImagePicker _picker = ImagePicker();
 
-  Future<void> _pikeprofileimage() async {
-    final String? source = await showModalBottomSheet(
-      backgroundColor: kBackgroundColor,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0.r)),
-      ),
-      context: context,
-      builder: (BuildContext sheetContext) {
-        return Container(
-          padding: EdgeInsets.fromLTRB(20.w, 20.h, 20.w, 0),
-          height: 200.h,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pop(sheetContext);
-                    },
-                    icon: Icon(PhosphorIconsLight.x),
-                  ),
-                  //  SizedBox(width: 90.w),
-                  Text(
-                    'Profile photo',
-                    textAlign: TextAlign.center,
-                    style: GTextStyle.body,
-                  ),
-                ],
-              ),
-              SizedBox(height: 20.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  // Camera option
-                  InkWell(
-                    overlayColor: MaterialStateProperty.all(Colors.transparent),
-                    hoverColor: Colors.transparent,
-                    onTap: () {
-                      Navigator.pop(sheetContext, 'camera');
-                    },
-                    child: Column(
-                      children: [
-                        CircleAvatar(
-                          radius: 30.r,
-                          backgroundColor: kPrimaryColor.withOpacity(.1),
-                          child: Icon(
-                            Ionicons.camera,
-                            size: 25.spMin,
-                            color: kBlackPrimary,
-                          ),
-                        ),
-                        SizedBox(height: 8.h),
-                        Text('Camera', style: GTextStyle.bodySmall.copyWith()),
-                      ],
-                    ),
-                  ),
-                  // Gallery option
-                  InkWell(
-                    overlayColor: MaterialStateProperty.all(Colors.transparent),
-                    hoverColor: Colors.transparent,
-                    onTap: () {
-                      Navigator.pop(sheetContext, 'gallery');
-                    },
-                    child: Column(
-                      children: [
-                        CircleAvatar(
-                          radius: 30.r,
-                          backgroundColor: kPrimaryColor.withOpacity(.1),
-                          child: Icon(
-                            Ionicons.images,
-                            size: 25.spMin,
-                            color: kBlackPrimary,
-                          ),
-                        ),
-                        SizedBox(height: 8.h),
-                        Text('Gallery', style: GTextStyle.bodySmall.copyWith()),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      },
-    );
-
-    if (source == null || !mounted) return;
-
-    await Future.delayed(Duration(milliseconds: 100));
-
-    try {
-      String? imagePath;
-      if (source == 'camera') {
-        final XFile? pickedFile = await _picker.pickImage(
-          source: ImageSource.camera,
-          preferredCameraDevice: CameraDevice.rear,
-          imageQuality: 85,
-        );
-        imagePath = pickedFile?.path;
-      } else if (source == 'gallery') {
-        FilePickerResult? result = await FilePicker.platform.pickFiles(
-          type: FileType.image,
-          allowMultiple: false,
-        );
-        imagePath = result?.files.single.path;
-      }
-      if (imagePath == null || !mounted) return;
-      final File? editedImage = await Navigator.push<File>(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ImagePerview(imagePath: imagePath!),
-        ),
-      );
-
-      if (editedImage != null && mounted) {
-        setState(() {
-          _profileimage = editedImage;
-        });
-      }
-    } catch (e) {
-      debugPrint("Error Picking img$e");
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    //MARK:- Appbar
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        scrolledUnderElevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: Icon(
-            UIcons.solidRounded.angle_left,
-            size: 18.spMin,
-            color: Colors.white,
-          ),
-          onPressed: () {
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(56.h),
+        child: buildAppbar(
+          leadingColor: white,
+          appbarColor: Colors.transparent,
+          onPressedLeading: () {
             Navigator.pop(context);
           },
         ),
       ),
+
       extendBodyBehindAppBar: true,
       body: Stack(
         clipBehavior: Clip.none,
@@ -184,12 +55,12 @@ class _AgentDetailsState extends State<AgentDetails> {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: kBlackPrimary,
-                //   gradient: LinearGradient(
-                //     colors: [kPrimaryColor.withOpacity(.7), kPrimaryColor],
-                //     begin: Alignment.topLeft,
-                //     end: Alignment.bottomRight,
-                //   ),
+                //    color: kprimaryGreen,
+                gradient: LinearGradient(
+                  colors: [kPrimaryColor.withOpacity(.7), kPrimaryColor],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
               ),
             ),
           ),
@@ -210,7 +81,7 @@ class _AgentDetailsState extends State<AgentDetails> {
                       Text(
                         'Your Name',
                         style: GTextStyle.heading1Bold.copyWith(
-                          color: Colors.black87,
+                          color: kTextPrimary,
                         ),
                       ),
                       SizedBox(height: isLandscape ? 4.h : 8.h),
@@ -221,12 +92,12 @@ class _AgentDetailsState extends State<AgentDetails> {
                         ),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.r),
-                          color: Colors.grey.shade300,
+                          color: kBlackPrimary.withOpacity(0.1),
                         ),
                         child: Text(
                           'Youmail@gmail.com',
                           style: GTextStyle.bodyMedium.copyWith(
-                            color: Colors.black54,
+                            color: kTextPrimary,
                           ),
                         ),
                       ),
@@ -291,7 +162,20 @@ class _AgentDetailsState extends State<AgentDetails> {
 
             child: Center(
               child: GestureDetector(
-                onTap: _pikeprofileimage,
+                onTap: () async {
+                  final result = await pikeprofileimage(
+                    context: context,
+                    mounted: mounted,
+                    picker: _picker,
+                  );
+
+                  if (result != null && mounted) {
+                    setState(() {
+                      _profileimage = result;
+                    });
+                  }
+                },
+
                 child: Container(
                   height: isLandscape ? 120 : 110.h,
                   width: isLandscape ? 120 : 110.h,

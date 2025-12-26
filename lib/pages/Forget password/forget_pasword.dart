@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_ashaas/pages/mobile_screen.dart';
 import 'package:my_ashaas/styles/style.dart';
 import 'package:my_ashaas/widgets/Text_field.dart';
-import 'package:my_ashaas/widgets/logo.dart';
+import 'package:my_ashaas/widgets/buttons.dart';
 import 'package:uicons/uicons.dart';
 import '../../styles/constants.dart';
 import 'package:flutter/gestures.dart';
@@ -13,13 +13,14 @@ import 'Reset_password_verify.dart';
 import '../set_pasaword.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
-  const ForgotPasswordPage({Key? key}) : super(key: key);
+  const ForgotPasswordPage({super.key});
 
   @override
-  _ForgotPasswordPageState createState() => _ForgotPasswordPageState();
+  
+  ForgotPasswordPageState createState() => ForgotPasswordPageState();
 }
 
-class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
+class ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _phoneController = TextEditingController();
 
@@ -103,7 +104,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   SizedBox(height: 5.h),
                   Text(
                     'Forgot\nPassword?',
-                    style: GTextStyle.display.copyWith(color: kTextPrimary),
+                    style: GTextStyle.display.copyWith(color: kTextblod),
                   ),
                   SizedBox(height: 4.h),
                   Text(
@@ -135,8 +136,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         ),
 
                         SizedBox(height: 32.h),
-                        buildButton(
-                          title: 'Rest Password',
+                        buildButtions(
+                          context: context,
+                          label: 'Rest Password',
                           onTap: () {
                             Navigator.pushReplacement(
                               context,
@@ -155,7 +157,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                             children: [
                               TextSpan(
                                 text: "Remember your password? ",
-                                style: GTextStyle.bodyLight.copyWith(),
+                                style: GTextStyle.bodyLight.copyWith(color: kTextSecondary),
                               ),
                               TextSpan(
                                 text: 'Login',
@@ -171,7 +173,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                         );
                                       },
                                 style: GTextStyle.bodyBold.copyWith(
-                                  color: kTextOnPrimary
+                                  color: kTextblod
                                 ),
                               ),
                             ],

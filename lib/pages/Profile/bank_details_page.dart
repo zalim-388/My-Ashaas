@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_ashaas/styles/constants.dart';
 import 'package:my_ashaas/styles/style.dart';
+import 'package:my_ashaas/widgets/Appbar.dart';
+import 'package:my_ashaas/widgets/snackBar.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:uicons/uicons.dart';
-
 
 class BankDetailsPage extends StatelessWidget {
   const BankDetailsPage({super.key});
@@ -20,24 +20,7 @@ class BankDetailsPage extends StatelessWidget {
     if (fieldName.isEmpty) return;
 
     Clipboard.setData(ClipboardData(text: fieldName)).then((_) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            "$fieldName Copied",
-            textAlign: TextAlign.center,
-            style: GTextStyle.captionMedium.copyWith(color: Colors.white),
-          ),
-          duration: Duration(milliseconds: 2001),
-          backgroundColor: kBlackPrimary,
-          behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.only(left: 120.w, right: 120.w, bottom: 50.h),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(35.r),
-          ),
-          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
-          elevation: 0,
-        ),
-      );
+      buildShortSnackbar(context, kprimaryGreen, Message: "$fieldName Copied");
     });
   }
 
@@ -48,37 +31,19 @@ class BankDetailsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: Container(
-          decoration: BoxDecoration(
-            //       gradient: LinearGradient(
-            //   colors: [Color(0xDE000000), Colors.black],
-            //   begin: Alignment.topCenter,
-            //   end: Alignment.bottomCenter,
-            // ),
-          ),
-          child: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            scrolledUnderElevation: 0,
-            centerTitle: true,
-            title: Text(
-              'Bank Details',
-              style: GTextStyle.heading1Medium.copyWith(color: kBlackPrimary),
-            ),
-            leading: IconButton(
-              icon: Icon(
-                UIcons.solidRounded.angle_left,
-                size: 18.spMin,
-                color: kBlackPrimary,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
+        preferredSize: Size.fromHeight(56.h),
+        child: buildAppbar(
+          leadingColor: white,
+          appbarColor: kprimaryGreen,
+          onPressedLeading: () {
+            Navigator.pop(context);
+          },
+          centerTitle: true,
+          titleText: 'Bank Details',
+          titleColor: white,
         ),
       ),
+
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,37 +51,27 @@ class BankDetailsPage extends StatelessWidget {
             Container(
               width: double.infinity,
               padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 35.h),
-              decoration: BoxDecoration(
-                // gradient: LinearGradient(
-                //    colors: [kBlackPrimary, black.withOpacity(.7)],
-                //   begin: Alignment.topLeft,
-                //   end: Alignment.bottomRight,
-                // ),
-              ),
+              decoration: BoxDecoration(color: kprimaryGreen),
               child: Column(
                 children: [
-                  Icon(
-                    PhosphorIconsLight.bank,
-                    size: 48.spMin,
-                    color: kBlackPrimary,
-                  ),
+                  Icon(PhosphorIconsLight.bank, size: 48.spMin, color: white),
                   SizedBox(height: 12.h),
                   Text(
                     'Your Bank Information',
-                    style: GTextStyle.bodyMedium.copyWith(color: kBlackPrimary),
+                    style: GTextStyle.bodyMedium.copyWith(
+                      color: kTextOnPrimary,
+                    ),
                   ),
                   SizedBox(height: isLandscape ? 2.h : 4.h),
                   Text(
                     'Secure banking details',
-                    style: GTextStyle.bodyLight.copyWith(
-                      color: kBlackPrimary.withOpacity(0.6),
-                    ),
+                    style: GTextStyle.bodyLight.copyWith(color: kTextOnPrimary),
                   ),
                 ],
               ),
             ),
-             SizedBox(height: 10.h),
-            _buildDivider(),
+            // SizedBox(height: 10.h),
+            // _buildDivider(),
             SizedBox(height: 10.h),
 
             Padding(
@@ -218,7 +173,7 @@ class BankDetailsPage extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 6.h),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.r),
-        side: BorderSide(color: Colors.grey.shade100),
+        side: BorderSide(color: kTextFieldBorder.withOpacity(0.1)),
       ),
       child: InkWell(
         onLongPress: () {
@@ -272,7 +227,7 @@ class BankDetailsPage extends StatelessWidget {
                   child: Icon(
                     PhosphorIconsLight.copy,
                     size: 18.spMin,
-                    color: Colors.grey.shade400,
+                    color: kIconColor
                   ),
                 ),
               ),
@@ -290,20 +245,20 @@ class BankDetailsPage extends StatelessWidget {
   }
 }
 
-Widget _buildDivider() {
-  return Center(
-    child: Container(
-      width: 70.w,
-      height: 2,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Colors.transparent,
-            kBlackPrimary.withOpacity(0.9),
-            Colors.transparent,
-          ],
-        ),
-      ),
-    ),
-  );
-}
+// Widget _buildDivider() {
+//   return Center(
+//     child: Container(
+//       width: 70.w,
+//       height: 2,
+//       decoration: BoxDecoration(
+//         gradient: LinearGradient(
+//           colors: [
+//             Colors.transparent,
+//             kBlackPrimary.withOpacity(0.9),
+//             Colors.transparent,
+//           ],
+//         ),
+//       ),
+//     ),
+//   );
+// }
