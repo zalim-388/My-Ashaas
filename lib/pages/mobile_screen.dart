@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:country_picker/country_picker.dart';
-import 'package:my_ashaas/pages/set_pasaword.dart';
 import 'package:my_ashaas/pages/verify_screen.dart';
 import 'package:my_ashaas/styles/constants.dart';
+import 'package:my_ashaas/widgets/Text_field.dart';
 import 'package:my_ashaas/widgets/logo.dart';
 import '../styles/style.dart';
 
@@ -19,7 +19,7 @@ class _MoblieScreenState extends State<MobileScreen> {
   String? _selectedCountryCode = "+91";
   String? _selectedCountryFlag = '🇮🇳';
 
-//MARK:-   country select  Fuction 
+  //MARK:-   country select  Fuction
   void _openCountryPicker() {
     showCountryPicker(
       context: context,
@@ -73,21 +73,14 @@ class _MoblieScreenState extends State<MobileScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: isLandscape ? 40.h : 200.h),
+                SizedBox(height: isLandscape ? 40.h : 180.h),
 
                 buildlogo(),
-                SizedBox(height: 25.h),
+                SizedBox(height: 18.h),
                 // isLandscape ? 15.h :
-                Align(
-                  alignment: Alignment.centerLeft,
+                buildFieldLabel(label: "Email", context: context),
 
-                  child: Text(
-                    " Email",
-                    style: GTextStyle.label.copyWith(color: kBlackPrimary),
-                  ),
-                ),
-                SizedBox(height: 6.h),
-//MARK:- email 
+                //MARK:- email
                 Container(
                   height: 45.h,
                   decoration: ShapeDecoration(
@@ -95,7 +88,7 @@ class _MoblieScreenState extends State<MobileScreen> {
                     shape: RoundedRectangleBorder(
                       side: BorderSide(
                         width: isLandscape ? 0.5.w : 1.0.w,
-                        color: kBlackPrimary,
+                        color: kTextFieldBorder,
                       ),
                       borderRadius: BorderRadius.circular(8.r),
                     ),
@@ -111,7 +104,7 @@ class _MoblieScreenState extends State<MobileScreen> {
                     decoration: InputDecoration(
                       hintText: "Enter Your Email",
                       hintStyle: GTextStyle.bodyLight.copyWith(
-                        color: kBlackPrimary,
+                        color: kTextSecondary,
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.r),
@@ -244,34 +237,16 @@ class _MoblieScreenState extends State<MobileScreen> {
                 //MARK:- buttons
                 SizedBox(height: 40.h),
 
-                GestureDetector(
+                buildButton(
+                  title: 'Continue',
                   onTap: () {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) => VerifyScreen()),
                     );
                   },
-                  child: Container(
-                    width: double.infinity,
-                    height: 45.h,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          kBlackPrimary.withOpacity(0.610),
-                          kBlackPrimary,
-                        ],
-                        begin: Alignment.bottomLeft,
-                        end: Alignment.bottomCenter,
-                      ),
-                      borderRadius: BorderRadius.circular(30.r),
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Continue',
-                      style: GTextStyle.button.copyWith(color: Colors.white),
-                    ),
-                  ),
                 ),
+
                 SizedBox(height: 20.h),
               ],
             ),

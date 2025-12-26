@@ -93,7 +93,7 @@ Widget buildADDField({
           helperStyle: GTextStyle.bodyLight.copyWith(color: kTextPrimary),
 
           hintText: Controller.text.isEmpty ? hintText : null,
-          hintStyle: GTextStyle.bodyLight.copyWith(color: Colors.black45),
+          hintStyle: GTextStyle.bodyLight.copyWith(color: kTextSecondary),
           errorStyle: GTextStyle.bodyLight.copyWith(
             color: kErrorcolor,
             fontWeight: FontWeight.w300,

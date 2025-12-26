@@ -457,7 +457,7 @@ class _ContactFormScreenState extends State<businessCreation> {
                 buildDropdown(
                   isSearchable: true,
                   showBorderside: true,
-                  label: "Select Categor",
+                  label: "Select Category",
                   hintText: "Select Category",
                   icon: PhosphorIconsFill.forkKnife,
                   onChanged: onCategroyChanged,

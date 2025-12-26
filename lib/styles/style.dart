@@ -4,13 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class GTextStyle {
   GTextStyle._();
 
-  static get display => TextStyle(
+  static  TextStyle get display => TextStyle(
     fontSize: 40.spMin,
     fontWeight: FontWeight.bold,
     letterSpacing: -0.5,
   );
 
-  static get displayMedium => TextStyle(
+  static   TextStyle get displayMedium => TextStyle(
     fontSize: 26.0.spMin,
     fontWeight: FontWeight.w600,
     letterSpacing: -0.5,
@@ -19,21 +19,21 @@ class GTextStyle {
 
   /// heading  1 style
 
-  static get heading1 => TextStyle(
+  static  TextStyle get heading1 => TextStyle(
     fontSize: 24.0.spMin,
     fontWeight: FontWeight.w600,
     letterSpacing: -0.5,
     height: 1.3.h,
   );
 
-  static get heading1Medium => TextStyle(
+  static TextStyle get heading1Medium => TextStyle(
     fontSize: 24.0.spMin,
     fontWeight: FontWeight.w500,
     letterSpacing: -0.5,
     height: 1.2.h,
   );
 
-  static get heading1Bold => TextStyle(
+  static TextStyle get heading1Bold => TextStyle(
     fontSize: 25.0.spMin,
     fontWeight: FontWeight.w800,
     letterSpacing: 0,
@@ -41,34 +41,34 @@ class GTextStyle {
 
   /// heading  2 style
 
-  static get heading2 => TextStyle(
+  static TextStyle get heading2 => TextStyle(
     fontSize: 20.0.spMin,
     fontWeight: FontWeight.w600,
     letterSpacing: -0.2,
     height: 1.3.h,
   );
 
-  static get heading2Medium => TextStyle(
+  static TextStyle get heading2Medium => TextStyle(
     fontSize: 20.0.spMin,
     fontWeight: FontWeight.w500,
     letterSpacing: -0.3,
     height: 1.2.h,
   );
 
-  static get heading2Light => TextStyle(
+  static TextStyle get heading2Light => TextStyle(
     fontSize: 20.0.spMin,
     fontWeight: FontWeight.w300,
     letterSpacing: -0.3,
     height: 1.2.h,
   );
 
-  static get heading2Bold => TextStyle(
+  static TextStyle get heading2Bold => TextStyle(
     fontSize: 18.0.spMin,
     fontWeight: FontWeight.w700,
     letterSpacing: 0,
   );
 
-  static get heading2Small => TextStyle(
+  static TextStyle get heading2Small => TextStyle(
     fontSize: 20.0.spMin,
     fontWeight: FontWeight.w400,
     letterSpacing: 0,
@@ -77,14 +77,14 @@ class GTextStyle {
 
   /// heading  3 style
 
-  static get heading3 => TextStyle(
+  static TextStyle get heading3 => TextStyle(
     fontSize: 18.0.spMin,
     fontWeight: FontWeight.w600,
     letterSpacing: -0.1,
     height: 1.4.h,
   );
 
-  static get heading3Medium => TextStyle(
+  static TextStyle get heading3Medium => TextStyle(
     fontSize: 18.0.spMin,
     fontWeight: FontWeight.w500,
     letterSpacing: -0.1,
@@ -93,28 +93,28 @@ class GTextStyle {
 
   /// body 1 style (main contant)
 
-  static get body => TextStyle(
+  static TextStyle get body => TextStyle(
     fontSize: 16.0.spMin,
     fontWeight: FontWeight.w400,
     letterSpacing: 0,
     height: 1.5.h,
   );
 
-  static get bodyMedium => TextStyle(
+  static TextStyle get bodyMedium => TextStyle(
     fontSize: 16.0.spMin,
     fontWeight: FontWeight.w500,
     letterSpacing: 0,
     height: 1.5.h,
   );
 
-  static get bodyBold => TextStyle(
+  static TextStyle get bodyBold => TextStyle(
     fontSize: 16.0.spMin,
     fontWeight: FontWeight.w700,
     letterSpacing: 0,
     height: 1.5.h,
   );
 
-  static get bodyLight => TextStyle(
+  static TextStyle get bodyLight => TextStyle(
     fontSize: 16.0.spMin,
     fontWeight: FontWeight.w200,
     letterSpacing: 0,
@@ -123,20 +123,20 @@ class GTextStyle {
 
   //body secondy contant
 
-  static get bodySmall => TextStyle(
+  static TextStyle get bodySmall => TextStyle(
     fontSize: 14.0.spMin,
     fontWeight: FontWeight.w300,
     letterSpacing: -0.1,
     height: 1.5.h,
   );
 
-  static get bodySmallMedium => TextStyle(
+  static TextStyle get bodySmallMedium => TextStyle(
     fontSize: 14.0.spMin,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.1,
     height: 1.5.h,
   );
-  static get bodySmallbold => TextStyle(
+  static TextStyle get bodySmallbold => TextStyle(
     fontSize: 14.0.spMin,
     fontWeight: FontWeight.w700,
     letterSpacing: 0.1,
@@ -145,21 +145,21 @@ class GTextStyle {
 
   //caption styles (labels...)
 
-  static get caption => TextStyle(
+  static TextStyle get caption => TextStyle(
     fontSize: 12.0.spMin,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.2,
     height: 1.4.h,
   );
 
-  static get captionMedium => TextStyle(
+  static TextStyle get captionMedium => TextStyle(
     fontSize: 12.0.spMin,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.2,
     // height: 1.4.h,
   );
 
-  static get captionBold => TextStyle(
+  static TextStyle get captionBold => TextStyle(
     fontSize: 12.0.spMin,
     fontWeight: FontWeight.w600,
     letterSpacing: 0.2,
@@ -168,28 +168,28 @@ class GTextStyle {
 
   /// button and label
 
-  static get button => TextStyle(
+  static TextStyle get button => TextStyle(
     fontSize: 18.0.spMin,
     fontWeight: FontWeight.w800,
     letterSpacing: 0.5,
     height: 1.2.h,
   );
 
-  static get buttonSmall => TextStyle(
+  static TextStyle get buttonSmall => TextStyle(
     fontSize: 14.0.spMin,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.1,
     height: 1.3.h,
   );
 
-  static get label => TextStyle(
+  static TextStyle get label => TextStyle(
     fontSize: 14.0.spMin,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.1,
     height: 1.3.h,
   );
 
-  static get labelSmall => TextStyle(
+  static TextStyle get labelSmall => TextStyle(
     fontSize: 12.0.spMin,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.2,

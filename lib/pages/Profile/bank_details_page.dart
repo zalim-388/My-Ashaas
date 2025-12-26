@@ -25,7 +25,7 @@ class BankDetailsPage extends StatelessWidget {
           content: Text(
             "$fieldName Copied",
             textAlign: TextAlign.center,
-            style: GTextStyle.captionMedium(color: Colors.white),
+            style: GTextStyle.captionMedium.copyWith(color: Colors.white),
           ),
           duration: Duration(milliseconds: 2001),
           backgroundColor: kBlackPrimary,

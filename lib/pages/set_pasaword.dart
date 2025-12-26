@@ -8,7 +8,6 @@ import 'package:my_ashaas/pages/Congratulation.dart';
 import 'package:my_ashaas/pages/image_perview.dart';
 import 'package:my_ashaas/pages/verify_screen.dart';
 import 'package:my_ashaas/widgets/Text_field.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:uicons/uicons.dart';
 import 'Forget password/forget_pasword.dart';
 
@@ -38,32 +37,20 @@ class _LoginPageState extends State<Setpassword> {
     final String? source = await showModalBottomSheet(
       backgroundColor: kBackgroundColor,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0.r)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25.r)),
       ),
       context: context,
       builder: (BuildContext sheetContext) {
-        return Container(
-          padding: EdgeInsets.fromLTRB(20.w, 20.h, 20.w, 0),
-          height: 200.h,
+        return SizedBox(
+          height: 150.h,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pop(sheetContext);
-                    },
-                    icon: Icon(PhosphorIconsLight.x),
-                  ),
-                  //  SizedBox(width: 90.w),
-                  Text(
-                    'Profile photo',
-                    textAlign: TextAlign.center,
-                    style: GTextStyle.body,
-                  ),
-                ],
+              SizedBox(height: 12.h,),
+              Text(
+                'Profile photo',
+                textAlign: TextAlign.center,
+                style: GTextStyle.heading3,
               ),
               SizedBox(height: 20.h),
               Row(
@@ -84,7 +71,7 @@ class _LoginPageState extends State<Setpassword> {
                           child: Icon(
                             Ionicons.camera,
                             size: 25.spMin,
-                            color: kBlackPrimary,
+                            color: kIconColor,
                           ),
                         ),
                         SizedBox(height: 8.h),
@@ -103,15 +90,20 @@ class _LoginPageState extends State<Setpassword> {
                       children: [
                         CircleAvatar(
                           radius: 30.r,
-                          backgroundColor: kPrimaryColor.withOpacity(.1),
+                          backgroundColor: kBlackPrimary.withOpacity(0.1),
                           child: Icon(
                             Ionicons.images,
                             size: 25.spMin,
-                            color: kBlackPrimary,
+                            color: kIconColor,
                           ),
                         ),
                         SizedBox(height: 8.h),
-                        Text('Gallery', style: GTextStyle.bodySmall.copyWith()),
+                        Text(
+                          'Gallery',
+                          style: GTextStyle.bodySmall.copyWith(
+                            color: kTextPrimary,
+                          ),
+                        ),
                       ],
                     ),
                   ),

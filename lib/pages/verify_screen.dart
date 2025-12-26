@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_ashaas/pages/Congratulation.dart';
+import 'package:my_ashaas/pages/Referral_page.dart';
 import 'package:my_ashaas/pages/mobile_screen.dart';
 import 'package:my_ashaas/widgets/logo.dart';
 import 'package:uicons/uicons.dart';
@@ -170,20 +170,20 @@ class _VerifyScreenState extends State<VerifyScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: isLandscape ? 20.h : 120.h),
+            SizedBox(height: isLandscape ? 20.h : 110.h),
             buildlogo(),
             SizedBox(height: isLandscape ? 15.h : 10.h),
 
             Text(
               "Verify Your Code",
-              style: GTextStyle.heading2Bold.copyWith(color: Color(0xFF2C2C2C)),
+              style: GTextStyle.heading2Bold.copyWith(color:kTextblod),
             ),
 
             RichText(
               textAlign: TextAlign.center,
               text: TextSpan(
                 style: GTextStyle.bodySmall.copyWith(
-                  color: black,
+                  color: kTextPrimary,
                   // fontSize: isLandscape ? 8.sp : 12.sp,
                 ),
                 children: [
@@ -253,38 +253,21 @@ class _VerifyScreenState extends State<VerifyScreen> {
               ),
             ),
 
-            SizedBox(height: 45.h),
-            Padding(
+            SizedBox(height: 40.h),
+
+               Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => Congratulation()),
-                  );
-                },
-                child: Container(
-                  width: double.infinity,
-                  height: 45.h,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [kBlackPrimary.withOpacity(0.610), kBlackPrimary],
-                      begin: Alignment.bottomLeft,
-                      end: Alignment.bottomCenter,
-                    ),
-                    borderRadius: BorderRadius.circular(30.r),
+                 child: buildButton(
+                    title:'verify',
+                    onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => ReferralPage()),
+                    );
+                  },
                   ),
-                  alignment: Alignment.center,
-                  child: Text(
-                    'verify',
-                    style: GTextStyle.button.copyWith(
-                      // fontSize: isLandscape ? 11.sp : 18.sp,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+               ),
+           
             SizedBox(height: 15.h),
 
             RichText(
@@ -302,7 +285,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                         isResendDisable ? "Resend in $_conutdowm" : 'Resend',
                         style: GTextStyle.bodySmallbold.copyWith(
                           // fontSize: isLandscape ? 8.sp : 14.sp,
-                          color: isResendDisable ? grey : kTextPrimary,
+                          color: isResendDisable ? kTextSecondary : kTextblod,
                           // fontWeight: FontWeight.w800,
                         ),
                       ),
