@@ -102,6 +102,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
     _loadCountries();
   }
 
+  @override
   void dispose() {
     super.dispose();
     _fatherNameController.dispose();
@@ -115,6 +116,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
 
   void _loadCountries() async {
     _countries = await csc.getAllCountries();
+    if(!mounted) return;
     setState(() {
       countryOptions = _countries.map((country) => country.name).toList();
     });

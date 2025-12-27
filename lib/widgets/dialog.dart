@@ -15,8 +15,9 @@ void showConfirmDialog({
   String? snackbarMsg,
   required String? actionlabel1,
   required String? actionlabel2,
-
   Color? activecolor,
+  Color? gradientColor1,
+  Color? gradientColor2,
 }) {
   showDialog(
     context: context,
@@ -50,13 +51,13 @@ void showConfirmDialog({
                   Expanded(
                     child: buildButtions(
                       radius: BorderRadius.circular(12.r),
-                      gradientColor1: Colors.white,
-                      gradientColor2: Colors.white,
-                      showborder: true,
+                      gradientColor1: gradientColor1 ?? white,
+                      gradientColor2: gradientColor2 ?? white,
+                      usesolidColor: false,
                       borderColor: Colors.grey.shade300,
                       context: context,
                       label: actionlabel1 ?? 'Cancel',
-                      textColor: kBlackPrimary,
+                      textColor: kTextPrimary,
                       onTap: () => Navigator.pop(context),
                     ),
                   ),

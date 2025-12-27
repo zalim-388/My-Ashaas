@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_ashaas/pages/Congratulation.dart';
-import 'package:my_ashaas/pages/verify_screen.dart';
+import 'package:my_ashaas/pages/Referral_page.dart';
+import 'package:my_ashaas/widgets/Appbar.dart';
 import 'package:my_ashaas/widgets/ImagePiker.dart';
 import 'package:my_ashaas/widgets/Text_field.dart';
 import 'package:my_ashaas/widgets/buttons.dart';
-import 'package:uicons/uicons.dart';
+
 import 'Forget password/forget_pasword.dart';
 
 import 'package:my_ashaas/styles/constants.dart';
@@ -66,75 +67,21 @@ class _LoginPageState extends State<Setpassword> {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       //MARK:- AppBar
-      appBar:
-          isLandscape
-              ? null
-              : AppBar(
-                backgroundColor: kBackgroundColor,
-                scrolledUnderElevation: 0,
-                elevation: 0,
-                leading: IconButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => VerifyScreen()),
-                    );
-                  },
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 15.w,
-                    vertical: 10.h,
-                  ),
-                  icon: Icon(
-                    UIcons.solidRounded.angle_left,
-                    size: 18.spMin,
-                    color: kArrowBackColor,
-                  ),
-                ),
-                title: Text(
-                  "Set Password",
-                  style: GTextStyle.heading2Medium.copyWith(),
-                ),
-                titleSpacing: 10.w,
-                centerTitle: false,
-              ),
-      body:
-          isLandscape
-              ? NestedScrollView(
-                headerSliverBuilder: (context, innerBoxIsScrolled) {
-                  return <Widget>[
-                    SliverAppBar(
-                      backgroundColor: kBackgroundColor,
-                      leading: IconButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => VerifyScreen(),
-                            ),
-                          );
-                        },
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 10.w,
-                          vertical: 10.h,
-                        ),
-                        icon: Icon(
-                          Icons.arrow_back_ios,
-                          color: kPrimaryColor,
-                          size: 20.spMin,
-                        ),
-                      ),
-                      title: Text(
-                        "Set Password",
-                        style: GTextStyle.heading2Bold.copyWith(),
-                      ),
-                      titleSpacing: 10.w,
-                      centerTitle: false,
-                    ),
-                  ];
-                },
-                body: _mainBody(isLandscape),
-              )
-              : _mainBody(isLandscape),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(isLandscape ? 48.h : 56.h),
+        child: buildAppbar(
+          appbarColor: kBackgroundColor,
+          onPressedLeading: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => ReferralPage()),
+            );
+          },
+          titleText: "Set Password",
+        ),
+      ),
+
+      body: _mainBody(isLandscape),
     );
   }
 

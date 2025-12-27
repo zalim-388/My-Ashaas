@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_ashaas/styles/constants.dart';
 import 'package:my_ashaas/styles/style.dart';
 import 'package:my_ashaas/widgets/Text_field.dart';
+import 'package:my_ashaas/widgets/snackBar.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class RequestMoneyDialog {
@@ -44,12 +45,10 @@ class RequestMoneyDialog {
                       width: double.infinity,
                       padding: EdgeInsets.all(isLandscape ? 12.w : 20.w),
                       decoration: BoxDecoration(
-                       
                         gradient: LinearGradient(
                           colors: [
-                             kprimaryGreen.withOpacity(.7),
-                           kprimaryGreen
-                           
+                            kprimaryGreen.withOpacity(.7),
+                            kprimaryGreen,
                           ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
@@ -156,9 +155,7 @@ class RequestMoneyDialog {
                                     Navigator.of(context).pop();
                                   },
                                   style: OutlinedButton.styleFrom(
-                                    side: BorderSide(
-                                      color: kTextFieldBorder
-                                    ),
+                                    side: BorderSide(color: kTextFieldBorder),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30.r),
                                     ),
@@ -169,7 +166,7 @@ class RequestMoneyDialog {
                                   child: Text(
                                     'Cancel',
                                     style: GTextStyle.bodyLight.copyWith(
-                                      color: kTextSecondary
+                                      color: kTextSecondary,
                                     ),
                                   ),
                                 ),
@@ -265,20 +262,11 @@ class RequestMoneyDialog {
     Navigator.of(context).pop();
 
     // Show success message
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Money request of ₹$amount sent to Porta successfully!',
-        style: GTextStyle.body.copyWith(
-          color:Colors.white
-        ),
-        ),
-        backgroundColor: kBlackPrimary,
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10.r)),
-        ),
-        duration: const Duration(seconds: 3),
-      ),
+
+    buildShortSnackbar(
+      context,
+      null,
+      Message: "Money request of ₹$amount sent to Ashaa's successfully!",
     );
   }
 }

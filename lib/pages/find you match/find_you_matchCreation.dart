@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_ashaas/pages/find%20you%20match/Education_&_Professional%20Details.dart';
@@ -8,7 +7,8 @@ import 'package:my_ashaas/pages/find%20you%20match/family_details.dart';
 import 'package:my_ashaas/pages/find%20you%20match/personal_Details.dart';
 import 'package:my_ashaas/pages/find%20you%20match/registrationscreen.dart';
 import 'package:my_ashaas/styles/constants.dart';
-import 'package:uicons/uicons.dart';
+import 'package:my_ashaas/widgets/Appbar.dart';
+import 'package:my_ashaas/widgets/buttons.dart';
 import '../../styles/style.dart';
 import '../home_page.dart';
 
@@ -63,21 +63,11 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      appBar: AppBar(
-        backgroundColor: kBackgroundColor,
-        // toolbarHeight: 40.h,
-        automaticallyImplyLeading: false,
-
-        elevation: 0,
-        centerTitle: true,
-        // title: Text(
-        //   title ?? "",
-        //   style: GTextStyle.heading1Medium.copyWith(color: kPrimaryColor),
-        // ),
-        // titleSpacing: 30.w,
-        actionsPadding: EdgeInsets.symmetric(horizontal: 15.w),
-        leading: IconButton(
-          onPressed: () {
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(isLandscape ? 48.h : 56.h),
+        child: buildAppbar(
+          appbarColor: kBackgroundColor,
+          onPressedLeading: () {
             if (_currentPage == 0) {
               Navigator.push(
                 context,
@@ -90,46 +80,30 @@ class _FindYouMatchcreationState extends State<FindYouMatchcreation> {
               );
             }
           },
-          icon: Icon(
-            UIcons.solidRounded.angle_left,
-            size: 18.spMin,
-            color: kArrowBackColor,
-          ),
-        ),
-        actions: [
-          GestureDetector(
-            onTap: () {
-              _pageController.nextPage(
+          centerTitle: true,
+          // title: Text(
+          //   title ?? "",
+          //   style: GTextStyle.heading1Medium.copyWith(color: kPrimaryColor),
+          // ),
+          // titleSpacing: 30.w,
+          action: [
+            buildButtions(
+              context: context,
+              height: 33.h,
+              width: isLandscape ? 20.w : 40.w,
+              label: "Skip",
+              onTap: () {
+                 _pageController.nextPage(
                 duration: Duration(milliseconds: 300),
                 curve: Curves.easeIn,
               );
-            },
-            child: Container(
-              height: 33.h,
-              width: isLandscape ? 20.w : 40.w,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    kBottomNavBarSelected.withOpacity(0.65),
-                    kBottomNavBarSelected,
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  stops: [0.0, 0.9],
-                  tileMode: TileMode.decal,
-                ),
-                borderRadius: BorderRadius.circular(30.r),
-                // color: kPrimaryColor,
-              ),
-              alignment: Alignment.center,
-              child: Text(
-                "Skip",
-                style: GTextStyle.bodySmall.copyWith(color: Colors.white),
-              ),
+              },
             ),
-          ),
-        ],
+          ],
+        ),
       ),
+
+   
       extendBodyBehindAppBar: true,
 
       body: SafeArea(

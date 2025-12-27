@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:my_ashaas/styles/constants.dart';
+import 'package:my_ashaas/widgets/Appbar.dart';
 import 'package:my_ashaas/widgets/Text_field.dart';
 import 'package:my_ashaas/widgets/buttons.dart';
 import 'package:my_ashaas/widgets/dropdown.dart';
@@ -423,30 +424,21 @@ class _ContactFormScreenState extends State<Businesscreation> {
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      appBar: AppBar(
-        backgroundColor: kBackgroundColor,
-        toolbarHeight: 70.h,
-        automaticallyImplyLeading: false,
-        scrolledUnderElevation: 0,
-        elevation: 0,
-        centerTitle: true,
-        title: Text('Add Business', style: GTextStyle.heading2Bold.copyWith()),
-        titleSpacing: 30.w,
-        actionsPadding: EdgeInsets.symmetric(horizontal: 15.w),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.push(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(isLandscape ? 48.h : 56.h),
+        child: buildAppbar(
+          appbarColor: kBackgroundColor,
+          onPressedLeading: () {
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => HomePage()),
             );
           },
-          icon: Icon(
-            UIcons.solidRounded.angle_left,
-            size: 18.spMin,
-            color: kArrowBackColor,
-          ),
+          titleText: "Add Business",
+          centerTitle: true
         ),
       ),
+
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 16.w),

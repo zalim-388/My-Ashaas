@@ -1,11 +1,10 @@
-
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_ashaas/pages/mobile_screen.dart';
 import 'package:my_ashaas/styles/style.dart';
+import 'package:my_ashaas/widgets/Appbar.dart';
 import 'package:my_ashaas/widgets/Text_field.dart';
 import 'package:my_ashaas/widgets/buttons.dart';
-import 'package:uicons/uicons.dart';
 import '../../styles/constants.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,6 @@ class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
 
   @override
-  
   ForgotPasswordPageState createState() => ForgotPasswordPageState();
 }
 
@@ -66,30 +64,22 @@ class ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final isLandscape =
-    //     MediaQuery.of(context).orientation == Orientation.landscape;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(isLandscape ? 48.h : 56.h),
+        child: buildAppbar(
+          appbarColor: kBackgroundColor,
+          onPressedLeading: () {
             HapticFeedback.lightImpact();
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => Setpassword()),
             );
           },
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-
-          icon: Icon(
-            UIcons.solidRounded.angle_left,
-            size: 18.spMin,
-            color: kArrowBackColor,
-          ),
         ),
-        backgroundColor: kBackgroundColor,
-
-        centerTitle: false,
       ),
 
       body: Center(
@@ -157,7 +147,9 @@ class ForgotPasswordPageState extends State<ForgotPasswordPage> {
                             children: [
                               TextSpan(
                                 text: "Remember your password? ",
-                                style: GTextStyle.bodyLight.copyWith(color: kTextSecondary),
+                                style: GTextStyle.bodyLight.copyWith(
+                                  color: kTextSecondary,
+                                ),
                               ),
                               TextSpan(
                                 text: 'Login',
@@ -173,7 +165,7 @@ class ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                         );
                                       },
                                 style: GTextStyle.bodyBold.copyWith(
-                                  color: kTextblod
+                                  color: kTextblod,
                                 ),
                               ),
                             ],

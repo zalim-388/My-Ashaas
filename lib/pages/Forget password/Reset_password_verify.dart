@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_ashaas/pages/Forget%20password/forget_pasword.dart';
 import 'package:my_ashaas/styles/style.dart';
+import 'package:my_ashaas/widgets/Appbar.dart';
 import 'package:my_ashaas/widgets/buttons.dart';
 import 'package:my_ashaas/widgets/logo.dart';
-import 'package:uicons/uicons.dart';
 import '../../styles/constants.dart';
 import 'Enter_new_pass.dart';
 
@@ -15,10 +15,10 @@ class ResetPasswordVerify extends StatefulWidget {
   const ResetPasswordVerify({super.key, required this.otp});
 
   @override
-  _ResetPasswordVerifyState createState() => _ResetPasswordVerifyState();
+  ResetPasswordVerifyState createState() => ResetPasswordVerifyState();
 }
 
-class _ResetPasswordVerifyState extends State<ResetPasswordVerify> {
+class ResetPasswordVerifyState extends State<ResetPasswordVerify> {
   final List<TextEditingController> _verifycontroller = List.generate(
     6,
     (index) => TextEditingController(),
@@ -39,6 +39,19 @@ class _ResetPasswordVerifyState extends State<ResetPasswordVerify> {
     return Scaffold(
       backgroundColor: kBackgroundColor,
 
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(isLandscape ? 48.h : 56.h),
+        child: buildAppbar(
+          appbarColor: kBackgroundColor,
+          onPressedLeading: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => ForgotPasswordPage()),
+            );
+          },
+        ),
+      ),
+
       body: SingleChildScrollView(
         // physics: BouncingScrollPhysics(),
         child: Padding(
@@ -47,23 +60,6 @@ class _ResetPasswordVerifyState extends State<ResetPasswordVerify> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: isLandscape ? 30.h : 35.h),
-              IconButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ForgotPasswordPage(),
-                    ),
-                  );
-                },
-
-                icon: Icon(
-                  UIcons.solidRounded.angle_left,
-                  size: 18.spMin,
-                  color: kArrowBackColor,
-                ),
-              ),
               SizedBox(height: isLandscape ? 30.h : 100.h),
               buildlogo(),
               SizedBox(height: 30.h),
@@ -178,7 +174,7 @@ class _ResetPasswordVerifyState extends State<ResetPasswordVerify> {
                             TextSpan(
                               text: "If you didn't receive a code! ",
                               style: GTextStyle.bodyLight.copyWith(
-                                color: kTextSecondary
+                                color: kTextSecondary,
                               ),
                             ),
                             TextSpan(
@@ -208,6 +204,7 @@ class _ResetPasswordVerifyState extends State<ResetPasswordVerify> {
                   ],
                 ),
               ),
+              SizedBox(height: 25.h,)
             ],
           ),
         ),

@@ -99,6 +99,7 @@ void buildShortSnackbar(
   final horizonalMargin = (screenWidth - snacbarWidth) / 2;
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
+
       content: Text(
         Message,
         textAlign: TextAlign.center,
@@ -109,11 +110,12 @@ void buildShortSnackbar(
       backgroundColor: bgColor ?? black.withOpacity(0.8),
       behavior: SnackBarBehavior.floating,
       margin: EdgeInsets.only(
-        bottom: 80.h,
+        bottom: 50.h,
         left: horizonalMargin,
         right: horizonalMargin,
       ),
-      shape: StadiumBorder(),
+      
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999.r)),
       elevation: 8,
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
     ),

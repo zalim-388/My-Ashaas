@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_ashaas/pages/Referral_page.dart';
 import 'package:my_ashaas/pages/mobile_screen.dart';
+import 'package:my_ashaas/widgets/Appbar.dart';
 import 'package:my_ashaas/widgets/buttons.dart';
 import 'package:my_ashaas/widgets/logo.dart';
-import 'package:uicons/uicons.dart';
 import 'package:my_ashaas/styles/constants.dart';
 import '../styles/style.dart';
 
@@ -91,77 +91,25 @@ class _VerifyScreenState extends State<VerifyScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //MARK:-Appbar
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      appBar:
-          isLandscape
-              ? null
-              : AppBar(
-                leading: IconButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => MobileScreen()),
-                    );
-                  },
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10.w,
-                    vertical: 10.h,
-                  ),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(isLandscape ? 48.h : 56.h),
+        child: buildAppbar(
+          appbarColor: kBackgroundColor,
+          onPressedLeading: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => MobileScreen()),
+            );
+          },
+        ),
+      ),
 
-                  icon: Icon(
-                    UIcons.solidRounded.angle_left,
-                    size: 18.spMin,
-                    color: kArrowBackColor,
-                  ),
-                ),
-                backgroundColor: kBackgroundColor,
-                scrolledUnderElevation: 0,
-                elevation: 0,
-                centerTitle: false,
-              ),
-      body:
-          isLandscape
-              ? NestedScrollView(
-                headerSliverBuilder: (context, innerBoxIsScrolled) {
-                  return <Widget>[
-                    SliverAppBar(
-                      backgroundColor: kBackgroundColor,
-                      scrolledUnderElevation: 0,
-                      elevation: 0,
-
-                      leading: IconButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MobileScreen(),
-                            ),
-                          );
-                        },
-
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 10.w,
-                          vertical: 10.h,
-                        ),
-                        icon: Icon(
-                          Icons.arrow_back_ios,
-                          color: kArrowBackColor,
-                          size: 20.spMin,
-                        ),
-                      ),
-
-                      centerTitle: false,
-                      toolbarHeight: 56.h,
-                    ),
-                  ];
-                },
-
-                body: _mainbody(isLandscape),
-              )
-              : _mainbody(isLandscape),
+      body: _mainbody(isLandscape),
     );
   }
 
@@ -275,10 +223,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
             RichText(
               text: TextSpan(
                 text: "Didn't get OTP? ",
-                style: GTextStyle.bodySmall.copyWith(
-                  // fontSize: isLandscape ? 8.sp : 13.sp,
-                  color: Colors.black54,
-                ),
+                style: GTextStyle.bodySmall.copyWith(color: kTextSecondary),
                 children: [
                   WidgetSpan(
                     child: GestureDetector(
@@ -286,9 +231,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                       child: Text(
                         isResendDisable ? "Resend in $_conutdowm" : 'Resend',
                         style: GTextStyle.bodySmallbold.copyWith(
-                          // fontSize: isLandscape ? 8.sp : 14.sp,
                           color: isResendDisable ? kTextSecondary : kTextblod,
-                          // fontWeight: FontWeight.w800,
                         ),
                       ),
                     ),
@@ -297,27 +240,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
               ),
             ),
 
-            // Row(
-            //   mainAxisSize: MainAxisSize.min,
-            //   children: [
-            //     Text("Didn't get OTP? ", style: GTextStyle.bodyMedium),
-            //     TextButton(
-            //       style: TextButton.styleFrom(
-            //         minimumSize: Size(50, 30),
-            //         padding: EdgeInsets.zero,
-            //       ),
-            //       onPressed: isResendDisable ? null : resendOtp,
-            //       child: Text(
-            //         isResendDisable ? "Resend in $_conutdowm" : 'Resend',
-            //         style: GTextStyle.bodyBold.copyWith(
-            //           color: isResendDisable ? grey : kPrimaryColor,
-            //           fontWeight: FontWeight.w800,
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
-            SizedBox(height: 20.h),
+            SizedBox(height: isLandscape ? 30.h : 20.h),
           ],
         ),
       ),

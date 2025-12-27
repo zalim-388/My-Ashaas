@@ -94,6 +94,7 @@ Future<File?> pikeprofileimage({
   } catch (e) {
     debugPrint("Error Picking img$e");
   }
+  return null;
 }
 
 Widget _buildOption({

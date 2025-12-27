@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                       SizedBox(width: 4.w),
                       Text(
                         'My Ashaa\'s - A',
-                        style: GTextStyle.heading2Bold.copyWith(color: black),
+                        style: GTextStyle.heading2Bold.copyWith(color:kTextPrimary),
                       ),
                     ],
                   ),
@@ -108,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                             image: AssetImage("assets/images/ashaas.png"),
                             height: 40.h,
                           ),
-                          SizedBox(width: 10.w),
+                          SizedBox(width: 6.w),
                           Text(
                             'My Ashaa\'s',
                             style: GTextStyle.heading1Bold.copyWith(),
@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
 
-                      titleSpacing: 40.spMin,
+                      titleSpacing: 15.w,
                       actionsPadding: EdgeInsets.symmetric(horizontal: 15.w),
                       actions: [
                         IconButton(

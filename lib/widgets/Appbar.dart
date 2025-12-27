@@ -21,14 +21,14 @@ Widget buildAppbar({
   double? leadingWidth,
   double? leadingButtonhorizontal,
   bool automaticallyImplyLeading = false,
- 
 }) {
   return AppBar(
     automaticallyImplyLeading: automaticallyImplyLeading,
     backgroundColor: appbarColor ?? kBackgroundColor,
     leading:
-        onPressedLeading !=null
+        onPressedLeading != null
             ? IconButton(
+              highlightColor: kprimaryGreen.withOpacity(0.1),
               onPressed: onPressedLeading,
               icon: Icon(
                 leadingIcon ?? PhosphorIconsBold.caretLeft,
@@ -36,7 +36,7 @@ Widget buildAppbar({
                 size: 20.spMin,
               ),
               padding: EdgeInsets.symmetric(
-                horizontal: leadingButtonhorizontal ?? 16.w,
+                horizontal: leadingButtonhorizontal ?? 8.w,
               ),
             )
             : null,

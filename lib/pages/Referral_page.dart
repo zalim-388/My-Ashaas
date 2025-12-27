@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_ashaas/pages/set_pasaword.dart';
+import 'package:my_ashaas/pages/verify_screen.dart';
 import 'package:my_ashaas/styles/constants.dart';
 import 'package:my_ashaas/styles/style.dart';
 import 'package:my_ashaas/widgets/Appbar.dart';
 import 'package:my_ashaas/widgets/Text_field.dart';
 import 'package:my_ashaas/widgets/buttons.dart';
-
 
 class ReferralPage extends StatefulWidget {
   const ReferralPage({super.key});
@@ -21,19 +21,28 @@ class _ReferralPageState extends State<ReferralPage> {
 
   @override
   Widget build(BuildContext context) {
+    //MARK:-Appbar
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(50.h),
+        preferredSize: Size.fromHeight(isLandscape ? 48.h : 56.h),
         child: buildAppbar(
           onPressedLeading: () {
-            Navigator.pop(context);
+               Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => VerifyScreen()),
+            );
           },
           titleText: "Referral",
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 150.h),
+        padding: EdgeInsets.symmetric(
+          horizontal: 12.w,
+          vertical: isLandscape ? 60.h : 150.h,
+        ),
         child: Column(
           children: [
             buildADDField(
@@ -44,26 +53,27 @@ class _ReferralPageState extends State<ReferralPage> {
               context: context,
             ),
             SizedBox(height: 20.h),
-        
+
             Row(
               children: [
-                Expanded(child: Divider(color: grey.withOpacity(.40), thickness: 1.w)),
-        
+                Expanded(
+                  child: Divider(color: grey.withOpacity(.40), thickness: 1.w),
+                ),
+
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: Text(
                     "OR",
-                    style: GTextStyle.bodyBold.copyWith(
-                      color: kTextSecondary,
-                    ),
+                    style: GTextStyle.bodyBold.copyWith(color: kTextSecondary),
                   ),
                 ),
-        
-                Expanded(child: Divider(color: grey.withOpacity(.50), thickness: 1.w)),
+
+                Expanded(
+                  child: Divider(color: grey.withOpacity(.50), thickness: 1.w),
+                ),
               ],
             ),
-                 
-        
+
             buildADDField(
               label: "Phone Number",
               showBorderside: true,
@@ -72,10 +82,10 @@ class _ReferralPageState extends State<ReferralPage> {
               context: context,
             ),
             SizedBox(height: 40.h),
-        
-        //MARK:- button
+
+            //MARK:- button
             buildButtions(
-                context: context,
+              context: context,
               label: 'Continue',
               onTap: () {
                 Navigator.pushReplacement(

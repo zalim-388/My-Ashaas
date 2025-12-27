@@ -29,9 +29,10 @@ class BankDetailsPage extends StatelessWidget {
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
+      //MARK:- Appbar
       backgroundColor: kBackgroundColor,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(56.h),
+        preferredSize: Size.fromHeight(isLandscape ? 48.h : 56.h),
         child: buildAppbar(
           leadingColor: white,
           appbarColor: kprimaryGreen,
@@ -227,7 +228,7 @@ class BankDetailsPage extends StatelessWidget {
                   child: Icon(
                     PhosphorIconsLight.copy,
                     size: 18.spMin,
-                    color: kIconColor
+                    color: kIconColor,
                   ),
                 ),
               ),

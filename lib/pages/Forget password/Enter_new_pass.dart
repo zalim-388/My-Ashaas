@@ -5,9 +5,10 @@ import 'package:my_ashaas/pages/Congratulation.dart';
 import 'package:my_ashaas/pages/Forget%20password/Reset_password_verify.dart';
 import 'package:my_ashaas/styles/constants.dart';
 import 'package:my_ashaas/styles/style.dart';
+import 'package:my_ashaas/widgets/Appbar.dart';
 import 'package:my_ashaas/widgets/Text_field.dart';
 import 'package:my_ashaas/widgets/buttons.dart';
-import 'package:uicons/uicons.dart';
+
 
 class EnterNewPass extends StatefulWidget {
   final String otp;
@@ -54,6 +55,20 @@ class EnterNewPassState extends State<EnterNewPass> {
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       backgroundColor: kBackgroundColor,
+        appBar: PreferredSize(
+        preferredSize: Size.fromHeight(isLandscape ? 48.h : 56.h),
+        child: buildAppbar(
+          appbarColor: kBackgroundColor,
+          onPressedLeading: () {
+             Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ResetPasswordVerify(otp: ''),
+                    ),
+                  );
+          },
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -62,25 +77,9 @@ class EnterNewPassState extends State<EnterNewPass> {
             crossAxisAlignment: CrossAxisAlignment.start,
 
             children: [
-              SizedBox(height: isLandscape ? 30.h : 30.h),
+         
 
-              IconButton(
-                icon: Icon(
-                  UIcons.solidRounded.angle_left,
-                  size: 18.spMin,
-                  color: kArrowBackColor,
-                ),
-
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ResetPasswordVerify(otp: ''),
-                    ),
-                  );
-                },
-              ),
-              SizedBox(height: isLandscape ? 30.h : 150.h),
+              SizedBox(height: isLandscape ? 30.h : 140.h),
 
               Center(
                 child: Text(

@@ -3,11 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_ashaas/pages/Profile/agent_details.dart';
 import 'package:my_ashaas/pages/Profile/request_money.dart';
 import 'package:my_ashaas/pages/Profile/wallet_page.dart';
+import 'package:my_ashaas/pages/mobile_screen.dart';
 import 'package:my_ashaas/styles/constants.dart';
 import 'package:my_ashaas/styles/style.dart';
 import 'package:my_ashaas/widgets/Appbar.dart';
+import 'package:my_ashaas/widgets/dialog.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-
 
 import 'bank_details_page.dart';
 
@@ -19,9 +20,10 @@ class ProfileScreen extends StatelessWidget {
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
+      //MARK:- Appbar
       backgroundColor: kBackgroundColor,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(56.h),
+        preferredSize: Size.fromHeight(isLandscape ? 48.h : 56.h),
         child: buildAppbar(
           appbarColor: kBackgroundColor,
           onPressedLeading: () {
@@ -234,7 +236,24 @@ class ProfileScreen extends StatelessWidget {
                     title: 'Logout',
                     showArrow: true,
                     onTap: () {
-                      _showLogoutDialog(context);
+                      //MARK:- Delete Dialog
+                      showConfirmDialog(
+                        context: context,
+                        tilte: "Log Out",
+                        subtitle: "Are you sure you want to log out?",
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MobileScreen(),
+                            ),
+                          );
+                        },
+                      
+
+                        actionlabel1: "Canecl",
+                        actionlabel2: "Log Out",
+                      );
                     },
                   ),
 
@@ -245,65 +264,6 @@ class ProfileScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  void _showLogoutDialog(BuildContext context) {
-    final isLandScape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          backgroundColor: kBackgroundColor1,
-          insetPadding: EdgeInsets.symmetric(
-            horizontal: isLandScape ? 100.w : 40.w,
-            vertical: 30.h,
-          ),
-
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.r),
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text('Log Out', style: GTextStyle.heading1.copyWith()),
-                SizedBox(height: 10.h),
-                Text(
-                  'Are you sure you want to log out?',
-                  style: GTextStyle.bodySmall.copyWith(),
-                ),
-                SizedBox(height: 20.h),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    TextButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      child: Text(
-                        'Cancel',
-                        style: GTextStyle.button.copyWith(),
-                      ),
-                    ),
-                    SizedBox(width: 16.w),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text(
-                        'Log Out',
-                        style: GTextStyle.button.copyWith(color: Colors.red),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
-      },
     );
   }
 }

@@ -6,7 +6,7 @@ import 'package:my_ashaas/styles/style.dart';
 
 Widget buildButtions({
   required BuildContext context,
-   String? label,
+  String? label,
   Color? gradientColor1,
   Color? gradientColor2,
   Color? textColor,
@@ -43,18 +43,19 @@ Widget buildButtions({
       alignment: Alignment.center,
       decoration: BoxDecoration(
         border: boderSide,
-        color: (usesolidColor) ? (solidColor ?? kPrimaryColor) : null,
+        color: usesolidColor ? (solidColor ?? kPrimaryColor) : null,
 
         gradient:
             !usesolidColor
-                ?  LinearGradient(
-          colors: [
-            kBottomNavBarSelected.withOpacity(0.65),
-            kBottomNavBarSelected,
-          ],
-          begin: Alignment.bottomLeft,
-          end: Alignment.bottomCenter,
-        ):null,
+                ? LinearGradient(
+                  colors: [
+                    gradientColor1 ?? kBottomNavBarSelected.withOpacity(0.65),
+                    gradientColor2 ?? kBottomNavBarSelected,
+                  ],
+                  begin: Alignment.bottomLeft,
+                  end: Alignment.bottomCenter,
+                )
+                : null,
         borderRadius: radius ?? BorderRadius.circular(30.r),
       ),
 
@@ -68,7 +69,7 @@ Widget buildButtions({
             SizedBox(width: 8.w),
           ],
           Text(
-            label??"Continue",
+            label ?? "Continue",
             style: GTextStyle.button.copyWith(
               color: textColor ?? Colors.white,
               fontSize: fontSize ?? 16.spMin,
